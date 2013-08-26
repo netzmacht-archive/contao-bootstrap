@@ -1,0 +1,23 @@
+<fieldset id="ctrl_<?php echo $this->id; ?>" class="radio_container<?php if($this->class): ?> <?php echo $this->class; ?><?php endif; ?>">
+	<?php if($this->label): ?>
+		<legend>
+			<?php if($this->required): ?><span class="invisible"><?php echo $GLOBALS['TL_LANG']['MSC']['mandatory']; ?>'</span><?php endif; ?>
+			<?php echo $this->label; ?>
+			<?php if($this->required): ?><span class="mandatory">*</span><?php endif; ?>
+		</legend>
+	<?php endif; ?>
+	<?php echo $this->error; ?>
+	<input type="hidden" name="<?php echo $this->name; ?>" value="">
+
+
+	<?php foreach($this->options as $i => $option): ?>
+		<?php if($this->inline): ?><div class="radio-inline"><?php endif; ?>
+		<label id="lbl_<?php echo $this->id . '_' . $i; ?>" for="opt_<?php echo $this->id . '_' . $i; ?>" <?php if(!$this->inline): ?>class="radio"<?php endif; ?>>
+			<input type="radio" name="<?php echo $this->name; ?>" id="opt_<?php echo $this->id . '_' . $i; ?>" value="<?php echo $option['value']; ?>" <?php echo $this->isChecked($option) . $this->getAttributes(); ?>>
+			<?php echo $option['label']; ?>
+		</label>
+		<?php if($this->inline): ?></div><?php endif; ?>
+	<?php endforeach; ?>
+
+	<?php echo $this->addSubmit(); ?>
+</fieldset>

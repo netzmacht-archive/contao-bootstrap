@@ -1,0 +1,21 @@
+<?php if (!$this->tableless): ?>
+	<div class="form-group<?php if($this->hasErrors()): ?> has-error<?php endif; ?>">
+		<?php echo $this->generateLabel(); ?>
+		<div class="<?php echo $this->columnClass; ?>">
+			<div class="input-group">
+				<?php echo $this->generate(); ?>
+				<?php echo $this->generateQuestion(); ?>
+			</div>
+			<?php echo $this->getErrorAsHtml(); ?>
+		</div>
+	</div>
+<?php else: ?>
+	<div class="form-group<?php if($this->hasErrors()): ?> has-error<?php endif; ?>">
+		<?php echo $this->generateLabel(); ?>
+		<div class="input-group">
+			<?php echo $this->generate(); ?>
+			<?php echo $this->generateQuestion(); ?>
+		</div>
+		<?php echo $this->getErrorAsHtml(); ?>
+	</div>
+<?php endif; ?>

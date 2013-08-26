@@ -1,0 +1,18 @@
+
+<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> method="get" class="form-inline">
+	<div class="formbody">
+		<?php if ($this->id): ?>
+			<input type="hidden" name="id" value="<?php echo $this->id; ?>">
+		<?php endif; ?>
+		<div class="form-group">
+		<label for="ctrl_keywords_<?php echo $this->uniqueId; ?>" class="sr-only"><?php echo $this->keywordLabel; ?></label>
+		<input type="search" name="keywords" id="ctrl_keywords_<?php echo $this->uniqueId; ?>" class="text form-control" value="<?php echo $this->keyword; ?>">
+		</div>
+		<fieldset class="form-group">
+			<legend class="invisible"><?php echo $this->optionsLabel; ?></legend>
+			<label for="matchAll_<?php echo $this->uniqueId; ?>" class="radio-inline"><input type="radio" name="query_type" id="matchAll_<?php echo $this->uniqueId; ?>" class="radio" value="and"<?php if ($this->queryType == 'and'): ?> checked="checked"<?php endif; ?>><?php echo $this->matchAll; ?></label>
+			<label for="matchAny_<?php echo $this->uniqueId; ?>" class="radio-inline"><input type="radio" name="query_type" id="matchAny_<?php echo $this->uniqueId; ?>" class="radio" value="or"<?php if ($this->queryType == 'or'): ?> checked="checked"<?php endif; ?>><?php echo $this->matchAny; ?></label>
+		</fieldset>
+		<button type="submit" id="ctrl_submit_<?php echo $this->uniqueId; ?>" class="submit btn btn-primary"><i class="icon-search"></i> <?php echo $this->search; ?></button>
+	</div>
+</form>
