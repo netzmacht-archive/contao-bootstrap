@@ -55,6 +55,16 @@ class BootstrapContentElement extends \ContentElement
 		parent::__set($key, $value);
 	}
 
+	public function __isset($key)
+	{
+		if(in_array($key, $this->arrBootstrapAttributes))
+		{
+			$key = 'bootstrap_' . $key;
+		}
+
+		return parent::__isset($key);
+	}
+
 
 	/**
 	 * compile bootstrap content element

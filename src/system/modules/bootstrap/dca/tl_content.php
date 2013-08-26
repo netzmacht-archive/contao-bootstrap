@@ -25,6 +25,18 @@ $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_button extends __boo
 	'config' => array('bootstrap_buttonType', 'bootstrap_buttonSize', 'bootstrap_icon', 'bootstrap_buttonDisabled'),
 );
 
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_slider extends __bootstrap__'] = array
+(
+	'config' => array(
+		'bootstrap_sliderArticles',
+		'bootstrap_showIndicators',
+		'bootstrap_showControls',
+		'bootstrap_autostart',
+		'bootstrap_articleMarkup',
+		'bootstrap_interval',
+	),
+);
+
 $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_columnset extends __bootstrap__'] = array
 (
 	'config' => array('sc_type', 'bootstrap_articleMarkup'),
@@ -107,6 +119,72 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_columnset'] = array
 		),
 		'buttons'  => array('copy' => false, 'delete' => false),
 		'tl_class' => '" style="clear:both;', /* workaround for Contao #6093 */
+
+	),
+	'sql'                     => "blob NULL"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_showIndicators'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_showIndicators'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'m12 w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_showControls'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_showControls'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'w50 m12'),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_autostart'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_autostart'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_interval'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_interval'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('tl_class'=>'clr'),
+	'sql'                     => "int(10) unsigned NOT NULL default '0'"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_sliderArticles'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_sliderArticles'],
+	'exclude'                 => true,
+	'inputType'               => 'multiColumnWizard',
+	'eval'                    => array(
+		'columnFields' => array
+		(
+			'article' => array
+			(
+				'label'                 => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_sliderArticles_article'],
+				'exclude'               => true,
+				'inputType'             => 'select',
+				'options_callback'     	=> array('Bootstrap\\DataContainer\\Content', 'getPageBootstrapArticles'),
+				'eval' 			        => array('style' => 'width:450px', 'includeBlankOption'=>true, 'chosen'=>true)
+			),
+
+			'active' => array
+			(
+				'label'                 => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_sliderArticles_article'],
+				'exclude'               => true,
+				'inputType'             => 'checkbox',
+				'eval' 			        => array('style' => 'width:80px')
+			),
+		),
 
 	),
 	'sql'                     => "blob NULL"

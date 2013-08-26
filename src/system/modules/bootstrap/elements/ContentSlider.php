@@ -20,7 +20,13 @@ class ContentSlider extends BootstrapContentElement
 	/**
 	 * @var array
 	 */
-	protected $arrBootstrapAttributes = array();
+	protected $arrBootstrapAttributes = array('articleMarkup', 'autostart', 'interval', 'sliderArticles', 'showIndicators', 'showControls');
+
+
+	/**
+	 * @var string
+	 */
+	protected $strTemplate = 'ce_bootstrap_slider';
 
 
 	/**
@@ -28,8 +34,6 @@ class ContentSlider extends BootstrapContentElement
 	 */
 	protected function compile()
 	{
-		parent::compile();
-
 		$articles = deserialize($this->sliderArticles, true);
 
 		foreach ($articles as $i => $article)
@@ -41,10 +45,18 @@ class ContentSlider extends BootstrapContentElement
 		$this->Template->articles      = $articles;
 		$this->Template->articlesCount = count($articles);
 
-		if ($this->cssID == '')
+		if ($this->cssID[0] == '')
 		{
-			$this->Template->cssID = 'carousel-' . $this->id;
+			$cssID = $this->cssID;
+			$cssID[0] = 'carousel-' . $this->id;
+			$this->cssID = $cssID;
 		}
+
+
+
+		$this->Template->identifer = $this->cssID[0];
+
+		parent::compile();
 	}
 
 }
