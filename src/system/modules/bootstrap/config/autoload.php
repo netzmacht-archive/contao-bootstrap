@@ -40,8 +40,10 @@ ClassLoader::addClasses(array
 	'Netzmacht\Bootstrap\ModuleNavbar'             => 'system/modules/bootstrap/modules/ModuleNavbar.php',
 
 	// Elements
+	'Netzmacht\Bootstrap\BootstrapContentElement'  => 'system/modules/bootstrap/elements/BootstrapContentElement.php',
 	'Netzmacht\Bootstrap\ContentButton'            => 'system/modules/bootstrap/elements/ContentButton.php',
 	'Netzmacht\Bootstrap\ContentColumnSet'         => 'system/modules/bootstrap/elements/ContentColumnSet.php',
+	'Netzmacht\Bootstrap\ContentSlider'            => 'system/modules/bootstrap/elements/ContentSlider.php',
 
 	// Forms
 	//'Netzmacht\Bootstrap\FormCheckBox'             => 'system/modules/bootstrap/forms/FormCheckBox.php',
@@ -58,6 +60,7 @@ TemplateLoader::addFiles(array
 (
 	'ce_bootstrap_button'    => 'system/modules/bootstrap/templates',
 	'ce_bootstrap_columnset' => 'system/modules/bootstrap/templates',
+	'ce_bootstrap_slider'    => 'system/modules/bootstrap/templates',
 	'mod_navbar'             => 'system/modules/bootstrap/templates',
 	'mod_navbar_container'   => 'system/modules/bootstrap/templates',
 	'mod_search_advanced'    => 'system/modules/bootstrap/templates',

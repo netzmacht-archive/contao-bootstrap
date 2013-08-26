@@ -77,14 +77,15 @@ $GLOBALS['BOOTSTRAP'] = array
 /**
  * frontend modules
  */
-$GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar']     = 'Netzmacht\\Bootstrap\\ModuleNavbar';
+$GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar'] = 'Netzmacht\\Bootstrap\\ModuleNavbar';
 
 
 /**
  * content elements
  */
 $GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']  = 'Netzmacht\\Bootstrap\\ContentColumnSet';
-$GLOBALS['TL_CTE']['links']['bootstrap_button']     = 'Netzmacht\\Bootstrap\\ContentButton';
+$GLOBALS['TL_CTE']['links']['bootstrap_button']          = 'Netzmacht\\Bootstrap\\ContentButton';
+$GLOBALS['TL_CTE']['slider']['bootstrap_slider']          = 'Netzmacht\\Bootstrap\\ContentSlider';
 
 
 /**
@@ -97,7 +98,5 @@ $GLOBALS['TL_FFL']['button'] = 'Netzmacht\\Bootstrap\\FormButton';
  * hooks
  */
 $GLOBALS['TL_HOOKS']['parseTemplate'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeLayout');
-
-//$GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('Bootstrap\\DataContainer\\StylePicker', 'initialize');
 
 $GLOBALS['TL_HOOKS']['loadFormField'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeFormWidget');
