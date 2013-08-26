@@ -15,9 +15,6 @@
 /**
  * Initialize the system
  */
-define('TL_MODE', 'BE');
-require_once('../../../initialize.php');
 
-
-$controller = new \Netzmacht\Bootstrap\Installer();
+$controller = new Bootstrap\Installer();
 $controller->run();
