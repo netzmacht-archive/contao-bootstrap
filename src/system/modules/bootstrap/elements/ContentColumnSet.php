@@ -22,8 +22,13 @@ use Netzmacht\ColumnSet\ColumnSet;
  *
  * @package Netzmacht\Bootstrap
  */
-class ContentColumnSet extends \ContentElement
+class ContentColumnSet extends BootstrapContentElement
 {
+
+	/**
+	 * @var array
+	 */
+	protected $arrBootstrapAttributes = array('columnset', 'articleMarkup');
 
 	/**
 	 * @var string
@@ -61,7 +66,7 @@ class ContentColumnSet extends \ContentElement
 	 */
 	protected function compile()
 	{
-		$data = deserialize($this->bootstrap_columnset, true);
+		$data = deserialize($this->columnset, true);
 		$articles = array();
 
 		$container = ColumnSet::prepareContainer($this->columnset_id);
@@ -70,7 +75,7 @@ class ContentColumnSet extends \ContentElement
 		foreach($data as $article)
 		{
 			$articles[] = array(
-				'article' => $this->getArticle($article['article'], false, !((bool) $this->bootstrap_articleMarkup)),
+				'article' => $this->getArticle($article['article'], false, !((bool) $this->articleMarkup)),
 				'class'   => $container[$i++][0],
 				'id'      => $article['article'],
 			);

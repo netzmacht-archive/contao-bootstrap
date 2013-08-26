@@ -13,8 +13,14 @@ namespace Netzmacht\Bootstrap;
  * Class ContentButton
  * @package Netzmacht\Bootstrap
  */
-class ContentButton extends \ContentHyperlink
+class ContentButton extends BootstrapContentElement
 {
+
+	/**
+	 * bootstrap namespace attributes
+	 * @var array
+	 */
+	protected $arrBootstrapAttributes = array('buttonDisabled', 'buttonSize', 'buttonType', 'icon');
 
 	/**
 	 * @var string
@@ -22,17 +28,19 @@ class ContentButton extends \ContentHyperlink
 	protected $strTemplate = 'ce_bootstrap_button';
 
 
-	/**bootstrap_buttonSize
-	 *
+	/**
+	 * compile button element
 	 */
 	protected function compile()
 	{
-		if($this->bootstrap_buttonSize == 'default') {
-			$this->bootstrap_buttonSize = '';
+		parent::compile();
+
+		if($this->buttonSize == 'default') {
+			$this->buttonSize = '';
 		}
 
-		if($this->bootstrap_icon) {
-			$this->Template->icon = Icons::generateIcon($this->bootstrap_icon);
+		if($this->icon) {
+			$this->Template->icon = Icons::generateIcon($this->icon);
 		}
 
 		parent::compile();

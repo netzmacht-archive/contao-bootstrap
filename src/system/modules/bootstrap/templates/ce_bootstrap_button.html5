@@ -5,7 +5,7 @@
 	<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<?php echo $this->embed_pre; ?><a href="<?php echo $this->href; ?>" class="btn btn-<?php echo $this->bootstrap_buttonType; ?> <?php echo $this->bootstrap_buttonSize; ?><?php echo (!$this->bootstrap_buttonDisabled ? '' : ' disabled'); ?>" title="<?php echo $this->linkTitle; ?>"<?php echo $this->attribute; ?><?php echo $this->target; ?>>
+<?php echo $this->embed_pre; ?><a href="<?php echo $this->href; ?>" class="btn btn-<?php echo $this->buttonType; ?> <?php echo $this->buttonSize; ?><?php echo (!$this->buttonDisabled ? '' : ' disabled'); ?>" title="<?php echo $this->linkTitle; ?>"<?php echo $this->attribute; ?><?php echo $this->target; ?>>
 	<?php echo $this->icon; ?>
 	<?php echo $this->link; ?></a><?php echo $this->embed_post; ?>
 
