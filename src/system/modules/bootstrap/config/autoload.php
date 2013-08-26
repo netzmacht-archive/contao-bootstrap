@@ -36,6 +36,7 @@ ClassLoader::addClasses(array
 	'Netzmacht\Bootstrap\DataContainer\StylePicker' => 'system/modules/bootstrap/dataContainer/StylePicker.php',
 
 	// Modules
+	'Netzmacht\Bootstrap\BootstrapModule'          => 'system/modules/bootstrap/modules/BootstrapModule.php',
 	'Netzmacht\Bootstrap\ModuleNavbar'             => 'system/modules/bootstrap/modules/ModuleNavbar.php',
 
 	// Elements
@@ -57,9 +58,11 @@ TemplateLoader::addFiles(array
 (
 	'ce_bootstrap_button'    => 'system/modules/bootstrap/templates',
 	'ce_bootstrap_columnset' => 'system/modules/bootstrap/templates',
-	'mod_bootstrap_navbar'   => 'system/modules/bootstrap/templates',
+	'mod_navbar'             => 'system/modules/bootstrap/templates',
+	'mod_navbar_container'   => 'system/modules/bootstrap/templates',
 	'mod_search_advanced'    => 'system/modules/bootstrap/templates',
 	'nav_bootstrap_dropdown' => 'system/modules/bootstrap/templates',
+	'navbar'                 => 'system/modules/bootstrap/templates',
 	'navbar_brand'           => 'system/modules/bootstrap/templates',
 	'navbar_toggle'          => 'system/modules/bootstrap/templates',
 	'form_checkbox_generate' => 'system/modules/bootstrap/templates',

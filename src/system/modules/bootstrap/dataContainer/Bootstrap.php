@@ -15,7 +15,7 @@ use Netzmacht\Bootstrap\BootstrapWidget;
  * Class BootstrapDataContainer
  * @package Netzmacht\Bootstrap
  */
-class Bootstrap
+class Bootstrap extends \Backend
 {
 
 	/**
@@ -35,21 +35,15 @@ class Bootstrap
 	 */
 	public function getAllModules($mcw)
 	{
-		$model = \ModuleModel::findAll(array('order' => 'name'));
-		$modules = array(
-			'bootstrap' => \TemplateLoader::getPrefixedFiles('navbar_'),
-			'modules' => array(),
-		);
+		$arrModules = array();
+		$objModules = $this->Database->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id ORDER BY t.name, m.name");
 
-		if($model === null) {
-			return $modules;
+		while ($objModules->next())
+		{
+			$arrModules[$objModules->theme][$objModules->id] = $objModules->name . ' (ID ' . $objModules->id . ')';
 		}
 
-		while($model->next()) {
-			$modules['modules'][$model->id] = $model->name;
-		}
-
-		return $modules;
+		return $arrModules;
 	}
 
 
@@ -116,6 +110,16 @@ class Bootstrap
 		}
 
 		return self::$pageLayout;
+	}
+
+	public function getTemplates($dc)
+	{
+		if(isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix'])) {
+			return \TemplateLoader::getPrefixedFiles($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix']);
+		}
+
+		return \TemplateLoader::getFiles();
+
 	}
 
 }

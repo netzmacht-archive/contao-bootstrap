@@ -17,3 +17,9 @@ $GLOBALS['TL_LANG']['CTE']['bootstrap_button'][1] = 'Stellt eine Schaltfläche a
  */
 $GLOBALS['TL_LANG']['FFL']['button'][0] = 'Schaltfläche';
 $GLOBALS['TL_LANG']['FFL']['button'][1] = 'Schaltfläche mit Text, Icon oder Bild';
+
+
+/**
+ *
+ */
+$GLOBALS['TL_LANG']['MSC']['bootstrapToggleNavigation'] = 'Navigation anzeigen/verstecken';

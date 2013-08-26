@@ -1,69 +1,97 @@
 <?php
+
 /**
- * Created by JetBrains PhpStorm.
- * User: david
- * Date: 12.08.13
- * Time: 20:31
- * To change this template use File | Settings | File Templates.
+ * Contao Open Source CMS
+ *
+ * Copyright (C) 2005-2013 Leo Feyer
+ *
+ * @package   netzmacht-bootstrap
+ * @author    netzmacht creative David Molineus
+ * @license   MPL/2.0
+ * @copyright 2013 netzmacht creative David Molineus
  */
 
 namespace Netzmacht\Bootstrap;
 
+use \FrontendTemplate;
 
-use Contao\FrontendTemplate;
 
-class ModuleNavbar extends \Module
+/**
+ * Class ModuleNavbar
+ *
+ * @package Netzmacht\Bootstrap
+ */
+class ModuleNavbar extends BootstrapModule
 {
-	protected $strTemplate = 'mod_bootstrap_navbar';
 
+	/**
+	 * list of bootstrap attributes to easily access it without namespace
+	 * @var array
+	 */
+	protected $arrBootstrapAttributes = array('addHeader', 'isResponsive', 'navbarModules', 'navbarTemplate');
+
+	/**
+	 * @var string
+	 */
+	protected $strTemplate = 'mod_navbar';
+
+
+	/**
+	 * @param        $module
+	 * @param string $column
+	 */
+	public function __construct($module, $column='main')
+	{
+		parent::__construct($module, $column);
+
+		if($this->navbarTemplate != '') {
+			$this->strTemplate = $this->navbarTemplate;
+		}
+	}
+
+
+	/**
+	 * compile the navbar
+	 */
 	protected function compile()
 	{
-		$dataModules = deserialize($this->bootstrap_navbarModules, true);
-		$dataHeader = deserialize($this->bootstrap_navbarHeader, true);
+		parent::compile();
 
+		// generate modules
+		$dataModules = deserialize($this->navbarModules, true);
 		$modules = array();
-		$header = array();
 
-		foreach($dataModules as $module) {
+		foreach ($dataModules as $module)
+		{
 			$modules[] = $this->generateModule($module);
 		}
 
-		foreach($dataHeader as $module) {
-			$header[] = $this->generateModule($module);
-		}
-
 		$this->Template->modules = $modules;
-		$this->Template->header = $header;
 	}
 
+
+	/**
+	 * @param $module
+	 * @return array
+	 */
 	protected function generateModule($module)
 	{
-		$class = '';
+		$class = $module['cssClass'];
 
-		if($module['floating']) {
-			$class = 'pull-' . $module['floating'] . ' ';
+		if($module['floating'])
+		{
+			if($class != '') {
+				$class .= ' ';
+			}
+
+			$class .= 'navbar-' . $module['floating'];
 		}
-
-		$class .= $module['cssClass'];
-
-		if(intval($module['module'])) {
-			$rendered = $this->getFrontendModule($module['module']);
-
-			return array(
-				'type' => 'module',
-				'module' => $rendered,
-				'id' => $module['module'],
-				'class' => $class,
-			);
-		}
-
-		$template = new FrontendTemplate($module['module']);
 
 		return array(
-			'type' => 'template',
-			'module' => $template->parse(),
-			'id' => $module['module'],
-			'class' => $class,
+			'type'   => 'module',
+			'module' => $this->getFrontendModule($module['module']),
+			'id'     => $module['module'],
+			'class'  => $class,
 		);
 	}
 
