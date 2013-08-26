@@ -1,0 +1,4 @@
+
+<nav class="navbar <?php echo $this->class;?>" <?php if($this->cssID): ?><?php echo $this->cssID; ?><?php endif; ?> role="navigation">
+		<?php include $this->getTemplate('navbar'); ?>
+</nav>
