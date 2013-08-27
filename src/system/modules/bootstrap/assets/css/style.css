@@ -1,0 +1,15 @@
+
+.tl_content.wrapper_start .title, .tl_content.wrapper_separator .title {
+    background: #f9f9f9;
+    display: block;
+    padding: 4px 4px 4px 6px;
+
+}
+
+.tl_content.wrapper_start .title {
+    margin: 0 3px -6px;
+}
+
+.tl_content.wrapper_separator .title {
+    margin: 0 -6px -6px;
+}
