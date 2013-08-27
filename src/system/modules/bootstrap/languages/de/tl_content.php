@@ -28,3 +28,37 @@ $GLOBALS['TL_LANG']['tl_content']['bootstrap_icon'][1] = 'Sie können der Schalt
 
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttonDisabled'][0] = 'Schaltfläche deaktivieren';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttonDisabled'][1] = 'Die Schaltfläche kann als deaktiviert angezeigt werden.';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_subType'][0] = 'Betriebsart';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_subType'][1] = 'Bitte wählen Sie die Betriebsart des Elements.';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_subType']['start'] = 'Anfang';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_subType']['part'] = 'Trennelement';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_subType']['end'] = 'Ende';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_showIndicators'][0] = 'Indikatoren anzeigen';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_showIndicators'][1] = 'Indikatoren des aktuellen Slider-Elements werden eingeblendet';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_showControls'][0] = 'Steuerelemente anzeigen';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_showControls'][1] = 'Rechts/Link Schaltflächen werden anzeigt.';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_autostart'][0] = 'Automatisch abspielen';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_autostart'][1] = 'Animation des Elements werden automatisch gestartet.';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_interval'][0] = 'Anzeigedauer';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_interval'][1] = 'Anzeigedauer in Millisekunden des einzelnen Elements.';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs'][0] = 'Tabs';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs'][1] = 'Definieren Sie die einzelnen Tab-Bezeichnungen. Es können auch Dropdown-Menüs angelegt werden.';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_title'][0] = 'Bezeichung';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_title'][1] = 'Die Bezeichnung wird für das Tab-Menü verwendet.';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_type'][0] = 'Dropdown';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_type'][1] = 'Der Eintrag kann als Dropdown-Menü erstellt werden. Die nachfolgenden Elemente müssen kann als Kind definiert werden.';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_type']['dropdown'] = 'Dropdown-Menü';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_type']['child'] = 'Kind-Element';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_fade'][0] = 'Überblendeffekt aktivieren';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_fade'][1] = 'Verwendet einen Überblendeffekt beim Wechseln der Tabs.';

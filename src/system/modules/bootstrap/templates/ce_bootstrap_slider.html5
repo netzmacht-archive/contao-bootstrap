@@ -1,28 +1,29 @@
+<?php if($this->type == 'bootstrap_sliderStart'): ?>
 <div class="carousel slide"<?php echo $this->cssID; ?> <?php if($this->autostart): ?> data-ride="carousel"<?php endif; ?><?php if($this->interval > 0): ?> data-interval="<?php echo $this->interval; ?>"<?php endif; ?>>
+	<?php if($this->showIndicators): ?>
+		<ol class="carousel-indicators">
+			<?php for($i=0; $i < $this->count; $i++): ?>
+				<li data-target="#<?php echo $this->identifier; ?>" data-slide-to="<?php echo $i; ?>" <?php if($i == 0): ?>class="active"<?php endif; ?>></li>
+			<?php endfor; ?>
+		</ol>
+	<?php endif; ?>
 
-<?php if($this->showIndicators): ?>
-	<ol class="carousel-indicators">
-		<?php for($i=0; $i < $this->articlesCount; $i++): ?>
-			<li data-target="#<?php echo $this->identifer; ?>" data-slide-to="<?php echo $i; ?>" <?php if($articles[$i]['active']): ?>class="active"<?php endif; ?>></li>
-		<?php endfor; ?>
-	</ol>
-<?php endif; ?>
-
-<div class="carousel-inner">
-<?php foreach($this->articles as $article): ?>
-	<div class="item<?php if($article['active']):?> active<?php endif; ?>">
-		<?php echo $article['article']; ?>
+	<div class="carousel-inner">
+	<div class="item active">
+<?php elseif($this->type == 'bootstrap_sliderPart'): ?>
 	</div>
-<?php endforeach; ?>
-</div>
+	<div class="item">
+<?php else: ?>
+	</div>
+	</div>
+	<?php if($this->start['bootstrap_showControls']): ?>
+		<a class="left carousel-control" href="#<?php echo $this->identifier; ?>" data-slide="prev">
+			<span class="icon-prev"></span>
+		</a>
+		<a class="right carousel-control" href="#<?php echo $this->identifier; ?>" data-slide="next">
+			<span class="icon-next"></span>
+		</a>
+	<?php endif; ?>
 
-<?php if($this->showControls): ?>
-	<a class="left carousel-control" href="#<?php echo $this->identifer; ?>" data-slide="prev">
-		<span class="icon-prev"></span>
-	</a>
-	<a class="right carousel-control" href="#<?php echo $this->identifer; ?>" data-slide="next">
-		<span class="icon-next"></span>
-	</a>
+</div>
 <?php endif; ?>
-
-</div>

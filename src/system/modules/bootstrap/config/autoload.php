@@ -33,7 +33,6 @@ ClassLoader::addClasses(array
 	// DataContainer
 	'Netzmacht\Bootstrap\DataContainer\Bootstrap'  => 'system/modules/bootstrap/dataContainer/Bootstrap.php',
 	'Netzmacht\Bootstrap\DataContainer\Content'    => 'system/modules/bootstrap/dataContainer/Content.php',
-	'Netzmacht\Bootstrap\DataContainer\StylePicker' => 'system/modules/bootstrap/dataContainer/StylePicker.php',
 
 	// Modules
 	'Netzmacht\Bootstrap\BootstrapModule'          => 'system/modules/bootstrap/modules/BootstrapModule.php',
@@ -41,9 +40,11 @@ ClassLoader::addClasses(array
 
 	// Elements
 	'Netzmacht\Bootstrap\BootstrapContentElement'  => 'system/modules/bootstrap/elements/BootstrapContentElement.php',
+	'Netzmacht\Bootstrap\BootstrapWrapperElement'  => 'system/modules/bootstrap/elements/BootstrapWrapperElement.php',
 	'Netzmacht\Bootstrap\ContentButton'            => 'system/modules/bootstrap/elements/ContentButton.php',
 	'Netzmacht\Bootstrap\ContentColumnSet'         => 'system/modules/bootstrap/elements/ContentColumnSet.php',
 	'Netzmacht\Bootstrap\ContentSlider'            => 'system/modules/bootstrap/elements/ContentSlider.php',
+	'Netzmacht\Bootstrap\ContentTab'               => 'system/modules/bootstrap/elements/ContentTab.php',
 
 	// Forms
 	//'Netzmacht\Bootstrap\FormCheckBox'             => 'system/modules/bootstrap/forms/FormCheckBox.php',
@@ -61,6 +62,7 @@ TemplateLoader::addFiles(array
 	'ce_bootstrap_button'    => 'system/modules/bootstrap/templates',
 	'ce_bootstrap_columnset' => 'system/modules/bootstrap/templates',
 	'ce_bootstrap_slider'    => 'system/modules/bootstrap/templates',
+	'ce_bootstrap_tab'       => 'system/modules/bootstrap/templates',
 	'mod_navbar'             => 'system/modules/bootstrap/templates',
 	'mod_navbar_container'   => 'system/modules/bootstrap/templates',
 	'mod_search_advanced'    => 'system/modules/bootstrap/templates',

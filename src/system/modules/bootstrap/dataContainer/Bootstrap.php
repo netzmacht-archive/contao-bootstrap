@@ -13,6 +13,7 @@ use Netzmacht\Bootstrap\BootstrapWidget;
 
 /**
  * Class BootstrapDataContainer
+ *
  * @package Netzmacht\Bootstrap
  */
 class Bootstrap extends \Backend
@@ -36,7 +37,9 @@ class Bootstrap extends \Backend
 	public function getAllModules($mcw)
 	{
 		$arrModules = array();
-		$objModules = $this->Database->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id ORDER BY t.name, m.name");
+
+		$objModules = $this->Database
+			->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id ORDER BY t.name, m.name");
 
 		while ($objModules->next())
 		{
@@ -49,13 +52,15 @@ class Bootstrap extends \Backend
 
 	/**
 	 * only load templates if bootstrap is activated, so diverent layouts will work instead of template changes
+	 *
 	 * @param $objTemplate
 	 */
 	public function initializeLayout($objTemplate)
 	{
 		global $objPage;
 
-		if(static::$bootstrapLoaded || !$objPage) {
+		if(static::$bootstrapLoaded || !$objPage)
+		{
 			return;
 		}
 
@@ -66,9 +71,9 @@ class Bootstrap extends \Backend
 		if($layout->addBootstrap)
 		{
 			// only load these templates if layout uses it because default templates are changed
-			foreach($GLOBALS['BOOTSTRAP']['dynamicLoadTemplates'] as $path => $templates)
+			foreach ($GLOBALS['BOOTSTRAP']['dynamicLoadTemplates'] as $path => $templates)
 			{
-				foreach($templates as $template)
+				foreach ($templates as $template)
 				{
 					\TemplateLoader::addFile($template, $path);
 				}
@@ -77,29 +82,34 @@ class Bootstrap extends \Backend
 			// load assets
 			$layout->bootstrapAssets = deserialize($layout->bootstrapAssets, true);
 
-			foreach($layout->bootstrapAssets as $asset) {
-				$extension = substr($asset, strrpos($asset, '.') +1);
+			foreach ($layout->bootstrapAssets as $asset)
+			{
+				$extension = substr($asset, strrpos($asset, '.') + 1);
 
-				if($extension == 'js') {
+				if($extension == 'js')
+				{
 					$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/bootstrap/assets/bootstrap/' . $asset . '|static';
-				}
-				else {
+				} else
+				{
 					$GLOBALS['TL_CSS'][] = 'system/modules/bootstrap/assets/bootstrap/' . $asset . '|static';
 				}
 			}
 		}
 	}
 
+
 	public function initializeFormWidget(\Widget $widget, $formId, $data, $form)
 	{
 		$layout = self::getPageLayout();
 
-		if($layout->addBootstrap) {
+		if($layout->addBootstrap)
+		{
 			return new BootstrapWidget($widget);
 		}
 
 		return $widget;
 	}
+
 
 	protected static function getPageLayout()
 	{
@@ -112,9 +122,11 @@ class Bootstrap extends \Backend
 		return self::$pageLayout;
 	}
 
+
 	public function getTemplates($dc)
 	{
-		if(isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix'])) {
+		if(isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix']))
+		{
 			return \TemplateLoader::getPrefixedFiles($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix']);
 		}
 

@@ -1,60 +1,93 @@
 <?php
+
 /**
- * Created by JetBrains PhpStorm.
- * User: david
- * Date: 26.08.13
- * Time: 17:05
- * To change this template use File | Settings | File Templates.
+ * Contao Open Source CMS
+ *
+ * Copyright (C) 2005-2013 Leo Feyer
+ *
+ * @package   netzmacht-bootstrap
+ * @author    netzmacht creative David Molineus
+ * @license   MPL/2.0
+ * @copyright 2013 netzmacht creative David Molineus
  */
+
 
 namespace Netzmacht\Bootstrap;
 
 
-/**
- * Class ContentSlider
- * @package Netzmacht\Bootstrap
- */
-class ContentSlider extends BootstrapContentElement
+class ContentSlider extends BootstrapWrapperElement
 {
 
 	/**
 	 * @var array
 	 */
-	protected $arrBootstrapAttributes = array('articleMarkup', 'autostart', 'interval', 'sliderArticles', 'showIndicators', 'showControls');
-
+	protected $arrBootstrapAttributes = array('subType', 'autostart', 'interval', 'showIndicators', 'showControls');
 
 	/**
 	 * @var string
 	 */
+	protected static $strWrapperName = 'slider';
+
 	protected $strTemplate = 'ce_bootstrap_slider';
+
+	protected $strIdentifier = 'carousel-%s';
 
 
 	/**
-	 * compile content slider
+	 * compile wrapper element
 	 */
 	protected function compile()
 	{
-		$articles = deserialize($this->sliderArticles, true);
-
-		foreach ($articles as $i => $article)
+		// get included elements
+		if($this->type == static::getName('start'))
 		{
-			$articles[$i]['id']      = $article['article'];
-			$articles[$i]['article'] = $this->getArticle($article['article'], false, !((bool)$this->articleMarkup));
+			$count = 1;
+			$result = $this->Database
+				->prepare('SELECT type FROM tl_content WHERE pid=? AND ptable=? AND sorting > ? ORDER BY sorting')
+				->execute($this->pid, $this->ptable, $this->sorting);
+
+			while ($result->next())
+			{
+
+				if($result->type == self::getName('stop'))
+				{
+					break;
+				}
+				elseif($result->type == self::getName('separator'))
+				{
+					$count++;
+				}
+			}
+
+			$this->Template->count = $count;
 		}
 
-		$this->Template->articles      = $articles;
-		$this->Template->articlesCount = count($articles);
+		// generate css identifier
+		if($this->type != static::getName('start'))
+		{
+			$start = self::getStartElement();
+			$this->Template->start = $start;
 
-		if ($this->cssID[0] == '')
+			$start['cssID'] = deserialize($start['cssID'], true);
+
+			if($start['cssID'][0] == '')
+			{
+				$start['cssID'][0] = sprintf($this->strIdentifier, $start['id']);
+				$this->cssID = $start['cssID'];
+			}
+			else
+			{
+				$this->cssID = $start['cssID'];
+			}
+		}
+		elseif($this->cssID[0] == '')
 		{
 			$cssID = $this->cssID;
-			$cssID[0] = 'carousel-' . $this->id;
+			$cssID[0] = sprintf($this->strIdentifier, $this->id);
 			$this->cssID = $cssID;
 		}
 
-
-
-		$this->Template->identifer = $this->cssID[0];
+		$this->Template->identifier = $this->cssID[0];
 
 		parent::compile();
 	}

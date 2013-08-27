@@ -44,10 +44,10 @@ $GLOBALS['BOOTSTRAP'] = array
 		'tag'               => 'i',
 	),
 
-	'navbar' => array
+	'dropdown' => array
 	(
 		// element which is used as download toggler
-		'dropdownToggler'   => '<a href="#" class="button dropdown-toggle" data-toggle="dropdown"><i class="icon-caret-down"></i></a>',
+		'toggle'   => '<b class="caret"></b>',
 	),
 
 
@@ -69,7 +69,24 @@ $GLOBALS['BOOTSTRAP'] = array
 			'form_submit',
 			'form_widget',
 		),
-	)
+	),
+
+	'wrappers' => array
+	(
+		'tabs' => array
+		(
+			'start'      => 'bootstrap_tabStart',
+			'separator'  => 'bootstrap_tabPart',
+			'stop'       => 'bootstrap_tabEnd',
+		),
+
+		'slider' => array
+		(
+			'start'      => 'bootstrap_sliderStart',
+			'separator'  => 'bootstrap_sliderPart',
+			'stop'       => 'bootstrap_sliderEnd',
+		),
+	),
 );
 
 
@@ -83,9 +100,16 @@ $GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar'] = 'Netzmacht\\Bootstrap
 /**
  * content elements
  */
-$GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']  = 'Netzmacht\\Bootstrap\\ContentColumnSet';
-$GLOBALS['TL_CTE']['links']['bootstrap_button']          = 'Netzmacht\\Bootstrap\\ContentButton';
-$GLOBALS['TL_CTE']['slider']['bootstrap_slider']          = 'Netzmacht\\Bootstrap\\ContentSlider';
+$GLOBALS['TL_CTE']['bootstrap_slider']['bootstrap_sliderStart'] = 'Bootstrap\\ContentSlider';
+$GLOBALS['TL_CTE']['bootstrap_slider']['bootstrap_sliderPart']  = 'Bootstrap\\ContentSlider';
+$GLOBALS['TL_CTE']['bootstrap_slider']['bootstrap_sliderEnd']   = 'Bootstrap\\ContentSlider';
+
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabStart']      = 'Bootstrap\\ContentTab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabPart']       = 'Bootstrap\\ContentTab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabEnd']        = 'Bootstrap\\ContentTab';
+
+$GLOBALS['TL_CTE']['links']['bootstrap_button']                 = 'Bootstrap\\ContentButton';
+$GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']         = 'Bootstrap\\ContentColumnSet';
 
 
 /**
@@ -100,3 +124,24 @@ $GLOBALS['TL_FFL']['button'] = 'Netzmacht\\Bootstrap\\FormButton';
 $GLOBALS['TL_HOOKS']['parseTemplate'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeLayout');
 
 $GLOBALS['TL_HOOKS']['loadFormField'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeFormWidget');
+
+
+/**
+ * wrapper
+ */
+$GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_tabStart';
+$GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_tabEnd';
+$GLOBALS['TL_WRAPPERS']['separator'][]  = 'bootstrap_tabPart';
+
+$GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_sliderStart';
+$GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_sliderEnd';
+$GLOBALS['TL_WRAPPERS']['separator'][]  = 'bootstrap_sliderPart';
+
+
+/**
+ * stylesheets
+ */
+// add stylesheet for indented elements
+if(TL_MODE == 'BE' && version_compare(VERSION, '3.1', '>=')) {
+	$GLOBALS['TL_CSS'][] = 'system/modules/bootstrap/assets/css/style.css|all|static';
+}

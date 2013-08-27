@@ -5,11 +5,20 @@
  */
 $GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('Bootstrap\\DataContainer\\Content', 'setArticlesRows');
 
+$GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('Bootstrap\\DataContainer\\Content', 'saveSlider');
+
+$GLOBALS['TL_DCA']['tl_content']['config']['ondelete_callback'][] = array('Bootstrap\\DataContainer\\Content', 'deleteWrapperElements');
+
 
 /**
  * palettes
  */
-$GLOBALS['TL_DCA']['tl_content']['metapalettes']['__bootstrap__'] = array
+
+// add bootstrap_subType to the selectors
+$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'bootstrap_subType';
+
+// define default bootstrap palette
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['_bootstrap_'] = array
 (
 	'type' => array('type', 'headline'),
 	'link' => array(),
@@ -19,29 +28,58 @@ $GLOBALS['TL_DCA']['tl_content']['metapalettes']['__bootstrap__'] = array
 	'invisible' => array(':hide', 'invisible', 'start', 'stop'),
 );
 
-$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_button extends __bootstrap__'] = array
+// bootstrap contentSlider palettes
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['_typeOnly_'] = array
+(
+	'type' => array('type'),
+);
+
+// bootstrap_button palette
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_button extends _bootstrap_'] = array
 (
 	'link'   => array('url', 'target', 'linkTitle', 'embed', 'titleText', 'rel'),
 	'config' => array('bootstrap_buttonType', 'bootstrap_buttonSize', 'bootstrap_icon', 'bootstrap_buttonDisabled'),
 );
 
-$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_slider extends __bootstrap__'] = array
+
+// bootstrap slider
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_sliderPart extends _typeOnly_'] = array();
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_sliderEnd extends _typeOnly_'] = array();
+
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_sliderStart extends _typeOnly_'] = array
 (
 	'config' => array(
-		'bootstrap_sliderArticles',
 		'bootstrap_showIndicators',
 		'bootstrap_showControls',
 		'bootstrap_autostart',
-		'bootstrap_articleMarkup',
 		'bootstrap_interval',
 	),
+	'expert' => array(':hide', 'cssID', 'space'),
 );
 
-$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_columnset extends __bootstrap__'] = array
+
+// bootstrap tabs palette
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_tabPart extends _typeOnly_'] = array();
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_tabEnd extends _typeOnly_'] = array();
+
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_tabStart extends _typeOnly_'] = array
+(
+	'config' => array(
+		'bootstrap_tabs', 'bootstrap_fade',
+	),
+	'expert' => array(':hide', 'cssID', 'space'),
+);
+
+// boostrap columnset palettes
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_columnset extends _bootstrap_'] = array
 (
 	'config' => array('sc_type', 'bootstrap_articleMarkup'),
 );
 
+
+/**
+ * sub select palettes
+ */
 $GLOBALS['TL_DCA']['tl_content']['metasubselectpalettes']['sc_type']['!'] = array('bootstrap_columnset');
 
 
@@ -160,32 +198,54 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_interval'] = array
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_sliderArticles'] = array
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_subType'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_sliderArticles'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_subType'],
+	'exclude'                 => true,
+	'inputType'               => 'radio',
+	'options'                 => array('start', 'part', 'end'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_subType'],
+	'eval'                    => array('tl_class'=>'clr', 'submitOnChange' => true),
+	'sql'                     => "varchar(5) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_tabs'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs'],
 	'exclude'                 => true,
 	'inputType'               => 'multiColumnWizard',
+	'save_callback'           => array(array('Bootstrap\\DataContainer\\Content', 'saveTabs')),
 	'eval'                    => array(
+		'tl_class'=>'clr',
+		'submitOnChange' => true,
 		'columnFields' => array
 		(
-			'article' => array
+			'title' => array
 			(
-				'label'                 => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_sliderArticles_article'],
-				'exclude'               => true,
-				'inputType'             => 'select',
-				'options_callback'     	=> array('Bootstrap\\DataContainer\\Content', 'getPageBootstrapArticles'),
-				'eval' 			        => array('style' => 'width:450px', 'includeBlankOption'=>true, 'chosen'=>true)
+				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_title'],
+				'exclude'                 => true,
+				'inputType'               => 'text',
+				'eval'                    => array(),
 			),
-
-			'active' => array
+			'type' => array
 			(
-				'label'                 => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_sliderArticles_article'],
-				'exclude'               => true,
-				'inputType'             => 'checkbox',
-				'eval' 			        => array('style' => 'width:80px')
+				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_type'],
+				'exclude'                 => true,
+				'inputType'               => 'select',
+				'options'                 => array('dropdown', 'child'),
+				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_type'],
+				'eval'                    => array('includeBlankOption' => true, 'style' => 'width: 140px;'),
 			),
-		),
-
+		)
 	),
 	'sql'                     => "blob NULL"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_fade'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_fade'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
