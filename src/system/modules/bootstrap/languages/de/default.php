@@ -11,14 +11,14 @@ $GLOBALS['TL_LANG']['CTE']['bootstrap_columnset'][1] = 'Erlaubt es beliebige Spa
 $GLOBALS['TL_LANG']['CTE']['bootstrap_button'][0] = 'Schaltfläche';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_button'][1] = 'Stellt eine Schaltfläche als Inhaltselement zur Verfügung.';
 
-$GLOBALS['TL_LANG']['CTE']['bootstrap_sliderStart'][0] = 'Bootstrap Carousel Start';
-$GLOBALS['TL_LANG']['CTE']['bootstrap_sliderStart'][1] = 'Beginnt ein Bootstrap Carousel.';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselStart'][0] = 'Bootstrap Carousel Start';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselStart'][1] = 'Beginnt ein Bootstrap Carousel.';
 
-$GLOBALS['TL_LANG']['CTE']['bootstrap_sliderPart'][0] = 'Bootstrap Carousel Trennelement';
-$GLOBALS['TL_LANG']['CTE']['bootstrap_sliderPart'][1] = 'Trennelement für das Bootstrap Carousel.';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselPart'][0] = 'Bootstrap Carousel Trennelement';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselPart'][1] = 'Trennelement für das Bootstrap Carousel.';
 
-$GLOBALS['TL_LANG']['CTE']['bootstrap_sliderEnd'][0] = 'Bootstrap Carousel Ende';
-$GLOBALS['TL_LANG']['CTE']['bootstrap_sliderEnd'][1] = 'Ende des Bootstrap Carousel.';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselEnd'][0] = 'Bootstrap Carousel Ende';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselEnd'][1] = 'Ende des Bootstrap Carousel.';
 
 $GLOBALS['TL_LANG']['CTE']['bootstrap_tabStart'][0] = 'Bootstrap Tabs Start';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_tabStart'][1] = 'Beginnt die Tab-Komponente.';
@@ -42,5 +42,10 @@ $GLOBALS['TL_LANG']['FFL']['button'][1] = 'Schaltfläche mit Text, Icon oder Bil
  */
 $GLOBALS['TL_LANG']['MSC']['bootstrapToggleNavigation'] = 'Navigation anzeigen/verstecken';
 
-$GLOBALS['TL_LANG']['MSC']['bootstrap_slider'] = 'Bootstrap Carousel: %s';
+$GLOBALS['TL_LANG']['MSC']['bootstrap_carousel'] = 'Bootstrap Carousel: %s';
 $GLOBALS['TL_LANG']['MSC']['bootstrap_tab'] = 'Bootstrap Tab: %s';
+
+/**
+ * errors
+ */
+$GLOBALS['TL_LANG']['ERR']['wrapperStartNotExists'] = 'Das zugehörige Startelement für "%s" wurde nicht gefunden. Bitte legen Sie dieses erst an.';

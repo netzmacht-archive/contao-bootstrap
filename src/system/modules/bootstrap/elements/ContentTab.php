@@ -28,14 +28,14 @@ class ContentTab extends BootstrapWrapperElement
 	protected $strTemplate = 'ce_bootstrap_tab';
 
 	/**
-	 * @var string
-	 */
-	protected static $strWrapperName = 'tabs';
-
-	/**
 	 * @var array
 	 */
-	protected $arrBootstrapAttributes = array('subType', 'fade', 'tabs');
+	protected $arrBootstrapAttributes = array('fade', 'tabs');
+
+	protected $arrTabdefinition;
+
+	protected $arrTabs;
+	protected $arrTab;
 
 
 	/**
@@ -47,32 +47,55 @@ class ContentTab extends BootstrapWrapperElement
 		parent::__construct($objElement);
 
 		// load tab definitions
-		if($this->type == static::getName('start'))
+		if($this->objModel->getType() == ContentWrapperModel::TYPE_START)
 		{
-			static::$arrStartElement[static::$strWrapperName] = array();
 			$tabs = deserialize($this->tabs, true);
+			$tab = null;
 
-			foreach ($tabs as $i => $tab)
+			foreach ($tabs as $i => $t)
 			{
-				$tabs[$i]['id'] = standardize($tab['title']);
+				$tabs[$i]['id'] = standardize($t['title']);
+
+				if($t['type'] != 'dropdown' && $tab === null)
+				{
+					$tab = $tabs[$i];
+				}
 			}
 
-			$start['tabs'] = $tabs;
+			$this->arrTabs = $tabs;
+			$this->arrTab = $tab;
+			$this->fade = $this->bootstrap_fade;
+		}
+		elseif($this->objModel->getType() == ContentWrapperModel::TYPE_SEPARATOR)
+		{
+			$elements = $this->Database
+				->prepare('SELECT id FROM tl_content WHERE bootstrap_parentId=? ORDER by sorting')
+				->execute($this->bootstrap_parentId);
+
+			$elements = array_merge(array($this->bootstrap_parentId), $elements->fetchEach('id'));
+
+			$index = 0;
+			$parent = ContentWrapperModel::findByPK($this->bootstrap_parentId);
+			$tabs = deserialize($parent->bootstrap_tabs, true);
+
+			foreach ($tabs as $i => $t)
+			{
+				$tabs[$i]['id'] = standardize($t['title']);
+
+				if($t['type'] != 'dropdown')
+				{
+					if($elements[$index] == $this->id)
+					{
+						$this->arrTab = $tabs[$i];
+					}
+					$index++;
+				}
+			}
+
+			$this->arrTabs = $tabs;
+			$this->fade = $parent->bootstrap_fade;
 		}
 
-		// get current tab index
-		if($start['tabIndex'] === null)
-		{
-			$start['tabIndex'] = -1;
-		}
-
-		do
-		{
-			$start['tabIndex']++;
-		} while (isset($start['tabs'][$start['tabIndex']]) &&
-			$start['tabs'][$start['tabIndex']]['type'] == 'dropdown');
-
-		static::$arrStartElement[static::$strWrapperName] = $start;
 	}
 
 	/**
@@ -80,13 +103,10 @@ class ContentTab extends BootstrapWrapperElement
 	 */
 	protected function compile()
 	{
-		$start = self::getStartElement();
-
-		$this->tabs = $start['tabs'];
-		$this->fade = $start['bootstrap_fade'];
-		$this->Template->tabIndex = $start['tabIndex'];
-
 		parent::compile();
+
+		$this->Template->tabs = $this->arrTabs;
+		$this->Template->currentTab = $this->arrTab;
 	}
 
 
@@ -95,11 +115,8 @@ class ContentTab extends BootstrapWrapperElement
 	 */
 	protected function generateTitle()
 	{
-		$start = self::getStartElement();
-
-		if($start['tabs'][$start['tabIndex']]['title'] != '') {
-			return '<strong class="title">' . $start['tabs'][$start['tabIndex']]['title'] . '</strong>';
+		if($this->arrTab['title'] != '') {
+			return '<strong class="title">' . $this->arrTab['title'] . '</strong>';
 		}
 	}
-
 }

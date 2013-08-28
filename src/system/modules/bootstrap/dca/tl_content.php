@@ -5,9 +5,7 @@
  */
 $GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('Bootstrap\\DataContainer\\Content', 'setArticlesRows');
 
-$GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('Bootstrap\\DataContainer\\Content', 'saveSlider');
-
-$GLOBALS['TL_DCA']['tl_content']['config']['ondelete_callback'][] = array('Bootstrap\\DataContainer\\Content', 'deleteWrapperElements');
+$GLOBALS['TL_DCA']['tl_content']['config']['ondelete_callback'][] = array('Bootstrap\\DataContainer\\WrapperElements', 'delete');
 
 
 /**
@@ -42,11 +40,11 @@ $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_button extends _boot
 );
 
 
-// bootstrap slider
-$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_sliderPart extends _typeOnly_'] = array();
-$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_sliderEnd extends _typeOnly_'] = array();
+// bootstrap carousel
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_carouselPart extends _typeOnly_'] = array();
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_carouselEnd extends _typeOnly_'] = array();
 
-$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_sliderStart extends _typeOnly_'] = array
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_carouselStart extends _typeOnly_'] = array
 (
 	'config' => array(
 		'bootstrap_showIndicators',
@@ -86,6 +84,8 @@ $GLOBALS['TL_DCA']['tl_content']['metasubselectpalettes']['sc_type']['!'] = arra
 /**
  * fields
  */
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['type']['save_callback'][] = array('Bootstrap\\DataContainer\\WrapperElements', 'save');
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_articleMarkup'] = array
 (
@@ -214,7 +214,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_tabs'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs'],
 	'exclude'                 => true,
 	'inputType'               => 'multiColumnWizard',
-	'save_callback'           => array(array('Bootstrap\\DataContainer\\Content', 'saveTabs')),
 	'eval'                    => array(
 		'tl_class'=>'clr',
 		'submitOnChange' => true,
@@ -248,4 +247,9 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_fade'] = array
 	'inputType'               => 'checkbox',
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_parentId'] = array
+(
+	'sql'                     => "int(10) unsigned NULL"
 );

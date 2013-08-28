@@ -16,7 +16,7 @@
 <?php else: ?>
 	</div>
 	</div>
-	<?php if($this->start['bootstrap_showControls']): ?>
+	<?php if($this->start->bootstrap_showControls): ?>
 		<a class="left carousel-control" href="#<?php echo $this->identifier; ?>" data-slide="prev">
 			<span class="icon-prev"></span>
 		</a>

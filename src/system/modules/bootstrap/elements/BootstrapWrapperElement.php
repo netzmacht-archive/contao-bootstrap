@@ -23,15 +23,15 @@ class BootstrapWrapperElement extends BootstrapContentElement
 {
 
 	/**
-	 * @var string
-	 */
-	protected $strIdentifier = 'element-%s';
-
-	/**
 	 * store start element
 	 * @var array
 	 */
 	protected static $arrStartElement;
+
+	/**
+	 * @var ContentWrapperModel
+	 */
+	protected $objModel;
 
 	/**
 	 * @var string
@@ -46,13 +46,21 @@ class BootstrapWrapperElement extends BootstrapContentElement
 	 */
 	public function __construct($objElement)
 	{
+		if($objElement instanceof \Model\Collection && !$objElement instanceof ContentWrapperCollection)
+		{
+			$objElement = $objElement->current();
+		}
+
+		if(!$objElement instanceof ContentWrapperModel)
+		{
+			$row = $objElement->row();
+
+			$objElement = new ContentWrapperModel();
+			$objElement->setRow($row);
+		}
+
 		parent::__construct($objElement);
 
-		// load start element
-		if($this->type == static::getName('start'))
-		{
-			static::$arrStartElement[static::$strWrapperName] = $this->arrData;
-		}
 	}
 
 
@@ -64,34 +72,15 @@ class BootstrapWrapperElement extends BootstrapContentElement
 		// backend mode
 		if(TL_MODE == 'BE')
 		{
-			if(static::getName('stop') == $this->type) {
+			if($this->objModel->getType() == ContentWrapperModel::TYPE_STOP)
+			{
 				return '';
 			}
+
 			return $this->generateTitle();
 		}
 
-		$generated = parent::generate();
-
-		// reset start element
-		if($this->type == static::getName('stop'))
-		{
-			static::$arrStartElement[static::$strWrapperName] = null;
-		}
-
-		return $generated;
-	}
-
-
-	/**
-	 * get name of start part or end element
-	 *
-	 * @param $key
-	 *
-	 * @return mixed
-	 */
-	public static function getName($key)
-	{
-		return $GLOBALS['BOOTSTRAP']['wrappers'][static::$strWrapperName][$key];
+		return parent::generate();
 	}
 
 
@@ -106,20 +95,6 @@ class BootstrapWrapperElement extends BootstrapContentElement
 			return '<strong class="title">' . $this->type . '</strong>';
 		}
 		return '';
-	}
-
-
-	/**
-	 * @return mixed
-	 */
-	public static function getStartElement()
-	{
-		if(isset(static::$arrStartElement[static::$strWrapperName]))
-		{
-			return static::$arrStartElement[static::$strWrapperName];
-		}
-
-		return null;
 	}
 
 }

@@ -75,16 +75,54 @@ $GLOBALS['BOOTSTRAP'] = array
 	(
 		'tabs' => array
 		(
-			'start'      => 'bootstrap_tabStart',
-			'separator'  => 'bootstrap_tabPart',
-			'stop'       => 'bootstrap_tabEnd',
+			'start' => array
+			(
+				'name'          => 'bootstrap_tabStart',
+				'triggerCreate' => true,
+				'triggerDelete' => true,
+			),
+
+			'separator' => array
+			(
+				'name'          => 'bootstrap_tabPart',
+				'autoCreate'    => true,
+				'autoDelete'    => true,
+				'countExisting' => array('Bootstrap\\DataContainer\\Content', 'countExistingTabSeparators'),
+				'countRequired' => array('Bootstrap\\DataContainer\\Content', 'countRequiredTabSeparators'),
+			),
+
+			'stop' => array
+			(
+				'name'       => 'bootstrap_tabEnd',
+				'autoCreate' => true,
+				'autoDelete' => true,
+			),
 		),
 
-		'slider' => array
+		'carousel' => array
 		(
-			'start'      => 'bootstrap_sliderStart',
-			'separator'  => 'bootstrap_sliderPart',
-			'stop'       => 'bootstrap_sliderEnd',
+			'start' => array
+			(
+				'name'          => 'bootstrap_carouselStart',
+				'autoCreate'    => true,
+				'triggerCreate' => true,
+				'triggerDelete' => true,
+			),
+
+			'separator' => array
+			(
+				'name'          => 'bootstrap_carouselPart',
+				'triggerCreate' => false,
+				'autoDelete'    => true,
+
+			),
+
+			'stop' => array
+			(
+				'name'          => 'bootstrap_carouselEnd',
+				'autoCreate'    => true,
+				'autoDelete'    => true,
+			),
 		),
 	),
 );
@@ -100,9 +138,9 @@ $GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar'] = 'Netzmacht\\Bootstrap
 /**
  * content elements
  */
-$GLOBALS['TL_CTE']['bootstrap_slider']['bootstrap_sliderStart'] = 'Bootstrap\\ContentSlider';
-$GLOBALS['TL_CTE']['bootstrap_slider']['bootstrap_sliderPart']  = 'Bootstrap\\ContentSlider';
-$GLOBALS['TL_CTE']['bootstrap_slider']['bootstrap_sliderEnd']   = 'Bootstrap\\ContentSlider';
+$GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselStart'] = 'Bootstrap\\ContentCarousel';
+$GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselPart']  = 'Bootstrap\\ContentCarousel';
+$GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselEnd']   = 'Bootstrap\\ContentCarousel';
 
 $GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabStart']      = 'Bootstrap\\ContentTab';
 $GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabPart']       = 'Bootstrap\\ContentTab';
@@ -133,9 +171,9 @@ $GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_tabStart';
 $GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_tabEnd';
 $GLOBALS['TL_WRAPPERS']['separator'][]  = 'bootstrap_tabPart';
 
-$GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_sliderStart';
-$GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_sliderEnd';
-$GLOBALS['TL_WRAPPERS']['separator'][]  = 'bootstrap_sliderPart';
+$GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_carouselStart';
+$GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_carouselEnd';
+$GLOBALS['TL_WRAPPERS']['separator'][]  = 'bootstrap_carouselPart';
 
 
 /**

@@ -10,6 +10,8 @@
 namespace Netzmacht\Bootstrap\DataContainer;
 
 
+use Netzmacht\Bootstrap\ContentWrapperModel;
+
 class Content extends \Backend
 {
 	protected $articles;
@@ -211,6 +213,47 @@ class Content extends \Backend
 		{
 			$this->Database->query(sprintf('DELETE FROM tl_content WHERE id IN(%s)', implode(',', $delete)));
 		}
+	}
+
+	/**
+	 * @param ContentWrapperModel $model
+	 *
+	 * @return int
+	 */
+	public function countExistingTabSeparators(ContentWrapperModel $model)
+	{
+		$id = $model->getType() == ContentWrapperModel::TYPE_START ? $model->id : $model->bootstrap_parentId;
+
+		return ContentWrapperModel::countBy(
+			'type=? AND bootstrap_parentId',
+			array($model->getTypeName(ContentWrapperModel::TYPE_SEPARATOR), $id)
+		);
+	}
+
+	/**
+	 * @param ContentWrapperModel $model
+	 *
+	 * @return int
+	 */
+	public function countRequiredTabSeparators(ContentWrapperModel $model)
+	{
+		if($model->getType() != ContentWrapperModel::TYPE_START)
+		{
+			$model = ContentWrapperModel::findByPk($model->bootstrap_parentId);
+		}
+
+		$tabs = deserialize($model->bootstrap_tabs, true);
+		$count = 0;
+
+		foreach($tabs as $tab)
+		{
+			if($tab['type'] != 'dropdown')
+			{
+				$count++;
+			}
+		}
+
+		return $count > 0 ? ($count - 1 ) : 0;
 	}
 
 }
