@@ -1,4 +1,4 @@
-<?php if($this->type == 'bootstrap_sliderStart'): ?>
+<?php if($this->type == 'bootstrap_carouselStart'): ?>
 <div class="carousel slide"<?php echo $this->cssID; ?> <?php if($this->autostart): ?> data-ride="carousel"<?php endif; ?><?php if($this->interval > 0): ?> data-interval="<?php echo $this->interval; ?>"<?php endif; ?>>
 	<?php if($this->showIndicators): ?>
 		<ol class="carousel-indicators">
@@ -10,7 +10,7 @@
 
 	<div class="carousel-inner">
 	<div class="item active">
-<?php elseif($this->type == 'bootstrap_sliderPart'): ?>
+<?php elseif($this->type == 'bootstrap_carouselPart'): ?>
 	</div>
 	<div class="item">
 <?php else: ?>

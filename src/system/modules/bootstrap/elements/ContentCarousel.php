@@ -51,22 +51,23 @@ class ContentCarousel extends BootstrapWrapperElement
 		// generate css identifier
 		else
 		{
-			$start = $this->objModel->findRelatedelements(ContentWrapperModel::TYPE_START);
+			$start = ContentWrapperModel::findByPk($this->bootstrap_parentId);
 
 			if($start !== null)
 			{
 				$this->Template->start = $start;
 
-				$start['cssID'] = deserialize($start['cssID'], true);
+				$start->cssID = deserialize($start->cssID, true);
 
-				if($start['cssID'][0] == '')
+				if($start->cssID[0] == '')
 				{
-					$start['cssID'][0] = sprintf($this->strIdentifier, $start['id']);
-					$this->cssID = $start['cssID'];
+					$cssID = $start->cssID;
+					$cssID[0] = sprintf($this->strIdentifier, $start->id);
+					$this->cssID = $cssID;
 				}
 				else
 				{
-					$this->cssID = $start['cssID'];
+					$this->cssID = $start->cssID;
 				}
 			}
 		}
