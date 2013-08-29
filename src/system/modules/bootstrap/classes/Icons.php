@@ -23,6 +23,11 @@ class Icons
 	 */
 	protected static $flatIcons;
 
+	/**
+	 * @var bool
+	 */
+	protected static $initialized;
+
 
 	/**
 	 * generates code for an icon
@@ -34,13 +39,11 @@ class Icons
 	 */
 	public static function generateIcon($icon, $class=null)
 	{
+		static::initialize();
+
 		return sprintf(
-			'<%s class="%s%s%s"></%s>',
-			$GLOBALS['BOOTSTRAP']['icons']['tag'],
-			$GLOBALS['BOOTSTRAP']['icons']['classPrefix'],
-			$icon,
-			$class == null ? '' : ' ' . $class,
-			$GLOBALS['BOOTSTRAP']['icons']['tag']
+			$GLOBALS['BOOTSTRAP']['icons']['template'],
+			$icon . ($class != null ?: ' ' . $class)
 		);
 	}
 
@@ -48,12 +51,14 @@ class Icons
 	/**
 	 * get all icons of a group, as grouped array or as flat array
 	 *
-	 * @param mixed $group string for an icon group, true if
+	 * @param mixed $group string for an icon group, true if a flat array
 	 *
 	 * @return array [group => array]
 	 */
 	public static function getIcons($group=null)
 	{
+		static::initialize();
+
 		// get all icons
 		if($group === null) {
 			return $GLOBALS['BOOTSTRAP']['icons']['set'];
@@ -84,6 +89,19 @@ class Icons
 
 
 	/**
+	 * get icon template
+	 *
+	 * @return string
+	 */
+	public static function getIconTemplate()
+	{
+		static::initialize();
+
+		return $GLOBALS['BOOTSTRAP']['icons']['template'];
+	}
+
+
+	/**
 	 * check if an icon exists
 	 *
 	 * @param string $icon
@@ -94,6 +112,25 @@ class Icons
 		$icons = self::getIcons(true);
 
 		return in_array($icon, $icons);
+	}
+
+
+	/**
+	 * initialize icon configuration
+	 */
+	public static function initialize()
+	{
+		if(static::$initialized)
+		{
+			return;
+		}
+
+		$set = $GLOBALS['TL_CONFIG']['bootstrapIconSet'];
+
+		$GLOBALS['BOOTSTRAP']['icons']['set'] = include(TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['icons']['sets'][$set]['path']);
+		$GLOBALS['BOOTSTRAP']['icons']['template'] = $GLOBALS['BOOTSTRAP']['icons']['sets'][$set]['template'];
+
+		static::$initialized = true;
 	}
 
 }
