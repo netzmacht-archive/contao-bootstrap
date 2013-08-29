@@ -10,6 +10,7 @@
 namespace Netzmacht\Bootstrap\DataContainer;
 
 use Netzmacht\Bootstrap\BootstrapWidget;
+use Netzmacht\Bootstrap\Icons;
 
 /**
  * Class BootstrapDataContainer
@@ -51,11 +52,11 @@ class Bootstrap extends \Backend
 
 
 	/**
-	 * only load templates if bootstrap is activated, so diverent layouts will work instead of template changes
+	 * We need to use the parseTemplate callback to trigger initializeLayout in Contao 3.
 	 *
 	 * @param $objTemplate
 	 */
-	public function initializeLayout($objTemplate)
+	public function initializeLayoutByParseTemplateHook($objTemplate)
 	{
 		global $objPage;
 
@@ -67,6 +68,19 @@ class Bootstrap extends \Backend
 		static::$bootstrapLoaded = true;
 
 		$layout = self::getPageLayout();
+
+		$this->initializeLayout($objPage, $layout);
+	}
+
+
+	/**
+	 * only load templates if bootstrap is activated, so diverent layouts will work instead of template changes
+	 *
+	 * @param $objTemplate
+	 */
+	public function initializeLayout($page, $layout)
+	{
+		static::$pageLayout = $layout;
 
 		if($layout->addBootstrap)
 		{
@@ -80,9 +94,9 @@ class Bootstrap extends \Backend
 			}
 
 			// load assets
-			$layout->bootstrapAssets = deserialize($layout->bootstrapAssets, true);
+			$layout->bootstrap_assets = deserialize($layout->bootstrap_assets, true);
 
-			foreach ($layout->bootstrapAssets as $asset)
+			foreach ($layout->bootstrap_assets as $asset)
 			{
 				$extension = substr($asset, strrpos($asset, '.') + 1);
 
