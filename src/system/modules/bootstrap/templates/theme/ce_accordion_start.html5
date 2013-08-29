@@ -1,0 +1,26 @@
+<?php
+if($GLOBALS['accordionGroup'])
+{
+	if($GLOBALS['accordionGroupFirst'])
+	{
+		$this->accordion = 'collapse in';
+		$GLOBALS['accordionGroupFirst'] = false;
+	}
+	else
+	{
+		$this->accordion = 'collapse';
+	}
+}
+else {
+	$this->accordion = $this->accordion == 'accordion' ? 'collapse' : $this->accordion;
+}
+?>
+<section class="<?php echo $this->class; ?> panel block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+
+	<div class="panel-heading"<?php if ($this->headlineStyle): ?> style="<?php echo $this->headlineStyle; ?>"<?php endif; ?> data-toggle="collapse"<?php if($GLOBALS['accordionGroup']): ?> data-parent="#<?php echo $GLOBALS['accordionGroup']; ?>"<?php endif; ?> data-target="#accordion-<?php echo $this->id; ?>">
+		<div class="panel-title">
+			<?php echo $this->headline; ?>
+		</div>
+	</div>
+
+	<div class="panel-collapse <?php echo $this->accordion; ?>" id="accordion-<?php echo $this->id; ?>"><div class="panel-body">

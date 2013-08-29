@@ -1,0 +1,40 @@
+<?php if (!$this->requireLogin): ?>
+
+	<!-- indexer::stop -->
+	<div class="form">
+
+		<?php if ($this->confirm): ?>
+			<p class="confirm"><?php echo $this->confirm; ?></p>
+		<?php elseif ($this->allowComments): ?>
+			<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> id="<?php echo $this->formId; ?>" method="post">
+				<div class="formbody <?php if(!$GLOBALS['BOOTSTRAP']['form']['defaultTableless']): ?>form-horizontal<?php endif; ?>">
+					<input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>">
+					<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+
+					<?php
+						foreach($this->fields as $name => $widget )
+						{
+							$fields[$name] = new Bootstrap\BootstrapWidget($widget);
+							$fields[$name]->tableless = $GLOBALS['BOOTSTRAP']['form']['defaultTableless'];
+							echo $fields[$name]->parse();
+						}
+					?>
+
+					<div class="form-group">
+						<?php if(!$GLOBALS['BOOTSTRAP']['form']['defaultTableless']): ?>
+						<div class="<?php echo $GLOBALS['BOOTSTRAP']['form']['tableFormat']['offset'] . ' ' . $GLOBALS['BOOTSTRAP']['form']['tableFormat']['control']; ?>">
+						<?php endif; ?>
+						<input type="submit" class="submit" value="<?php echo $this->submit; ?>">
+						<?php if(!$GLOBALS['BOOTSTRAP']['form']['defaultTableless']): ?>
+						</div>
+						<?php endif; ?>
+					</div>
+
+				</div>
+			</form>
+		<?php endif; ?>
+
+	</div>
+	<!-- indexer::continue -->
+
+<?php endif; ?>
