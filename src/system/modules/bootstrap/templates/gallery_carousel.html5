@@ -1,0 +1,25 @@
+<?php if($this->cssID[0] == '') : $cssId = 'carousel_' . time(); else: $cssId = 'carousel_' . $this->cssID[0]; endif; ?>
+<div class="carousel slide img-polaroid" data-interval="8000" id="<?php echo $cssId; ?>">
+	<div class="carousel-inner">
+		<?php foreach ($this->body as $class=>$row): ?>
+			<?php foreach ($row as $col): ?>
+				<?php if ($col->addImage): ?>
+					<div class="item <?php echo $col->class; ?> <?php if(!$first) : echo 'active'; $first=true; endif; ?>">
+						<figure class="image_container"<?php if ($col->margin): ?> style="<?php echo $col->margin; ?>"<?php endif; ?>>
+							<?php if ($col->href): ?>
+								<a href="<?php echo $col->href; ?>"<?php echo $col->attributes; ?> title="<?php echo $col->alt; ?>"><img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> alt="<?php echo $col->alt; ?>"></a>
+							<?php else: ?>
+								<img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> alt="<?php echo $col->alt; ?>">
+							<?php endif; ?>
+							<?php if ($col->caption): ?>
+								<figcaption class="carousel-caption" style="width:<?php echo $col->arrSize[0]; ?>px"><?php if($col->alt): ?><h3><?php echo $col->alt; ?></h3><?php endif; ?><?php echo $col->caption; ?></figcaption>
+							<?php endif; ?>
+						</figure>
+					</div>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		<?php endforeach; ?>
+	</div>
+	<a class="carousel-control left" href="#<?php echo $cssId; ?>" data-slide="prev"><span class="icon-prev"></span></a>
+	<a class="carousel-control right" href="#<?php echo $cssId; ?>" data-slide="next"><span class="icon-next"></span></a>
+</div>
