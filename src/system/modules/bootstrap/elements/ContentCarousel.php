@@ -37,7 +37,7 @@ class ContentCarousel extends BootstrapWrapperElement
 		// get included elements
 		if($this->objModel->getType() == ContentWrapperModel::TYPE_START)
 		{
-			$this->Template->count = $this->objModel->countRelatedElements() + 1;
+			$this->Template->count = $this->objModel->countRelatedElements();
 
 			$cssID = $this->cssID;
 
