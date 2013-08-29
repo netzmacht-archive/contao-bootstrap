@@ -90,12 +90,12 @@ class ContentWrapperModel extends \ContentModel
 			if($type === null)
 			{
 				$strColumn = 'bootstrap_parentId';
-				$mixedValue = $this->bootstrap_parentId;
+				$mixedValue = $this->id;
 			}
 			else
 			{
 				$strColumn = 'bootstrap_parentId=? AND type';
-				$mixedValue = array($this->bootstrap_parentId, $this->getTypeName($type));
+				$mixedValue = array($this->id, $this->getTypeName($type));
 			}
 		}
 		elseif($type === null)
