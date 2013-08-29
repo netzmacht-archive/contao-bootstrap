@@ -1,0 +1,5 @@
+<?php if($this->type == 'bootstrap_accordionGroupStart'): ?>
+<div class="panel-group" id="<?php echo $this->groupId; ?>">
+<?php else: ?>
+</div>
+<?php endif; ?>
