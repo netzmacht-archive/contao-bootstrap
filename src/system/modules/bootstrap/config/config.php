@@ -28,20 +28,36 @@ $GLOBALS['BOOTSTRAP'] = array
 			'offset'        => 'col-lg-offset-3',
 		),
 
+		// which controls are generated without a label. This is used to set offset in the table layout
 		'noLabel'           => array('checkbox', 'radio'),
+
+		// how to display forms like comments form by default
+		'defaultTableless'  => true,
 	),
 
 	// The bootstrap module supports different icons sets
 	'icons' => array
 	(
-		// Prefix for the icon class, for glyphicons the value is "glyphicons glyphicons-"
-		'classPrefix'       => 'icon-',
+		// registered icons sets
+		'sets' => array
+		(
+			'font-awesome'  => array
+			(
+				'path'      => 'system/modules/bootstrap/config/icons-font-awesome.php',
+				'template'  => '<i class="icon-%s"></i>',
+			),
+			'glyphicons'    => array
+			(
+				'path'      => 'system/modules/bootstrap/config/icons-glyphicons.php',
+				'template'  => '<span class="glyphicon glyphicon-%s"></span>',
+			),
+		),
 
 		// the array where all icons are defined
-		'set'               => include TL_ROOT . '/system/modules/bootstrap/config/icons-font-awesome.php',
+		''                  => array(),
 
 		// which tag shall be used for icons
-		'tag'               => 'i',
+		'template'          => array(),
 	),
 
 	'dropdown' => array
@@ -56,8 +72,10 @@ $GLOBALS['BOOTSTRAP'] = array
 	// You can add differnt template directories here.
 	'dynamicLoadTemplates' => array
 	(
-		'system/modules/bootstrap/templates' => array
+		'system/modules/bootstrap/templates/theme' => array
 		(
+			'ce_accordion',
+			'ce_accordion_start',
 			'form',
 			'form_captcha',
 			'form_checkbox',
@@ -68,26 +86,36 @@ $GLOBALS['BOOTSTRAP'] = array
 			'form_radio',
 			'form_submit',
 			'form_widget',
+			'mod_comment_form',
+			'mod_search_advanced',
 		),
 	),
 
+	// Wrappers are content elements containing a start, separators and stop elements
+	// If they are created a generic callback checks how to create or delete the containing elements
+	// Only change this config if you know what you are doing!
 	'wrappers' => array
 	(
+		// Bootstrap tab component
 		'tabs' => array
 		(
 			'start' => array
 			(
 				'name'          => 'bootstrap_tabStart',
-				'triggerCreate' => true,
-				'triggerDelete' => true,
+				'triggerCreate' => true, // auto create separators and stop element
+				'triggerDelete' => true, // auto deleete separators and stop element
 			),
 
 			'separator' => array
 			(
 				'name'          => 'bootstrap_tabPart',
-				'autoCreate'    => true,
-				'autoDelete'    => true,
+				'autoCreate'    => true, // can be auto created
+				'autoDelete'    => true, // can be auto deleted
+
+				// callback to detect how many separators exists
 				'countExisting' => array('Bootstrap\\DataContainer\\Content', 'countExistingTabSeparators'),
+
+				// callback to detect how many separators are required
 				'countRequired' => array('Bootstrap\\DataContainer\\Content', 'countRequiredTabSeparators'),
 			),
 
@@ -99,6 +127,7 @@ $GLOBALS['BOOTSTRAP'] = array
 			),
 		),
 
+		// Bootstrap carousel component
 		'carousel' => array
 		(
 			'start' => array
@@ -124,9 +153,33 @@ $GLOBALS['BOOTSTRAP'] = array
 				'autoDelete'    => true,
 			),
 		),
+
+		'accordion' => array
+		(
+			'start' => array
+			(
+				'name'          => 'bootstrap_accordionGroupStart',
+				'autoCreate'    => true,
+				'autoDelete'    => true,
+				'triggerCreate' => true,
+				'triggerDelete' => true,
+			),
+
+			'stop' => array
+			(
+				'name'          => 'bootstrap_accordionGroupEnd',
+				'autoCreate'    => true,
+				'autoDelete'    => true,
+				'triggerCreate' => true,
+				'triggerDelete' => true,
+			),
+		),
 	),
 );
 
+/**
+ * backend modules
+ */
 
 
 /**
@@ -146,6 +199,10 @@ $GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabStart']      = 'Bootstrap\\Co
 $GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabPart']       = 'Bootstrap\\ContentTab';
 $GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabEnd']        = 'Bootstrap\\ContentTab';
 
+$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupStart']      = 'Bootstrap\\ContentAccordionGroup';
+$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupEnd']        = 'Bootstrap\\ContentAccordionGroup';
+
+
 $GLOBALS['TL_CTE']['links']['bootstrap_button']                 = 'Bootstrap\\ContentButton';
 $GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']         = 'Bootstrap\\ContentColumnSet';
 
@@ -159,14 +216,28 @@ $GLOBALS['TL_FFL']['button'] = 'Netzmacht\\Bootstrap\\FormButton';
 /**
  * hooks
  */
-$GLOBALS['TL_HOOKS']['parseTemplate'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeLayout');
+if(version_compare(VERSION, '3.1', '>0'))
+{
+	$GLOBALS['TL_HOOKS']['getPageLayout'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeLayout');
+}
+else
+{
+	$GLOBALS['TL_HOOKS']['parseTemplate'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeLayoutByParseTemplateHook');
+}
 
 $GLOBALS['TL_HOOKS']['loadFormField'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeFormWidget');
 
+/**
+ * config values
+ */
+$GLOBALS['TL_CONFIG']['bootstrapIconSet'] = 'font-awesome';
 
 /**
  * wrapper
  */
+$GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_accordionGroupStart';
+$GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_accordionGroupEnd';
+
 $GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_tabStart';
 $GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_tabEnd';
 $GLOBALS['TL_WRAPPERS']['separator'][]  = 'bootstrap_tabPart';
