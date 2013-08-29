@@ -5,7 +5,7 @@
 ));
 
 $GLOBALS['TL_DCA']['tl_layout']['metasubpalettes']['addBootstrap'] = array(
-	'bootstrapAssets'
+	'bootstrap_assets',
 );
 
 $GLOBALS['TL_DCA']['tl_layout']['fields']['addBootstrap'] = array
@@ -17,15 +17,15 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['addBootstrap'] = array
 	'sql'                     => "char(1) NOT NULL default ''"
 );
 
-$GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrapAssets'] = array
+$GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_assets'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['bootstrapAssets'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['bootstrap_assets'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'options'                 => array(
 		'dist/css/bootstrap.min.css' => 'bootstrap.min.css',
 		'dist/js/bootstrap.min.js' => 'bootstrap.min.js'
 	),
-	'eval'                    => array('multiple' => true, 'tl_class' => 'w50'),
+	'eval'                    => array('multiple' => true),
 	'sql'                     => "mediumblob NULL"
 );
