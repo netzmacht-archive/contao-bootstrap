@@ -1,0 +1,30 @@
+
+<div class="media<?php echo $this->class; ?>" id="<?php echo $this->id; ?>">
+	<?php if($this->website): ?><a href="<?php echo $this->website; ?>" rel="nofollow" target="_blank" class="pull-left"><?php else: ?><div class="pull-left"><?php endif; ?>
+		<img src="<?php echo Bootstrap\Gravatar::generateUrl($this->email); ?>" class="media-object">
+			<?php if($this->website): ?></a><?php else: ?></div><?php endif; ?>
+
+	<div class="media-body">
+		<p class="media-info"><?php echo $this->by; ?> <?php if ($this->website): ?><a href="<?php echo $this->website; ?>" rel="nofollow" target="_blank"><?php endif; ?><?php echo $this->name; ?><?php if ($this->website): ?></a><?php endif; ?> | <time datetime="<?php echo $this->datetime; ?>" class="date"><?php echo $this->date; ?></time></p>
+
+		<?php echo $this->comment; ?>
+
+
+		<?php if ($this->addReply): ?>
+			<div class="media reply">
+
+				<div class="pull-left">
+					<img src="<?php echo Bootstrap\Gravatar::generateUrl($this->author->email); ?>" class="media-object">
+				</div>
+
+				<div class="media-body">
+					<p class="media-info"><?php echo $this->rby; ?> <?php echo $this->author->name; ?></p>
+
+					<?php echo $this->reply; ?>
+				</div>
+
+			</div>
+		<?php endif; ?>
+	</div>
+
+</div>
