@@ -85,7 +85,7 @@ class Bootstrap extends \Backend
 		if($layout->addBootstrap)
 		{
 			// only load these templates if layout uses it because default templates are changed
-			foreach ($GLOBALS['BOOTSTRAP']['dynamicLoadTemplates'] as $path => $templates)
+			foreach ($GLOBALS['BOOTSTRAP']['templates']['dynamicLoad'] as $path => $templates)
 			{
 				foreach ($templates as $template)
 				{
@@ -145,7 +145,40 @@ class Bootstrap extends \Backend
 		}
 
 		return \TemplateLoader::getFiles();
+	}
 
+	public function callTemplateModifiers(\Template $template)
+	{
+		if(!static::getPageLayout()->addBootstrap)
+		{
+			return;
+		}
+
+		foreach($GLOBALS['BOOTSTRAP']['templates']['modifiers'] as $name => $config)
+		{
+			if(!in_array($template->getName(), $config['templates']))
+			{
+				continue;
+			}
+
+			if($config['type'] == 'placeholder')
+			{
+				if(is_callable($config['value']))
+				{
+					$value = call_user_func($config['value'], $template);
+				}
+				else
+				{
+					$value = $config['value'];
+				}
+
+				$template->$config['key'] = str_replace($name, $value, $template->$config['key']);
+			}
+			elseif($config['type'] == 'callback')
+			{
+				call_user_func($config['callback'], $template);
+			}
+		}
 	}
 
 }
