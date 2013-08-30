@@ -20,3 +20,6 @@ $GLOBALS['TL_LANG']['tl_module']['bootstrap_navbarModules_cssClass'][1] = 'Sie k
 
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_navbarTemplate'][0] = 'Template';
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_navbarTemplate'][1] = 'Entscheiden Sie, welches Template für die Navigationsleiste verwendet werden soll.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_navClass'][0] = 'Bootstrap Navigations-Klassen';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_navClass'][1] = 'Geben Sie die Navigations-Klassen an, die Bootstrap bietet. Sie müssen die allgemeine <em>nav</em> Klasse auch zuweisen.';
