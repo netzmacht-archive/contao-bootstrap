@@ -1,0 +1,26 @@
+<?php if($button['type'] == 'group'): ?>
+	<div class="btn-group">
+	<?php $item = $button; foreach($item['items'] as $button): ?>
+		<?php include($this->getTemplate('ce_bootstrap_buttons_item')); ?>
+	<?php endforeach; ?>
+	</div>
+<?php elseif($button['type'] == 'dropdown'): ?>
+	<div class="btn-group">
+		<a type="button" class="btn <?php echo $this->buttonStyle; ?> dropdown-toggle" data-toggle="dropdown">
+			<?php echo $button['label']; ?>
+			<span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			<?php foreach($button['items'] as $i => $item): ?>
+				<?php if($item['type'] == 'header'): ?>
+				<?php if($i > 0): ?><li class="divider"></li><?php endif; ?>
+				<li class="dropdown-header"><?php echo $item['label']; ?></li>
+				<?php else: ?>
+				<li><a href="<?php echo $item['url']; ?>" title="<?php echo $item['title']; ?>"><?php echo $item['label']; ?></a></li>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+<?php else: ?>
+	<a href="<?php echo $button['url']; ?>" title="<?php echo $button['title']; ?>" class="btn <?php echo $this->buttonStyle; ?>"><?php echo $button['label']; ?></a>
+<?php endif; ?>
