@@ -55,8 +55,6 @@ class ModuleNavbar extends BootstrapModule
 	 */
 	protected function compile()
 	{
-		parent::compile();
-
 		// generate modules
 		$dataModules = deserialize($this->navbarModules, true);
 		$modules = array();
@@ -64,6 +62,13 @@ class ModuleNavbar extends BootstrapModule
 		foreach ($dataModules as $module)
 		{
 			$modules[] = $this->generateModule($module);
+		}
+
+		if($this->cssID[1] == '')
+		{
+			$cssID = $this->cssID;
+			$cssID[1] = 'navbar-default';
+			$this->cssID = $cssID;
 		}
 
 		$this->Template->modules = $modules;
