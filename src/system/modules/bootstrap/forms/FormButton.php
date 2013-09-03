@@ -1,10 +1,14 @@
 <?php
+
 /**
- * Created by JetBrains PhpStorm.
- * User: david
- * Date: 21.08.13
- * Time: 16:38
- * To change this template use File | Settings | File Templates.
+ * Contao Open Source CMS
+ *
+ * Copyright (C) 2005-2013 Leo Feyer
+ *
+ * @package   netzmacht-bootstrap
+ * @author    netzmacht creative David Molineus
+ * @license   MPL/2.0
+ * @copyright 2013 netzmacht creative David Molineus
  */
 
 namespace Netzmacht\Bootstrap;
@@ -30,9 +34,9 @@ class FormButton extends \FormSubmit
 
 			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 			{
-				return sprintf('<button type="submit" id="ctrl_%s" class="submit%s" title="%s" alt="%s"%s>%s</button>',
+				return sprintf('<button type="submit" id="ctrl_%s" class="submit %s" title="%s" alt="%s"%s>%s</button>',
 					$this->strId,
-					(($this->strClass != '') ? ' ' . $this->strClass : ''),
+					(($this->strClass != '') ? ' ' . $this->strClass : 'btn-default'),
 					specialchars($this->slabel),
 					specialchars($this->slabel),
 					$this->getAttributes(),
@@ -57,9 +61,9 @@ class FormButton extends \FormSubmit
 		}
 
 		// Return the regular button
-		return sprintf('<button type="submit" id="ctrl_%s" class="submit%s"%s>%s</button>',
+		return sprintf('<button type="submit" id="ctrl_%s" class="submit btn %s"%s>%s</button>',
 			$this->strId,
-			(($this->strClass != '') ? ' ' . $this->strClass : ''),
+			(($this->strClass != '') ? $this->strClass : 'btn-default'),
 			$this->getAttributes(),
 			$label
 		);
