@@ -19,7 +19,7 @@ namespace Netzmacht\Bootstrap;
  *
  * @package Netzmacht\Bootstrap
  */
-class BootstrapWrapperElement extends BootstrapContentElement
+abstract class BootstrapWrapperElement extends BootstrapContentElement
 {
 
 	/**
@@ -60,7 +60,6 @@ class BootstrapWrapperElement extends BootstrapContentElement
 		}
 
 		parent::__construct($objElement);
-
 	}
 
 
@@ -79,6 +78,8 @@ class BootstrapWrapperElement extends BootstrapContentElement
 
 			return $this->generateTitle();
 		}
+
+		$this->wrapperType = $this->objModel->getType();
 
 		return parent::generate();
 	}
