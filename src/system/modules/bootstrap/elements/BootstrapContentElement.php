@@ -13,13 +13,14 @@
 
 namespace Netzmacht\Bootstrap;
 
-
 /**
- * Class BootstrapContentElement provides access to bootstrap namespaced elements
+ * Class BootstrapContentElement provides easy access for bootstrap namespaces attributes
+ *
  * @package Netzmacht\Bootstrap
  */
-class BootstrapContentElement extends \ContentElement
+abstract class BootstrapContentElement extends \ContentElement
 {
+
 	/**
 	 * @var array
 	 */
@@ -27,55 +28,63 @@ class BootstrapContentElement extends \ContentElement
 
 
 	/**
-	 * @param string $key
-	 * @return mixed
+	 * @param        $objElement
+	 * @param string $strColumn
 	 */
-	public function __get($key)
+	public function __construct($objElement, $strColumn='main')
 	{
-		if(in_array($key, $this->arrBootstrapAttributes))
-		{
-			return $this->arrData['bootstrap_' . $key];
-		}
+		parent::__construct($objElement, $strColumn);
 
-		return parent::__get($key);
+		$this->arrData = new Attributes($this->arrData);
+		$this->arrData->registerNamespaceAttributes($this->arrBootstrapAttributes);
+		$this->cssDefinitioin = $this->cssID;
 	}
 
 
 	/**
-	 * @param $key
-	 * @param $value
+	 * @return string|void
+	 *
+	 * Need to copy original method because of #6149
 	 */
-	public function __set($key, $value)
+	public function generate()
 	{
-		if(in_array($key, $this->arrBootstrapAttributes))
+		if (TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->invisible || ($this->start > 0 && $this->start > time()) || ($this->stop > 0 && $this->stop < time())))
 		{
-			$key = 'bootstrap_' . $key;
+			return '';
 		}
 
-		parent::__set($key, $value);
-	}
-
-	public function __isset($key)
-	{
-		if(in_array($key, $this->arrBootstrapAttributes))
+		if ($this->arrData['space'][0] != '')
 		{
-			$key = 'bootstrap_' . $key;
+			$this->arrStyle[] = 'margin-top:'.$this->arrData['space'][0].'px;';
 		}
 
-		return parent::__isset($key);
-	}
-
-
-	/**
-	 * compile bootstrap content element
-	 */
-	protected function compile()
-	{
-		foreach ($this->arrBootstrapAttributes as $attribute)
+		if ($this->arrData['space'][1] != '')
 		{
-			$this->Template->$attribute = $this->arrData['bootstrap_' . $attribute];
+			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
-	}
 
+		$this->Template = new \FrontendTemplate($this->strTemplate);
+		$this->Template->setData($this->arrData);
+
+		$this->compile();
+
+		$this->Template->style = !empty($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
+		$this->Template->class = trim('ce_' . $this->type . ' ' . $this->cssID[1]);
+		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
+
+		$this->Template->inColumn = $this->strColumn;
+
+		if ($this->Template->headline == '')
+		{
+			$this->Template->headline = $this->headline;
+		}
+
+		if ($this->Template->hl == '')
+		{
+			$this->Template->hl = $this->hl;
+		}
+
+		return $this->Template->parse();
+	}
 
 }

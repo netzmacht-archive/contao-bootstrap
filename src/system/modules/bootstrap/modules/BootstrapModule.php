@@ -13,7 +13,6 @@
 
 namespace Netzmacht\Bootstrap;
 
-
 /**
  * Class BootstrapModule provides easy access for bootstrap namespaces attributes
  *
@@ -29,44 +28,57 @@ abstract class BootstrapModule extends \Module
 
 
 	/**
-	 * @param string $key
-	 * @return mixed
+	 * @param        $objElement
+	 * @param string $strColumn
 	 */
-	public function __get($key)
+	public function __construct($objElement, $strColumn='main')
 	{
-		if(in_array($key, $this->arrBootstrapAttributes))
-		{
-			return $this->arrData['bootstrap_' . $key];
-		}
+		parent::__construct($objElement, $strColumn);
 
-		return parent::__get($key);
+		$this->arrData = new Attributes($this->arrData);
+		$this->arrData->registerNamespaceAttributes($this->arrBootstrapAttributes);
+		$this->cssDefinitioin = $this->cssID;
 	}
 
 
 	/**
-	 * @param $key
-	 * @param $value
+	 * @return string|void
+	 *
+	 * Need to copy original method because of #6149
 	 */
-	public function __set($key, $value)
+	public function generate()
 	{
-		if(in_array($key, $this->arrBootstrapAttributes))
+		if ($this->arrData['space'][0] != '')
 		{
-			$key = 'bootstrap_' . $key;
+			$this->arrStyle[] = 'margin-top:'.$this->arrData['space'][0].'px;';
 		}
 
-		parent::__set($key, $value);
-	}
-
-
-	/**
-	 * compile bootstrap module
-	 */
-	protected function compile()
-	{
-		foreach ($this->arrBootstrapAttributes as $attribute)
+		if ($this->arrData['space'][1] != '')
 		{
-			$this->Template->$attribute = $this->arrData['bootstrap_' . $attribute];
+			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
+
+		$this->Template = new \FrontendTemplate($this->strTemplate);
+		$this->Template->setData($this->arrData);
+
+		$this->compile();
+
+		$this->Template->inColumn = $this->strColumn;
+		$this->Template->style = !empty($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
+		$this->Template->class = trim('mod_' . $this->type . ' ' . $this->cssID[1]);
+		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
+
+		if ($this->Template->headline == '')
+		{
+			$this->Template->headline = $this->headline;
+		}
+
+		if ($this->Template->hl == '')
+		{
+			$this->Template->hl = $this->hl;
+		}
+
+		return $this->Template->parse();
 	}
 
 }
