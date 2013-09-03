@@ -1,10 +1,14 @@
 <?php
+
 /**
- * Created by JetBrains PhpStorm.
- * User: david
- * Date: 12.08.13
- * Time: 20:34
- * To change this template use File | Settings | File Templates.
+ * Contao Open Source CMS
+ *
+ * Copyright (C) 2005-2013 Leo Feyer
+ *
+ * @package   netzmacht-bootstrap
+ * @author    netzmacht creative David Molineus
+ * @license   MPL/2.0
+ * @copyright 2013 netzmacht creative David Molineus
  */
 
 namespace Netzmacht\Bootstrap\DataContainer;
@@ -26,16 +30,17 @@ class Bootstrap extends \Backend
 	protected static $bootstrapLoaded = false;
 
 	/**
-	 * @var
+	 * @var \LayoutModel
 	 */
 	protected static $pageLayout;
 
 
 	/**
-	 * @param $mcw
+	 * Get all modules prepared for select wizard
+	 *
 	 * @return array
 	 */
-	public function getAllModules($mcw)
+	public function getAllModules()
 	{
 		$arrModules = array();
 
@@ -54,9 +59,8 @@ class Bootstrap extends \Backend
 	/**
 	 * We need to use the parseTemplate callback to trigger initializeLayout in Contao 3.
 	 *
-	 * @param $objTemplate
 	 */
-	public function initializeLayoutByParseTemplateHook($objTemplate)
+	public function initializeLayoutByParseTemplateHook()
 	{
 		global $objPage;
 
@@ -67,18 +71,17 @@ class Bootstrap extends \Backend
 
 		static::$bootstrapLoaded = true;
 
-		$layout = self::getPageLayout();
-
-		$this->initializeLayout($objPage, $layout);
+		$this->initializeLayout($objPage, self::getPageLayout());
 	}
 
 
 	/**
 	 * only load templates if bootstrap is activated, so diverent layouts will work instead of template changes
 	 *
-	 * @param $objTemplate
+	 * @param \PageModel   $page
+	 * @param \LayoutModel $layout
 	 */
-	public function initializeLayout($page, $layout)
+	public function initializeLayout(\PageModel $page, \LayoutModel $layout)
 	{
 		static::$pageLayout = $layout;
 
@@ -112,6 +115,16 @@ class Bootstrap extends \Backend
 	}
 
 
+	/**
+	 * add bootstrap form widget as delegator by using the loadFormField hook
+	 *
+	 * @param \Widget $widget
+	 * @param         $formId
+	 * @param         $data
+	 * @param         $form
+	 *
+	 * @return BootstrapWidget|\Widget
+	 */
 	public function initializeFormWidget(\Widget $widget, $formId, $data, $form)
 	{
 		$layout = self::getPageLayout();
@@ -125,6 +138,11 @@ class Bootstrap extends \Backend
 	}
 
 
+	/**
+	 * get current layout of current page
+	 *
+	 * @return \LayoutModel|\Model|null
+	 */
 	protected static function getPageLayout()
 	{
 		if(self::$pageLayout === null)
@@ -137,6 +155,13 @@ class Bootstrap extends \Backend
 	}
 
 
+	/**
+	 * get all templates. A templatePrefix can be defined using eval.TemplatePrefix
+	 *
+	 * @param $dc
+	 *
+	 * @return array
+	 */
 	public function getTemplates($dc)
 	{
 		if(isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix']))
@@ -147,6 +172,12 @@ class Bootstrap extends \Backend
 		return \TemplateLoader::getFiles();
 	}
 
+
+	/**
+	 * execute all registered template modifiers
+	 *
+	 * @param \Template $template
+	 */
 	public function callTemplateModifiers(\Template $template)
 	{
 		if(!static::getPageLayout()->addBootstrap)
@@ -154,7 +185,7 @@ class Bootstrap extends \Backend
 			return;
 		}
 
-		foreach($GLOBALS['BOOTSTRAP']['templates']['modifiers'] as $name => $config)
+		foreach($GLOBALS['BOOTSTRAP']['templates']['modifiers'] as $config)
 		{
 			if(!in_array($template->getName(), $config['templates']))
 			{
@@ -172,7 +203,7 @@ class Bootstrap extends \Backend
 					$value = $config['value'];
 				}
 
-				$template->$config['key'] = str_replace($name, $value, $template->$config['key']);
+				$template->$config['key'] = str_replace($config['placeholder'], $value, $template->$config['key']);
 			}
 			elseif($config['type'] == 'callback')
 			{
