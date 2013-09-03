@@ -3,11 +3,6 @@
 require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap.php';
 
 /**
- * backend modules
- */
-
-
-/**
  * frontend modules
  */
 $GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar'] = 'Netzmacht\\Bootstrap\\ModuleNavbar';
@@ -20,14 +15,16 @@ $GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselStart'] = 'Bootstrap
 $GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselPart']  = 'Bootstrap\\ContentCarousel';
 $GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselEnd']   = 'Bootstrap\\ContentCarousel';
 
-$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabStart']      = 'Bootstrap\\ContentTab';
-$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabPart']       = 'Bootstrap\\ContentTab';
-$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabEnd']        = 'Bootstrap\\ContentTab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabStart']       = 'Bootstrap\\ContentTab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabPart']        = 'Bootstrap\\ContentTab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabEnd']         = 'Bootstrap\\ContentTab';
 
-$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupStart']      = 'Bootstrap\\ContentAccordionGroup';
-$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupEnd']        = 'Bootstrap\\ContentAccordionGroup';
+$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupStart'] = 'Bootstrap\\ContentAccordionGroup';
+$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupEnd']   = 'Bootstrap\\ContentAccordionGroup';
 
-$GLOBALS['TL_CTE']['links']['bootstrap_button']                 = 'Bootstrap\\ContentButton';
+$GLOBALS['TL_CTE']['links']['bootstrap_button'] = 'Bootstrap\\ContentButton';
+$GLOBALS['TL_CTE']['links']['bootstrap_buttons'] = 'Bootstrap\\ContentButtons';
+
 $GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']         = 'Bootstrap\\ContentColumnSet';
 
 
@@ -35,7 +32,6 @@ $GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']         = 'Bootstrap\\Co
  * form wigets
  */
 $GLOBALS['TL_FFL']['button'] = 'Netzmacht\\Bootstrap\\FormButton';
-
 
 /**
  * hooks
@@ -51,6 +47,7 @@ else
 
 $GLOBALS['TL_HOOKS']['loadFormField'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeFormWidget');
 $GLOBALS['TL_HOOKS']['parseTemplate'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'callTemplateModifiers');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Bootstrap\\Icons', 'replaceInsertTags');
 
 /**
  * config values
@@ -71,11 +68,17 @@ $GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_carouselStart';
 $GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_carouselEnd';
 $GLOBALS['TL_WRAPPERS']['separator'][]  = 'bootstrap_carouselPart';
 
+$GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_buttonToolbarStart';
+$GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_buttonToolbarEnd';
+
+$GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_buttonGroupStart';
+$GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_buttonGroupEnd';
 
 /**
  * stylesheets
  */
 // add stylesheet for indented elements
-if(TL_MODE == 'BE' && version_compare(VERSION, '3.1', '>=')) {
+if(TL_MODE == 'BE' && version_compare(VERSION, '3.1', '>='))
+{
 	$GLOBALS['TL_CSS'][] = 'system/modules/bootstrap/assets/css/style.css|all|static';
 }

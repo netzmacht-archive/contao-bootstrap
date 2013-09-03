@@ -56,12 +56,12 @@ $GLOBALS['BOOTSTRAP'] = array
 		(
 			'font-awesome'  => array
 			(
-				'path'      => 'system/modules/bootstrap/config/icons-font-awesome.php',
+				'path'      => 'system/modules/bootstrap/config/icons/font-awesome.php',
 				'template'  => '<i class="icon-%s"></i>',
 			),
 			'glyphicons'    => array
 			(
-				'path'      => 'system/modules/bootstrap/config/icons-glyphicons.php',
+				'path'      => 'system/modules/bootstrap/config/icons/glyphicons.php',
 				'template'  => '<span class="glyphicon glyphicon-%s"></span>',
 			),
 		),
@@ -101,9 +101,11 @@ $GLOBALS['BOOTSTRAP'] = array
 				'form_radio',
 				'form_submit',
 				'form_widget',
+				'mod_breadcrumb',
 				'mod_comment_form',
 				'mod_search_advanced',
 				'nav_default',
+				'pagination',
 			),
 		),
 
@@ -114,9 +116,11 @@ $GLOBALS['BOOTSTRAP'] = array
 		'modifiers' => array
 		(
 			// #navClass# placeholder is used for injecting defined nav classes to the rendered items
-			'#navClass#' => array
+			array
 			(
 				'type' => 'placeholder',
+
+				'placeholder' => '#navClass#',
 
 				// template key which shall be modified
 				'key' => 'items',
@@ -135,7 +139,8 @@ $GLOBALS['BOOTSTRAP'] = array
 				}
 			),
 
-			'trail' => array
+			// add active class to trail class
+			array
 			(
 				'type' => 'callback',
 
@@ -145,21 +150,30 @@ $GLOBALS['BOOTSTRAP'] = array
 					'nav_bootstrap_dropdown'
 				),
 
-				'callback' => function($template)
-				{
-					$items = $template->items;
-
-					foreach($items as $i => $item)
-					{
-						if(strpos($item['class'], 'trail') !== false)
-						{
-							$items[$i]['class'] .= ' active';
-						}
-					}
-
-					$template->items = $items;
-				}
+				'callback' => array('Bootstrap\\TemplateModifier', 'addActiveClassToTrailItem'),
 			),
+
+			array
+			(
+				'type'        => 'placeholder',
+				'key'         => 'items',
+				'placeholder' => '<li><span class="current">',
+				'value'       => '<li class="active"><span>',
+				'templates'   => array('pagination'),
+			),
+
+			array
+			(
+				'type' => 'callback',
+
+				'templates' => array
+				(
+					'ce_accordion',
+					'ce_accordion_start',
+				),
+
+				'callback' => array('Bootstrap\\TemplateModifier', 'setPanelDefaultClass'),
+			)
 		),
 	),
 
@@ -240,6 +254,48 @@ $GLOBALS['BOOTSTRAP'] = array
 			'stop' => array
 			(
 				'name'          => 'bootstrap_accordionGroupEnd',
+				'autoCreate'    => true,
+				'autoDelete'    => true,
+				'triggerCreate' => true,
+				'triggerDelete' => true,
+			),
+		),
+
+		'buttonToolbar' => array
+		(
+			'start' => array
+			(
+				'name'          => 'bootstrap_buttonToolbarStart',
+				'autoCreate'    => true,
+				'autoDelete'    => true,
+				'triggerCreate' => true,
+				'triggerDelete' => true,
+			),
+
+			'stop' => array
+			(
+				'name'          => 'bootstrap_buttonToolbarEnd',
+				'autoCreate'    => true,
+				'autoDelete'    => true,
+				'triggerCreate' => true,
+				'triggerDelete' => true,
+			),
+		),
+
+		'buttonGroup' => array
+		(
+			'start' => array
+			(
+				'name'          => 'bootstrap_buttonGroupStart',
+				'autoCreate'    => true,
+				'autoDelete'    => true,
+				'triggerCreate' => true,
+				'triggerDelete' => true,
+			),
+
+			'stop' => array
+			(
+				'name'          => 'bootstrap_buttonGroupEnd',
 				'autoCreate'    => true,
 				'autoDelete'    => true,
 				'triggerCreate' => true,
