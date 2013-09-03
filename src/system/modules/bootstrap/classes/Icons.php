@@ -1,10 +1,14 @@
 <?php
+
 /**
- * Created by JetBrains PhpStorm.
- * User: david
- * Date: 22.08.13
- * Time: 09:34
- * To change this template use File | Settings | File Templates.
+ * Contao Open Source CMS
+ *
+ * Copyright (C) 2005-2013 Leo Feyer
+ *
+ * @package   netzmacht-bootstrap
+ * @author    netzmacht creative David Molineus
+ * @license   MPL/2.0
+ * @copyright 2013 netzmacht creative David Molineus
  */
 
 namespace Netzmacht\Bootstrap;
@@ -131,6 +135,26 @@ class Icons
 		$GLOBALS['BOOTSTRAP']['icons']['template'] = $GLOBALS['BOOTSTRAP']['icons']['sets'][$set]['template'];
 
 		static::$initialized = true;
+	}
+
+
+	/**
+	 * generate an icon using insert tag {{icon::example}}
+	 *
+	 * @param $tag
+	 *
+	 * @return bool|string
+	 */
+	public static function replaceInsertTags($tag)
+	{
+		$parts = explode('::', $tag);
+
+		if($parts[0] == 'icon')
+		{
+			return static::generateIcon($parts[1]);
+		}
+
+		return false;
 	}
 
 }
