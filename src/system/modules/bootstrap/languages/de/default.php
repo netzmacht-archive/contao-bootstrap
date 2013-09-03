@@ -35,6 +35,20 @@ $GLOBALS['TL_LANG']['CTE']['bootstrap_accordionGroupStart'][1] = 'Gruppiert einz
 $GLOBALS['TL_LANG']['CTE']['bootstrap_accordionGroupEnd'][0] = 'Gruppe Ende';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_accordionGroupEnd'][1] = 'Ende einer Akkordeongruppe';
 
+$GLOBALS['TL_LANG']['CTE']['button'] = 'Schaltfläche';
+
+$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonGroupStart'][0] = 'Schaltfläche Gruppe Anfang';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonGroupStart'][1] = 'Anfang einer Schaltlächengruppe';
+
+$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonGroupEnd'][0] = 'Schaltfläche Gruppe Ende';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonGroupEnd'][1] = 'Ende einer Schaltlächengruppe';
+
+$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonToolbarStart'][0] = 'Schaltfläche Toolbar Anfang';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonToolbarStart'][1] = 'Anfang einer Schaltlächen-Toolbar';
+
+$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonToolbarEnd'][0] = 'Schaltfläche Toolbar Ende';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonToolbarEnd'][1] = 'Ende einer Schaltlächen-Toolbar';
+
 
 /**
  * form elements

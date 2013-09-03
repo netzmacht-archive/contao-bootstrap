@@ -4,9 +4,7 @@
  * config
  */
 $GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('Bootstrap\\DataContainer\\Content', 'setArticlesRows');
-
 $GLOBALS['TL_DCA']['tl_content']['config']['ondelete_callback'][] = array('Bootstrap\\DataContainer\\WrapperElements', 'delete');
-
 
 /**
  * palettes
@@ -33,10 +31,11 @@ $GLOBALS['TL_DCA']['tl_content']['metapalettes']['_typeOnly_'] = array
 );
 
 // bootstrap_button palette
-$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_button extends _bootstrap_'] = array
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_button extends _typeOnly_'] = array
 (
-	'link'   => array('url', 'target', 'linkTitle', 'embed', 'titleText', 'rel'),
-	'config' => array('bootstrap_buttonType', 'bootstrap_buttonSize', 'bootstrap_icon', 'bootstrap_buttonDisabled'),
+	'link'   => array('url', 'target', 'linkTitle', 'titleText', 'rel', 'bootstrap_icon'),
+	'expert' => array(':hide', 'guests', 'cssID', 'space'),
+	'invisible' => array(':hide', 'invisible', 'start', 'stop'),
 );
 
 
@@ -52,7 +51,8 @@ $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_carouselStart extend
 		'bootstrap_autostart',
 		'bootstrap_interval',
 	),
-	'expert' => array(':hide', 'cssID', 'space'),
+	'expert' => array(':hide', 'guests', 'cssID', 'space'),
+	'invisible' => array(':hide', 'invisible', 'start', 'stop'),
 );
 
 
@@ -65,13 +65,19 @@ $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_tabStart extends _ty
 	'config' => array(
 		'bootstrap_tabs', 'bootstrap_fade',
 	),
-	'expert' => array(':hide', 'cssID', 'space'),
+	'expert' => array(':hide', 'guests', 'cssID', 'space'),
+	'invisible' => array(':hide', 'invisible', 'start', 'stop'),
 );
 
 // boostrap columnset palettes
 $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_columnset extends _bootstrap_'] = array
 (
 	'config' => array('sc_type', 'bootstrap_articleMarkup'),
+);
+
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_buttons extends _bootstrap_'] = array
+(
+	'config' => array('bootstrap_buttons', 'bootstrap_buttonStyle'),
 );
 
 
@@ -96,26 +102,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_articleMarkup'] = array
 	'sql'                     => "char(1) NOT NULL default ''",
 );
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttonType'] = array
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttonStyle'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttonType'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttonStyle'],
 	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'                 => array('default', 'primary', 'sucess', 'info', 'warning', 'danger', 'link'),
-	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-	'eval'                    => array('tl_class' => 'w50'),
-	'sql'                     => "varchar(32) NOT NULL default ''"
-);
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttonSize'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttonType'],
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'                 => array('default', 'btn-lg', 'btn-sm', 'btn-xs'),
+	'inputType'               => 'text',
 	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
 	'eval'                    => array('tl_class' => 'w50', ),
-	'sql'                     => "varchar(32) NOT NULL default ''"
+	'sql'                     => "varchar(128) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_icon'] = array
@@ -127,15 +121,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_icon'] = array
 	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
 	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => Bootstrap\Icons::getIconTemplate()),
 	'sql'                     => "varchar(32) NOT NULL default ''",
-);
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttonDisabled'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttonDisabled'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50 m12'),
-	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_columnset'] = array
@@ -252,4 +237,57 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_fade'] = array
 $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_parentId'] = array
 (
 	'sql'                     => "int(10) unsigned NULL"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons'],
+	'exclude'                 => true,
+	'inputType'               => 'multiColumnWizard',
+	'eval'                    => array(
+		'tl_class'=>'clr',
+		'helpwizard' => true,
+		'submitOnChange' => true,
+		'columnFields' => array
+		(
+			'type' => array
+			(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_type'],
+				'exclude'                 => true,
+				'inputType'               => 'select',
+				'options'                 => array('link', 'group', 'dropdown', 'child', 'header'),
+				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types'],
+				'eval'                    => array('style' => 'width: 110px;'),
+			),
+
+			'label' => array
+			(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_label'],
+				'exclude'                 => true,
+				'inputType'               => 'text',
+				'eval'                    => array('style' => 'width: 170px'),
+			),
+
+			'url' => array
+			(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_url'],
+				'exclude'                 => true,
+				'inputType'               => 'text',
+				'eval'                    => array('style' => 'width: 150px', 'rgxp' => 'url', 'tl_class' => 'wizard'),
+				'wizard' => array
+				(
+					array('tl_content', 'pagePicker')
+				),
+			),
+
+			'title' => array
+			(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['titleText'],
+				'exclude'                 => true,
+				'inputType'               => 'text',
+				'eval'                    => array('style' => 'width: 130px'),
+			),
+		)
+	),
+	'sql'                     => "blob NULL"
 );
