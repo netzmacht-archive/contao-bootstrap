@@ -13,7 +13,6 @@
 
 namespace Netzmacht\Bootstrap;
 
-
 /**
  * Class ContentTab
  *
@@ -103,8 +102,6 @@ class ContentTab extends BootstrapWrapperElement
 	 */
 	protected function compile()
 	{
-		parent::compile();
-
 		$this->Template->tabs = $this->arrTabs;
 		$this->Template->currentTab = $this->arrTab;
 	}

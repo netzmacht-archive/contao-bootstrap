@@ -55,9 +55,11 @@ class ContentCarousel extends BootstrapWrapperElement
 
 			if($start !== null)
 			{
-				$this->Template->start = $start;
-
+				$start = new Attributes($start);
+				$start->registerNamespaceAttributes($this->arrBootstrapAttributes);
 				$start->cssID = deserialize($start->cssID, true);
+
+				$this->Template->start = $start;
 
 				if($start->cssID[0] == '')
 				{
@@ -72,9 +74,7 @@ class ContentCarousel extends BootstrapWrapperElement
 			}
 		}
 
-
 		$this->Template->identifier = $this->cssID[0];
-		parent::compile();
 	}
 
 }

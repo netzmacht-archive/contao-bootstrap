@@ -15,10 +15,15 @@ namespace Netzmacht\Bootstrap;
  */
 class ContentAccordionGroup extends BootstrapWrapperElement
 {
-	protected $strTemplate = 'ce_accordion_group';
 
 	/**
-	 *
+	 * @var string
+	 */
+	protected $strTemplate = 'ce_accordion_group';
+
+
+	/**
+	 * compile accordion group
 	 */
 	protected function compile()
 	{
@@ -33,7 +38,5 @@ class ContentAccordionGroup extends BootstrapWrapperElement
 			$GLOBALS['accordionGroup'] = null;
 			$GLOBALS['accordionGroupFirst'] = null;
 		}
-
-		parent::compile();
 	}
 }
