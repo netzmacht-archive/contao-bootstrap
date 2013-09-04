@@ -154,18 +154,43 @@ class BootstrapWidget
 	 */
 	public function generate()
 	{
-		if(isset($GLOBALS['BOOTSTRAP']['form']['generateTemplates'][$this->type])) {
+		$isModal = $GLOBALS['BOOTSTRAP']['modal']['adjustForm'] && in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['modalFooter']);
+
+		// modal form support
+		if($isModal)
+		{
+			$this->class = 'form-related';
+		}
+
+		if(isset($GLOBALS['BOOTSTRAP']['form']['generateTemplates'][$this->type]))
+		{
 			ob_start();
 			include $this->getTemplate($GLOBALS['BOOTSTRAP']['form']['generateTemplates'][$this->type], $this->strFormat);
 			$widget = ob_get_contents();
 			ob_end_clean();
 		}
-		else {
+		else
+		{
+			if($this->type == 'select' && $GLOBALS['BOOTSTRAP']['form']['styleSelect'])
+			{
+				$this->class = 'selectpicker';
+				$this->addAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']);
+			}
+
 			$widget = $this->widget->generate();
 		}
 
-		if(in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['allowInputGroup'])) {
+		if(in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['allowInputGroup']))
+		{
 			return $this->generateInputGroup($widget);
+		}
+
+		if($isModal)
+		{
+			$GLOBALS['bootstrapModalForm'] .= $widget;
+			$this->widget->class = 'invisible';
+			$this->widget->id = $this->widget->id . '_o';
+			$widget =  $this->widget->generate();
 		}
 
 		return $widget;

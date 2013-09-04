@@ -1,0 +1,31 @@
+
+<!-- indexer::stop -->
+<div class="modal fade <?php echo $this->class; ?>"<?php echo $this->cssID; ?>>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><?php echo $this->headerClose; ?></button>
+				<?php if ($this->headline): ?>
+
+				<<?php echo $this->hl; ?> class="modal-title"><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+				<?php endif; ?>
+			</div>
+
+			<?php if($this->addModalBody): ?>
+			<div class="modal-body">
+			<?php endif; ?>
+				<?php echo $this->content; ?>
+			<?php if($this->addModalBody): ?>
+			</div>
+			<?php endif; ?>
+
+			<?php if($this->addModalFooter || $this->footer): ?>
+			<div class="modal-footer">
+				<?php echo ($this->addModalFooter ? $this->footerButtons : '') . $this->footer; ?>
+			</div>
+			<?php endif; ?>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- indexer::continue -->
