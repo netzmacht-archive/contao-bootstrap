@@ -105,10 +105,10 @@ class Bootstrap extends \Backend
 
 				if($extension == 'js')
 				{
-					$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/bootstrap/assets/bootstrap/' . $asset . '|static';
+					$GLOBALS['TL_JAVASCRIPT'][] = $asset . '|static';
 				} else
 				{
-					$GLOBALS['TL_CSS'][] = 'system/modules/bootstrap/assets/bootstrap/' . $asset . '|static';
+					$GLOBALS['TL_CSS'][] = $asset . '|static';
 				}
 			}
 		}
