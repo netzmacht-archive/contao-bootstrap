@@ -4,6 +4,8 @@
  * content elements
  */
 $GLOBALS['TL_LANG']['CTE']['bootstrap'] = 'Bootstrap';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_tabs'] = 'Reiter-Elemente';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_carousel'] = 'Carousel-Element';
 
 $GLOBALS['TL_LANG']['CTE']['bootstrap_columnset'][0] = 'Spaltenset artikelbasiert';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_columnset'][1] = 'Erlaubt es beliebige Spaltensets als Inhaltselement anzulegen.';
@@ -11,22 +13,25 @@ $GLOBALS['TL_LANG']['CTE']['bootstrap_columnset'][1] = 'Erlaubt es beliebige Spa
 $GLOBALS['TL_LANG']['CTE']['bootstrap_button'][0] = 'Schaltfläche';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_button'][1] = 'Stellt eine Schaltfläche als Inhaltselement zur Verfügung.';
 
-$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselStart'][0] = 'Bootstrap Carousel Start';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_buttons'][0] = 'Kombinierte Schaltfächen ';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_buttons'][1] = 'Element für kombinierte Schaltflächen wie Toolbars/Gruppes/Dropdowns';
+
+$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselStart'][0] = 'Carousel Start';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_carouselStart'][1] = 'Beginnt ein Bootstrap Carousel.';
 
-$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselPart'][0] = 'Bootstrap Carousel Trennelement';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselPart'][0] = 'Carousel Trennelement';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_carouselPart'][1] = 'Trennelement für das Bootstrap Carousel.';
 
-$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselEnd'][0] = 'Bootstrap Carousel Ende';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_carouselEnd'][0] = 'Carousel Ende';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_carouselEnd'][1] = 'Ende des Bootstrap Carousel.';
 
-$GLOBALS['TL_LANG']['CTE']['bootstrap_tabStart'][0] = 'Bootstrap Tabs Start';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_tabStart'][0] = 'Reiter Start';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_tabStart'][1] = 'Beginnt die Tab-Komponente.';
 
-$GLOBALS['TL_LANG']['CTE']['bootstrap_tabPart'][0] = 'Bootstrap Tabs Trennelement';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_tabPart'][0] = 'Reiter Trennelement';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_tabPart'][1] = 'Trennelement um einen neuen Tab anzufangen';
 
-$GLOBALS['TL_LANG']['CTE']['bootstrap_tabEnd'][0] = 'Bootstrap Tabs Ende';
+$GLOBALS['TL_LANG']['CTE']['bootstrap_tabEnd'][0] = 'Reiter Ende';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_tabEnd'][1] = 'Tab-Komponente beenden';
 
 $GLOBALS['TL_LANG']['CTE']['bootstrap_accordionGroupStart'][0] = 'Gruppe Anfang';
@@ -35,19 +40,7 @@ $GLOBALS['TL_LANG']['CTE']['bootstrap_accordionGroupStart'][1] = 'Gruppiert einz
 $GLOBALS['TL_LANG']['CTE']['bootstrap_accordionGroupEnd'][0] = 'Gruppe Ende';
 $GLOBALS['TL_LANG']['CTE']['bootstrap_accordionGroupEnd'][1] = 'Ende einer Akkordeongruppe';
 
-$GLOBALS['TL_LANG']['CTE']['button'] = 'Schaltfläche';
 
-$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonGroupStart'][0] = 'Schaltfläche Gruppe Anfang';
-$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonGroupStart'][1] = 'Anfang einer Schaltlächengruppe';
-
-$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonGroupEnd'][0] = 'Schaltfläche Gruppe Ende';
-$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonGroupEnd'][1] = 'Ende einer Schaltlächengruppe';
-
-$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonToolbarStart'][0] = 'Schaltfläche Toolbar Anfang';
-$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonToolbarStart'][1] = 'Anfang einer Schaltlächen-Toolbar';
-
-$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonToolbarEnd'][0] = 'Schaltfläche Toolbar Ende';
-$GLOBALS['TL_LANG']['CTE']['bootstrap_buttonToolbarEnd'][1] = 'Ende einer Schaltlächen-Toolbar';
 
 
 /**

@@ -47,7 +47,7 @@ class Icons
 
 		return sprintf(
 			$GLOBALS['BOOTSTRAP']['icons']['template'],
-			$icon . ($class != null ?: ' ' . $class)
+			$icon . ($class == null ? '' : ' ' . $class)
 		);
 	}
 
@@ -151,7 +151,7 @@ class Icons
 
 		if($parts[0] == 'icon')
 		{
-			return static::generateIcon($parts[1]);
+			return static::generateIcon($parts[1], isset($parts[2]) ? $parts[2] : null);
 		}
 
 		return false;

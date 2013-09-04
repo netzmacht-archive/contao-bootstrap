@@ -44,14 +44,13 @@ ClassLoader::addClasses(array
 	// Modules
 	'Netzmacht\Bootstrap\ModuleNavbar'                  => 'system/modules/bootstrap/modules/ModuleNavbar.php',
 	'Netzmacht\Bootstrap\BootstrapModule'               => 'system/modules/bootstrap/modules/BootstrapModule.php',
+	'Netzmacht\Bootstrap\ModuleModal'                   => 'system/modules/bootstrap/modules/ModuleModal.php',
 
 	// Models
-	'Contao\BootstrapContentModel'                      => 'system/modules/bootstrap/models/BootstrapContentModel.php',
 	'Netzmacht\Bootstrap\ContentWrapperCollection'      => 'system/modules/bootstrap/models/ContentWrapperCollection.php',
 	'Netzmacht\Bootstrap\ContentWrapperModel'           => 'system/modules/bootstrap/models/ContentWrapperModel.php',
 
 	// Elements
-	'Netzmacht\Bootstrap\ContentCollapse'               => 'system/modules/bootstrap/elements/ContentCollapse.php',
 	'Netzmacht\Bootstrap\ContentButton'                 => 'system/modules/bootstrap/elements/ContentButton.php',
 	'Netzmacht\Bootstrap\ContentCarousel'               => 'system/modules/bootstrap/elements/ContentCarousel.php',
 	'Netzmacht\Bootstrap\BootstrapContentElement'       => 'system/modules/bootstrap/elements/BootstrapContentElement.php',
@@ -80,6 +79,7 @@ TemplateLoader::addFiles(array
 	'form_radio_generate'       => 'system/modules/bootstrap/templates',
 	'gallery_carousel'          => 'system/modules/bootstrap/templates',
 	'gallery_grid'              => 'system/modules/bootstrap/templates',
+	'mod_boostrap_modal'        => 'system/modules/bootstrap/templates',
 	'mod_navbar'                => 'system/modules/bootstrap/templates',
 	'mod_navbar_container'      => 'system/modules/bootstrap/templates',
 	'nav_bootstrap_dropdown'    => 'system/modules/bootstrap/templates',

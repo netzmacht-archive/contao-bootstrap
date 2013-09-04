@@ -6,6 +6,7 @@ require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap.php';
  * frontend modules
  */
 $GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar'] = 'Netzmacht\\Bootstrap\\ModuleNavbar';
+$GLOBALS['FE_MOD']['miscellaneous']['bootstrap_modal']   = 'Netzmacht\\Bootstrap\\ModuleModal';
 
 
 /**
@@ -82,3 +83,6 @@ if(TL_MODE == 'BE' && version_compare(VERSION, '3.1', '>='))
 {
 	$GLOBALS['TL_CSS'][] = 'system/modules/bootstrap/assets/css/style.css|all|static';
 }
+
+
+$GLOBALS['TL_CONFIG']['gravatarSize'] = '60';

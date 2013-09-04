@@ -22,10 +22,7 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_assets'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['bootstrap_assets'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'options'                 => array(
-		'dist/css/bootstrap.min.css' => 'bootstrap.min.css',
-		'dist/js/bootstrap.min.js' => 'bootstrap.min.js'
-	),
+	'options'                 => $GLOBALS['BOOTSTRAP']['assets'],
 	'eval'                    => array('multiple' => true),
 	'sql'                     => "mediumblob NULL"
 );

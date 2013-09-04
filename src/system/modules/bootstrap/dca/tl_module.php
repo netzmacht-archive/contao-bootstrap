@@ -21,11 +21,42 @@ $GLOBALS['TL_DCA']['tl_module']['metapalettes']['bootstrap_navbar'] = array
 	'config'                    => array('bootstrap_navigation', 'bootstrap_isResponsive', 'bootstrap_addHeader', 'bootstrap_navbarModules'),
 	'protected'                 => array(':hide', 'protected'),
 	'expert'                    => array(':hide', 'guests', 'cssID', 'space'),
+);
+
+$GLOBALS['TL_DCA']['tl_module']['metapalettes']['bootstrap_modal'] = array
+(
+	'title'                     => array('name', 'headline', 'type'),
+	'body'                      => array('bootstrap_addModalBody', 'bootstrap_modalContentType'),
+	'footer'                    => array('bootstrap_addModalFooter'),
+	'protected'                 => array(':hide', 'protected'),
+	'expert'                    => array(':hide', 'guests', 'cssID', 'space'),
 	'template'                  => array(':hide', 'bootstrap_navbarTemplate'),
 );
 
 \MetaPalettes::appendFields('tl_module', 'navigation', 'template', array('bootstrap_navClass'));
 \MetaPalettes::appendFields('tl_module', 'customnav', 'template', array('bootstrap_navClass'));
+
+/**
+ * subplaettes
+ */
+$GLOBALS['TL_DCA']['tl_module']['metasubselectpalettes']['bootstrap_modalContentType'] = array
+(
+	'text'   => array('bootstrap_text'),
+	'html'   => array('html'),
+	'module' => array('bootstrap_module'),
+	'form'   => array('form')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['metasubpalettes']['bootstrap_addModalFooter'] = array
+(
+	'bootstrap_addCloseButton',
+	'bootstrap_buttons',
+);
+
+$GLOBALS['TL_DCA']['tl_module']['metasubpalettes']['bootstrap_addCloseButton'] = array
+(
+	'bootstrap_closeButton',
+);
 
 /**
  * fields
@@ -106,4 +137,140 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_navClass'] = array
 	'inputType'               => 'text',
 	'eval'                    => array('tl_class' => 'w50'),
 	'sql'                     => "varchar(100) NOT NULL default ''",
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_addModalBody'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_addModalBody'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'default'                 => true,
+	'eval'                    => array('tl_class' => 'w50'),
+	'sql'                     => "char(1) NOT NULL default ''",
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_addModalFooter'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_addModalFooter'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'default'                 => true,
+	'eval'                    => array('submitOnChange' => true, 'tl_class' => 'w50'),
+	'sql'                     => "char(1) NOT NULL default ''",
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_addModalButton'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_addModalButton'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'default'                 => true,
+	'eval'                    => array('tl_class' => 'w50'),
+	'sql'                     => "char(1) NOT NULL default ''",
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_modalContentType'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType'],
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => array('text', 'html', 'module', 'form'),
+	'eval'                    => array('submitOnChange' => true, 'tl_class' => 'w50'),
+	'sql'                     => "varchar(6) NOT NULL default ''",
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_addCloseButton'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_addCloseButton'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'default'                 => true,
+	'eval'                    => array('tl_class' => 'clr w50'),
+	'sql'                     => "char(1) NOT NULL default ''",
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_closeButton'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_closeButton'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'default'                 => true,
+	'eval'                    => array('tl_class' => 'w50', 'maxlength' => 64),
+	'sql'                     => "varchar(64) NOT NULL default ''",
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_buttons'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons'],
+	'exclude'                 => true,
+	'inputType'               => 'multiColumnWizard',
+	'eval'                    => array(
+		'tl_class'=>'clr',
+		'helpwizard' => true,
+		'submitOnChange' => true,
+		'columnFields' => array
+		(
+			'type' => array
+			(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_type'],
+				'exclude'                 => true,
+				'inputType'               => 'select',
+				'options'                 => array('link', 'group', 'dropdown', 'child', 'header'),
+				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types'],
+				'eval'                    => array('style' => 'width: 110px;'),
+			),
+
+			'button' => array
+			(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_button'],
+				'exclude'                 => true,
+				'inputType'               => 'select',
+				'options'                 => array('link', 'submit', 'button'),
+				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_button'],
+				'eval'                    => array('style' => 'width: 70px;'),
+			),
+
+			'label' => array
+			(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_label'],
+				'exclude'                 => true,
+				'inputType'               => 'text',
+				'eval'                    => array('style' => 'width: 150px'),
+			),
+
+			'url' => array
+			(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_url'],
+				'exclude'                 => true,
+				'inputType'               => 'text',
+				'eval'                    => array('style' => 'width: 140px', 'rgxp' => 'url', 'tl_class' => 'wizard'),
+				'wizard' => array
+				(
+					//array('tl_content', 'pagePicker')
+				),
+			),
+		)
+	),
+	'sql' => "blob NULL"
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_module'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_module'],
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options_callback'        => array('Bootstrap\\DataContainer\\Bootstrap', 'getAllModules'),
+	'eval'                    => array('chosen'=>true),
+	'sql'                     => "int(10) unsigned NOT NULL default '0'"
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_text'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['text'],
+	'exclude'                 => true,
+	'search'                  => true,
+	'inputType'               => 'textarea',
+	'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE', 'helpwizard'=>true),
+	'explanation'             => 'insertTags',
+	'sql'                     => "mediumtext NULL"
 );

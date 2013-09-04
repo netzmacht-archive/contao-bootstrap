@@ -18,6 +18,21 @@
  */
 $GLOBALS['BOOTSTRAP'] = array
 (
+	'assets' => array
+	(
+		'bootstrap' => array
+		(
+			'system/modules/bootstrap/assets/bootstrap/dist/css/bootstrap.min.css|all' => 'bootstrap.min.css|all',
+			'system/modules/bootstrap/assets/bootstrap/dist/js/bootstrap.min.js' => 'bootstrap.min.js',
+		),
+
+		'boostrap-select' => array
+		(
+			'system/modules/bootstrap/assets/bootstrap-select/bootstrap-select.min.js' => 'bootstrap-select.min.js',
+			'system/modules/bootstrap/assets/bootstrap-select/bootstrap-select.min.css|screen' => 'bootstrap-select.min.css|screen',
+		),
+	),
+
 	'form' => array
 	(
 		// form widgets get automatically added the form-control class. elements listed here will be skipped
@@ -46,6 +61,12 @@ $GLOBALS['BOOTSTRAP'] = array
 
 		// how to display forms like comments form by default
 		'defaultTableless'  => true,
+
+		// add style select to select list, set to false to disable
+		'styleSelect'       => 'btn-default',
+
+		// if form is displayed in a modal these input types are displayed in the footer
+		'modalFooter'       => array('button', 'submit'),
 	),
 
 	// The bootstrap module supports different icons sets
@@ -77,6 +98,13 @@ $GLOBALS['BOOTSTRAP'] = array
 	(
 		// element which is used as download toggler
 		'toggle' => '<b class="caret"></b>',
+	),
+
+	'modal' => array
+	(
+		'dismiss' => '&times;',
+
+		'adjustForm' => true,
 	),
 
 
@@ -173,7 +201,7 @@ $GLOBALS['BOOTSTRAP'] = array
 				),
 
 				'callback' => array('Bootstrap\\TemplateModifier', 'setPanelDefaultClass'),
-			)
+			),
 		),
 	),
 
@@ -254,48 +282,6 @@ $GLOBALS['BOOTSTRAP'] = array
 			'stop' => array
 			(
 				'name'          => 'bootstrap_accordionGroupEnd',
-				'autoCreate'    => true,
-				'autoDelete'    => true,
-				'triggerCreate' => true,
-				'triggerDelete' => true,
-			),
-		),
-
-		'buttonToolbar' => array
-		(
-			'start' => array
-			(
-				'name'          => 'bootstrap_buttonToolbarStart',
-				'autoCreate'    => true,
-				'autoDelete'    => true,
-				'triggerCreate' => true,
-				'triggerDelete' => true,
-			),
-
-			'stop' => array
-			(
-				'name'          => 'bootstrap_buttonToolbarEnd',
-				'autoCreate'    => true,
-				'autoDelete'    => true,
-				'triggerCreate' => true,
-				'triggerDelete' => true,
-			),
-		),
-
-		'buttonGroup' => array
-		(
-			'start' => array
-			(
-				'name'          => 'bootstrap_buttonGroupStart',
-				'autoCreate'    => true,
-				'autoDelete'    => true,
-				'triggerCreate' => true,
-				'triggerDelete' => true,
-			),
-
-			'stop' => array
-			(
-				'name'          => 'bootstrap_buttonGroupEnd',
 				'autoCreate'    => true,
 				'autoDelete'    => true,
 				'triggerCreate' => true,
