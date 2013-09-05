@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * legends
+ */
+$GLOBALS['TL_LANG']['tl_module']['body_legend'] = 'Inhaltsbereich';
+$GLOBALS['TL_LANG']['tl_module']['footer_legend'] = 'Fußbereich';
+
+
+/**
+ * fields
+ */
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_addHeader'][0] = 'Kopfbereich hinzufügen';
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_addHeader'][1] = 'Navigationsleiste besitzt einen Kopfbereich, indem sich der Websitetitel sowie die Umschalt-Schaltfläche der responsive Navigationsleiste befindet.';
 
@@ -23,3 +33,45 @@ $GLOBALS['TL_LANG']['tl_module']['bootstrap_navbarTemplate'][1] = 'Entscheiden S
 
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_navClass'][0] = 'Bootstrap Navigations-Klassen';
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_navClass'][1] = 'Geben Sie die Navigations-Klassen an, die Bootstrap bietet. Sie müssen die allgemeine <em>nav</em> Klasse auch zuweisen.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_addModalFooter'][0] = 'Fußbereich hinzufügen';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_addModalFooter'][1] = 'Aktivieren Sie die Option, wenn Sie dem modalen Fenster einen Fußbereich hinzufügen wollen.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType'][0] = 'Typ des Inhaltes';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType'][1] = 'Entscheiden Sie, welcher Inhalt im modalen Fenster dargestellt wird.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_text'][0] = 'Text';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_text'][1] = 'Sie können HTML-Tags verwenden, um den Text zu formatieren.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_module'][0] = 'Module';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_module'][1] = 'Wählen Sie ein Modul aus.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons'][0] = 'Schaltflächen';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons'][1] = 'Hier können Sie Schaltflächen anlegen. Sowohl die Gruppierung von Schaltflächen als auch Dropdown-Listen sind möglich.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_type'][0] = 'Typ';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_type'][1] = 'Art der Schaltfläche';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_label'][0] = 'Beschriftung';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_label'][1] = 'Beschriftung der Schaltfläche.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_url'][0] = 'Link-Adresse';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_url'][1] = 'Worauf soll die Schaltfläche verlinken.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_attributes'][0] = 'HTML Attribute';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_attributes'][1] = 'Weitere HTML-Attribute definieren';
+
+/**
+ * values
+ */
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['text'][0] = 'Text';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['text'][1] = 'Text als Inhalt eingeben.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['html'][0] = 'HTML-Code';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['html'][1] = 'Eigenen HTML-Code schreiben.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['module'][0] = 'Modul';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['module'][1] = 'Anderes Modul einbinden.';
+
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['form'][0] = 'Formular';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['form'][1] = 'Formular einbinden. Schaltflächen des Formulars werden automatisch in den Fußberecih übernommen (je nach Konfiguration).';

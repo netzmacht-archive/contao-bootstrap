@@ -33,7 +33,7 @@ $GLOBALS['TL_DCA']['tl_content']['metapalettes']['_typeOnly_'] = array
 // bootstrap_button palette
 $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bootstrap_button extends _typeOnly_'] = array
 (
-	'link'   => array('url', 'target', 'linkTitle', 'titleText', 'rel', 'bootstrap_icon'),
+	'link'   => array('url', 'target', 'linkTitle', 'titleText', 'rel', 'bootstrap_icon', 'bootstrap_dataAttributes'),
 	'expert' => array(':hide', 'guests', 'cssID', 'space'),
 	'invisible' => array(':hide', 'invisible', 'start', 'stop'),
 );
@@ -257,7 +257,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 				'inputType'               => 'select',
 				'options'                 => array('link', 'group', 'dropdown', 'child', 'header'),
 				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types'],
-				'eval'                    => array('style' => 'width: 110px;'),
+				'eval'                    => array('style' => 'width: 95px;'),
 			),
 
 			'label' => array
@@ -273,21 +273,52 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_url'],
 				'exclude'                 => true,
 				'inputType'               => 'text',
-				'eval'                    => array('style' => 'width: 150px', 'rgxp' => 'url', 'tl_class' => 'wizard'),
+				'eval'                    => array('style' => 'width: 100px', 'rgxp' => 'url', 'decodeEntities'=>true, 'tl_class' => 'wizard'),
 				'wizard' => array
 				(
-					array('tl_content', 'pagePicker')
+					array('Bootstrap\\DataContainer\\Bootstrap', 'pagePicker')
 				),
 			),
 
-			'title' => array
+			'attributes' => array
 			(
-				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['titleText'],
+				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_attributes'],
 				'exclude'                 => true,
 				'inputType'               => 'text',
-				'eval'                    => array('style' => 'width: 130px'),
+				'eval'                    => array('style' => 'width: 200px', 'decodeEntities' => true),
 			),
 		)
 	),
-	'sql'                     => "blob NULL"
+	'sql' => "blob NULL"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_dataAttributes'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes'],
+	'exclude'                 => true,
+	'inputType'               => 'multiColumnWizard',
+	'eval'                    => array(
+		'tl_class'=>'clr',
+		'columnFields' => array
+		(
+			'name' => array
+			(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_name'],
+				'exclude'                 => true,
+				'inputType'               => 'select', //'customselect' wainting for PR integrated https://github.com/xat/contao-customselectmenu/pull/5
+				'options'                 => $GLOBALS['BOOTSTRAP']['button']['dataAttributes'],
+				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types'],
+				'eval'                    => array('style' => 'width: 75px;', 'includeBlankOption' => true),
+			),
+
+			'value' => array
+			(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_value'],
+				'exclude'                 => true,
+				'inputType'               => 'text',
+				'eval'                    => array('style' => 'width: 160px'),
+			),
+		)
+	),
+	'sql' => "blob NULL"
 );

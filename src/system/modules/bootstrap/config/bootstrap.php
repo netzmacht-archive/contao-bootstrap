@@ -63,7 +63,12 @@ $GLOBALS['BOOTSTRAP'] = array
 		'defaultTableless'  => true,
 
 		// add style select to select list, set to false to disable
-		'styleSelect'       => 'btn-default',
+		'styleSelect' => array
+		(
+			'class'         => 'selectpicker',
+			'defaultStyle'  => 'btn-default',
+			'elements'      => array('select'),
+		),
 
 		// if form is displayed in a modal these input types are displayed in the footer
 		'modalFooter'       => array('button', 'submit'),
@@ -105,6 +110,11 @@ $GLOBALS['BOOTSTRAP'] = array
 		'dismiss' => '&times;',
 
 		'adjustForm' => true,
+	),
+
+	'button' => array
+	(
+		'dataAttributes' => array('target', 'toggle', 'dismiss', 'remote'),
 	),
 
 

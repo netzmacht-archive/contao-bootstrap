@@ -78,8 +78,20 @@ $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_label'][1] = 'Geben Sie ein
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_url'][0] = 'Link-Adresse';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_url'][1] = 'Die Link-Adresse kann nur für Dropdown-Kinderelemente sowie Links verwendet werden.';
 
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_attributes'][0] = 'HTML Attribute';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_attributes'][1] = 'Weitere HTML-Attribute definieren';
+
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types']['link']     = 'Schaltfläche';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types']['dropdown'] = 'Dropdown';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types']['child']    = 'Dropdown Link';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types']['header']   = 'Dropdown Bereichsüberschrift';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types']['group']   = 'Gruppe';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes'][0] = 'Data-Attribute';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes'][1] = 'Über Data-Attribute können Bootstrap Komponenten angesteuert werden, wie z.B. ein modales Fenster.';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_name'][0] = 'Name';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_name'][1] = 'Name des Attributes';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_value'][0] = 'Wert';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_value'][1] = 'Wert des Attributes';
