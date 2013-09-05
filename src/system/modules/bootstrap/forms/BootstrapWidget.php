@@ -154,14 +154,19 @@ class BootstrapWidget
 	 */
 	public function generate()
 	{
-		$isModal = $GLOBALS['BOOTSTRAP']['modal']['adjustForm'] && in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['modalFooter']);
+		$isModal = isset($GLOBALS['bootstrapModalForm']) &&
+			$GLOBALS['BOOTSTRAP']['modal']['adjustForm'] &&
+			in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['modalFooter']);
 
 		// modal form support
 		if($isModal)
 		{
-			$this->class = 'form-related';
+			$widgetId = $this->widget->id;
+			$this->widget->onclick = sprintf('$(\'#ctrl_%s\').click();', $this->widget->id);
+			$this->widget->id = 'md_' . $widgetId;
 		}
 
+		// generating using defined templates
 		if(isset($GLOBALS['BOOTSTRAP']['form']['generateTemplates'][$this->type]))
 		{
 			ob_start();
@@ -171,10 +176,11 @@ class BootstrapWidget
 		}
 		else
 		{
-			if($this->type == 'select' && $GLOBALS['BOOTSTRAP']['form']['styleSelect'])
+			//
+			if(in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['styleSelect']['elements']))
 			{
-				$this->class = 'selectpicker';
-				$this->addAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']);
+				$this->class = $GLOBALS['BOOTSTRAP']['form']['styleSelect']['class'];
+				$this->addAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']['style']);
 			}
 
 			$widget = $this->widget->generate();
@@ -188,8 +194,11 @@ class BootstrapWidget
 		if($isModal)
 		{
 			$GLOBALS['bootstrapModalForm'] .= $widget;
+
 			$this->widget->class = 'invisible';
-			$this->widget->id = $this->widget->id . '_o';
+			$this->widget->onclick = '';
+			$this->widget->id = $widgetId;
+
 			$widget =  $this->widget->generate();
 		}
 
