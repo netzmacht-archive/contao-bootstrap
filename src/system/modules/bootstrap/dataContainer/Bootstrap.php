@@ -166,10 +166,10 @@ class Bootstrap extends \Backend
 	{
 		if(isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix']))
 		{
-			return \TemplateLoader::getPrefixedFiles($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix']);
+			return $this->getTemplateGroup($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix']);
 		}
 
-		return \TemplateLoader::getFiles();
+		return array_keys(\TemplateLoader::getFiles());
 	}
 
 
@@ -210,6 +210,27 @@ class Bootstrap extends \Backend
 				call_user_func($config['callback'], $template);
 			}
 		}
+	}
+
+
+	/**
+	 * @param DataContainer $dc
+	 *
+	 * @return string
+	 */
+	public function pagePicker(\DataContainer $dc)
+	{
+		return sprintf(' <a href="contao/page.php?do=%s&amp;table=%s&amp;field=%s&amp;value=%s" title="%s" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\'%s\',\'url\':this.href,\'id\':\'%s\',\'tag\':\'ctrl_%s\',\'self\':this});return false">%s</a>',
+			\Input::get('do'),
+			$dc->table,
+			$dc->field,
+			str_replace(array('{{link_url::', '}}'), '', $dc->value),
+			specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']),
+			specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])),
+			$dc->field,
+			$dc->field . ((\Input::get('act') == 'editAll') ? '_' . $dc->id : ''),
+			$this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"')
+		);
 	}
 
 }
