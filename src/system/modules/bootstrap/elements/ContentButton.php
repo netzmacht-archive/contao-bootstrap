@@ -19,7 +19,7 @@ class ContentButton extends BootstrapContentElement
 	/**
 	 * @var array
 	 */
-	protected $arrBootstrapAttributes = array('icon');
+	protected $arrBootstrapAttributes = array('icon', 'dataAttributes');
 
 	/**
 	 * @var string
@@ -73,6 +73,25 @@ class ContentButton extends BootstrapContentElement
 		if($this->icon)
 		{
 			$this->Template->icon = Icons::generateIcon($this->icon);
+		}
+
+		// add data attributes
+		$this->dataAttributes = deserialize($this->dataAttributes, true);
+
+		if(!empty($this->dataAttributes))
+		{
+			$attributes = array();
+
+			foreach($this->dataAttributes as $attribute)
+			{
+				if(trim($attribute['value']) != '' && $attribute['name'] != '')
+				{
+
+					$attributes[] = 'data-' . $attribute['name'] . '=' . $attribute['value'];
+				}
+			}
+
+			$this->Template->attribute = trim($this->attribute . ' ' . implode(' ', $attributes));
 		}
 
 		$this->Template->rel = $this->rel; // Backwards compatibility

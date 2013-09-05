@@ -11,10 +11,24 @@ namespace Netzmacht\Bootstrap;
 
 class ModuleModal extends BootstrapModule
 {
-	protected $arrBootstrapAttributes = array('addModalBody', 'addModalFooter', 'addCloseButton', 'buttons', 'closeButton', 'modalContentType', 'module', 'text');
 
+	/**
+	 * namespaces elements
+	 * @var array
+	 */
+	protected $arrBootstrapAttributes = array('addModalFooter', 'buttons', 'modalContentType', 'modalTemplate', 'module', 'remoteUrl', 'text');
+
+
+	/**
+	 * template
+	 * @var string
+	 */
 	protected $strTemplate = 'mod_bootstrap_modal';
 
+
+	/**
+	 * compile
+	 */
 	protected function compile()
 	{
 		//$this->Template->content = $this->getFrontendModule($this->module);
@@ -40,6 +54,16 @@ class ModuleModal extends BootstrapModule
 				$this->Template->content = (TL_MODE == 'FE') ? $this->html : htmlspecialchars($this->html);
 				break;
 
+			case 'template':
+				ob_start();
+				include $this->getTemplate($this->modalTemplate);
+				$buffer = ob_get_contents();
+				ob_end_clean();
+
+				$this->Template->content = $buffer;
+
+				break;
+
 			case 'text':
 				$this->Template->content = \String::toHtml5($this->text);
 				break;
@@ -49,29 +73,10 @@ class ModuleModal extends BootstrapModule
 		{
 			$buttons  = new Buttons();
 			$buttons->loadFromFieldset($this->buttons);
+			$buttons->buttonStyle = $this->buttonStyle ? $this->buttonStyle : 'btn-default';
+			$buttons->addContainer = false;
 
-			$buttonsTemplate = new \FrontendTemplate('bootstrap_buttons');
-			$buttonsTemplate->buttonStyle = $this->buttonStyle ? $this->buttonStyle : 'btn-default';
-
-			if($this->addCloseButton)
-			{
-				$inject = array
-				(
-					'type'       => 'link',
-					'button'     => 'button',
-					'label'      => $this->closeButton ? $this->closeButton : $GLOBALS['TL_LANG']['MSC']['close'],
-					'value'      => '',
-					'attributes' => 'data-dismiss="modal"',
-				);
-
-				$buttons->addItem($inject, true, true);
-			}
-
-			$buttonsTemplate->addContainer = false;
-			$buttonsTemplate->buttons = $buttons;
-			$buttonsTemplate->containerClass = 'btn-' . $buttons->getContainerType();
-
-			$this->Template->footerButtons = $buttonsTemplate->parse();
+			$this->Template->footerButtons = $buttons->generate();
 		}
 
 		$this->Template->headerClose = $GLOBALS['BOOTSTRAP']['modal']['dismiss'];

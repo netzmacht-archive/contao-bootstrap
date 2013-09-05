@@ -11,21 +11,16 @@
 				<?php endif; ?>
 			</div>
 
-			<?php if($this->addModalBody): ?>
 			<div class="modal-body">
-			<?php endif; ?>
 				<?php echo $this->content; ?>
-			<?php if($this->addModalBody): ?>
 			</div>
-			<?php endif; ?>
 
 			<?php if($this->addModalFooter || $this->footer): ?>
 			<div class="modal-footer">
 				<?php echo ($this->addModalFooter ? $this->footerButtons : '') . $this->footer; ?>
 			</div>
 			<?php endif; ?>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
+		</div>
+	</div>
+</div>
 <!-- indexer::continue -->

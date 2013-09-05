@@ -7,17 +7,10 @@
 <?php elseif($button['type'] == 'dropdown'): ?>
 	<div class="btn-group">
 
-		<?php if($button['button'] == '' || $button['button'] == 'link'): ?>
-		<a class="btn <?php echo $this->buttonStyle; ?> dropdown-toggle" data-toggle="dropdown" <?php echo $button['attributes']; ?>>
+		<a class="btn <?php echo $button['class']; ?> dropdown-toggle" data-toggle="dropdown" <?php echo $button['attributes']; ?>>
 			<?php echo $button['label']; ?>
 			<span class="caret"></span>
 		</a>
-		<?php else: ?>
-			<button type="button" class="btn <?php echo $this->buttonStyle; ?> dropdown-toggle" data-toggle="dropdown" <?php echo $button['attributes']; ?>>
-				<?php echo $button['label']; ?>
-				<span class="caret"></span>
-			</button>
-		<?php endif; ?>
 
 		<ul class="dropdown-menu">
 			<?php foreach($button['items'] as $i => $item): ?>
@@ -25,26 +18,16 @@
 				<?php if($item['type'] == 'header'): ?>
 					<?php if($i > 0): ?><li class="divider"></li><?php endif; ?>
 					<li class="dropdown-header"><?php echo $item['label']; ?></li>
-				<?php elseif($item['button'] == 'link'): ?>
-					<li>
-						<a href="<?php echo $item['']; ?>"<?php if($item['title']): ?> title="<?php echo $item['title']; ?>"<?php endif; ?> <?php echo $item['attributes']; ?>>
-							<?php echo $item['label']; ?>
-						</a>
-					</li>
 				<?php else: ?>
 					<li>
-						<button type="<?php echo $item['button']; ?> value="<?php echo $item['value']; ?>"<?php if($item['title']): ?> title="<?php echo $item['title']; ?>"<?php endif; ?> <?php echo $item['attributes']; ?>>
-						<?php echo $item['label']; ?>
-						</button>
+						<a href="<?php echo $item['url']; ?>" <?php echo $item['attributes']; ?>>
+							<?php echo $item['label']; ?>
+						</a>
 					</li>
 				<?php endif; ?>
 			<?php endforeach; ?>
 		</ul>
 	</div>
 <?php else: ?>
-	<?php if($button['button'] == 'link'): ?>
-	<a href="<?php echo $button['value']; ?>" <?php if($item['title']): ?> title="<?php echo $item['title']; ?>"<?php endif; ?>  class="btn <?php echo $this->buttonStyle; ?>" <?php echo $button['attributes']; ?>><?php echo $button['label']; ?></a>
-	<?php else: ?>
-	<button type="<?php echo $button['button']; ?>" value="<?php echo $button['value']; ?>"<?php if($item['title']): ?> title="<?php echo $item['title']; ?>"<?php endif; ?>  class="btn <?php echo $this->buttonStyle; ?>" <?php echo $button['attributes']; ?>><?php echo $button['label']; ?></button>
-	<?php endif; ?>
+	<a href="<?php echo $button['url']; ?>" class="btn <?php echo $button['class']; ?>" <?php echo $button['attributes']; ?>><?php echo $button['label']; ?></a>
 <?php endif; ?>
