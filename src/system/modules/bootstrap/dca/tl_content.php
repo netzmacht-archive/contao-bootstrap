@@ -1,10 +1,21 @@
 <?php
 
 /**
+ * Contao Open Source CMS
+ *
+ * Copyright (C) 2005-2013 Leo Feyer
+ *
+ * @package   netzmacht-bootstrap
+ * @author    netzmacht creative David Molineus
+ * @license   MPL/2.0
+ * @copyright 2013 netzmacht creative David Molineus
+ */
+
+/**
  * config
  */
-$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('Bootstrap\\DataContainer\\Content', 'setArticlesRows');
-$GLOBALS['TL_DCA']['tl_content']['config']['ondelete_callback'][] = array('Bootstrap\\DataContainer\\WrapperElements', 'delete');
+$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('Bootstrap\\ContentDataContainer', 'setArticlesRows');
+$GLOBALS['TL_DCA']['tl_content']['config']['ondelete_callback'][] = array('Bootstrap\\WrapperDataContainer', 'delete');
 
 /**
  * palettes
@@ -91,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_content']['metasubselectpalettes']['sc_type']['!'] = arra
  * fields
  */
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['type']['save_callback'][] = array('Bootstrap\\DataContainer\\WrapperElements', 'save');
+$GLOBALS['TL_DCA']['tl_content']['fields']['type']['save_callback'][] = array('Bootstrap\\WrapperDataContainer', 'save');
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_articleMarkup'] = array
 (
@@ -136,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_columnset'] = array
 				'label'                 => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_columnset_article'],
 				'exclude'               => true,
 				'inputType'             => 'select',
-				'options_callback'     	=> array('Bootstrap\\DataContainer\\Content', 'getPageBootstrapArticles'),
+				'options_callback'     	=> array('Bootstrap\\ContentDataContainer', 'getPageBootstrapArticles'),
 				'eval' 			=> array('style' => 'width:450px', 'includeBlankOption'=>true, 'chosen'=>true)
 			),
 		),
@@ -276,7 +287,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 				'eval'                    => array('style' => 'width: 100px', 'rgxp' => 'url', 'decodeEntities'=>true, 'tl_class' => 'wizard'),
 				'wizard' => array
 				(
-					array('Bootstrap\\DataContainer\\Bootstrap', 'pagePicker')
+					array('Bootstrap\\GeneralDataContainer', 'pagePicker')
 				),
 			),
 
@@ -305,7 +316,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_dataAttributes'] = array
 			(
 				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_name'],
 				'exclude'                 => true,
-				'inputType'               => 'select', //'customselect' wainting for PR integrated https://github.com/xat/contao-customselectmenu/pull/5
+				// @todo 'customselect' waiting for PR integrated https://github.com/xat/contao-customselectmenu/pull/5
+				'inputType'               => 'select',
 				'options'                 => $GLOBALS['BOOTSTRAP']['button']['dataAttributes'],
 				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types'],
 				'eval'                    => array('style' => 'width: 75px;', 'includeBlankOption' => true),

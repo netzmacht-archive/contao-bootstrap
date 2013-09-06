@@ -65,6 +65,7 @@ $GLOBALS['BOOTSTRAP'] = array
 		// add style select to select list, set to false to disable
 		'styleSelect' => array
 		(
+			'enabled'       => true,
 			'class'         => 'selectpicker',
 			'defaultStyle'  => 'btn-default',
 			'elements'      => array('select'),
@@ -110,6 +111,9 @@ $GLOBALS['BOOTSTRAP'] = array
 		'dismiss' => '&times;',
 
 		'adjustForm' => true,
+
+		'remoteUrl' => 'SimpleAjax.php?page=%s&amp;modal=%s',
+		'remoteDynamicUrl' => 'SimpleAjax.php?page=%s&amp;modal=%s&amp;dynamic=%s&amp;id=%s',
 	),
 
 	'button' => array

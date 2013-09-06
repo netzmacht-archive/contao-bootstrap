@@ -122,7 +122,7 @@ class Icons
 	/**
 	 * initialize icon configuration
 	 */
-	public static function initialize()
+	protected static function initialize()
 	{
 		if(static::$initialized)
 		{
@@ -136,25 +136,4 @@ class Icons
 
 		static::$initialized = true;
 	}
-
-
-	/**
-	 * generate an icon using insert tag {{icon::example}}
-	 *
-	 * @param $tag
-	 *
-	 * @return bool|string
-	 */
-	public static function replaceInsertTags($tag)
-	{
-		$parts = explode('::', $tag);
-
-		if($parts[0] == 'icon')
-		{
-			return static::generateIcon($parts[1], isset($parts[2]) ? $parts[2] : null);
-		}
-
-		return false;
-	}
-
 }

@@ -11,16 +11,16 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap\DataContainer;
+namespace Netzmacht\Bootstrap;
 
-use Netzmacht\Bootstrap\ContentWrapperModel;
+use Netzmacht\Bootstrap;
 
 
 /**
  * Class Content
  * @package Netzmacht\Bootstrap\DataContainer
  */
-class Content extends \Backend
+class ContentDataContainer extends \Backend
 {
 
 	/**

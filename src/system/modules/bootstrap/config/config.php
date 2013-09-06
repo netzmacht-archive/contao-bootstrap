@@ -5,8 +5,8 @@ require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap.php';
 /**
  * frontend modules
  */
-$GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar'] = 'Netzmacht\\Bootstrap\\ModuleNavbar';
-$GLOBALS['FE_MOD']['miscellaneous']['bootstrap_modal']   = 'Netzmacht\\Bootstrap\\ModuleModal';
+$GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar']            = 'Netzmacht\\Bootstrap\\ModuleNavbar';
+$GLOBALS['FE_MOD']['miscellaneous']['bootstrap_modal']              = 'Netzmacht\\Bootstrap\\ModuleModal';
 
 
 /**
@@ -16,17 +16,17 @@ $GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselStart'] = 'Bootstrap
 $GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselPart']  = 'Bootstrap\\ContentCarousel';
 $GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselEnd']   = 'Bootstrap\\ContentCarousel';
 
-$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabStart']       = 'Bootstrap\\ContentTab';
-$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabPart']        = 'Bootstrap\\ContentTab';
-$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabEnd']         = 'Bootstrap\\ContentTab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabStart']          = 'Bootstrap\\ContentTab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabPart']           = 'Bootstrap\\ContentTab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabEnd']            = 'Bootstrap\\ContentTab';
 
-$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupStart'] = 'Bootstrap\\ContentAccordionGroup';
-$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupEnd']   = 'Bootstrap\\ContentAccordionGroup';
+$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupStart']    = 'Bootstrap\\ContentAccordionGroup';
+$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupEnd']      = 'Bootstrap\\ContentAccordionGroup';
 
-$GLOBALS['TL_CTE']['links']['bootstrap_button'] = 'Bootstrap\\ContentButton';
-$GLOBALS['TL_CTE']['links']['bootstrap_buttons'] = 'Bootstrap\\ContentButtons';
+$GLOBALS['TL_CTE']['links']['bootstrap_button']                     = 'Bootstrap\\ContentButton';
+$GLOBALS['TL_CTE']['links']['bootstrap_buttons']                    = 'Bootstrap\\ContentButtons';
 
-$GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']         = 'Bootstrap\\ContentColumnSet';
+$GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']             = 'Bootstrap\\ContentColumnSet';
 
 
 /**
@@ -34,26 +34,30 @@ $GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']         = 'Bootstrap\\Co
  */
 $GLOBALS['TL_FFL']['button'] = 'Netzmacht\\Bootstrap\\FormButton';
 
+
 /**
  * hooks
  */
-if(version_compare(VERSION, '3.1', '>0'))
+if(version_compare(VERSION, '3.1', '>='))
 {
-	$GLOBALS['TL_HOOKS']['getPageLayout'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeLayout');
+	$GLOBALS['TL_HOOKS']['getPageLayout'][]     = array('Bootstrap\\Bootstrap', 'initializeLayout');
 }
 else
 {
-	$GLOBALS['TL_HOOKS']['parseTemplate'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeLayoutByParseTemplateHook');
+	$GLOBALS['TL_HOOKS']['parseTemplate'][]     = array('Bootstrap\\Bootstrap', 'initializeLayoutByParseTemplateHook');
 }
 
-$GLOBALS['TL_HOOKS']['loadFormField'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'initializeFormWidget');
-$GLOBALS['TL_HOOKS']['parseTemplate'][] = array('Bootstrap\\DataContainer\\Bootstrap', 'callTemplateModifiers');
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Bootstrap\\Icons', 'replaceInsertTags');
+$GLOBALS['TL_HOOKS']['loadFormField'][]         = array('Bootstrap\\Bootstrap', 'initializeFormWidget');
+$GLOBALS['TL_HOOKS']['parseTemplate'][]         = array('Bootstrap\\TemplateModifier', 'execute');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][]     = array('Bootstrap\\InsertTags', 'replaceTags');
+$GLOBALS['TL_HOOKS']['simpleAjax'][]            = array('Bootstrap\\Ajax', 'loadModalContent');
+
 
 /**
  * config values
  */
 $GLOBALS['TL_CONFIG']['bootstrapIconSet'] = 'font-awesome'; //'glyphicons';
+
 
 /**
  * wrapper
