@@ -1,28 +1,58 @@
 <?php
+
 /**
- * Created by JetBrains PhpStorm.
- * User: david
- * Date: 04.09.13
- * Time: 13:48
- * To change this template use File | Settings | File Templates.
+ * Contao Open Source CMS
+ *
+ * Copyright (C) 2005-2013 Leo Feyer
+ *
+ * @package   netzmacht-bootstrap
+ * @author    netzmacht creative David Molineus
+ * @license   MPL/2.0
+ * @copyright 2013 netzmacht creative David Molineus
  */
 
 namespace Netzmacht\Bootstrap;
 
 
+/**
+ * Class Buttons is a component for displaying buttons
+ * @package Netzmacht\Bootstrap
+ */
 class Buttons extends \Frontend implements \Iterator
 {
+
+	/**
+	 * @var string
+	 */
 	protected $strTemplate = 'bootstrap_buttons';
 
+	/**
+	 * @var array
+	 */
 	protected $arrButtons = array();
 
+	/**
+	 * @var array
+	 */
 	protected $arrConfiguration = array();
 
+	/**
+	 * render as toolbar
+	 *
+	 * @var bool
+	 */
 	protected $blnToolbar = false;
 
+	/**
+	 * index for button iterator
+	 * @var int
+	 */
 	protected $intIndex = 0;
 
 
+	/**
+	 * make constructor public
+	 */
 	public function __construct()
 	{
 		parent::__construct();
@@ -30,8 +60,10 @@ class Buttons extends \Frontend implements \Iterator
 
 
 	/**
+	 * add class dynamically
 	 * (PHP 5 &gt;= 5.0.0)<br/>
 	 * Return the current element
+	 *
 	 * @link http://php.net/manual/en/iterator.current.php
 	 * @return mixed Can return any type.
 	 */
@@ -51,6 +83,7 @@ class Buttons extends \Frontend implements \Iterator
 	/**
 	 * (PHP 5 &gt;= 5.0.0)<br/>
 	 * Move forward to next element
+	 *
 	 * @link http://php.net/manual/en/iterator.next.php
 	 * @return void Any returned value is ignored.
 	 */
@@ -63,6 +96,7 @@ class Buttons extends \Frontend implements \Iterator
 	/**
 	 * (PHP 5 &gt;= 5.0.0)<br/>
 	 * Return the key of the current element
+	 *
 	 * @link http://php.net/manual/en/iterator.key.php
 	 * @return mixed scalar on success, or null on failure.
 	 */
@@ -75,6 +109,7 @@ class Buttons extends \Frontend implements \Iterator
 	/**
 	 * (PHP 5 &gt;= 5.0.0)<br/>
 	 * Checks if current position is valid
+	 *
 	 * @link http://php.net/manual/en/iterator.valid.php
 	 * @return boolean The return value will be casted to boolean and then evaluated.
 	 *       Returns true on success or false on failure.
@@ -88,6 +123,7 @@ class Buttons extends \Frontend implements \Iterator
 	/**
 	 * (PHP 5 &gt;= 5.0.0)<br/>
 	 * Rewind the Iterator to the first element
+	 *
 	 * @link http://php.net/manual/en/iterator.rewind.php
 	 * @return void Any returned value is ignored.
 	 */
@@ -97,6 +133,11 @@ class Buttons extends \Frontend implements \Iterator
 	}
 
 
+	/**
+	 * @param string $key
+	 *
+	 * @return array|bool|mixed|null|string
+	 */
 	public function __get($key)
 	{
 		switch($key)
@@ -140,6 +181,10 @@ class Buttons extends \Frontend implements \Iterator
 	}
 
 
+	/**
+	 * load buttons defined in a field set definition, created by the MultiColumnWizard
+	 * @param $definition
+	 */
 	public function loadFromFieldset($definition)
 	{
 		if(!is_array($definition))
@@ -240,7 +285,7 @@ class Buttons extends \Frontend implements \Iterator
 
 
 	/**
-	 *
+	 * add item to button component
 	 * @param array $item
 	 * @param bool  $first
 	 * @param bool  $createGroup
@@ -250,16 +295,35 @@ class Buttons extends \Frontend implements \Iterator
 		$this->addItemToTarget($this->arrButtons, $item, $first, $createGroup);
 	}
 
+
+	/**
+	 * count first level elements
+	 * @return int
+	 */
 	public function count()
 	{
 		return count($this->arrButtons);
 	}
 
+
+	/**
+	 * is component a group or toolbar
+	 * @return string
+	 */
 	public function getContainerType()
 	{
 		return $this->toolbar ? 'toolbar' : 'group';
 	}
 
+
+	/**
+	 * add item to a target, used for subitems and button component itself
+	 *
+	 * @param array $target
+	 * @param array $item
+	 * @param bool  $first
+	 * @param bool  $createGroup
+	 */
 	protected function addItemToTarget(array &$target, array $item, $first=false, $createGroup=false)
 	{
 		// make sure every key is set
@@ -305,6 +369,10 @@ class Buttons extends \Frontend implements \Iterator
 		$target[] = $item;
 	}
 
+
+	/**
+	 * @return string
+	 */
 	public function generate()
 	{
 		if($this->addContainer === null)

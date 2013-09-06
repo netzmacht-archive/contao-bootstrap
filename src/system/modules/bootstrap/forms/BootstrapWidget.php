@@ -1,10 +1,14 @@
 <?php
+
 /**
- * Created by JetBrains PhpStorm.
- * User: david
- * Date: 13.08.13
- * Time: 11:54
- * To change this template use File | Settings | File Templates.
+ * Contao Open Source CMS
+ *
+ * Copyright (C) 2005-2013 Leo Feyer
+ *
+ * @package   netzmacht-bootstrap
+ * @author    netzmacht creative David Molineus
+ * @license   MPL/2.0
+ * @copyright 2013 netzmacht creative David Molineus
  */
 
 namespace Netzmacht\Bootstrap;
@@ -29,6 +33,9 @@ class BootstrapWidget
 	 */
 	protected $strFormat = 'html5';
 
+	/**
+	 * @var string
+	 */
 	protected $strTagEnding = '>';
 
 
@@ -176,8 +183,8 @@ class BootstrapWidget
 		}
 		else
 		{
-			//
-			if(in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['styleSelect']['elements']))
+			// styleSelect support
+			if($GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['styleSelect']['elements']))
 			{
 				$this->class = $GLOBALS['BOOTSTRAP']['form']['styleSelect']['class'];
 				$this->addAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']['style']);
@@ -186,11 +193,13 @@ class BootstrapWidget
 			$widget = $this->widget->generate();
 		}
 
+		// create input groups
 		if(in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['allowInputGroup']))
 		{
 			return $this->generateInputGroup($widget);
 		}
 
+		// modal form support, render widget again invisible
 		if($isModal)
 		{
 			$GLOBALS['bootstrapModalForm'] .= $widget;
@@ -204,6 +213,7 @@ class BootstrapWidget
 
 		return $widget;
 	}
+
 
 	/**
 	 * Generate the widget with error message and return it as string. We have to redeclare this method so that
@@ -315,6 +325,14 @@ class BootstrapWidget
 		return $this->optionChecked($arrOption['value'], $this->value);
 	}
 
+
+	/**
+	 * generate the input group
+	 *
+	 * @param $widget
+	 *
+	 * @return string
+	 */
 	protected function generateInputGroup($widget)
 	{
 		$addOn = '<span class="input-group-addon">%s</span>';
@@ -357,6 +375,13 @@ class BootstrapWidget
 		return $widget;
 	}
 
+
+	/**
+	 * generate the question for the captcha as input group
+	 *
+	 * @return mixed
+	 * @throws \BadMethodCallException
+	 */
 	public function generateQuestion()
 	{
 		if($this->type != 'captcha') {
@@ -368,6 +393,10 @@ class BootstrapWidget
 	}
 
 
+	/**
+	 * @return string
+	 * @throws \BadMethodCallException
+	 */
 	public function generateConfirmationLabel()
 	{
 		if($this->type != 'password') {
