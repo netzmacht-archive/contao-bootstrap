@@ -1,6 +1,9 @@
 
+<?php if(!$this->hideFrame): ?>
 <!-- indexer::stop -->
-<div class="modal fade <?php echo $this->class; ?>"<?php echo $this->cssID; ?>>
+<div class="modal fade <?php echo $this->class; ?>"<?php echo $this->cssID; ?><?php echo $this->dataRemote; ?>>
+<?php endif; ?>
+<?php if(!$this->hideContent): ?>
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -17,10 +20,13 @@
 
 			<?php if($this->addModalFooter || $this->footer): ?>
 			<div class="modal-footer">
-				<?php echo ($this->addModalFooter ? $this->footerButtons : '') . $this->footer; ?>
+				<?php echo ($this->addModalFooter ? $this->footerButtons->generate() : '') . $this->footer; ?>
 			</div>
 			<?php endif; ?>
 		</div>
 	</div>
+<?php endif; ?>
+<?php if(!$this->hideFrame): ?>
 </div>
 <!-- indexer::continue -->
+<?php endif; ?>
