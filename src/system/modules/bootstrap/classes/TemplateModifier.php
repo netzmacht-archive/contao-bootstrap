@@ -20,6 +20,45 @@ namespace Netzmacht\Bootstrap;
 class TemplateModifier
 {
 
+	/**
+	 * execute all registered template modifiers
+	 *
+	 * @param \Template $template
+	 */
+	public function execute(\Template $template)
+	{
+		if(!Bootstrap::isEnabled())
+		{
+			return;
+		}
+
+		foreach($GLOBALS['BOOTSTRAP']['templates']['modifiers'] as $config)
+		{
+			if(!in_array($template->getName(), $config['templates']))
+			{
+				continue;
+			}
+
+			if($config['type'] == 'placeholder')
+			{
+				if(is_callable($config['value']))
+				{
+					$value = call_user_func($config['value'], $template);
+				}
+				else
+				{
+					$value = $config['value'];
+				}
+
+				$template->$config['key'] = str_replace($config['placeholder'], $value, $template->$config['key']);
+			}
+			elseif($config['type'] == 'callback')
+			{
+				call_user_func($config['callback'], $template);
+			}
+		}
+	}
+
 
 	/**
 	 * @param \Template $template modifier
