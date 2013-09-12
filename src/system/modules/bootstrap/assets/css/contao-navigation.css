@@ -1,0 +1,77 @@
+.mod_quicknav .dropdown-menu .level_1 a {
+    padding-left: 40px;
+    font-size: 0.95em;
+}
+
+.mod_quicknav .dropdown-menu .level_2 a {
+    padding-left: 60px;
+    font-size: 0.85em;
+}
+
+.mod_quicknav .dropdown-menu .level_3 a {
+    padding-left: 80px;
+    font-size: 0.85em;
+    font-style: italic;
+}
+
+.mod_quicknav .dropdown-menu .level_4 a {
+    padding-left: 90px;
+    font-size: 0.85em;
+}
+
+.nav > li.navbar-group {
+    display: block;
+}
+
+.nav > li.navbar-group > a {
+    display: block;
+    float: left;
+}
+
+.nav > li.navbar-group > .submenu {
+    padding-right: 7px;
+}
+
+.nav > li.navbar-group > .dropdown-toggle {
+    margin-left: 1px;
+    padding-left: 7px;
+}
+
+.nav > li.navbar-group.active > .dropdown-toggle {
+    border-left: 1px solid #555;
+}
+
+.dropdown-menu > li.dropdown > .submenu {
+    margin-right: 50px;
+}
+
+.dropdown-menu > li.dropdown.active > .dropdown-toggle > .caret {
+    border-top-color: #fff;
+}
+
+/*
+.dropdown-menu li.dropdown > .dropdown-toggle {
+    clear: none;
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+}*/
+
+.navbar-group > .nav-dropdown {
+    clear: both;
+}
+
+.dropdown-menu > li.dropdown > .submenu, .navbar-group > .nav-dropdown {
+    float: none !important; /* preventing navbar-right is changing alignment */
+}
+
+.navbar-group > .nav-dropdown > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #333;
+    white-space: nowrap;
+}
