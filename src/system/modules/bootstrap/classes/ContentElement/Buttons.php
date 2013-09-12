@@ -11,13 +11,14 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\ContentElement;
 
+use Netzmacht\Bootstrap\Helper;
 /**
  * Class ContentToolbar
  * @package Netzmacht\Bootstrap
  */
-class ContentButtons extends BootstrapContentElement
+class Buttons extends BootstrapAbstract
 {
 
 	/**
@@ -36,7 +37,7 @@ class ContentButtons extends BootstrapContentElement
 	 */
 	protected function compile()
 	{
-		$buttons = new Buttons();
+		$buttons = new Helper\Buttons();
 		$buttons->loadFromFieldset($this->buttons);
 		$buttons->buttonStyle = $this->buttonStyle;
 

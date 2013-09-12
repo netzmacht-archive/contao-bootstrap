@@ -11,11 +11,12 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
+namespace Netzmacht\Bootstrap\ContentElement;
 
-namespace Netzmacht\Bootstrap;
+use Netzmacht\Bootstrap\Attributes;
+use Netzmacht\Bootstrap\Model\ContentWrapper;
 
-
-class ContentCarousel extends BootstrapWrapperElement
+class Carousel extends Wrapper
 {
 
 	/**
@@ -35,7 +36,7 @@ class ContentCarousel extends BootstrapWrapperElement
 	protected function compile()
 	{
 		// get included elements
-		if($this->objModel->getType() == ContentWrapperModel::TYPE_START)
+		if($this->objModel->getType() == ContentWrapper::TYPE_START)
 		{
 			$this->Template->count = $this->objModel->countRelatedElements();
 
@@ -51,7 +52,7 @@ class ContentCarousel extends BootstrapWrapperElement
 		// generate css identifier
 		else
 		{
-			$start = ContentWrapperModel::findByPk($this->bootstrap_parentId);
+			$start = ContentWrapper::findByPk($this->bootstrap_parentId);
 
 			if($start !== null)
 			{

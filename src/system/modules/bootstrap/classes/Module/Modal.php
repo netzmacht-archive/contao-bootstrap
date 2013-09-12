@@ -11,9 +11,12 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\Module;
 
-class ModuleModal extends BootstrapModule
+use Netzmacht\Bootstrap\Helper;
+
+
+class Modal extends BootstrapAbstract
 {
 
 	/**
@@ -125,7 +128,7 @@ class ModuleModal extends BootstrapModule
 
 		if($this->addModalFooter)
 		{
-			$buttons  = new Buttons();
+			$buttons  = new Helper\Buttons();
 			$buttons->loadFromFieldset($this->buttons);
 			$buttons->buttonStyle = $this->buttonStyle ? $this->buttonStyle : 'btn-default';
 			$buttons->addContainer = false;
@@ -134,6 +137,17 @@ class ModuleModal extends BootstrapModule
 		}
 
 		$this->Template->headerClose = $GLOBALS['BOOTSTRAP']['modal']['dismiss'];
+	}
+
+	public function generate()
+	{
+		if(!$this->modalAjax || !$this->isAjax)
+		{
+			$GLOBALS['TL_JQUERY']['bootstrap-modal-' . $this->id] = parent::generate();
+			return '';
+		}
+
+		return parent::generate();
 	}
 
 }

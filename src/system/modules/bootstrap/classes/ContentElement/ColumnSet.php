@@ -12,17 +12,14 @@
  *
  **/
 
-namespace Netzmacht\Bootstrap;
-
-use Netzmacht\ColumnSet\ColumnSet;
-
+namespace Netzmacht\Bootstrap\ContentElement;
 
 /**
  * Class ContentColumnSet provides an column set based on subcolumns_bootstrap_customize for including articles
  *
  * @package Netzmacht\Bootstrap
  */
-class ContentColumnSet extends BootstrapContentElement
+class ColumnSet extends BootstrapAbstract
 {
 
 	/**
@@ -69,7 +66,7 @@ class ContentColumnSet extends BootstrapContentElement
 		$data = deserialize($this->columnset, true);
 		$articles = array();
 
-		$container = ColumnSet::prepareContainer($this->columnset_id);
+		$container = \Netzmacht\ColumnSet\ColumnSet::prepareContainer($this->columnset_id);
 		$i=0;
 
 		foreach($data as $article)

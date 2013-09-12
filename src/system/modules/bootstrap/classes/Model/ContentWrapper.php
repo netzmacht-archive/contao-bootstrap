@@ -11,14 +11,14 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\Model;
 
 
 /**
  * Class ContentWrapperModel extends model for wrapper element specific methods
  * @package Netzmacht\Bootstrap
  */
-class ContentWrapperModel extends \ContentModel
+class ContentWrapper extends \ContentModel
 {
 
 	/**
@@ -66,11 +66,11 @@ class ContentWrapperModel extends \ContentModel
 	{
 		$return = parent::find($arrOptions);
 
-		if($return instanceof \Model && !$return instanceof \ContentWrapperModel)
+		if($return instanceof \Model && !$return instanceof static)
 		{
 			$row = $return->row();
 
-			$return = new ContentWrapperModel();
+			$return = new static();
 			$return->setRow($row);
 		}
 

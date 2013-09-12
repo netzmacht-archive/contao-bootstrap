@@ -11,13 +11,13 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\Model\Collection;
 
 /**
  * Class ContentWrapperCollection
  * @package Netzmacht\Bootstrap
  */
-class ContentWrapperCollection extends \Model\Collection
+class ContentWrapper extends \Model\Collection
 {
 
 	/**
@@ -32,7 +32,7 @@ class ContentWrapperCollection extends \Model\Collection
 			return false;
 		}
 
-		$strClass = 'Bootstrap\\ContentWrapperModel';
+		$strClass = 'Bootstrap\Model\ContentWrapper';
 		$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
 
 		return true;

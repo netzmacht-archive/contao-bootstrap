@@ -7,13 +7,15 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\ContentElement;
+
+use Netzmacht\Bootstrap\Helper\Icons;
 
 /**
  * Class ContentButton
  * @package Netzmacht\Bootstrap
  */
-class ContentButton extends BootstrapContentElement
+class Button extends BootstrapAbstract
 {
 
 	/**
@@ -41,14 +43,12 @@ class ContentButton extends BootstrapContentElement
 			$this->url = ampersand($this->url);
 		}
 
-		$embed = explode('%s', $this->embed);
-
 		if ($this->linkTitle == '')
 		{
 			$this->linkTitle = $this->url;
 		}
 
-		if (strncmp($this->rel, 'lightbox', 8) !== 0 || $objPage->outputFormat == 'xhtml')
+		if (strncmp($this->rel, 'lightbox', 8) !== 0)
 		{
 			$this->Template->attribute = ' rel="'. $this->rel .'"';
 		}
@@ -60,7 +60,7 @@ class ContentButton extends BootstrapContentElement
 		// Override the link target
 		if ($this->target)
 		{
-			$this->Template->target = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
+			$this->Template->target = ' target="_blank"';
 		}
 
 		if($this->cssID[1] == '')
@@ -98,7 +98,6 @@ class ContentButton extends BootstrapContentElement
 		$this->Template->href = $this->url;
 		$this->Template->link = $this->linkTitle;
 		$this->Template->linkTitle = specialchars($this->titleText ?: $this->linkTitle);
-		$this->Template->target = '';
 	}
 
 }

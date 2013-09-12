@@ -7,13 +7,13 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\ContentElement;
 
 /**
  * Class ContentAccordionGroup
  * @package Netzmacht\Bootstrap
  */
-class ContentAccordionGroup extends BootstrapWrapperElement
+class ContentAccordionGroup extends Wrapper
 {
 
 	/**

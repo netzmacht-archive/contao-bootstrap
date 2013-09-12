@@ -11,7 +11,10 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\ContentElement;
+
+use Netzmacht\Bootstrap\Model;
+use Netzmacht\Bootstrap\Collection;
 
 
 /**
@@ -19,7 +22,7 @@ namespace Netzmacht\Bootstrap;
  *
  * @package Netzmacht\Bootstrap
  */
-abstract class BootstrapWrapperElement extends BootstrapContentElement
+abstract class Wrapper extends BootstrapAbstract
 {
 
 	/**
@@ -29,7 +32,7 @@ abstract class BootstrapWrapperElement extends BootstrapContentElement
 	protected static $arrStartElement;
 
 	/**
-	 * @var ContentWrapperModel
+	 * @var Model\ContentWrapper
 	 */
 	protected $objModel;
 
@@ -46,16 +49,16 @@ abstract class BootstrapWrapperElement extends BootstrapContentElement
 	 */
 	public function __construct($objElement)
 	{
-		if($objElement instanceof \Model\Collection && !$objElement instanceof ContentWrapperCollection)
+		if($objElement instanceof \Model\Collection && !$objElement instanceof Collection\ContentWrapper)
 		{
 			$objElement = $objElement->current();
 		}
 
-		if(!$objElement instanceof ContentWrapperModel)
+		if(!$objElement instanceof Model\ContentWrapper)
 		{
 			$row = $objElement->row();
 
-			$objElement = new ContentWrapperModel();
+			$objElement = new Model\ContentWrapper();
 			$objElement->setRow($row);
 		}
 
@@ -71,7 +74,7 @@ abstract class BootstrapWrapperElement extends BootstrapContentElement
 		// backend mode
 		if(TL_MODE == 'BE')
 		{
-			if($this->objModel->getType() == ContentWrapperModel::TYPE_STOP)
+			if($this->objModel->getType() == Model\ContentWrapper::TYPE_STOP)
 			{
 				return '';
 			}

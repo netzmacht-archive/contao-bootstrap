@@ -11,14 +11,16 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\ContentElement;
+
+use Netzmacht\Bootstrap\Attributes;
 
 /**
  * Class BootstrapContentElement provides easy access for bootstrap namespaces attributes
  *
  * @package Netzmacht\Bootstrap
  */
-abstract class BootstrapContentElement extends \ContentElement
+abstract class BootstrapAbstract extends \ContentElement
 {
 
 	/**

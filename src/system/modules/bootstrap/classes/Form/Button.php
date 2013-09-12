@@ -11,10 +11,12 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\Form;
 
 
-class FormButton extends \FormSubmit
+use Netzmacht\Bootstrap\Helper\Icons;
+
+class Button extends \FormSubmit
 {
 	/**
 	 * Generate the widget and return it as string

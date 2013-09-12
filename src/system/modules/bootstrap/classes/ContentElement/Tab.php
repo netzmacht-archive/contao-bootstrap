@@ -11,14 +11,16 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\ContentElement;
+
+use Netzmacht\Bootstrap\Model\ContentWrapper;
 
 /**
  * Class ContentTab
  *
  * @package Netzmacht\Bootstrap
  */
-class ContentTab extends BootstrapWrapperElement
+class Tab extends Wrapper
 {
 
 	/**
@@ -46,7 +48,7 @@ class ContentTab extends BootstrapWrapperElement
 		parent::__construct($objElement);
 
 		// load tab definitions
-		if($this->objModel->getType() == ContentWrapperModel::TYPE_START)
+		if($this->objModel->getType() == ContentWrapper::TYPE_START)
 		{
 			$tabs = deserialize($this->tabs, true);
 			$tab = null;
@@ -65,7 +67,7 @@ class ContentTab extends BootstrapWrapperElement
 			$this->arrTab = $tab;
 			$this->fade = $this->bootstrap_fade;
 		}
-		elseif($this->objModel->getType() == ContentWrapperModel::TYPE_SEPARATOR)
+		elseif($this->objModel->getType() == ContentWrapper::TYPE_SEPARATOR)
 		{
 			$elements = $this->Database
 				->prepare('SELECT id FROM tl_content WHERE bootstrap_parentId=? ORDER by sorting')
@@ -74,7 +76,7 @@ class ContentTab extends BootstrapWrapperElement
 			$elements = array_merge(array($this->bootstrap_parentId), $elements->fetchEach('id'));
 
 			$index = 0;
-			$parent = ContentWrapperModel::findByPK($this->bootstrap_parentId);
+			$parent = ContentWrapper::findByPK($this->bootstrap_parentId);
 			$tabs = deserialize($parent->bootstrap_tabs, true);
 
 			foreach ($tabs as $i => $t)

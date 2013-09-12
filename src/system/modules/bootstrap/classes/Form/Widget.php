@@ -11,7 +11,9 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\Form;
+
+use Netzmacht\Bootstrap\Helper\Icons;
 
 
 /**
@@ -20,7 +22,7 @@ namespace Netzmacht\Bootstrap;
  *
  * @package Netzmacht\Bootstrap
  */
-class BootstrapWidget
+class Widget
 {
 
 	/**
@@ -368,6 +370,11 @@ class BootstrapWidget
 			$right .= sprintf('<span class="input-group-btn">%s</span>', $submit);
 		}
 
+		if($this->type == 'captcha')
+		{
+			$right .= $this->generateQuestion(true);
+		}
+
 		if($left != '' || $right != '') {
 			return '<div class="input-group">' . $left . $widget . $right . '</div>';
 		}
@@ -382,14 +389,21 @@ class BootstrapWidget
 	 * @return mixed
 	 * @throws \BadMethodCallException
 	 */
-	public function generateQuestion()
+	public function generateQuestion($force=false)
 	{
 		if($this->type != 'captcha') {
-			throw new \BadMethodCallException('BootstrapWidget::generateQuest can only be called by Captcha');
+			throw new \BadMethodCallException('BootstrapWidget::generateQuestion can only be called by Captcha');
 		}
 
+		if(!$force && in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['allowInputGroup']))
+		{
+			return '';
+		}
+
+		$class = in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['allowInputGroup']) ? 'input-group-addon' : 'help-block';
+
 		$question = $this->widget->generateQuestion();
-		return preg_replace('/(class=\")([^\"]*)\"/', 'class="question input-group-addon"', $question);
+		return preg_replace('/(class=\")([^\"]*)\"/', 'class="question ' . $class . '"', $question);
 	}
 
 

@@ -11,8 +11,10 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\Module;
 
+
+use Contao\ModuleModel;
 use \FrontendTemplate;
 
 
@@ -21,14 +23,14 @@ use \FrontendTemplate;
  *
  * @package Netzmacht\Bootstrap
  */
-class ModuleNavbar extends BootstrapModule
+class Navbar extends BootstrapAbstract
 {
 
 	/**
 	 * list of bootstrap attributes to easily access it without namespace
 	 * @var array
 	 */
-	protected $arrBootstrapAttributes = array('addHeader', 'isResponsive', 'navbarModules', 'navbarTemplate');
+	protected $arrBootstrapAttributes = array('addHeader', 'isResponsive', 'navbarModules', 'navbarTemplate', 'navbarBrandTemplate');
 
 	/**
 	 * @var string
@@ -61,7 +63,10 @@ class ModuleNavbar extends BootstrapModule
 
 		foreach ($dataModules as $module)
 		{
-			$modules[] = $this->generateModule($module);
+			if($module['module'] != '')
+			{
+				$modules[] = $this->generateModule($module);
+			}
 		}
 
 		if($this->cssID[1] == '')
@@ -92,9 +97,15 @@ class ModuleNavbar extends BootstrapModule
 			$class .= 'navbar-' . $module['floating'];
 		}
 
+		$model = ModuleModel::findByPk($module['module']);
+		$model->bootstrap_inNavbar = true;
+		$model->bootstrap_navbarFloating = $module['floating'];
+
+		$rendered = $this->getFrontendModule($model);
+
 		return array(
 			'type'   => 'module',
-			'module' => $this->getFrontendModule($module['module']),
+			'module' => $rendered,
 			'id'     => $module['module'],
 			'class'  => $class,
 		);

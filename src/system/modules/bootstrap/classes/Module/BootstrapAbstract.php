@@ -11,14 +11,16 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\Module;
+
+use Netzmacht\Bootstrap\Attributes;
 
 /**
  * Class BootstrapModule provides easy access for bootstrap namespaces attributes
  *
  * @package Netzmacht\Bootstrap
  */
-abstract class BootstrapModule extends \Module
+abstract class BootstrapAbstract extends \Module
 {
 
 	/**
@@ -59,7 +61,7 @@ abstract class BootstrapModule extends \Module
 		}
 
 		$this->Template = new \FrontendTemplate($this->strTemplate);
-		$this->Template->setData($this->arrData);
+		$this->Template->setData(clone $this->arrData);
 
 		$this->compile();
 
