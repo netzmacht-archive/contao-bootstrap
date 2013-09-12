@@ -34,6 +34,9 @@ $GLOBALS['TL_LANG']['tl_module']['bootstrap_navbarTemplate'][1] = 'Entscheiden S
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_navClass'][0] = 'Bootstrap Navigations-Klassen';
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_navClass'][1] = 'Geben Sie die Navigations-Klassen an, die Bootstrap bietet. Sie müssen die allgemeine <em>nav</em> Klasse auch zuweisen.';
 
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_navbarBrandTemplate'][0] = 'Template für Header-Titel';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_navbarBrandTemplate'][1] = 'Welches Template soll für den Header-Title verwendet werden.';
+
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_addModalFooter'][0] = 'Fußbereich hinzufügen';
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_addModalFooter'][1] = 'Aktivieren Sie die Option, wenn Sie dem modalen Fenster einen Fußbereich hinzufügen wollen.';
 
@@ -90,3 +93,9 @@ $GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['article'][
 
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['template'][0] = 'Template';
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_modalContentType_types']['template'][1] = 'Ein Template wird im modalen Fenster geladen.';
+
+/**
+ * values
+ */
+$GLOBALS['TL_LANG']['tl_module']['safeTpl'] = 'Im Theme verfügbar';
+$GLOBALS['TL_LANG']['tl_module']['unsafeTpl'] = 'In anderen Themes';
