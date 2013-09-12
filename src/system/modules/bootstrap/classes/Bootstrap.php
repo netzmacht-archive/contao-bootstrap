@@ -32,61 +32,28 @@ class Bootstrap
 
 
 	/**
-	 * We need to use the parseTemplate callback to trigger initializeLayout in Contao 3.
-	 *
-	 */
-	public function initializeLayoutByParseTemplateHook()
-	{
-		global $objPage;
-
-		if(static::$bootstrapLoaded || !$objPage)
-		{
-			return;
-		}
-
-		static::$bootstrapLoaded = true;
-
-		$this->initializeLayout($objPage, self::getPageLayout());
-	}
-
-
-	/**
 	 * only load templates if bootstrap is activated, so diverent layouts will work instead of template changes
 	 *
 	 * @param \PageModel   $page
 	 * @param \LayoutModel $layout
 	 */
-	public function initializeLayout(\PageModel $page, \LayoutModel $layout)
+	public function initializeLayout($page, \LayoutModel $layout)
 	{
 		static::$pageLayout = $layout;
 
-		if(!$layout->addBootstrap)
+		if(!static::isEnabled())
 		{
 			return;
 		}
 
+		$templates = $GLOBALS['BOOTSTRAP']['templates']['dynamicLoad'];
+
 		// only load these templates if layout uses it because default templates are changed
-		foreach ($GLOBALS['BOOTSTRAP']['templates']['dynamicLoad'] as $path => $templates)
+		foreach ($templates as $path => $templates)
 		{
 			foreach ($templates as $template)
 			{
 				\TemplateLoader::addFile($template, $path);
-			}
-		}
-
-		// load assets
-		$layout->bootstrap_assets = deserialize($layout->bootstrap_assets, true);
-
-		foreach ($layout->bootstrap_assets as $asset)
-		{
-			$extension = substr($asset, strrpos($asset, '.') + 1);
-
-			if($extension == 'js')
-			{
-				$GLOBALS['TL_JAVASCRIPT'][] = $asset . '|static';
-			} else
-			{
-				$GLOBALS['TL_CSS'][] = $asset . '|static';
 			}
 		}
 	}
@@ -106,10 +73,22 @@ class Bootstrap
 	{
 		if(static::isEnabled())
 		{
-			return new BootstrapWidget($widget);
+			return new Form\Widget($widget);
 		}
 
 		return $widget;
+	}
+
+
+	/**
+	 * initialize icon configuration
+	 */
+	public static function initializeIconSet()
+	{
+		$set = $GLOBALS['TL_CONFIG']['bootstrapIconSet'];
+
+		$GLOBALS['BOOTSTRAP']['icons']['set'] = include(TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['icons']['sets'][$set]['path']);
+		$GLOBALS['BOOTSTRAP']['icons']['template'] = $GLOBALS['BOOTSTRAP']['icons']['sets'][$set]['template'];
 	}
 
 
@@ -120,12 +99,12 @@ class Bootstrap
 	 */
 	public static function isEnabled()
 	{
-		if(static::getPageLayout() === null)
+		if(static::getLayout() === null)
 		{
 			return false;
 		}
 
-		return (bool) static::getPageLayout()->addBootstrap;
+		return (bool) static::$pageLayout->layoutType == 'bootstrap';
 	}
 
 
@@ -134,15 +113,18 @@ class Bootstrap
 	 *
 	 * @return \LayoutModel|\Model|null
 	 */
-	protected static function getPageLayout()
+	public static function getLayout()
 	{
 		if(self::$pageLayout === null)
 		{
 			global $objPage;
-			self::$pageLayout = \LayoutModel::findByPk($objPage->layout);
+
+			if($objPage !== null)
+			{
+				self::$pageLayout = \LayoutModel::findByPk($objPage->layout);
+			}
 		}
 
 		return self::$pageLayout;
 	}
-
 }
