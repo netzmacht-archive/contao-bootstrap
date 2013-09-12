@@ -21,7 +21,6 @@ namespace Netzmacht\Bootstrap;
  */
 class Attributes extends \ArrayObject
 {
-
 	/**
 	 * Attributes which have a namespace
 	 * @var array
@@ -35,9 +34,13 @@ class Attributes extends \ArrayObject
 	 */
 	public function __construct($data=null)
 	{
-		if($data instanceof \Model || $data instanceof \Model\Collection)
+		if($data instanceof \Model)
 		{
 			$data = $data->row();
+		}
+		elseif($data instanceof \Model\Collection)
+		{
+			$data = $data->current()->row();
 		}
 
 		parent::__construct($data);
@@ -136,7 +139,7 @@ class Attributes extends \ArrayObject
 	 */
 	public function offsetUnset($key)
 	{
-		return parent::offsetExists($this->getKey($key));
+		parent::offsetUnset($this->getKey($key));
 	}
 
 
