@@ -14,8 +14,8 @@
 /**
  * config
  */
-$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('Bootstrap\DataContainer\Content', 'setArticlesRows');
-$GLOBALS['TL_DCA']['tl_content']['config']['ondelete_callback'][] = array('Bootstrap\DataContainer\Wrapper', 'delete');
+$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('Netzmacht\Bootstrap\DataContainer\Content', 'setArticlesRows');
+$GLOBALS['TL_DCA']['tl_content']['config']['ondelete_callback'][] = array('Netzmacht\Bootstrap\DataContainer\Wrapper', 'delete');
 
 /**
  * palettes
@@ -102,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_content']['metasubselectpalettes']['sc_type']['!'] = arra
  * fields
  */
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['type']['save_callback'][] = array('Bootstrap\DataContainer\Wrapper', 'save');
+$GLOBALS['TL_DCA']['tl_content']['fields']['type']['save_callback'][] = array('Netzmacht\Bootstrap\DataContainer\Wrapper', 'save');
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_articleMarkup'] = array
 (
@@ -147,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_columnset'] = array
 				'label'                 => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_columnset_article'],
 				'exclude'               => true,
 				'inputType'             => 'select',
-				'options_callback'     	=> array('Bootstrap\DataContainer\Content', 'getPageBootstrapArticles'),
+				'options_callback'     	=> array('Netzmacht\Bootstrap\DataContainer\Content', 'getPageBootstrapArticles'),
 				'eval' 			=> array('style' => 'width:450px', 'includeBlankOption'=>true, 'chosen'=>true)
 			),
 		),
@@ -287,7 +287,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 				'eval'                    => array('style' => 'width: 100px', 'rgxp' => 'url', 'decodeEntities'=>true, 'tl_class' => 'wizard'),
 				'wizard' => array
 				(
-					array('Bootstrap\DataContainer\General', 'pagePicker')
+					array('Netzmacht\Bootstrap\DataContainer\Content', 'pagePicker')
 				),
 			),
 
@@ -316,11 +316,10 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_dataAttributes'] = array
 			(
 				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_name'],
 				'exclude'                 => true,
-				// @todo 'customselect' waiting for PR integrated https://github.com/xat/contao-customselectmenu/pull/5
-				'inputType'               => 'select',
+				'inputType'               => 'customselect',
 				'options'                 => $GLOBALS['BOOTSTRAP']['button']['dataAttributes'],
 				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types'],
-				'eval'                    => array('style' => 'width: 75px;', 'includeBlankOption' => true),
+				'eval'                    => array('style' => 'width: 145px;', 'includeBlankOption' => true),
 			),
 
 			'value' => array

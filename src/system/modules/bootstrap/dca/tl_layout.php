@@ -3,7 +3,7 @@
 /**
  * config
  */
-$GLOBALS['TL_DCA']['tl_layout']['config']['palettes_callback'][]   = array('Bootstrap\DataContainer\Layout', 'generatePalette');
+$GLOBALS['TL_DCA']['tl_layout']['config']['palettes_callback'][]   = array('Netzmacht\Bootstrap\DataContainer\Layout', 'generatePalette');
 
 
 /**
@@ -20,7 +20,7 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['name']['eval']['tl_class'] = 'w50';
 
 // use template loader which shows list of safe and unsafe templates
 $GLOBALS['TL_DCA']['tl_layout']['fields']['template']['reference'] = $GLOBALS['TL_LANG']['tl_layout'];
-$GLOBALS['TL_DCA']['tl_layout']['fields']['template']['options_callback'] = array('Bootstrap\DataContainer\Layout', 'getTemplates');
+$GLOBALS['TL_DCA']['tl_layout']['fields']['template']['options_callback'] = array('Netzmacht\Bootstrap\DataContainer\Layout', 'getTemplates');
 $GLOBALS['TL_DCA']['tl_layout']['fields']['template']['eval'] = array('templatePrefix' => 'fe_', 'templateThemeId' => 'pid');
 
 // do not import layout builder by default to prevent side effects
@@ -99,7 +99,7 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_stylesheets'] = array
 	'inputType'               => 'multiColumnWizard',
 	'options'                 => $GLOBALS['BOOTSTRAP']['assets']['css'],
 	'save_callback'           => array(
-		array('Bootstrap\DataContainer\Layout', 'installStylesheets'),
+		array('Netzmacht\Bootstrap\DataContainer\Layout', 'installStylesheets'),
 	),
 	'eval'                    => array
 	(
@@ -110,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_stylesheets'] = array
 				'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['bootstrap_importFile'],
 				'exclude'                 => true,
 				'inputType'               => 'select',
-				'options_callback'        => array('Bootstrap\DataContainer\Layout', 'getStylesheets'),
+				'options_callback'        => array('Netzmacht\Bootstrap\DataContainer\Layout', 'getStylesheets'),
 				'eval'                    => array('style' => 'width: 300px'),
 			),
 
@@ -150,11 +150,12 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_importJavaScripts'] = array
 $GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_javaScripts'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['bootstrap_javaScripts'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['bootstrap_javaScripts'],
 	'exclude'                 => true,
 	'inputType'               => 'multiColumnWizard',
 	'options'                 => $GLOBALS['BOOTSTRAP']['assets']['js'],
 	'save_callback'           => array(
-		array('Bootstrap\DataContainer\Layout', 'installJavaScripts'),
+		array('Netzmacht\Bootstrap\DataContainer\Layout', 'installJavaScripts'),
 	),
 	'eval'                    => array
 	(
@@ -165,7 +166,7 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_javaScripts'] = array
 				'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['bootstrap_importFile'],
 				'exclude'                 => true,
 				'inputType'               => 'select',
-				'options_callback'        => array('Bootstrap\DataContainer\Layout', 'getJavaScripts'),
+				'options_callback'        => array('Netzmacht\Bootstrap\DataContainer\Layout', 'getJavaScripts'),
 				'eval'                    => array('style' => 'width: 300px'),
 			),
 

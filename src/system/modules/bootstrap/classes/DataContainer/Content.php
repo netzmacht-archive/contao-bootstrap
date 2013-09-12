@@ -19,7 +19,7 @@ use Netzmacht\Bootstrap\Model;
  * Class Content
  * @package Netzmacht\Bootstrap\DataContainer
  */
-class Content extends \Backend
+class Content extends General
 {
 
 	/**
