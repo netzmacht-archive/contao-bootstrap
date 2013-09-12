@@ -2,7 +2,7 @@
 <div class="<?php echo $this->containerClass; ?>">
 	<?php endif; ?>
 
-	<?php foreach($this as $button): ?>
+	<?php foreach($this->buttons as $button): ?>
 		<?php include($this->getTemplate('bootstrap_buttons_item')); ?>
 	<?php endforeach; ?>
 

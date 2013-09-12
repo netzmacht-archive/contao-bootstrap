@@ -13,12 +13,14 @@
 
 namespace Netzmacht\Bootstrap\Helper;
 
+use Netzmacht\Bootstrap\Iterator\ArrayCallbackModify;
+
 
 /**
  * Class Buttons is a component for displaying buttons
  * @package Netzmacht\Bootstrap
  */
-class Buttons extends \Frontend implements \Iterator
+class Buttons extends \Frontend
 {
 
 	/**
@@ -60,80 +62,6 @@ class Buttons extends \Frontend implements \Iterator
 
 
 	/**
-	 * add class dynamically
-	 * (PHP 5 &gt;= 5.0.0)<br/>
-	 * Return the current element
-	 *
-	 * @link http://php.net/manual/en/iterator.current.php
-	 * @return mixed Can return any type.
-	 */
-	public function current()
-	{
-		$current= $this->arrButtons[$this->intIndex];
-
-		if(!isset($current['class']))
-		{
-			$current['class'] = $this->buttonStyle;
-		}
-
-		return $current;
-	}
-
-
-	/**
-	 * (PHP 5 &gt;= 5.0.0)<br/>
-	 * Move forward to next element
-	 *
-	 * @link http://php.net/manual/en/iterator.next.php
-	 * @return void Any returned value is ignored.
-	 */
-	public function next()
-	{
-		++$this->intIndex;
-	}
-
-
-	/**
-	 * (PHP 5 &gt;= 5.0.0)<br/>
-	 * Return the key of the current element
-	 *
-	 * @link http://php.net/manual/en/iterator.key.php
-	 * @return mixed scalar on success, or null on failure.
-	 */
-	public function key()
-	{
-		return $this->intIndex;
-	}
-
-
-	/**
-	 * (PHP 5 &gt;= 5.0.0)<br/>
-	 * Checks if current position is valid
-	 *
-	 * @link http://php.net/manual/en/iterator.valid.php
-	 * @return boolean The return value will be casted to boolean and then evaluated.
-	 *       Returns true on success or false on failure.
-	 */
-	public function valid()
-	{
-		return isset($this->arrButtons[$this->intIndex]);
-	}
-
-
-	/**
-	 * (PHP 5 &gt;= 5.0.0)<br/>
-	 * Rewind the Iterator to the first element
-	 *
-	 * @link http://php.net/manual/en/iterator.rewind.php
-	 * @return void Any returned value is ignored.
-	 */
-	public function rewind()
-	{
-		$this->intIndex = 0;
-	}
-
-
-	/**
 	 * @param string $key
 	 *
 	 * @return array|bool|mixed|null|string
@@ -147,14 +75,35 @@ class Buttons extends \Frontend implements \Iterator
 				break;
 
 			case 'buttons':
-				return $this->arrButtons;
+				$style = $this->buttonStyle;
+				$callback = function($item) use($style, &$callback)
+				{
+					if($item['class'] == '')
+					{
+						$item['class'] = $style;
+					}
+
+					if(isset($item['items']))
+					{
+						$item['items'] = new ArrayCallbackModify(new \ArrayIterator($item['items']), $callback);
+					}
+
+					return $item;
+				};
+
+				return new ArrayCallbackModify(
+					new \ArrayIterator($this->arrButtons), $callback
+				);
+
 				break;
 
 			case 'buttonStyle':
 				if(!isset($this->arrConfiguration[$key]) || $this->arrConfiguration[$key] == '')
 				{
-					return 'btn-default';
+					return 'btn btn-default';
 				}
+
+				return $this->arrConfiguration[$key];
 
 				// no break
 
@@ -177,7 +126,15 @@ class Buttons extends \Frontend implements \Iterator
 	 */
 	public function __set($key, $value)
 	{
-		$this->arrConfiguration[$key] = $value;
+		switch($key)
+		{
+			case 'toolbar':
+				$this->blnToolbar = $value;
+				break;
+
+			default:
+				$this->arrConfiguration[$key] = $value;
+		}
 	}
 
 
@@ -235,9 +192,23 @@ class Buttons extends \Frontend implements \Iterator
 			{
 				$this->toolbar = true;
 
+				if($dropdown !== false)
+				{
+					if($group)
+					{
+						$this->addItemToTarget($group['items'], $dropdown);
+					}
+					else
+					{
+						$this->addItem($dropdown);
+					}
+
+					$dropdown = false;
+				}
+
 				if($group !== false)
 				{
-					$buttons[] = $group;
+					$this->addItem($group);
 				}
 
 				$group = $button;
@@ -342,7 +313,7 @@ class Buttons extends \Frontend implements \Iterator
 		if(!isset($item['class']) && preg_match($pattern, $item['attributes'], $matches))
 		{
 			$item['class'] = $matches[1];
-			preg_replace($pattern, '', $item['attributes']);
+			$item['attributes'] = preg_replace($pattern, '', $item['attributes']);
 		}
 
 		if($first)
@@ -377,7 +348,7 @@ class Buttons extends \Frontend implements \Iterator
 	{
 		if($this->addContainer === null)
 		{
-			$this->addContainer = $this->count() > 0;
+			$this->addContainer = ($this->count() > 0);
 		}
 
 		$this->containerClass = 'btn-' . $this->getContainerType();

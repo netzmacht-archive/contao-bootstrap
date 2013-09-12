@@ -1,7 +1,8 @@
+
 <?php if($button['type'] == 'group'): ?>
 	<div class="btn-group">
 		<?php $item = $button; foreach($item['items'] as $button): ?>
-			<?php include($this->getTemplate('ce_bootstrap_buttons_item')); ?>
+			<?php include($this->getTemplate('bootstrap_buttons_item')); ?>
 		<?php endforeach; ?>
 	</div>
 <?php elseif($button['type'] == 'dropdown'): ?>
