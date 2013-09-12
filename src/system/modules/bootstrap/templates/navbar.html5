@@ -1,6 +1,7 @@
+
 <?php if($this->addHeader): ?>
 	<div class="navbar-header">
-		<?php include $this->getTemplate('navbar_brand'); ?>
+		<?php include $this->getTemplate($this->navbarBrandTemplate); ?>
 
 		<?php if($this->isResponsive): ?>
 			<?php include $this->getTemplate('navbar_toggle'); ?>
@@ -10,7 +11,6 @@
 <?php if($this->isResponsive): ?>
 	<div class="collapse navbar-collapse" id="navbar-responsive-<?php echo $this->id; ?>">
 <?php endif; ?>
-
 <?php foreach($this->modules as $module): ?>
 	<?php if($module['class']): ?><div class="<?php echo $module['class']; ?>"><?php endif; ?>
 	<?php echo $module['module']; ?>
