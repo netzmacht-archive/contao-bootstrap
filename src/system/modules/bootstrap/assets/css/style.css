@@ -13,3 +13,12 @@
 .tl_content.wrapper_separator .title {
     margin: 0 -6px -6px;
 }
+
+.clr {
+    display: table;
+}
+
+.multicolumnwizard .tl_select {
+    margin-top: 2px;
+    margin-bottom: 0 !important;
+}
