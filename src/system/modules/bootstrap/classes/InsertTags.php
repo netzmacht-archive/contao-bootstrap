@@ -13,11 +13,13 @@
 
 namespace Netzmacht\Bootstrap;
 
+use Netzmacht\Bootstrap\Helper\Icons;
+
 /**
  * Class InsertTags provides insert tags of the Bootstrap extension
  * @package Netzmacht\Bootstrap
  */
-class InsertTags
+class InsertTags extends \Controller
 {
 
 	/**
@@ -76,6 +78,16 @@ class InsertTags
 		if(is_numeric($parts[0]))
 		{
 			array_insert($parts, 0, array('remote'));
+		}
+
+		if(!isset($GLOBALS['TL_BODY']['bootstrap-modal-' . $parts[1]]))
+		{
+			$model = \ModuleModel::findByPk($parts[1]);
+
+			if($model != null && $model->type == 'bootstrap_modal')
+			{
+				$this->getFrontendModule($parts[1]);
+			}
 		}
 
 		$count = count($parts);
