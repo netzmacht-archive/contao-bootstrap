@@ -24,7 +24,7 @@ class Installer extends \Backend
 		$this->loadLanguageFile('modules');
 	}
 
-	public function run()
+	public function runOnce()
 	{
 		if(!$this->User->isAdmin) {
 			return;

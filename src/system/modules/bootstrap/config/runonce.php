@@ -17,4 +17,4 @@
  */
 
 $controller = new Bootstrap\Installer();
-$controller->run();
+$controller->runOnce();
