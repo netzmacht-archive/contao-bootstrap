@@ -14,7 +14,7 @@
 					<?php
 						foreach($this->fields as $name => $widget )
 						{
-							$fields[$name] = new Bootstrap\BootstrapWidget($widget);
+							$fields[$name] = new Netzmacht\Bootstrap\Form\Widget($widget);
 							$fields[$name]->tableless = $GLOBALS['BOOTSTRAP']['form']['defaultTableless'];
 							echo $fields[$name]->parse();
 						}
