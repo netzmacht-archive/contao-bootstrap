@@ -50,8 +50,8 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['bootstrap_icon'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['bootstrap_icon'],
 	'exclude'                 => true,
 	'inputType'               => 'icon',
-	'options'                 => Bootstrap\Icons::getIcons(),
-	'eval'                    => array('tl_class' => 'w50', 'iconTemplate' => Bootstrap\Icons::getIconTemplate()),
+	'options'                 => &$GLOBALS['BOOTSTRAP']['icons']['set'],
+	'eval'                    => array('tl_class' => 'w50', 'iconTemplate' => &$GLOBALS['BOOTSTRAP']['icons']['template']),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
@@ -118,9 +118,9 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['bootstrap_addSubmitIcon'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['bootstrap_icon'],
 	'exclude'                 => true,
 	'inputType'               => 'icon',
-	'options'                 => Bootstrap\Icons::getIcons(),
+	'options'                 => &$GLOBALS['BOOTSTRAP']['icons']['set'],
 	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => Bootstrap\Icons::getIconTemplate()),
+	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => &$GLOBALS['BOOTSTRAP']['icons']['template']),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 

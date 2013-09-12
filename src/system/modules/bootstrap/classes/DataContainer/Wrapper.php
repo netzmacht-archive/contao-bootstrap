@@ -11,7 +11,9 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\DataContainer;
+
+use Netzmacht\Bootstrap\Model;
 
 
 /**
@@ -19,7 +21,7 @@ namespace Netzmacht\Bootstrap;
  *
  * @package Netzmacht\Bootstrap\DataContainer
  */
-class WrapperDataContainer extends \Backend
+class Wrapper extends \Backend
 {
 
 	/**
@@ -46,7 +48,7 @@ class WrapperDataContainer extends \Backend
 	/**
 	 * current model
 	 *
-	 * @var ContentWrapperModel
+	 * @var Model\ContentWrapper
 	 */
 	protected $objModel;
 
@@ -62,11 +64,11 @@ class WrapperDataContainer extends \Backend
 	public function save($value, $dc)
 	{
 		// shortcuts
-		$start  = ContentWrapperModel::TYPE_START;
-		$stop   = ContentWrapperModel::TYPE_STOP;
-		$sep    = ContentWrapperModel::TYPE_SEPARATOR;
+		$start  = Model\ContentWrapper::TYPE_START;
+		$stop   = Model\ContentWrapper::TYPE_STOP;
+		$sep    = Model\ContentWrapper::TYPE_SEPARATOR;
 
-		$this->objModel = new ContentWrapperModel($dc->activeRecord);
+		$this->objModel = new Model\ContentWrapper($dc->activeRecord);
 
 		$this->objModel->type = $value;
 		$sorting = $this->objModel->sorting;
@@ -156,7 +158,7 @@ class WrapperDataContainer extends \Backend
 				{
 					$count = $existing - $required;
 
-					$parentId = $this->objModel->getType() == ContentWrapperModel::TYPE_START
+					$parentId = $this->objModel->getType() == Model\ContentWrapper::TYPE_START
 						? $this->objModel->id
 						: $this->objModel->bootstrap_parentId;
 
@@ -171,7 +173,7 @@ class WrapperDataContainer extends \Backend
 		// cereate end element
 		if($type == $start && $this->isTrigger($type, $stop))
 		{
-			$end = $this->objModel->findRelatedElements(ContentWrapperModel::TYPE_STOP);
+			$end = $this->objModel->findRelatedElements(Model\ContentWrapper::TYPE_STOP);
 
 			if($end === null)
 			{
@@ -189,7 +191,7 @@ class WrapperDataContainer extends \Backend
 	 */
 	public function delete($dc)
 	{
-		$this->objModel = new ContentWrapperModel($dc->activeRecord);
+		$this->objModel = new Model\ContentWrapper($dc->activeRecord);
 
 		// getType will throw an exception if type is not found. use it to detect non content wrapper elements
 		try {
@@ -200,18 +202,18 @@ class WrapperDataContainer extends \Backend
 			return;
 		}
 
-		if($this->objModel->getType() == ContentWrapperModel::TYPE_START)
+		if($this->objModel->getType() == Model\ContentWrapper::TYPE_START)
 		{
 			$deleteTypes = array();
 
-			if($this->isTrigger($this->objModel->getType(), ContentWrapperModel::TYPE_SEPARATOR, static::TRIGGER_DELETE))
+			if($this->isTrigger($this->objModel->getType(), Model\ContentWrapper::TYPE_SEPARATOR, static::TRIGGER_DELETE))
 			{
-				$deleteTypes[] = $this->objModel->getTypeName(ContentWrapperModel::TYPE_SEPARATOR);
+				$deleteTypes[] = $this->objModel->getTypeName(Model\ContentWrapper::TYPE_SEPARATOR);
 			}
 
-			if($this->isTrigger($this->objModel->getType(), ContentWrapperModel::TYPE_STOP, static::TRIGGER_DELETE))
+			if($this->isTrigger($this->objModel->getType(), Model\ContentWrapper::TYPE_STOP, static::TRIGGER_DELETE))
 			{
-				$deleteTypes[] = $this->objModel->getTypeName(ContentWrapperModel::TYPE_STOP);
+				$deleteTypes[] = $this->objModel->getTypeName(Model\ContentWrapper::TYPE_STOP);
 			}
 
 			if(!empty($deleteTypes))
@@ -224,20 +226,20 @@ class WrapperDataContainer extends \Backend
 					->execute($this->objModel->id);
 			}
 		}
-		elseif($this->objModel->getType() == ContentWrapperModel::TYPE_STOP) {
-			if($this->isTrigger($this->objModel->getType(), ContentWrapperModel::TYPE_SEPARATOR, static::TRIGGER_DELETE))
+		elseif($this->objModel->getType() == Model\ContentWrapper::TYPE_STOP) {
+			if($this->isTrigger($this->objModel->getType(), Model\ContentWrapper::TYPE_SEPARATOR, static::TRIGGER_DELETE))
 			{
 				$this->Database
 					->prepare('DELETE FROM tl_content WHERE bootstrap_parentId=? AND type=?')
 					->execute(
 						$this->objModel->bootstrap_parentId,
-						$this->objModel->getTypeName(ContentWrapperModel::TYPE_SEPARATOR)
+						$this->objModel->getTypeName(Model\ContentWrapper::TYPE_SEPARATOR)
 					);
 			}
 
-			if($this->isTrigger($this->objModel->getType(), ContentWrapperModel::TYPE_START, static::TRIGGER_DELETE))
+			if($this->isTrigger($this->objModel->getType(), Model\ContentWrapper::TYPE_START, static::TRIGGER_DELETE))
 			{
-				$model = new ContentWrapperModel();
+				$model = new Model\ContentWrapper();
 				$model->id = $this->objModel->bootstrap_parentId;
 				$model->delete();
 			}
@@ -252,21 +254,21 @@ class WrapperDataContainer extends \Backend
 	/**
 	 * Create a new wrapper element
 	 *
-	 * @param ContentWrapperModel $related
+	 * @param Model\ContentWrapper $related
 	 * @param int                 $sorting
 	 * @param string              $type
 	 *
-	 * @return ContentWrapperModel
+	 * @return Model\ContentWrapper
 	 */
-	protected function createElement(&$sorting, $type=ContentWrapperModel::TYPE_SEPARATOR)
+	protected function createElement(&$sorting, $type=Model\ContentWrapper::TYPE_SEPARATOR)
 	{
-		$model = new ContentWrapperModel();
+		$model = new Model\ContentWrapper();
 		$model->tstamp = time();
 		$model->pid = $this->objModel->pid;
 		$model->ptable = $this->objModel->ptable;
 		$model->type = $this->objModel->getTypeName($type);
 
-		if($type == ContentWrapperModel::TYPE_START)
+		if($type == Model\ContentWrapper::TYPE_START)
 		{
 			$model->sorting = --$sorting;
 		}
@@ -290,7 +292,7 @@ class WrapperDataContainer extends \Backend
 	 *
 	 * @return bool
 	 */
-	protected function isTrigger($trigger, $target, $action = WrapperElements::TRIGGER_CREATE)
+	protected function isTrigger($trigger, $target, $action = Wrapper::TRIGGER_CREATE)
 	{
 		$config  = $GLOBALS['BOOTSTRAP']['wrappers'][$this->objModel->getGroup()];
 		$key = $action == static::TRIGGER_DELETE ? 'triggerDelete' : 'triggerCreate';
@@ -300,7 +302,7 @@ class WrapperDataContainer extends \Backend
 			$key = $action == static::TRIGGER_DELETE ? 'autoDelete' : 'autoCreate';
 
 			// check if count callback is defined
-			if($target == ContentWrapperModel::TYPE_SEPARATOR)
+			if($target == Model\ContentWrapper::TYPE_SEPARATOR)
 			{
 				if(!isset($config[$target]['countExisting']) || !isset($config[$target]['countRequired']))
 				{

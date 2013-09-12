@@ -35,10 +35,16 @@ $GLOBALS['TL_DCA']['tl_module']['metapalettes']['bootstrap_modal'] = array
 
 \MetaPalettes::appendFields('tl_module', 'navigation', 'template', array('bootstrap_navClass'));
 \MetaPalettes::appendFields('tl_module', 'customnav', 'template', array('bootstrap_navClass'));
+\MetaPalettes::appendFields('tl_module', 'quicklink', 'template', array('bootstrap_navClass'));
 
 /**
  * subplaettes
  */
+$GLOBALS['TL_DCA']['tl_module']['metasubpalettes']['bootstrap_addHeader'] = array
+(
+	'bootstrap_navbarBrandTemplate',
+);
+
 $GLOBALS['TL_DCA']['tl_module']['metasubselectpalettes']['bootstrap_modalContentType'] = array
 (
 	'article'   => array('bootstrap_article'),
@@ -80,7 +86,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_addHeader'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_addHeader'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class' => 'w50'),
+	'eval'                    => array('tl_class' => 'w50', 'submitOnChange' => true),
 	'sql'                     => "char(1) NOT NULL default ''",
 );
 
@@ -97,7 +103,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_navbarModules'] = array
 			(
 				'label' => $GLOBALS['TL_LANG']['tl_module']['bootstrap_navbarModules_module'],
 				'inputType' => 'select',
-				'options_callback' => array('Bootstrap\\GeneralDataContainer', 'getAllModules'),
+				'options_callback' => array('Bootstrap\DataContainer\Module', 'getAllModules'),
 				'eval' => array('style' => 'width: 300px', 'includeBlankOption' => true, 'chosen' => true),
 			),
 
@@ -126,13 +132,21 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_navbarTemplate'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_navbarTemplate'],
 	'default'                 => 'mod_navbar',
 	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options_callback'        => array('Bootstrap\\BootstrapDataContainer', 'getTemplates'),
-	'eval'                    => array('templatePrefix' => 'mod_navbar'),
+	'inputType'               => 'singleSelect',
+	'options_callback'        => array('Bootstrap\DataContainer\Module', 'getTemplates'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('templatePrefix' => 'mod_navbar', 'templateThemeId' => 'pid'),
 	'sql'                     => "varchar(32) NOT NULL default ''",
 );
 
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['navigationTpl']['inputType'] = 'singleSelect';
+$GLOBALS['TL_DCA']['tl_module']['fields']['navigationTpl']['reference'] = $GLOBALS['TL_LANG']['tl_module'];
+$GLOBALS['TL_DCA']['tl_module']['fields']['navigationTpl']['options_callback'] = array('Bootstrap\DataContainer\Module', 'getTemplates');
+$GLOBALS['TL_DCA']['tl_module']['fields']['navigationTpl']['eval']['templatePrefix'] = 'nav_';
+$GLOBALS['TL_DCA']['tl_module']['fields']['navigationTpl']['eval']['templateThemeId'] = 'pid';
 $GLOBALS['TL_DCA']['tl_module']['fields']['navigationTpl']['eval']['tl_class'] = 'w50';
+
 $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_navClass'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_navClass'],
@@ -209,7 +223,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_buttons'] = array
 				'eval'                    => array('style' => 'width: 100px', 'rgxp' => 'url', 'decodeEntities'=>true, 'tl_class' => 'wizard'),
 				'wizard' => array
 				(
-					array('Bootstrap\\GeneralDataContainer', 'pagePicker')
+					array('Bootstrap\DataContainer\Module', 'pagePicker')
 				),
 			),
 
@@ -230,7 +244,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_module'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_module'],
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('Bootstrap\\GeneralDataContainer', 'getAllModules'),
+	'options_callback'        => array('Bootstrap\DataContainer\Module', 'getAllModules'),
 	'eval'                    => array('chosen'=>true),
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
@@ -240,7 +254,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_article'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_article'],
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('Bootstrap\\ModuleDataContainer', 'getAllArticles'),
+	'options_callback'        => array('Bootstrap\DataContainer\Module', 'getAllArticles'),
 	'eval'                    => array('chosen'=>true),
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
@@ -261,10 +275,23 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_modalTemplate'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalTemplate'],
 	'default'                 => 'mod_navbar',
 	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options_callback'        => array('Bootstrap\\GeneralDataContainer', 'getTemplates'),
-	'eval'                    => array('templatePrefix' => 'bootstrap_modal_', 'chosen' => true),
-	'sql'                     => "varchar(32) NOT NULL default ''",
+	'inputType'               => 'singleSelect',
+	'options_callback'        => array('Bootstrap\DataContainer\Module', 'getTemplates'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('templatePrefix' => 'bootstrap_modal_', 'templateThemeId' => 'pid', 'chosen' => true),
+	'sql'                     => "varchar(64) NOT NULL default ''",
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_navbarBrandTemplate'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_navbarBrandTemplate'],
+	'default'                 => 'mod_navbar',
+	'exclude'                 => true,
+	'inputType'               => 'singleSelect',
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'options_callback'        => array('Bootstrap\DataContainer\Module', 'getTemplates'),
+	'eval'                    => array('templatePrefix' => 'navbar_brand', 'templateThemeId' => 'pid', 'chosen' => true, 'tl_class' => 'clr'),
+	'sql'                     => "varchar(64) NOT NULL default ''",
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_modalAjax'] = array

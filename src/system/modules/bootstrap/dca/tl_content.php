@@ -14,8 +14,8 @@
 /**
  * config
  */
-$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('Bootstrap\\ContentDataContainer', 'setArticlesRows');
-$GLOBALS['TL_DCA']['tl_content']['config']['ondelete_callback'][] = array('Bootstrap\\WrapperDataContainer', 'delete');
+$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('Bootstrap\DataContainer\Content', 'setArticlesRows');
+$GLOBALS['TL_DCA']['tl_content']['config']['ondelete_callback'][] = array('Bootstrap\DataContainer\Wrapper', 'delete');
 
 /**
  * palettes
@@ -102,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_content']['metasubselectpalettes']['sc_type']['!'] = arra
  * fields
  */
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['type']['save_callback'][] = array('Bootstrap\\WrapperDataContainer', 'save');
+$GLOBALS['TL_DCA']['tl_content']['fields']['type']['save_callback'][] = array('Bootstrap\DataContainer\Wrapper', 'save');
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_articleMarkup'] = array
 (
@@ -128,9 +128,9 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_icon'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_icon'],
 	'exclude'                 => true,
 	'inputType'               => 'icon',
-	'options'                 => Bootstrap\Icons::getIcons(),
+	'options'                 => &$GLOBALS['BOOTSTRAP']['icons']['set'],
 	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => Bootstrap\Icons::getIconTemplate()),
+	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => &$GLOBALS['BOOTSTRAP']['icons']['template']),
 	'sql'                     => "varchar(32) NOT NULL default ''",
 );
 
@@ -147,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_columnset'] = array
 				'label'                 => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_columnset_article'],
 				'exclude'               => true,
 				'inputType'             => 'select',
-				'options_callback'     	=> array('Bootstrap\\ContentDataContainer', 'getPageBootstrapArticles'),
+				'options_callback'     	=> array('Bootstrap\DataContainer\Content', 'getPageBootstrapArticles'),
 				'eval' 			=> array('style' => 'width:450px', 'includeBlankOption'=>true, 'chosen'=>true)
 			),
 		),
@@ -287,7 +287,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 				'eval'                    => array('style' => 'width: 100px', 'rgxp' => 'url', 'decodeEntities'=>true, 'tl_class' => 'wizard'),
 				'wizard' => array
 				(
-					array('Bootstrap\\GeneralDataContainer', 'pagePicker')
+					array('Bootstrap\DataContainer\General', 'pagePicker')
 				),
 			),
 

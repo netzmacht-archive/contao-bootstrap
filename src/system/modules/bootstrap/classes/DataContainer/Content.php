@@ -11,16 +11,15 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\DataContainer;
 
-use Netzmacht\Bootstrap;
-
+use Netzmacht\Bootstrap\Model;
 
 /**
  * Class Content
  * @package Netzmacht\Bootstrap\DataContainer
  */
-class ContentDataContainer extends \Backend
+class Content extends \Backend
 {
 
 	/**
@@ -48,8 +47,8 @@ class ContentDataContainer extends \Backend
 	 */
 	public function getPageBootstrapArticles($mcw)
 	{
-		if($this->articles === null) {
-			//var_dump($dc);
+		if($this->articles === null)
+		{
 			$article = \ArticleModel::findByPk($mcw->activeRecord->pid);
 
 			$model = \ArticleModel::findAll(array(
@@ -77,32 +76,32 @@ class ContentDataContainer extends \Backend
 	/**
 	 * count existing tab separators elements
 	 *
-	 * @param ContentWrapperModel $model
+	 * @param Model\ContentWrapper $model
 	 *
 	 * @return int
 	 */
-	public function countExistingTabSeparators(ContentWrapperModel $model)
+	public function countExistingTabSeparators(Model\ContentWrapper $model)
 	{
-		$id = $model->getType() == ContentWrapperModel::TYPE_START ? $model->id : $model->bootstrap_parentId;
+		$id = $model->getType() == Model\ContentWrapper::TYPE_START ? $model->id : $model->bootstrap_parentId;
 
-		return ContentWrapperModel::countBy(
+		return Model\ContentWrapper::countBy(
 			'type=? AND bootstrap_parentId',
-			array($model->getTypeName(ContentWrapperModel::TYPE_SEPARATOR), $id)
+			array($model->getTypeName(Model\ContentWrapper::TYPE_SEPARATOR), $id)
 		);
 	}
 
 	/**
 	 * count required tab separator elements
 	 *
-	 * @param ContentWrapperModel $model
+	 * @param Model\ContentWrapper $model
 	 *
 	 * @return int
 	 */
-	public function countRequiredTabSeparators(ContentWrapperModel $model)
+	public function countRequiredTabSeparators(Model\ContentWrapper $model)
 	{
-		if($model->getType() != ContentWrapperModel::TYPE_START)
+		if($model->getType() != Model\ContentWrapper::TYPE_START)
 		{
-			$model = ContentWrapperModel::findByPk($model->bootstrap_parentId);
+			$model = Model\ContentWrapper::findByPk($model->bootstrap_parentId);
 		}
 
 		$tabs = deserialize($model->bootstrap_tabs, true);
