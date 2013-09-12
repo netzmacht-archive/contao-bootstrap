@@ -25,45 +25,39 @@ ClassLoader::addNamespaces(array
  */
 ClassLoader::addClasses(array
 (
-	// Forms
-	'Netzmacht\Bootstrap\BootstrapWidget'          => 'system/modules/bootstrap/forms/BootstrapWidget.php',
-	'Netzmacht\Bootstrap\FormButton'               => 'system/modules/bootstrap/forms/FormButton.php',
-
-	// Modules
-	'Netzmacht\Bootstrap\ModuleModal'              => 'system/modules/bootstrap/modules/ModuleModal.php',
-	'Netzmacht\Bootstrap\BootstrapModule'          => 'system/modules/bootstrap/modules/BootstrapModule.php',
-	'Netzmacht\Bootstrap\ModuleNavbar'             => 'system/modules/bootstrap/modules/ModuleNavbar.php',
-
-	// Elements
-	'Netzmacht\Bootstrap\ContentButton'            => 'system/modules/bootstrap/elements/ContentButton.php',
-	'Netzmacht\Bootstrap\ContentAccordionGroup'    => 'system/modules/bootstrap/elements/ContentAccordionGroup.php',
-	'Netzmacht\Bootstrap\ContentButtons'           => 'system/modules/bootstrap/elements/ContentButtons.php',
-	'Netzmacht\Bootstrap\ContentCarousel'          => 'system/modules/bootstrap/elements/ContentCarousel.php',
-	'Netzmacht\Bootstrap\BootstrapWrapperElement'  => 'system/modules/bootstrap/elements/BootstrapWrapperElement.php',
-	'Netzmacht\Bootstrap\BootstrapContentElement'  => 'system/modules/bootstrap/elements/BootstrapContentElement.php',
-	'Netzmacht\Bootstrap\ContentColumnSet'         => 'system/modules/bootstrap/elements/ContentColumnSet.php',
-	'Netzmacht\Bootstrap\ContentTab'               => 'system/modules/bootstrap/elements/ContentTab.php',
-
 	// Classes
-	'Netzmacht\Bootstrap\Gravatar'                 => 'system/modules/bootstrap/classes/Gravatar.php',
-	'Netzmacht\Bootstrap\Icons'                    => 'system/modules/bootstrap/classes/Icons.php',
-	'Netzmacht\Bootstrap\Attributes'               => 'system/modules/bootstrap/classes/Attributes.php',
-	'Netzmacht\Bootstrap\Ajax'                     => 'system/modules/bootstrap/classes/Ajax.php',
-	'Netzmacht\Bootstrap\InsertTags'               => 'system/modules/bootstrap/classes/InsertTags.php',
-	'Netzmacht\Bootstrap\Bootstrap'                => 'system/modules/bootstrap/classes/Bootstrap.php',
-	'Netzmacht\Bootstrap\TemplateModifier'         => 'system/modules/bootstrap/classes/TemplateModifier.php',
-	'Netzmacht\Bootstrap\Installer'                => 'system/modules/bootstrap/classes/Installer.php',
-	'Netzmacht\Bootstrap\Buttons'                  => 'system/modules/bootstrap/classes/Buttons.php',
-
-	// DataContainer
-	'Netzmacht\Bootstrap\ContentDataContainer'     => 'system/modules/bootstrap/dataContainer/ContentDataContainer.php',
-	'Netzmacht\Bootstrap\ModuleDataContainer'      => 'system/modules/bootstrap/dataContainer/ModuleDataContainer.php',
-	'Netzmacht\Bootstrap\GeneralDataContainer'     => 'system/modules/bootstrap/dataContainer/GeneralDataContainer.php',
-	'Netzmacht\Bootstrap\WrapperDataContainer'     => 'system/modules/bootstrap/dataContainer/WrapperDataContainer.php',
-
-	// Models
-	'Netzmacht\Bootstrap\ContentWrapperCollection' => 'system/modules/bootstrap/models/ContentWrapperCollection.php',
-	'Netzmacht\Bootstrap\ContentWrapperModel'      => 'system/modules/bootstrap/models/ContentWrapperModel.php',
+	'Netzmacht\Bootstrap\Widget\SingleSelectSelectMenu'    => 'system/modules/bootstrap/classes/Widget/SingleSelectSelectMenu.php',
+	'Netzmacht\Bootstrap\Helper\Gravatar'                  => 'system/modules/bootstrap/classes/Helper/Gravatar.php',
+	'Netzmacht\Bootstrap\Helper\Icons'                     => 'system/modules/bootstrap/classes/Helper/Icons.php',
+	'Netzmacht\Bootstrap\Helper\Buttons'                   => 'system/modules/bootstrap/classes/Helper/Buttons.php',
+	'Netzmacht\Bootstrap\Attributes'                       => 'system/modules/bootstrap/classes/Attributes.php',
+	'Netzmacht\Bootstrap\Model\ContentWrapper'             => 'system/modules/bootstrap/classes/Model/ContentWrapper.php',
+	'Netzmacht\Bootstrap\Model\Collection\ContentWrapper'  => 'system/modules/bootstrap/classes/Model/Collection/ContentWrapper.php',
+	'Netzmacht\Bootstrap\Template\Modifier'                => 'system/modules/bootstrap/classes/Template/Modifier.php',
+	'Netzmacht\Bootstrap\Ajax'                             => 'system/modules/bootstrap/classes/Ajax.php',
+	'Netzmacht\Bootstrap\ContentElement\Button'            => 'system/modules/bootstrap/classes/ContentElement/Button.php',
+	'Netzmacht\Bootstrap\ContentElement\Tab'               => 'system/modules/bootstrap/classes/ContentElement/Tab.php',
+	'Netzmacht\Bootstrap\ContentElement\ColumnSet'         => 'system/modules/bootstrap/classes/ContentElement/ColumnSet.php',
+	'Netzmacht\Bootstrap\ContentElement\Carousel'          => 'system/modules/bootstrap/classes/ContentElement/Carousel.php',
+	'Netzmacht\Bootstrap\ContentElement\Buttons'           => 'system/modules/bootstrap/classes/ContentElement/Buttons.php',
+	'Netzmacht\Bootstrap\ContentElement\BootstrapAbstract' => 'system/modules/bootstrap/classes/ContentElement/BootstrapAbstract.php',
+	'Netzmacht\Bootstrap\ContentElement\Wrapper'           => 'system/modules/bootstrap/classes/ContentElement/Wrapper.php',
+	'Netzmacht\Bootstrap\Iterator\ArrayCallbackModify'     => 'system/modules/bootstrap/classes/Iterator/ArrayCallbackModify.php',
+	'Netzmacht\Bootstrap\Iterator\ArrayOuter'              => 'system/modules/bootstrap/classes/Iterator/ArrayOuter.php',
+	'Netzmacht\Bootstrap\Iterator\ArrayCallbackFilter'     => 'system/modules/bootstrap/classes/Iterator/ArrayCallbackFilter.php',
+	'Netzmacht\Bootstrap\DataContainer\Content'            => 'system/modules/bootstrap/classes/DataContainer/Content.php',
+	'Netzmacht\Bootstrap\DataContainer\Layout'             => 'system/modules/bootstrap/classes/DataContainer/Layout.php',
+	'Netzmacht\Bootstrap\DataContainer\General'            => 'system/modules/bootstrap/classes/DataContainer/General.php',
+	'Netzmacht\Bootstrap\DataContainer\Module'             => 'system/modules/bootstrap/classes/DataContainer/Module.php',
+	'Netzmacht\Bootstrap\DataContainer\Wrapper'            => 'system/modules/bootstrap/classes/DataContainer/Wrapper.php',
+	'Netzmacht\Bootstrap\InsertTags'                       => 'system/modules/bootstrap/classes/InsertTags.php',
+	'Netzmacht\Bootstrap\Module\Navbar'                    => 'system/modules/bootstrap/classes/Module/Navbar.php',
+	'Netzmacht\Bootstrap\Module\Modal'                     => 'system/modules/bootstrap/classes/Module/Modal.php',
+	'Netzmacht\Bootstrap\Module\BootstrapAbstract'         => 'system/modules/bootstrap/classes/Module/BootstrapAbstract.php',
+	'Netzmacht\Bootstrap\Bootstrap'                        => 'system/modules/bootstrap/classes/Bootstrap.php',
+	'Netzmacht\Bootstrap\Form\Button'                      => 'system/modules/bootstrap/classes/Form/Button.php',
+	'Netzmacht\Bootstrap\Form\Widget'                      => 'system/modules/bootstrap/classes/Form/Widget.php',
+	'Netzmacht\Bootstrap\Installer'                        => 'system/modules/bootstrap/classes/Installer.php',
 ));
 
 
@@ -77,7 +71,6 @@ TemplateLoader::addFiles(array
 	'mod_navbar_container'   => 'system/modules/bootstrap/templates',
 	'ce_bootstrap_tab'       => 'system/modules/bootstrap/templates',
 	'bootstrap_buttons'      => 'system/modules/bootstrap/templates',
-	'search_default'         => 'system/modules/bootstrap/templates',
 	'ce_bootstrap_carousel'  => 'system/modules/bootstrap/templates',
 	'mod_navbar'             => 'system/modules/bootstrap/templates',
 	'form_checkbox_generate' => 'system/modules/bootstrap/templates',

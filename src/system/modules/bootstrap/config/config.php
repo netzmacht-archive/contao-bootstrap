@@ -5,52 +5,51 @@ require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap.php';
 /**
  * frontend modules
  */
-$GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar']            = 'Netzmacht\\Bootstrap\\ModuleNavbar';
-$GLOBALS['FE_MOD']['miscellaneous']['bootstrap_modal']              = 'Netzmacht\\Bootstrap\\ModuleModal';
+$GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar']            = 'Netzmacht\Bootstrap\Module\Navbar';
+$GLOBALS['FE_MOD']['miscellaneous']['bootstrap_modal']              = 'Netzmacht\Bootstrap\Module\Modal';
 
 
 /**
  * content elements
  */
-$GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselStart'] = 'Bootstrap\\ContentCarousel';
-$GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselPart']  = 'Bootstrap\\ContentCarousel';
-$GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselEnd']   = 'Bootstrap\\ContentCarousel';
+$GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselStart'] = 'Netzmacht\Bootstrap\ContentElement\Carousel';
+$GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselPart']  = 'Netzmacht\Bootstrap\ContentElement\Carousel';
+$GLOBALS['TL_CTE']['bootstrap_carousel']['bootstrap_carouselEnd']   = 'Netzmacht\Bootstrap\ContentElement\Carousel';
 
-$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabStart']          = 'Bootstrap\\ContentTab';
-$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabPart']           = 'Bootstrap\\ContentTab';
-$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabEnd']            = 'Bootstrap\\ContentTab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabStart']          = 'Netzmacht\Bootstrap\ContentElement\Tab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabPart']           = 'Netzmacht\Bootstrap\ContentElement\Tab';
+$GLOBALS['TL_CTE']['bootstrap_tabs']['bootstrap_tabEnd']            = 'Netzmacht\Bootstrap\ContentElement\Tab';
 
-$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupStart']    = 'Bootstrap\\ContentAccordionGroup';
-$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupEnd']      = 'Bootstrap\\ContentAccordionGroup';
+$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupStart']    = 'Netzmacht\Bootstrap\ContentElement\AccordionGroup';
+$GLOBALS['TL_CTE']['accordion']['bootstrap_accordionGroupEnd']      = 'Netzmacht\Bootstrap\ContentElement\AccordionGroup';
 
-$GLOBALS['TL_CTE']['links']['bootstrap_button']                     = 'Bootstrap\\ContentButton';
-$GLOBALS['TL_CTE']['links']['bootstrap_buttons']                    = 'Bootstrap\\ContentButtons';
+$GLOBALS['TL_CTE']['links']['bootstrap_button']                     = 'Netzmacht\Bootstrap\ContentElement\Button';
+$GLOBALS['TL_CTE']['links']['bootstrap_buttons']                    = 'Netzmacht\Bootstrap\ContentElement\Buttons';
 
-$GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']             = 'Bootstrap\\ContentColumnSet';
+$GLOBALS['TL_CTE']['subcolumns']['bootstrap_columnset']             = 'Netzmacht\Bootstrap\ContentElement\ColumnSet';
 
 
 /**
  * form wigets
  */
-$GLOBALS['TL_FFL']['button'] = 'Netzmacht\\Bootstrap\\FormButton';
+$GLOBALS['TL_FFL']['button'] = 'Netzmacht\Bootstrap\Form\Button';
+
+/**
+ * backend widgets
+ */
+$GLOBALS['BE_FFL']['singleSelect']              = 'Netzmacht\Bootstrap\Widget\SingleSelectSelectMenu';
 
 
 /**
  * hooks
  */
-if(version_compare(VERSION, '3.1', '>='))
-{
-	$GLOBALS['TL_HOOKS']['getPageLayout'][]     = array('Bootstrap\\Bootstrap', 'initializeLayout');
-}
-else
-{
-	$GLOBALS['TL_HOOKS']['parseTemplate'][]     = array('Bootstrap\\Bootstrap', 'initializeLayoutByParseTemplateHook');
-}
+$GLOBALS['TL_HOOKS']['initializeSystem'][]      = array('Netzmacht\Bootstrap\Bootstrap', 'initializeIconSet');
+$GLOBALS['TL_HOOKS']['getPageLayout'][]         = array('Netzmacht\Bootstrap\Bootstrap', 'initializeLayout');
+$GLOBALS['TL_HOOKS']['loadFormField'][]         = array('Netzmacht\Bootstrap\Bootstrap', 'initializeFormWidget');
 
-$GLOBALS['TL_HOOKS']['loadFormField'][]         = array('Bootstrap\\Bootstrap', 'initializeFormWidget');
-$GLOBALS['TL_HOOKS']['parseTemplate'][]         = array('Bootstrap\\TemplateModifier', 'execute');
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][]     = array('Bootstrap\\InsertTags', 'replaceTags');
-$GLOBALS['TL_HOOKS']['simpleAjax'][]            = array('Bootstrap\\Ajax', 'loadModalContent');
+$GLOBALS['TL_HOOKS']['parseTemplate'][]         = array('Netzmacht\Bootstrap\Template\Modifier', 'execute');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][]     = array('Netzmacht\Bootstrap\InsertTags', 'replaceTags');
+$GLOBALS['TL_HOOKS']['simpleAjax'][]            = array('Netzmacht\Bootstrap\Ajax', 'loadModalContent');
 
 
 /**
@@ -82,10 +81,15 @@ $GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_buttonGroupEnd';
 /**
  * stylesheets
  */
-// add stylesheet for indented elements
-if(TL_MODE == 'BE' && version_compare(VERSION, '3.1', '>='))
+if(TL_MODE == 'BE')
 {
-	$GLOBALS['TL_CSS'][] = 'system/modules/bootstrap/assets/css/style.css|all|static';
+	$GLOBALS['TL_CSS']['bootstrap'] = 'system/modules/bootstrap/assets/css/style.css|all|static';
+
+	// @see menatwork/MultiColumnWizard/ #128
+	$GLOBALS['TL_CSS']['multicolumnwizard'] = 'system/modules/multicolumnwizard/html/css/multicolumnwizard.css';
+
+	// @see xat/contao-customselectmenu #6
+	$GLOBALS['TL_JAVASCRIPT']['customselectmenu'] = 'system/modules/customselectmenu/html/js/customselectmenu.min.js';
 }
 
 
