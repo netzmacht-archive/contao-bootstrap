@@ -11,7 +11,7 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-namespace Netzmacht\Bootstrap;
+namespace Netzmacht\Bootstrap\Helper;
 
 /**
  * Class Icons provides helper methos for icon handling using bootstrap
@@ -27,11 +27,6 @@ class Icons
 	 */
 	protected static $flatIcons;
 
-	/**
-	 * @var bool
-	 */
-	protected static $initialized;
-
 
 	/**
 	 * generates code for an icon
@@ -43,8 +38,6 @@ class Icons
 	 */
 	public static function generateIcon($icon, $class=null)
 	{
-		static::initialize();
-
 		return sprintf(
 			$GLOBALS['BOOTSTRAP']['icons']['template'],
 			$icon . ($class == null ? '' : ' ' . $class)
@@ -61,8 +54,6 @@ class Icons
 	 */
 	public static function getIcons($group=null)
 	{
-		static::initialize();
-
 		// get all icons
 		if($group === null) {
 			return $GLOBALS['BOOTSTRAP']['icons']['set'];
@@ -99,8 +90,6 @@ class Icons
 	 */
 	public static function getIconTemplate()
 	{
-		static::initialize();
-
 		return $GLOBALS['BOOTSTRAP']['icons']['template'];
 	}
 
@@ -118,22 +107,4 @@ class Icons
 		return in_array($icon, $icons);
 	}
 
-
-	/**
-	 * initialize icon configuration
-	 */
-	protected static function initialize()
-	{
-		if(static::$initialized)
-		{
-			return;
-		}
-
-		$set = $GLOBALS['TL_CONFIG']['bootstrapIconSet'];
-
-		$GLOBALS['BOOTSTRAP']['icons']['set'] = include(TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['icons']['sets'][$set]['path']);
-		$GLOBALS['BOOTSTRAP']['icons']['template'] = $GLOBALS['BOOTSTRAP']['icons']['sets'][$set]['template'];
-
-		static::$initialized = true;
-	}
 }
