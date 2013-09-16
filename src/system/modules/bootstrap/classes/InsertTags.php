@@ -110,7 +110,7 @@ class InsertTags extends \Controller
 					}
 
 					$cssId = deserialize($model->cssID, true);
-					$buffer = '#' . ($cssId[0] != '' ? $cssId[0] : 'modal-' . $this->id);
+					$buffer = '#' . ($cssId[0] != '' ? $cssId[0] : 'modal-' . $model->id);
 
 					if($parts[0] != 'link')
 					{
@@ -155,7 +155,7 @@ class InsertTags extends \Controller
 						$parts[6] = $model->name;
 
 						$cssId = deserialize($model->cssID, true);
-						$cssId = '#' . ($cssId[0] != '' ? $cssId[0] : 'modal-' . $this->id);
+						$cssId = '#' . ($cssId[0] != '' ? $cssId[0] : 'modal-' . $model->id);
 
 						$buffer = sprintf( '<a href="%s" data-toggle="modal" data-remote="%s">%s</a>', $cssId, $buffer, $parts[6]);
 					}
