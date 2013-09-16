@@ -85,24 +85,23 @@ class General extends \Backend
 	 */
 	public function getTemplates($dc)
 	{
+		$prefix = '';
+
 		if(isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix']))
 		{
-			$key = null;
-
-			if(isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templateThemeId']))
-			{
-				$key = $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templateThemeId'];
-			}
-
-			$key = $key == '' ? null : $dc->activeRecord->$key;
-
-			return $this->getTemplateGroup(
-				$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix'],
-				$key
-			);
+			$prefix = $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix'];
 		}
 
-		return array_keys(\TemplateLoader::getFiles());
+		$key = null;
+
+		if(isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templateThemeId']))
+		{
+			$key = $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templateThemeId'];
+		}
+
+		$key = $key == '' ? null : $dc->activeRecord->$key;
+
+		return $this->getTemplateGroup($prefix, $key);
 	}
 
 
