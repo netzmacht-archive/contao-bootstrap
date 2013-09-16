@@ -6,9 +6,9 @@
 			<div class="col-xs-<?php echo $grid; ?>">
 				<figure class="thumbnail"<?php if ($col->margin): ?> style="<?php echo $col->margin; ?>"<?php endif; ?>>
 					<?php if ($col->href): ?>
-						<a href="<?php echo $col->href; ?>"<?php echo $col->attributes; ?> title="<?php echo $col->alt; ?>"><img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> alt="<?php echo $col->alt; ?>"></a>
+						<a href="<?php echo $col->href; ?>"<?php echo $col->attributes; ?> title="<?php echo $col->alt; ?>"><img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> alt="<?php echo $col->alt; ?>" class="img-responsive"></a>
 					<?php else: ?>
-						<img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> alt="<?php echo $col->alt; ?>">
+						<img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> alt="<?php echo $col->alt; ?>" class="img-responsive">
 					<?php endif; ?>
 					<?php if ($col->caption): ?>
 						<figcaption class="caption"><?php echo $col->caption; ?></figcaption>
