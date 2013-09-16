@@ -231,7 +231,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_buttons'] = array
 			(
 				'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_attributes'],
 				'exclude'                 => true,
-				'inputType'               => 'text',
+				'inputType'               => 'customselect',
+				'options'                 => array('data-dismiss="modal"', 'class="btn-default"'),
 				'eval'                    => array('style' => 'width: 200px', 'decodeEntities' => true),
 			),
 		)
@@ -273,12 +274,11 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_text'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['bootstrap_modalTemplate'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['bootstrap_modalTemplate'],
-	'default'                 => 'mod_navbar',
 	'exclude'                 => true,
 	'inputType'               => 'singleSelect',
 	'options_callback'        => array('Netzmacht\Bootstrap\DataContainer\Module', 'getTemplates'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-	'eval'                    => array('templatePrefix' => 'bootstrap_modal_', 'templateThemeId' => 'pid', 'chosen' => true),
+	'eval'                    => array(/*'templatePrefix' => 'bootstrap_modal_',*/ 'templateThemeId' => 'pid', 'chosen' => true),
 	'sql'                     => "varchar(64) NOT NULL default ''",
 );
 
