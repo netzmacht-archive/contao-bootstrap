@@ -49,6 +49,14 @@ class Modal extends BootstrapAbstract
 	 */
 	protected function compile()
 	{
+		if($this->cssID[0] == '')
+		{
+			$cssID = $this->cssID;
+			$cssID[0] = 'modal-' . $this->id;
+			$cssID[1] .= $this->modalDynamicContent ? ' modal-reloadable' : '';
+			$this->cssID = $cssID;
+		}
+
 		// check if ajax is used
 		if($this->modalAjax)
 		{
