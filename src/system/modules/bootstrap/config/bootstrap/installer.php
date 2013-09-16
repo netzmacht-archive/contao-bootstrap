@@ -26,10 +26,11 @@ $GLOBALS['BOOSTRAP']['installer'] = array
 
 	'bootstrap' => array
 	(
-		'file'      => 'https://github.com/twbs/bootstrap/archive/v3.0.0.zip',
-		'root'      => 'bootstrap-3.0.0/',
-		'target'    => 'assets/bootstrap/bootstrap/',
-		'paths'     => array
+		'file'        => 'https://github.com/twbs/bootstrap/archive/v3.0.0.zip',
+		'root'        => 'bootstrap-3.0.0/',
+		'target'      => 'assets/bootstrap/bootstrap/',
+		'clearTarget' => true,
+		'paths'       => array
 		(
 			'js',
 			'less',
@@ -44,17 +45,19 @@ $GLOBALS['BOOSTRAP']['installer'] = array
 
 	'bootstrap-select' => array
 	(
-		'file'      => 'https://github.com/silviomoreto/bootstrap-select/archive/1.3.1.zip',
-		'root'      => 'bootstrap-select-1.3.1',
-		'target'    => 'assets/bootstrap/bootstrap-select/',
+		'file'        => 'https://github.com/silviomoreto/bootstrap-select/archive/1.3.1.zip',
+		'root'        => 'bootstrap-select-1.3.1',
+		'target'      => 'assets/bootstrap/bootstrap-select/',
+		'clearTarget' => true,
 	),
 
 	'jquery-touchSwipe' => array
 	(
-		'file'      => 'https://github.com/mattbryson/TouchSwipe-Jquery-Plugin/archive/1.6.4.zip',
-		'root'      => 'TouchSwipe-Jquery-Plugin-1.6.4/',
-		'target'    => 'assets/bootstrap/jquery-touchSwipe/',
-		'paths'     => array
+		'file'        => 'https://github.com/mattbryson/TouchSwipe-Jquery-Plugin/archive/1.6.4.zip',
+		'root'        => 'TouchSwipe-Jquery-Plugin-1.6.4/',
+		'target'      => 'assets/bootstrap/jquery-touchSwipe/',
+		'clearTarget' => true,
+		'paths'       => array
 		(
 			'jquery.touchSwipe.min.js',
 			'README.md'

@@ -10,8 +10,16 @@
 namespace Netzmacht\Bootstrap;
 
 
+/**
+ * Class Installer
+ * @package Netzmacht\Bootstrap
+ */
 class Installer extends \Backend
 {
+
+	/**
+	 * constructor
+	 */
 	public function __construct()
 	{
 		$this->import('BackendUser', 'User');
@@ -25,12 +33,23 @@ class Installer extends \Backend
 		$this->loadLanguageFile('modules');
 	}
 
+
+	/**
+	 * method for runonce.php
+	 */
 	public function runOnce()
 	{
-		$this->setupSections();
-		$this->installDependencies();
+		if($this->User->isAdmin)
+		{
+			$this->setupSections();
+			$this->installDependencies();
+		}
 	}
 
+
+	/**
+	 * install all dependencies of bootstrap
+	 */
 	protected function installDependencies()
 	{
 		require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/installer.php';
@@ -51,6 +70,12 @@ class Installer extends \Backend
 			if(isset($dependency['condition']) && !call_user_func($dependency['condition']))
 			{
 				continue;
+			}
+
+			// remove existing files
+			if(isset($dependency['clearTarget']) && $dependency['clearTarget'] && is_dir(TL_ROOT . '/' . $dependency['target']))
+			{
+				$files->rrdir($dependency['target']);
 			}
 
 			$content = file_get_contents($dependency['file']);
@@ -79,8 +104,6 @@ class Installer extends \Backend
 					continue;
 				}
 
-				var_dump($dependency['target'] . $fileName);
-
 				$file = new \File($dependency['target'] . $fileName);
 				$file->write($zip->unzip());
 				$file->close();
@@ -104,12 +127,12 @@ class Installer extends \Backend
 		$config->save();
 	}
 
+
+	/**
+	 * setup required sections
+	 */
 	protected function setupSections()
 	{
-		if(!$this->User->isAdmin) {
-			return;
-		}
-
 		if($GLOBALS['TL_CONFIG']['customSections'] == '') {
 			$GLOBALS['TL_CONFIG']['customSections'] = 'bootstrap';
 		}
@@ -122,6 +145,14 @@ class Installer extends \Backend
 		$config->save();
 	}
 
+
+	/**
+	 * check if file is in one of the defined paths
+	 * @param $fileName
+	 * @param $paths
+	 *
+	 * @return bool
+	 */
 	protected function fileMatchPaths($fileName, $paths)
 	{
 		foreach($paths as $path)
