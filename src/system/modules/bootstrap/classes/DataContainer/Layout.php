@@ -65,11 +65,11 @@ class Layout extends General
 		{
 			// dynamically render palette so that extensions can plug into default palette
 			$GLOBALS['TL_DCA']['tl_layout']['metapalettes']['__base__'] = $this->getMetaPaletteOfPalette('tl_layout');
-			$GLOBALS['TL_DCA']['tl_layout']['metapalettes']['default extends __base__']  = $GLOBALS['BOOTSTRAP']['general']['metapalette'];
+			$GLOBALS['TL_DCA']['tl_layout']['metapalettes']['default extends __base__']  = $GLOBALS['BOOTSTRAP']['layout']['metapalette'];
 
 			unset($GLOBALS['TL_DCA']['tl_layout']['palettes']['default']);
 
-			foreach($GLOBALS['BOOTSTRAP']['general']['metasubselectpalettes'] as $field => $meta)
+			foreach($GLOBALS['BOOTSTRAP']['layout']['metasubselectpalettes'] as $field => $meta)
 			{
 				foreach($meta as $value => $definition)
 				{
@@ -219,12 +219,24 @@ class Layout extends General
 				continue;
 			}
 
+			if(substr($file['file'], 6) == 'assets')
+			{
+				$source = 'assets';
+			}
+			elseif(substr($file['file'], 5) == 'files')
+			{
+				$source = 'files';
+			}
+			else {
+				$source = 'system/modules';
+			}
+
 			$model = new $modelClass();
 			$model->tstamp        = time();
 			$model->pid           = $layout->pid;
 			$model->type          = 'file';
 			$model->file          = $file['file'];
-			$model->filesource    = 'system/modules';
+			$model->filesource    = $source;
 			$model->cc            = $file['conditional'];
 			$model->asseticFilter = $file['asseticFilter'];
 			$model->sorting       = ++$sorting;
