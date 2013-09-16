@@ -1,6 +1,11 @@
 <?php
 
-require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap.php';
+require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/assets.php';
+require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/layout.php';
+require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/form.php';
+require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/templates.php';
+require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/wrappers.php';
+require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/miscellaneous.php';
 
 /**
  * frontend modules
@@ -83,7 +88,7 @@ $GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_buttonGroupEnd';
  */
 if(TL_MODE == 'BE')
 {
-	$GLOBALS['TL_CSS']['bootstrap'] = 'system/modules/bootstrap/assets/css/style.css|all|static';
+	$GLOBALS['TL_CSS']['bootstrap'] = 'system/modules/bootstrap/assets/css/backend.css|all|static';
 
 	// @see menatwork/MultiColumnWizard/ #128
 	$GLOBALS['TL_CSS']['multicolumnwizard'] = 'system/modules/multicolumnwizard/html/css/multicolumnwizard.css';
