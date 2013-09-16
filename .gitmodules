@@ -1,6 +1,3 @@
-[submodule "src/system/modules/bootstrap/assets/bootstrap"]
-	path = src/system/modules/bootstrap/assets/bootstrap
-	url = git@github.com:twbs/bootstrap.git
 [submodule "src/assets/bootstrap/bootstrap"]
 	path = src/assets/bootstrap/bootstrap
 	url = https://github.com/twbs/bootstrap.git
