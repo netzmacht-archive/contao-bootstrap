@@ -50,24 +50,29 @@ class Ajax extends \PageRegular
 		$page = \Input::get('page');
 
 		// load layout because we need to initiate bootstrap
-		$objPage = \Frontend::getPageDetails($page);
+		$objPage = \PageModel::findByPk($page);
+		$objPage->loadDetails();
+
+		if($objPage === null)
+		{
+			$this->log(sptrintf('Page ID %s not found', $page), 'Netzmacht\Bootstrap\Ajax::loadModalContent', TL_ERROR);
+			exit;
+		}
+
 		$objLayout = $this->getPageLayout($objPage);
 
-		// HOOK: modify the page or layout object (see #4736)
-		if (isset($GLOBALS['TL_HOOKS']['getPageLayout']) && is_array($GLOBALS['TL_HOOKS']['getPageLayout']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['getPageLayout'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objPage, $objLayout, $this);
-			}
-		}
+		// Set the layout template and template group
+		$objPage->template = $objLayout->template ?: 'fe_page';
+		$objPage->templateGroup = $objLayout->getRelated('pid')->templates;
+
+		// trigger getPageLayout hook so
+		\Hooky::trigger('getPageLayout', $objPage, $objLayout, $this);
 
 		$model = \ModuleModel::findOneBy('type="bootstrap_modal" AND tl_module.id', $id);
 
 		if($model === null)
 		{
-			return;
+			exit;
 		}
 
 		$model->isAjax = true;
