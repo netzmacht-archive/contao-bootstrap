@@ -18,14 +18,9 @@ $GLOBALS['BOOTSTRAP']['icons'] = array
 	// registered icons sets
 	'sets' => array
 	(
-		'font-awesome'  => array
-		(
-			'path'      => 'system/modules/bootstrap/config/icons/font-awesome.php',
-			'template'  => '<i class="icon-%s"></i>',
-		),
 		'glyphicons'    => array
 		(
-			'path'      => 'system/modules/bootstrap/config/icons/glyphicons.php',
+			'path'      => 'system/modules/bootstrap/config/bootstrap/glyphicons.php',
 			'template'  => '<span class="glyphicon glyphicon-%s"></span>',
 		),
 	),
