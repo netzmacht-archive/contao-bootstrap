@@ -189,4 +189,20 @@ class InsertTags extends \Controller
 		return Icons::generateIcon($parts[0], isset($parts[1]) ? $parts[1] : null);
 	}
 
+
+	/**
+	 * alias for InsertTags::icon
+	 *
+	 * icon::example
+	 * icon::exmaple::extra-css-class
+	 *
+	 * @param $tag
+	 *
+	 * @return bool|string
+	 */
+	protected function i($parts, $cache)
+	{
+		return $this->icon($parts, $cache);
+	}
+
 }
