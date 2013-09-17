@@ -31,6 +31,7 @@ $GLOBALS['BOOTSTRAP']['assets'] = array
 		'contao-bootstrap' => array
 		(
 			'system/modules/bootstrap/assets/css/navigation.css' => 'navigation.css',
+			'system/modules/bootstrap/assets/css/bootstrap-select-fix.css' => 'bootstrap-select-fix.css',
 		)
 	),
 
