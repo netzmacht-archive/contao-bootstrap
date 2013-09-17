@@ -219,11 +219,11 @@ class Layout extends General
 				continue;
 			}
 
-			if(substr($file['file'], 6) == 'assets')
+			if(substr($file['file'], 0, 6) == 'assets')
 			{
 				$source = 'assets';
 			}
-			elseif(substr($file['file'], 5) == 'files')
+			elseif(substr($file['file'], 0, 5) == 'files')
 			{
 				$source = 'files';
 			}
