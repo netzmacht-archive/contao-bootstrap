@@ -15,7 +15,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		(
 			'default' => array
 			(
-				'class' => 'Netzmacht\Bootstrap\DcGeneral\Data\BootstrapDriver',
+				'class' => 'Netzmacht\Bootstrap\DcGeneral\Data\BootstrapConfigDriver',
 				'source' => 'system/config/bootstrap',
 				'createSource' => true,
 			),
