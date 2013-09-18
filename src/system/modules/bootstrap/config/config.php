@@ -14,6 +14,9 @@ $GLOBALS['FE_MOD']['navigationMenu']['bootstrap_navbar']            = 'Netzmacht
 $GLOBALS['FE_MOD']['miscellaneous']['bootstrap_modal']              = 'Netzmacht\Bootstrap\Module\Modal';
 
 
+$GLOBALS['BE_MOD']['design']['themes']['tables'][] = 'tl_bootstrap';
+
+
 /**
  * content elements
  */
