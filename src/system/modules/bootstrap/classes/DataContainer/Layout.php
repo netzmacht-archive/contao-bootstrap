@@ -88,29 +88,24 @@ class Layout extends General
 	/**
 	 * get all uninstalled stylesheets
 	 *
-	 * @param \DC_Table|\MultiColumnWizard $dc
-	 *
 	 * @callback options_callback
 	 * @return mixed
 	 */
 	public function getStyleSheets($dc)
 	{
-
-		return $this->getUninstalledFiles('css', '\ThemePlus\Model\StylesheetModel',  $dc->activeRecord->pid);
+		return $this->getUninstalledFiles('css', '\ThemePlus\Model\StylesheetModel',  \LayoutModel::findByPK(\Input::get('id'))->pid);
 	}
 
 
 	/**
 	 * get all uninstalled javascript
 	 *
-	 * @param \DC_Table|\MultiColumnWizard $dc
-	 *
 	 * @callback options_callback
 	 * @return mixed
 	 */
 	public function getJavaScripts($dc)
 	{
-		return $this->getUninstalledFiles('js', '\ThemePlus\Model\JavaScriptModel', $dc->activeRecord->pid);
+		return $this->getUninstalledFiles('js', '\ThemePlus\Model\JavaScriptModel', \LayoutModel::findByPK(\Input::get('id'))->pid);
 	}
 
 
@@ -166,7 +161,7 @@ class Layout extends General
 	protected function getUninstalledFiles($type, $modelClass, $themeId)
 	{
 		$installed  = array();
-		$collection = $modelClass::findBy('type="file" AND filesource="system/modules" AND pid', $themeId);
+		$collection = $modelClass::findBy('type="file" AND pid', $themeId);
 
 		if($collection !== null)
 		{
@@ -245,7 +240,7 @@ class Layout extends General
 			$new[] = $model->id;
 		}
 
-		$new = array_merge(deserialize($layout->$field), $new);
+		$new = array_merge(deserialize($layout->$field, true), $new);
 
 		$model = new \LayoutModel();
 		$model->id = $layout->id;

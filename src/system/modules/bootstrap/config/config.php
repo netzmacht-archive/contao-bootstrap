@@ -93,9 +93,6 @@ if(TL_MODE == 'BE')
 {
 	$GLOBALS['TL_CSS']['bootstrap'] = 'system/modules/bootstrap/assets/css/backend.css|all|static';
 
-	// @see menatwork/MultiColumnWizard/ #128
-	$GLOBALS['TL_CSS']['multicolumnwizard'] = 'system/modules/multicolumnwizard/html/css/multicolumnwizard.css';
-
 	// @see xat/contao-customselectmenu #6
 	$GLOBALS['TL_JAVASCRIPT']['customselectmenu'] = 'system/modules/customselectmenu/html/js/customselectmenu.min.js';
 }
