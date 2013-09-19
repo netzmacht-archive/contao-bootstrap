@@ -22,3 +22,29 @@
     margin-top: 2px;
     margin-bottom: 0 !important;
 }
+
+.bootstrapMultiColumnWizard.hideSubLabels table table thead {
+    display: none;
+}
+
+.bootstrapMultiColumnWizard.hideSubLabels > table > tbody > tr> td.operations {
+    padding-top: 9px;
+    vertical-align: top;
+}
+
+.bootstrapMultiColumnWizard.alignOperations > table > tbody > tr> td.operations {
+    padding-top: 20px;
+    vertical-align: top;
+}
+
+input[readonly] {
+    background: #eee;
+}
+
+.bootstrapMultiColumnWizard.striped td{
+    padding: 3px;
+}
+.bootstrapMultiColumnWizard.striped tr:nth-child(2n) td
+{
+    background: #eee;
+}
