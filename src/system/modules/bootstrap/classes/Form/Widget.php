@@ -48,14 +48,15 @@ class Widget
 	{
 		$this->widget = $widget;
 
-		if(!in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['noFormControl'])) {
+		if(!$this->getConfiguration('noFormControl')) {
 			$this->class = 'form-control';
 		}
 
 		if(!$this->tableless) {
 			$this->columnClass = $GLOBALS['BOOTSTRAP']['form']['tableFormat']['control'];
 
-			if(!$this->label || in_array($widget->type, $GLOBALS['BOOTSTRAP']['form']['noLabel'])) {
+			if(!$this->label || $this->getConfiguration('noLabel'))
+			{
 				$this->columnClass .= ' ' . $GLOBALS['BOOTSTRAP']['form']['tableFormat']['offset'];
 			}
 		}
@@ -63,7 +64,8 @@ class Widget
 		$this->inline = (bool) $this->bootstrap_inlineStyle;
 
 		// avoid submit button if input group can be created
-		if($this->addSubmit && in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['allowInputGroup'])) {
+		if($this->addSubmit && $this->getConfiguration('allowInputGroup'))
+		{
 			$this->addSubmit = false;
 			$this->addInputGroupSubmit = true;
 		}
@@ -165,7 +167,7 @@ class Widget
 	{
 		$isModal = isset($GLOBALS['bootstrapModalForm']) &&
 			$GLOBALS['BOOTSTRAP']['modal']['adjustForm'] &&
-			in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['modalFooter']);
+			$this->getConfiguration('modalFooter');
 
 		// modal form support
 		if($isModal)
@@ -176,17 +178,17 @@ class Widget
 		}
 
 		// generating using defined templates
-		if(isset($GLOBALS['BOOTSTRAP']['form']['generateTemplates'][$this->type]))
+		if($this->getConfiguration('generateTemplate'))
 		{
 			ob_start();
-			include $this->getTemplate($GLOBALS['BOOTSTRAP']['form']['generateTemplates'][$this->type], $this->strFormat);
+			include $this->getTemplate($this->getConfiguration('generateTemplate'), $this->strFormat);
 			$widget = ob_get_contents();
 			ob_end_clean();
 		}
 		else
 		{
 			// styleSelect support
-			if($GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['styleSelect']['elements']))
+			if($GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && $this->getConfiguration('styleSelect'))
 			{
 				$this->class = $GLOBALS['BOOTSTRAP']['form']['styleSelect']['class'];
 				$this->addAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']['style']);
@@ -196,7 +198,7 @@ class Widget
 		}
 
 		// create input groups
-		if(in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['allowInputGroup']))
+		if($this->getConfiguration('allowInputGroup'))
 		{
 			return $this->generateInputGroup($widget);
 		}
@@ -231,6 +233,21 @@ class Widget
 		$strError = $this->getErrorAsHTML();
 
 		return $blnSwitchOrder ? $strWidget . $strError : $strError . $strWidget;
+	}
+
+
+	/**
+	 * @param $strName
+	 * @return bool
+	 */
+	public function getConfiguration($strName)
+	{
+		if(isset($GLOBALS['BOOTSTRAP']['form']['widgets'][$this->type][$strName]))
+		{
+			return $GLOBALS['BOOTSTRAP']['form']['widgets'][$this->type][$strName];
+		}
+
+		return false;
 	}
 
 
@@ -284,7 +301,7 @@ class Widget
 	 */
 	protected function addSubmit($force=false)
 	{
-		if (!$force && (!$this->addSubmit || in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['allowInputGroup'])))
+		if (!$force && (!$this->addSubmit || $this->getConfiguration('allowInputGroup')))
 		{
 			return '';
 		}
@@ -395,12 +412,12 @@ class Widget
 			throw new \BadMethodCallException('BootstrapWidget::generateQuestion can only be called by Captcha');
 		}
 
-		if(!$force && in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['allowInputGroup']))
+		if(!$force && $this->getConfiguration('allowInputGroup'))
 		{
 			return '';
 		}
 
-		$class = in_array($this->type, $GLOBALS['BOOTSTRAP']['form']['allowInputGroup']) ? 'input-group-addon' : 'help-block';
+		$class = $this->getConfiguration('allowInputGroup') ? 'input-group-addon' : 'help-block';
 
 		$question = $this->widget->generateQuestion();
 		return preg_replace('/(class=\")([^\"]*)\"/', 'class="question ' . $class . '"', $question);
