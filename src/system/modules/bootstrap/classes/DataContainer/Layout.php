@@ -201,7 +201,7 @@ class Layout extends General
 	 */
 	protected function installFiles($value, $modelClass, $layout, $field, $toggle)
 	{
-		if(!$layout->$field)
+		if(!isset($layout->$field))
 		{
 			return;
 		}
