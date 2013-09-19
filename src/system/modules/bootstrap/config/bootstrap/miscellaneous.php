@@ -26,10 +26,10 @@ $GLOBALS['BOOTSTRAP']['icons'] = array
 	),
 
 	// the array where all icons are defined
-	'set'                  => array(),
+	'set' => array(),
 
 	// which tag shall be used for icons
-	'template'          => array(),
+	'template' => array(),
 );
 
 $GLOBALS['BOOTSTRAP']['dropdown'] = array
@@ -50,6 +50,6 @@ $GLOBALS['BOOTSTRAP']['modal'] = array
 
 		'adjustForm' => true,
 
-		'remoteUrl' => 'SimpleAjax.php?page=%s&amp;modal=%s',
+		'remoteUrl'        => 'SimpleAjax.php?page=%s&amp;modal=%s',
 		'remoteDynamicUrl' => 'SimpleAjax.php?page=%s&amp;modal=%s&amp;dynamic=%s&amp;id=%s',
 );

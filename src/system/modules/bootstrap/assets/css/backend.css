@@ -48,3 +48,7 @@ input[readonly] {
 {
     background: #eee;
 }
+
+.bootstrapMultiColumnWizard.striped .operations {
+    padding-right: 5px;
+}

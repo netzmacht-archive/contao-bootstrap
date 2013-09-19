@@ -49,6 +49,7 @@ ClassLoader::addClasses(array
 	'Netzmacht\Bootstrap\Iterator\ArrayCallbackModify'     => 'system/modules/bootstrap/classes/Iterator/ArrayCallbackModify.php',
 	'Netzmacht\Bootstrap\Iterator\ArrayOuter'              => 'system/modules/bootstrap/classes/Iterator/ArrayOuter.php',
 	'Netzmacht\Bootstrap\Iterator\ArrayCallbackFilter'     => 'system/modules/bootstrap/classes/Iterator/ArrayCallbackFilter.php',
+	'Netzmacht\Bootstrap\DataContainer\Bootstrap'          => 'system/modules/bootstrap/classes/DataContainer/Bootstrap.php',
 	'Netzmacht\Bootstrap\DataContainer\Content'            => 'system/modules/bootstrap/classes/DataContainer/Content.php',
 	'Netzmacht\Bootstrap\DataContainer\Layout'             => 'system/modules/bootstrap/classes/DataContainer/Layout.php',
 	'Netzmacht\Bootstrap\DataContainer\General'            => 'system/modules/bootstrap/classes/DataContainer/General.php',
