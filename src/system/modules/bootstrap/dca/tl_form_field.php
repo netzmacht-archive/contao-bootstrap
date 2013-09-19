@@ -5,12 +5,18 @@
  */
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['button'] = $GLOBALS['TL_DCA']['tl_form_field']['palettes']['submit'];
 
-foreach($GLOBALS['BOOTSTRAP']['form']['allowInputGroup'] as $palette) {
-	\MetaPalettes::appendAfter('tl_form_field', $palette, 'fconfig', array
-	(
-		'icon' => array(':hide', 'bootstrap_addIcon'),
-		'unit' => array(':hide', 'bootstrap_addUnit'),
-	));
+
+
+foreach($GLOBALS['BOOTSTRAP']['form']['widgets'] as $widget => $config)
+{
+	if(isset($config['allowInputGroup']) && $config['allowInputGroup'])
+	{
+		\MetaPalettes::appendAfter('tl_form_field', $widget, 'fconfig', array
+		(
+			'icon' => array(':hide', 'bootstrap_addIcon'),
+			'unit' => array(':hide', 'bootstrap_addUnit'),
+		));
+	}
 }
 
 \MetaPalettes::appendAfter('tl_form_field', 'button', 'type', array
