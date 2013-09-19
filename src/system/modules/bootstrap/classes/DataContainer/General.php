@@ -87,6 +87,12 @@ class General extends \Backend
 	{
 		$prefix = '';
 
+		if($dc instanceof \MultiColumnWizard)
+		{
+			$dc->field = $dc->strField;
+			$dc->table = $dc->strTable;
+		}
+
 		if(isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix']))
 		{
 			$prefix = $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['templatePrefix'];
