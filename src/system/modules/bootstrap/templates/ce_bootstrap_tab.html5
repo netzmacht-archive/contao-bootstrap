@@ -11,7 +11,7 @@
 			<?php if($tab['type'] == 'dropdown'): $dropdownOpen = true; ?>
 				<li class="dropdown<?php if($i == 0): $d = true; ?> active<?php endif; ?>">
 					<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo $tab['title']; ?>
-						<?php echo $GLOBALS['BOOTSTRAP']['dropdown']['toggle']; ?>
+						<?php echo $GLOBALS['BOOTSTRAP']['miscellaneous']['dropdown']['toggle']; ?>
 					</a>
 					<ul class="dropdown-menu">
 			<?php else: ?>

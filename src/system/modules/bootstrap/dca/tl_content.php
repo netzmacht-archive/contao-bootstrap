@@ -128,9 +128,9 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_icon'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_icon'],
 	'exclude'                 => true,
 	'inputType'               => 'icon',
-	'options'                 => &$GLOBALS['BOOTSTRAP']['icons']['set'],
+	'options'                 => &$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'],
 	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => &$GLOBALS['BOOTSTRAP']['icons']['template']),
+	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => &$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['template']),
 	'sql'                     => "varchar(32) NOT NULL default ''",
 );
 
@@ -255,10 +255,10 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons'],
 	'exclude'                 => true,
 	'inputType'               => 'multiColumnWizard',
-	'eval'                    => array(
-		'tl_class'=>'clr',
-		'helpwizard' => true,
-		'submitOnChange' => true,
+
+	'eval' => array(
+		'tl_class' => 'bootstrapMultiColumnWizard hideSubLabels',
+		'decodeEntities' => true,
 		'columnFields' => array
 		(
 			'type' => array
@@ -268,7 +268,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 				'inputType'               => 'select',
 				'options'                 => array('link', 'group', 'dropdown', 'child', 'header'),
 				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types'],
-				'eval'                    => array('style' => 'width: 95px;'),
+				'eval'                    => array('style' => 'width: 90px;', 'valign' => 'top'),
 			),
 
 			'label' => array
@@ -276,7 +276,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_label'],
 				'exclude'                 => true,
 				'inputType'               => 'text',
-				'eval'                    => array('style' => 'width: 170px'),
+				'eval'                    => array('style' => 'width: 90px', 'valign' => 'top', 'allowHtml' => true,),
 			),
 
 			'url' => array
@@ -284,10 +284,10 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_url'],
 				'exclude'                 => true,
 				'inputType'               => 'text',
-				'eval'                    => array('style' => 'width: 100px', 'rgxp' => 'url', 'decodeEntities'=>true, 'tl_class' => 'wizard'),
+				'eval'                    => array('style' => 'width: 90px', 'valign' => 'top', 'rgxp' => 'url', 'decodeEntities'=>true, 'tl_class' => 'wizard'),
 				'wizard' => array
 				(
-					array('Netzmacht\Bootstrap\DataContainer\Content', 'pagePicker')
+					array('Netzmacht\Bootstrap\DataContainer\Module', 'pagePicker')
 				),
 			),
 
@@ -295,10 +295,37 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 			(
 				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_attributes'],
 				'exclude'                 => true,
-				'inputType'               => 'text',
-				'eval'                    => array('style' => 'width: 200px', 'decodeEntities' => true),
+				'inputType'               => 'multiColumnWizard',
+				'options'                 => array('data-dismiss="modal"', 'class="btn-default"'),
+				'eval'                    => array
+				(
+
+					'decodeEntities' => true,
+					'columnFields' => array
+					(
+						'name' => array
+						(
+							'inputType' => 'customselect',
+							'options' => array('class', 'title', 'data-'),
+							'exclude' => true,
+							'eval' => array
+							(
+								'includeBlankOption' => true,
+								'style' => 'width: 130px;',
+								'placeholder' => $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_attributes_name'],
+							),
+						),
+
+						'value' => array
+						(
+							'inputType' => 'text',
+							'exclude' => true,
+							'eval' => array('style' => 'width: 80px', 'placeholder' => $GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_attributes_value']),
+						),
+					),
+				),
 			),
-		)
+		),
 	),
 	'sql' => "blob NULL"
 );

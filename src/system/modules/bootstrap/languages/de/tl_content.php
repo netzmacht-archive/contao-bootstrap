@@ -95,3 +95,6 @@ $GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_name'][1] = 'Name de
 
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_value'][0] = 'Wert';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_value'][1] = 'Wert des Attributes';
+
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_attributes_name'] = 'Attribut';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_attributes_value'] = 'Wert';

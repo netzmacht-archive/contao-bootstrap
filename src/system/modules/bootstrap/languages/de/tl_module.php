@@ -73,6 +73,9 @@ $GLOBALS['TL_LANG']['tl_module']['bootstrap_modalAjax'][1] = 'Inhalt wird erst b
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_modalDynamicContent'][0] = 'Inhalt austasuchbar';
 $GLOBALS['TL_LANG']['tl_module']['bootstrap_modalDynamicContent'][1] = 'Der Inhalt des modalen Fensters kann variieren. Laden Sie den Inhalt über SimpleAjax.php?modal=ID&page=PAGE_ID&dynamic=article|form|module&id=DYNAMIC_ID';
 
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_attributes_name'] = 'Attribut';
+$GLOBALS['TL_LANG']['tl_module']['bootstrap_buttons_attributes_value'] = 'Wert';
+
 /**
  * values
  */
