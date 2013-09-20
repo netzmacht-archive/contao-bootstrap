@@ -129,50 +129,11 @@ class Bootstrap extends General
 			}
 			else
 			{
-				$arrNew[$value[$arrKeys[0]]] = ($arrConfig['fields'][$dc->field]['inputType'] == 'checkbox' ? (bool) $value[$arrKeys[$i]] : $value[$arrKeys[$i]]);
+				$arrNew[$value[$arrKeys[0]]] = ($arrConfig['fields'][$dc->field]['inputType'] == 'checkbox' ? (bool) $value[$arrKeys[1]] : $value[$arrKeys[1]]);
 			}
 		}
 
 		return $arrNew;
-	}
-
-	public function loadSubPath($value, DC_General $dc)
-	{
-		$config = $dc->getFieldDefinition($dc->field);
-
-		$root  = $dc->getDataProvider()->getRoot();
-		$value = $GLOBALS[$root][$dc->getId()];
-
-		foreach($config['subPath'] as $path)
-		{
-			$value = $value[$path];
-		}
-
-		return $value[$dc->field];
-	}
-
-	public function saveToSubSection($value, DC_General $dc)
-	{
-		$config = $dc->getFieldDefinition($dc->field);
-
-		$root = $dc->getDataProvider()->getRoot();
-		$point =& $GLOBALS[$root][$dc->getId()];
-
-		foreach($config['subPath'] as $path)
-		{
-			$target =& $point[$path];
-			unset($point);
-			$point =& $target;
-			unset($target);
-		}
-
-		$point[$dc->field] = $value;
-
-		$dc->getEnvironment()->getCurrentModel()->setProperty($config['subPath'][0], $GLOBALS[$root][$dc->getId()][$config['subPath'][0]]);
-		$dc->getEnvironment()->getCurrentModel()->setMeta(DCGE::MODEL_IS_CHANGED, true);
-		$dc->getEnvironment()->getCurrentModel()->setProperty($dc->field, null);
-
-		return;
 	}
 
 }

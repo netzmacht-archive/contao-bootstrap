@@ -11,6 +11,7 @@ $GLOBALS['TL_LANG']['tl_bootstrap']['table_legend']     = 'Zweispaltiges Formula
 $GLOBALS['TL_LANG']['tl_bootstrap']['widgets_legend']   = 'Widget-Einstellungen';
 $GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_legend']   = 'Style-Select';
 $GLOBALS['TL_LANG']['tl_bootstrap']['dataAttributes_legend']   = 'Data-Attribute';
+$GLOBALS['TL_LANG']['tl_bootstrap']['gridClasses_legend']   = 'Paletten der Layout-Builders';
 
 /**
  * fields
@@ -77,3 +78,26 @@ $GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_class'][1] = 'Geben Sie an, wel
 
 $GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_defaultStyle'][0] = 'Style Select Standard-Stile';
 $GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_defaultStyle'][1] = 'CSS-Klasse die standardmäßig verwendet wird (Bootstrap Buttons).';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['metasubselectpalettes_rows'][0] = 'Paletten der Reihen';
+$GLOBALS['TL_LANG']['tl_bootstrap']['metasubselectpalettes_rows'][1] = 'Definieren Sie die Paletten der möglichen Reihenkonfigurationen. Pro Zeile kann eine Spalte angelegt werden.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['metasubselectpalettes_cols'][0] = 'Paletten der Spalten';
+$GLOBALS['TL_LANG']['tl_bootstrap']['metasubselectpalettes_cols'][1] = 'Definieren Sie die Paletten der möglichen Spaltenkonfigurationen. Pro Zeile kann eine Spalte angelegt werden.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['legend'][0] = 'Legende';
+$GLOBALS['TL_LANG']['tl_bootstrap']['legend'][1] = 'Geben Sie die Palette an, die modifiziert werden soll. Mit +/- am Anfang können sie das Behalten beeinflussen. http://de.contaowiki.org/MetaPalettes';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['fields_extend'][0] = 'Felder';
+$GLOBALS['TL_LANG']['tl_bootstrap']['fields_extend'][1] = 'Geben Sie pro Zeile ein Feld an. Mit einem +/- am Anfang können diese hinzugefügt oder gelöscht werden. Es steht die ganze MetaPalettes Syntax zur Verfügung. http://de.contaowiki.org/MetaPalettes';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['fields'][0] = 'Felder';
+$GLOBALS['TL_LANG']['tl_bootstrap']['fields'][1] = 'Geben Sie pro Zeile ein Feld an.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['subselectpalette'][0] = 'Wert';
+$GLOBALS['TL_LANG']['tl_bootstrap']['subselectpalette'][1] = 'Wert der Subselectpalette, für den die Definition gilt.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['form'] = 'Formular';
+$GLOBALS['TL_LANG']['tl_bootstrap']['layout'] = 'Layout';
+$GLOBALS['TL_LANG']['tl_bootstrap']['form'] = 'Formular';
+$GLOBALS['TL_LANG']['tl_bootstrap']['miscellaneous'] = 'Allgemeine Einstellungen';

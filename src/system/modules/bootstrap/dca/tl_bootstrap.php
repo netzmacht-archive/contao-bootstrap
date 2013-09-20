@@ -1,5 +1,10 @@
 <?php
 
+use Netzmacht\Bootstrap\DcGeneral\Data\BootstrapConfigDriver;
+
+class BCD extends BootstrapConfigDriver{}
+
+
 $this->loadLanguageFile('tl_form_field');
 
 $GLOBALS['TL_DCA']['tl_bootstrap'] = array
@@ -18,10 +23,11 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			'default' => array
 			(
 				'class'        => 'Netzmacht\Bootstrap\DcGeneral\Data\BootstrapConfigDriver',
-				'source' => 'system/config/bootstrap',
+				'source'       => 'tl_bootstrap',
+				'path'         => 'system/config/bootstrap',
 				'root'         => 'BOOTSTRAP',
-				'ids'          => array('form', 'layout', 'templates'),
-				'createDirectory' => true,
+				'ids'          => array('miscellaneous', 'form', 'layout', 'templates'),
+				'createPath'   => true,
 			),
 		),
 	),
@@ -31,12 +37,12 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		'sorting' => array
 		(
 			'mode'                    => 1,
-			'fields'                  => array('viewport'),
+			'fields'                  => array('id'),
 		),
 
 		'label' => array
 		(
-			'fields' => array('id', 'viewport'),
+			'fields' => array('id'),
 		),
 
 		'operations' => array
@@ -64,13 +70,21 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 
 		'layout' => array
 		(
-			'viewport'          => array('viewport'),
-			'palettes'   => array(':hide', 'metapalette', 'metasubselectpalettes.rows', 'metasubselectpalettes.cols'),
+			'palettes'   => array(':hide', 'metapalette'),
+			'gridClasses' => array
+			(
+				':hide',
+				BCD::pathToField('metasubselectpalettes', 'rows'),
+				BCD::pathToField('metasubselectpalettes', 'cols'),
+			),
 		),
 
 		'templates' => array
 		(
-			'templates' => array('dynamicLoad'),
+			'templates' => array
+			(
+				BCD::pathToField('dynamicLoad', 'system/modules/bootstrap/templates/theme')
+			),
 			'modifiers' => array('bar'),
 		),
 
@@ -78,23 +92,28 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		(
 			'table'          => array('tableFormat', 'defaultTableless'),
 			'widgets'        => array(':hide', 'widgets'),
-			'styleSelect'    => array(':hide', 'enabled', 'class', 'defaultStyle'),
+			'styleSelect'    => array
+			(
+				':hide',
+				BCD::pathToField('styleSelect', 'enabled'),
+				BCD::pathToField('styleSelect', 'class'),
+				BCD::pathToField('styleSelect', 'defaultStyle'),
+			),
 			'dataAttributes' => array('dataAttributes'),
 		),
+
+		'miscellaneous' => array
+		(
+
+		)
 	),
 
 
 	'fields' => array
 	(
-		'viewport' => array
+		'id' => array
 		(
-			'inputType' => 'text',
-			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['viewport'],
-			'eval'   => array
-			(
-				'decodeEntities' => true,
-				'tl_class' => 'long'
-			),
+			'reference' => &$GLOBALS['TL_LANG']['tl_bootstrap'],
 		),
 
 		'metapalette' => array
@@ -130,6 +149,121 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 
 					'fields' => array
 					(
+						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['fields_extend'],
+						'inputType' => 'multiColumnWizard',
+						'eval' => array
+						(
+							'flatArray' => true,
+							'columnFields' => array
+							(
+								'fields' => array
+								(
+									'label' => &$GLOBALS['TL_LANG']['tl_bootstrap']['fields_extend'],
+									'inputType' => 'text',
+									'eval' => array('style'     => 'width: 400px',),
+								),
+
+
+							),
+						),
+					),
+				),
+
+			),
+		),
+
+
+		BCD::pathToField('metasubselectpalettes', 'rows') => array
+		(
+			'inputType' => 'multiColumnWizard',
+			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['metasubselectpalettes_rows'],
+			'save_callback' => array
+			(
+				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'saveAssociativeFromMcw'),
+			),
+
+			'load_callback' => array
+			(
+				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'loadAssociativeForMcw'),
+			),
+
+			'eval' => array
+			(
+				'tl_class'     => 'bootstrapMultiColumnWizard hideSubLabels',
+				'buttons'      => array('up' => false, 'down' => false, 'copy' => false, 'delete' => false),
+				'columnFields' => array
+				(
+					'legend' => array
+					(
+						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['subselectpalette'],
+						'inputType' => 'text',
+						'eval' => array
+						(
+							'valign'    => 'top',
+							'readonly'  => true,
+							'style'     => 'width: 120px; margin-top: 7px; vertical-align: top',
+						)
+					),
+
+					'fields' => array
+					(
+						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['fields'],
+						'inputType' => 'multiColumnWizard',
+						'eval' => array
+						(
+							'flatArray' => true,
+							'columnFields' => array
+							(
+								'fields' => array
+								(
+									'label' => &$GLOBALS['TL_LANG']['tl_bootstrap']['fields'],
+									'inputType' => 'text',
+									'eval' => array('style'     => 'width: 400px',),
+								),
+
+
+							),
+						),
+					),
+				),
+
+			),
+		),
+
+		BCD::pathToField('metasubselectpalettes', 'cols') => array
+		(
+			'inputType' => 'multiColumnWizard',
+			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['metasubselectpalettes_cols'],
+			'save_callback' => array
+			(
+				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'saveAssociativeFromMcw'),
+			),
+
+			'load_callback' => array
+			(
+				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'loadAssociativeForMcw'),
+			),
+
+			'eval' => array
+			(
+				'tl_class'     => 'bootstrapMultiColumnWizard hideSubLabels',
+				'buttons'      => array('up' => false, 'down' => false, 'copy' => false, 'delete' => false),
+				'columnFields' => array
+				(
+					'legend' => array
+					(
+						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['subselectpalette'],
+						'inputType' => 'text',
+						'eval' => array
+						(
+							'valign' => 'top',
+							'readonly'  => true,
+							'style'     => 'width: 120px; margin-top: 7px; vertical-align: top',
+						)
+					),
+
+					'fields' => array
+					(
 						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['fields'],
 						'inputType' => 'multiColumnWizard',
 						'eval' => array
@@ -154,64 +288,15 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		),
 
 
-		'dynamicLoad' => array
+		BCD::pathToField('dynamicLoad', 'system/modules/bootstrap/templates/theme') => array
 		(
-			'inputType' => 'multiColumnWizard',
+			'inputType' => 'listWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['dynamicLoad'],
-			'save_callback' => array
-			(
-				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'saveAssociativeFromMcw'),
-			),
-
-			'load_callback' => array
-			(
-				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'loadAssociativeForMcw'),
-			),
 
 			'eval' => array
 			(
-				'tl_class' => 'bootstrapMultiColumnWizard hideSubLabels alignOperations',
-				'explanation' => true,
-
-
-				'columnFields' => array
-				(
-					'path' => array
-					(
-						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['path'],
-						'inputType' => 'text',
-						'explanation' => true,
-						'eval' => array
-						(
-							'valign' => 'top',
-							'columnPos' => '1',
-							'style'     => 'width: 600px; margin-top: 7px; margin-bottom: 7px; vertical-align: top',
-						)
-					),
-
-					'templates' => array
-					(
-						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['templates'],
-						'inputType' => 'multiColumnWizard',
-						'eval' => array
-						(
-							'columnPos' => '1',
-							'flatArray' => true,
-							'columnFields' => array
-							(
-								'fields' => array
-								(
-									'label' => 'test',
-									'inputType' => 'text',
-									'eval' => array('style'     => 'width: 200px',),
-								),
-
-
-							),
-						),
-					),
-				),
-
+				'multiple' => true,
+				'size' => 1,
 			),
 		),
 
@@ -341,19 +426,10 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		'enabled' => array
+		BCD::pathToField('styleSelect', 'enabled') => array
 		(
 			'inputType' => 'checkbox',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_enabled'],
-			'subPath' => array('styleSelect'),
-			'load_callback' => array
-			(
-				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'loadSubPath'),
-			),
-			'save_callback' => array
-			(
-				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'saveToSubSection'),
-			),
 			'eval'   => array
 			(
 
@@ -361,19 +437,10 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		'class' => array
+		BCD::pathToField('styleSelect', 'class') => array
 		(
 			'inputType' => 'text',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_enabled'],
-			'subPath' => array('styleSelect'),
-			'load_callback' => array
-			(
-				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'loadSubPath'),
-			),
-			'save_callback' => array
-			(
-				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'saveToSubSection'),
-			),
 			'eval'   => array
 			(
 
@@ -381,26 +448,16 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		'defaultStyle' => array
+		BCD::pathToField('styleSelect', 'defaultStyle') => array
 		(
 			'inputType' => 'text',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_enabled'],
-			'subPath' => array('styleSelect'),
-			'load_callback' => array
-			(
-				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'loadSubPath'),
-			),
-			'save_callback' => array
-			(
-				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'saveToSubSection'),
-			),
 			'eval'   => array
 			(
 
 				'tl_class' => 'w50'
 			),
 		),
-
 
 		'dataAttributes' => array
 		(

@@ -21,6 +21,8 @@ class BootstrapConfigDriver implements DriverInterface
 {
 	protected $strSource = null;
 
+	protected $strPath = null;
+
 	protected $strRoot = null;
 
 	protected $arrIds = null;
@@ -47,19 +49,19 @@ class BootstrapConfigDriver implements DriverInterface
 
 
 		// set source
-		if(!isset($arrConfig['source']))
+		if(!isset($arrConfig['path']))
 		{
 			throw new \RuntimeException('Missing directory name');
 		}
-		elseif(!is_dir(TL_ROOT . '/' . $arrConfig['source']))
+		elseif(!is_dir(TL_ROOT . '/' . $arrConfig['path']))
 		{
-			if(!$arrConfig['createSource'])
+			if(!$arrConfig['createPath'])
 			{
 				throw new \RuntimeException('Directory does not exists');
 			}
 
 			$objFiles = \Files::getInstance();
-			$objFiles->mkdir($arrConfig['source']);
+			$objFiles->mkdir($arrConfig['path']);
 		}
 
 		if(isset($arrConfig['ids']))
@@ -68,6 +70,7 @@ class BootstrapConfigDriver implements DriverInterface
 		}
 
 		$this->strSource = $arrConfig['source'];
+		$this->strPath   = $arrConfig['path'];
 	}
 
 
@@ -133,7 +136,7 @@ class BootstrapConfigDriver implements DriverInterface
 	{
 		if($this->arrIds !== null && !in_array($objConfig->getId(), $this->arrIds))
 		{
-			throw new \RuntimeException('');
+			throw new \RuntimeException('Invalid ID given');
 		}
 
 		if(!isset($GLOBALS[$this->strRoot][$objConfig->getId()]))
@@ -149,9 +152,9 @@ class BootstrapConfigDriver implements DriverInterface
 			require_once $this->getFilePath($objConfig->getId());
 		}
 
-		foreach($GLOBALS[$this->strRoot][$objConfig->getId()] as $key => $value)
+		foreach($GLOBALS['TL_DCA'][$this->strSource]['fields'] as $key => $definition)
 		{
-			$objModel->setProperty($key, $value);
+			$objModel->setProperty($key, $this->getPathValue($key, $objConfig->getId()));
 		}
 
 		return $objModel;
@@ -196,7 +199,7 @@ class BootstrapConfigDriver implements DriverInterface
 
 			foreach($GLOBALS[$this->strRoot][$id] as $key => $value)
 			{
-				$objModel->setProperty($key, $value);
+				$objModel->setProperty($key, $this->getPathValue($key, $id));
 			}
 
 			$objCollection->add($objModel);
@@ -290,57 +293,69 @@ class BootstrapConfigDriver implements DriverInterface
 	 * @param array $arrTree
 	 * @return string
 	 */
-	protected function prepareForSave($item, $arrTree = null)
+	protected function prepareForSave($item, $arrTree = null, $id=null)
 	{
+		if($item instanceof ModelInterface)
+		{
+			$id = $item->getId();
+		}
+
 		if($arrTree === null)
 		{
-			$arrTree = array($this->strRoot);
+			$arrTree = array();
 		}
 
 		$buffer = '';
 
+		$buildTree = function($arrTree)
+		{
+			$part = '$GLOBALS';
+
+			foreach($arrTree as $tree)
+			{
+				if(is_int($tree))
+				{
+					$part .= '[' . $tree . ']';
+				}
+				else
+				{
+					$part .= '[\'' . $tree . '\']';
+				}
+			}
+
+			return $part;
+		};
+
 		foreach($item as $key => $value)
 		{
+			// @todo make it configurable that null values will be passed
 			if($value === null)
 			{
 				continue;
 			}
 
-			$arrNewTree = $arrTree;
+			$info = $this->getFieldInfo($key, $id);
 
-			if($item instanceof ModelInterface)
-			{
-				$arrNewTree[] = $item->getProperty('id');
-			}
+			$arrNewTree   = array_unique(array_merge($arrTree, $info['path']));
+			$arrNewTree[] = $info['field'];
 
-			$arrNewTree[] = $key;
-
-			if($key == 'id' && count($arrTree) == 1)
+			// do not save id on root level
+			if($key == 'id' && empty($arrTree))
 			{
 				continue;
 			}
 
 			if(is_array($value))
 			{
-				$buffer .= $this->prepareForSave($value, $arrNewTree);
+				$buffer .= $buildTree($arrNewTree) . ' = array(); ' . "\n";
+				$buffer .= $this->prepareForSave($value, $arrNewTree, $id);
 			}
 			else
 			{
-				$buffer .= '$GLOBALS';
+				$part = $buildTree($arrNewTree);
+				$part .= ' = ' . $this->prepareValueForSave($value) . ";\n";
 
-				foreach($arrNewTree as $tree)
-				{
-					if(is_int($tree))
-					{
-						$buffer .= '[' . $tree . ']';
-					}
-					else
-					{
-						$buffer .= '[\'' . $tree . '\']';
-					}
-				}
-
-				$buffer .= ' = ' . $this->prepareValueForSave($value) . ";\n";
+				$buffer .= $part;
 			}
 		}
 
@@ -590,7 +605,58 @@ class BootstrapConfigDriver implements DriverInterface
 	{
 		$base = $blnIncludeRoot ? (TL_ROOT . '/') : '';
 
-		return $base . $this->strSource . '/' . $strId . '.php';
+		return $base . $this->strPath . '/' . $strId . '.php';
+	}
+
+
+	/**
+	 * create field name
+	 * @return string
+	 */
+	public static function pathToField()
+	{
+		return '__' . implode('__', func_get_args());
+	}
+
+	protected function getFieldInfo($fieldName, $id)
+	{
+		if(strpos($fieldName, '__') === 0)
+		{
+			$path = explode('__', substr($fieldName, 2));
+
+			return array
+			(
+				'field'  => array_pop($path),
+				'path'   => array_merge(array($this->strRoot, $id), $path),
+			);
+		}
+		else
+		{
+			return array
+			(
+				'field' => $fieldName,
+				'path'  => array($this->strRoot, $id),
+			);
+		}
+	}
+
+
+	/**
+	 * @param $path
+	 * @param $id
+	 * @return mixed
+	 */
+	protected function getPathValue($path, $id)
+	{
+		$info = $this->getFieldInfo($path, $id);
+		$value = $GLOBALS;
+
+		foreach($info['path'] as $node)
+		{
+			$value = $value[$node];
+		}
+
+		return $value[$info['field']];
 	}
 
 }
