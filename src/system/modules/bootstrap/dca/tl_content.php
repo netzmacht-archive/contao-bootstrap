@@ -128,9 +128,9 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_icon'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_icon'],
 	'exclude'                 => true,
 	'inputType'               => 'icon',
-	'options'                 => &$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'],
+	'options'                 => \Netzmacht\Bootstrap\Helper\Icons::getIcons(),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => &$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['template']),
+	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => \Netzmacht\Bootstrap\Helper\Icons::getIconTemplate()),
 	'sql'                     => "varchar(32) NOT NULL default ''",
 );
 

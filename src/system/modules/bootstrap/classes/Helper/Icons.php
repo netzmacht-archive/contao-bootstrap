@@ -54,17 +54,29 @@ class Icons
 	 */
 	public static function getIcons($group=null)
 	{
+		$key = $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['active'];
+
+		// load icons if not done so far
+		if(isset($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons']))
+		{
+			$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons'] =
+				include $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['path'];
+		}
+
 		// get all icons
-		if($group === null) {
-			return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'];
+		if($group === null)
+		{
+			return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons'];
 		}
 
 		// get all icons as flat array
-		elseif($group === true) {
+		elseif($group === true)
+		{
 			if(self::$flatIcons === null) {
 				$icons = array();
 
-				foreach ($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'] as $groupIcons) {
+				foreach ($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons'] as $groupIcons)
+				{
 					$icons = array_merge($icons, $groupIcons);
 				}
 
@@ -74,12 +86,7 @@ class Icons
 			return self::$flatIcons;
 		}
 
-		//
-		if(isset($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'][$group])) {
-			return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'][$group];
-		}
-
-		return array();
+		return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons'];
 	}
 
 

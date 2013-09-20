@@ -51,19 +51,12 @@ $GLOBALS['BE_FFL']['singleSelect']              = 'Netzmacht\Bootstrap\Widget\Si
 /**
  * hooks
  */
-$GLOBALS['TL_HOOKS']['initializeSystem'][]      = array('Netzmacht\Bootstrap\Bootstrap', 'initializeIconSet');
 $GLOBALS['TL_HOOKS']['getPageLayout'][]         = array('Netzmacht\Bootstrap\Bootstrap', 'initializeLayout');
 $GLOBALS['TL_HOOKS']['loadFormField'][]         = array('Netzmacht\Bootstrap\Bootstrap', 'initializeFormWidget');
 
 $GLOBALS['TL_HOOKS']['parseTemplate'][]         = array('Netzmacht\Bootstrap\Template\Modifier', 'execute');
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][]     = array('Netzmacht\Bootstrap\InsertTags', 'replaceTags');
 $GLOBALS['TL_HOOKS']['simpleAjax'][]            = array('Netzmacht\Bootstrap\Ajax', 'loadModalContent');
-
-
-/**
- * config values
- */
-$GLOBALS['TL_CONFIG']['bootstrapIconSet'] = 'font-awesome'; //'glyphicons';
 
 
 /**
@@ -85,6 +78,7 @@ $GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_buttonToolbarEnd';
 
 $GLOBALS['TL_WRAPPERS']['start'][]      = 'bootstrap_buttonGroupStart';
 $GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_buttonGroupEnd';
+
 
 /**
  * stylesheets

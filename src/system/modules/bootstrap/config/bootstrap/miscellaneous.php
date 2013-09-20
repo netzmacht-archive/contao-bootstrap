@@ -25,6 +25,8 @@ $GLOBALS['BOOTSTRAP']['miscellaneous']['icons'] = array
 		),
 	),
 
+	'active' => 'glyphicons',
+
 	// the array where all icons are defined
 	'set' => array(),
 
