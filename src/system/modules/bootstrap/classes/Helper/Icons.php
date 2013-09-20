@@ -38,8 +38,10 @@ class Icons
 	 */
 	public static function generateIcon($icon, $class=null)
 	{
+		$key = $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['active'];
+
 		return sprintf(
-			$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['template'],
+			$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['template'],
 			$icon . ($class == null ? '' : ' ' . $class)
 		);
 	}
@@ -57,10 +59,10 @@ class Icons
 		$key = $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['active'];
 
 		// load icons if not done so far
-		if(isset($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons']))
+		if(!isset($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons']))
 		{
 			$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons'] =
-				include $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['path'];
+				include TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['path'];
 		}
 
 		// get all icons
@@ -97,7 +99,9 @@ class Icons
 	 */
 	public static function getIconTemplate()
 	{
-		return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['template'];
+		$key = $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['active'];
+
+		return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons'][$key]['template'];
 	}
 
 
