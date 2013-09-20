@@ -28,7 +28,7 @@
 }
 
 .bootstrapMultiColumnWizard.hideSubLabels > table > tbody > tr> td.operations {
-    padding-top: 9px;
+    padding-top: 4px;
     vertical-align: top;
 }
 
@@ -51,4 +51,8 @@ input[readonly] {
 
 .bootstrapMultiColumnWizard.striped .operations {
     padding-right: 5px;
+}
+
+.bootstrapMultiColumnWizard .multicolumnwizard {
+    margin-top: 0;
 }
