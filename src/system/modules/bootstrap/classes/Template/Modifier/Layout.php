@@ -124,16 +124,17 @@ class Layout
 		}
 	}
 
+
+	/**
+	 * @param $template
+	 */
 	protected static function initializeViewport($template)
 	{
-		if($GLOBALS['BOOTSTRAP']['layout']['viewport'])
+		$layout = \Netzmacht\Bootstrap\Bootstrap::getLayout();
+
+		if($layout->viewport)
 		{
-			$template->viewport = sprintf(
-				'<meta name="viewport" content="%s">',
-				is_callable($GLOBALS['BOOTSTRAP']['layout']['viewport']) ?
-					call_user_func($GLOBALS['BOOTSTRAP']['layout']['viewport']) :
-					$GLOBALS['BOOTSTRAP']['layout']['viewport']
-			);
+			$template->viewport = sprintf('<meta name="viewport" content="%s">', $layout->viewport);
 		}
 	}
 

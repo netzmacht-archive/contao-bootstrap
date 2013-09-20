@@ -52,6 +52,8 @@ $GLOBALS['TL_LANG']['tl_layout']['bootstrap_conditional'][1] = 'Conditional Comm
 $GLOBALS['TL_LANG']['tl_layout']['bootstrap_asseticFilter'][0] = 'Assetic Filter';
 $GLOBALS['TL_LANG']['tl_layout']['bootstrap_asseticFilter'][1] = 'Wählen Sie hier einen Assetic Filter oder eine Filter Chain aus, die auf diese Datei angewendet werden.';
 
+$GLOBALS['TL_LANG']['tl_layout']['viewport'][0] = 'Viewport';
+$GLOBALS['TL_LANG']['tl_layout']['viewport'][1] = 'Wählen Sie den Viewport für das Layout an. Dieser wird anders als Contao Standard permanent eingebunden. Desktopbrowser ignorieren diesen.';
 
 /**
  * values

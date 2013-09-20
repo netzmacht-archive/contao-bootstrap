@@ -27,6 +27,7 @@ $GLOBALS['BOOTSTRAP']['layout'] = array
 		'-style'    => array('framework', 'stylesheet', 'external', '+bootstrap_importStylesheets'),
 		'+script'   => array('bootstrap_importJavaScripts after theme_plus_javascripts'),
 		'-static'   => array('static'),
+		'+expert'   => array('viewport after cssClass'),
 	),
 
 	// modification of the default subpalettes by using metasubselectpalettes
