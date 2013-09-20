@@ -81,18 +81,6 @@ class Bootstrap
 
 
 	/**
-	 * initialize icon configuration
-	 */
-	public static function initializeIconSet($name=null)
-	{
-		$set = $name === null ? $GLOBALS['TL_CONFIG']['bootstrapIconSet'] : $name;
-
-		$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'] = include(TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$set]['path']);
-		$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['template'] = $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$set]['template'];
-	}
-
-
-	/**
 	 * check if bootstrap is used
 	 *
 	 * @return bool
