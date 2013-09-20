@@ -101,3 +101,18 @@ $GLOBALS['TL_LANG']['tl_bootstrap']['form'] = 'Formular';
 $GLOBALS['TL_LANG']['tl_bootstrap']['layout'] = 'Layout';
 $GLOBALS['TL_LANG']['tl_bootstrap']['form'] = 'Formular';
 $GLOBALS['TL_LANG']['tl_bootstrap']['miscellaneous'] = 'Allgemeine Einstellungen';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['activeIconSet'][0] = 'Iconset auswählen';
+$GLOBALS['TL_LANG']['tl_bootstrap']['activeIconSet'][1] = 'Wählen Sie das Icon-Set aus, das sie verwenen wollen.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons'][0] = 'Iconsets';
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons'][1] = 'Konfiguration der verfügbaren Icon-Sets';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_name'][0] = 'Name des Icons-Sets';
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_name'][1] = 'Der Name des Iconssets wird als Identifikation genutzt.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_path'][0] = 'Pfad zur Icon-Datei';
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_path'][1] = 'Geben Sie den Pfad zur Icon-Konfigurationsdatei an.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_template'][0] = 'Ausgabe-Template';
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_template'][1] = 'Format des Ausgabe-Templates.';

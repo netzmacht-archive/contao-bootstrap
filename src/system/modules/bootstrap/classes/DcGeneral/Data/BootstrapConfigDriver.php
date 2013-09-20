@@ -21,11 +21,11 @@ class BootstrapConfigDriver implements DriverInterface
 {
 	protected $strSource = null;
 
-	protected $strPath = null;
-
 	protected $strRoot = null;
 
 	protected $arrIds = null;
+
+	protected $objFile;
 
 
 	/**
@@ -51,18 +51,14 @@ class BootstrapConfigDriver implements DriverInterface
 		// set source
 		if(!isset($arrConfig['path']))
 		{
-			throw new \RuntimeException('Missing directory name');
+			throw new \RuntimeException('Missing filename name');
 		}
-		elseif(!is_dir(TL_ROOT . '/' . $arrConfig['path']))
+		elseif(!is_file(TL_ROOT . '/' . $arrConfig['path']) && !$arrConfig['autoCreate'])
 		{
-			if(!$arrConfig['createPath'])
-			{
-				throw new \RuntimeException('Directory does not exists');
-			}
-
-			$objFiles = \Files::getInstance();
-			$objFiles->mkdir($arrConfig['path']);
+			throw new \RuntimeException('File does not exists');
 		}
+
+		$this->objFile = new \File($arrConfig['path']);
 
 		if(isset($arrConfig['ids']))
 		{
@@ -70,7 +66,6 @@ class BootstrapConfigDriver implements DriverInterface
 		}
 
 		$this->strSource = $arrConfig['source'];
-		$this->strPath   = $arrConfig['path'];
 	}
 
 
@@ -147,14 +142,9 @@ class BootstrapConfigDriver implements DriverInterface
 		$objModel = $this->getEmptyModel();
 		$objModel->setID($objConfig->getId());
 
-		if(file_exists($this->getFilePath($objConfig->getId())))
-		{
-			require_once $this->getFilePath($objConfig->getId());
-		}
-
 		foreach($GLOBALS['TL_DCA'][$this->strSource]['fields'] as $key => $definition)
 		{
-			$objModel->setProperty($key, $this->getPathValue($key, $objConfig->getId()));
+			$objModel->setProperty($key, $this->getPathValue($key));
 		}
 
 		return $objModel;
@@ -186,12 +176,6 @@ class BootstrapConfigDriver implements DriverInterface
 			$objModel = $this->getEmptyModel();
 			$objModel->setID($id);
 
-			if(file_exists($this->getFilePath($id)))
-			{
-				require_once $this->getFilePath($id);
-			}
-
-
 			if(!isset($GLOBALS[$this->strRoot][$id]))
 			{
 				continue;
@@ -199,7 +183,7 @@ class BootstrapConfigDriver implements DriverInterface
 
 			foreach($GLOBALS[$this->strRoot][$id] as $key => $value)
 			{
-				$objModel->setProperty($key, $this->getPathValue($key, $id));
+				$objModel->setProperty($key, $this->getPathValue($key));
 			}
 
 			$objCollection->add($objModel);
@@ -281,10 +265,7 @@ class BootstrapConfigDriver implements DriverInterface
 		$data = '<?php' . "\n\n";
 		$data .= $this->prepareForSave($objItem);
 
-		$objFile = new \File($this->getFilePath($objItem->getId(), false));
-
-		$objFile->write($data);
-		$objFile->close();
+		$this->objFile->write($data);
 	}
 
 
@@ -293,13 +274,8 @@ class BootstrapConfigDriver implements DriverInterface
 	 * @param array $arrTree
 	 * @return string
 	 */
-	protected function prepareForSave($item, $arrTree = null, $id=null)
+	protected function prepareForSave($item, $arrTree = null, $blnForce=false)
 	{
-		if($item instanceof ModelInterface)
-		{
-			$id = $item->getId();
-		}
-
 		if($arrTree === null)
 		{
 			$arrTree = array();
@@ -334,21 +310,37 @@ class BootstrapConfigDriver implements DriverInterface
 				continue;
 			}
 
-			$info = $this->getFieldInfo($key, $id);
+			$info = $this->getFieldInfo($key);
 
 			$arrNewTree   = array_unique(array_merge($arrTree, $info['path']));
 			$arrNewTree[] = $info['field'];
 
 			// do not save id on root level
-			if($key == 'id' && empty($arrTree))
+			if(($key == 'tstamp' || $key == 'id') && empty($arrTree))
 			{
 				continue;
 			}
 
+			$hasChanged = !($value == $this->getTreeValue($arrNewTree));
+
+			//nothing changed
+			if(!$hasChanged && !$blnForce && ((count($arrNewTree) - $blnForce) > 2))
+			{
+				continue;
+			}
+
+			$blnForce = ($hasChanged || $blnForce) ? count($arrNewTree) : false;
+
 			if(is_array($value))
 			{
-				$buffer .= $buildTree($arrNewTree) . ' = array(); ' . "\n";
-				$buffer .= $this->prepareForSave($value, $arrNewTree, $id);
+				//
+				$children = $this->prepareForSave($value, $arrNewTree, $blnForce);
+
+				if($children != '')
+				{
+					$buffer .= $buildTree($arrNewTree) . ' = array(); ' . "\n";
+					$buffer .= $children;
+				}
 			}
 			else
 			{
@@ -380,8 +372,7 @@ class BootstrapConfigDriver implements DriverInterface
 		}
 		elseif(is_string($value))
 		{
-			return '\'' . addslashes($value) . '\'';
-
+			return '\'' . html_entity_decode($value, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']) . '\'';
 		}
 		elseif(is_null($value))
 		{
@@ -403,10 +394,8 @@ class BootstrapConfigDriver implements DriverInterface
 	 */
 	public function saveEach(CollectionInterface $objItems)
 	{
-		foreach($objItems as $value)
-		{
-			$this->save($value);
-		}
+		// @todo Will we support multi entries?
+		throw new \RuntimeException('Data provider does not support multiple savings');
 	}
 
 
@@ -426,8 +415,12 @@ class BootstrapConfigDriver implements DriverInterface
 			$item = $item->getId();
 		}
 
-		$objFiles = \Files::getInstance();
-		$objFiles->delete($this->getFilePath($item));
+		unset($GLOBALS[$this->strRoot][$item]);
+
+		if(empty($GLOBALS[$this->strRoot]))
+		{
+			$this->objFile->delete();
+		}
 	}
 
 
@@ -596,20 +589,6 @@ class BootstrapConfigDriver implements DriverInterface
 
 
 	/**
-	 * get file path of given id
-	 *
-	 * @param $strId
-	 * @return string
-	 */
-	protected function getFilePath($strId, $blnIncludeRoot = true)
-	{
-		$base = $blnIncludeRoot ? (TL_ROOT . '/') : '';
-
-		return $base . $this->strPath . '/' . $strId . '.php';
-	}
-
-
-	/**
 	 * create field name
 	 * @return string
 	 */
@@ -618,7 +597,12 @@ class BootstrapConfigDriver implements DriverInterface
 		return '__' . implode('__', func_get_args());
 	}
 
-	protected function getFieldInfo($fieldName, $id)
+
+	/**
+	 * @param $fieldName
+	 * @return array
+	 */
+	protected function getFieldInfo($fieldName)
 	{
 		if(strpos($fieldName, '__') === 0)
 		{
@@ -627,7 +611,7 @@ class BootstrapConfigDriver implements DriverInterface
 			return array
 			(
 				'field'  => array_pop($path),
-				'path'   => array_merge(array($this->strRoot, $id), $path),
+				'path'   => array_merge(array($this->strRoot), $path),
 			);
 		}
 		else
@@ -635,7 +619,7 @@ class BootstrapConfigDriver implements DriverInterface
 			return array
 			(
 				'field' => $fieldName,
-				'path'  => array($this->strRoot, $id),
+				'path'  => array($this->strRoot),
 			);
 		}
 	}
@@ -643,12 +627,11 @@ class BootstrapConfigDriver implements DriverInterface
 
 	/**
 	 * @param $path
-	 * @param $id
 	 * @return mixed
 	 */
-	protected function getPathValue($path, $id)
+	protected function getPathValue($path)
 	{
-		$info = $this->getFieldInfo($path, $id);
+		$info = $this->getFieldInfo($path);
 		$value = $GLOBALS;
 
 		foreach($info['path'] as $node)
@@ -657,6 +640,19 @@ class BootstrapConfigDriver implements DriverInterface
 		}
 
 		return $value[$info['field']];
+	}
+
+
+	protected function getTreeValue($arrTree)
+	{
+		$value = $GLOBALS;
+
+		foreach($arrTree as $node)
+		{
+			$value = $value[$node];
+		}
+
+		return $value;
 	}
 
 }

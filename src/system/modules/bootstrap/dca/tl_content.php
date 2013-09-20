@@ -130,7 +130,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_icon'] = array
 	'inputType'               => 'icon',
 	'options'                 => \Netzmacht\Bootstrap\Helper\Icons::getIcons(),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => \Netzmacht\Bootstrap\Helper\Icons::getIconTemplate()),
+	'eval'                    => array('tl_class' => 'w50', 'iconTemplate' => \Netzmacht\Bootstrap\Helper\Icons::getIconTemplate()),
 	'sql'                     => "varchar(32) NOT NULL default ''",
 );
 
@@ -354,7 +354,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_dataAttributes'] = array
 				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_value'],
 				'exclude'                 => true,
 				'inputType'               => 'text',
-				'eval'                    => array('style' => 'width: 160px'),
+				'eval'                    => array('style' => 'width: 160px', 'allowHtml' => true),
 			),
 		)
 	),

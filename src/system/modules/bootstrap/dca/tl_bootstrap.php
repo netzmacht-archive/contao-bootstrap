@@ -24,10 +24,10 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			(
 				'class'        => 'Netzmacht\Bootstrap\DcGeneral\Data\BootstrapConfigDriver',
 				'source'       => 'tl_bootstrap',
-				'path'         => 'system/config/bootstrap',
+				'path'         => 'system/config/bootstrap.php',
 				'root'         => 'BOOTSTRAP',
 				'ids'          => array('miscellaneous', 'form', 'layout', 'templates'),
-				'createPath'   => true,
+				'autoCreate'   => true,
 			),
 		),
 	),
@@ -54,6 +54,16 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 				'icon'                => 'edit.gif'
 			),
 		),
+
+		'global_operations' => array
+		(
+			'back' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['MSC']['backBT'],
+				'href'                => 'do=themes&amp;table=tl_theme&amp;rt=' . REQUEST_TOKEN,
+				'class'               => 'header_back',
+			),
+		),
 	),
 
 	'palettes' => array
@@ -70,12 +80,16 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 
 		'layout' => array
 		(
-			'palettes'   => array(':hide', 'metapalette'),
+			'palettes'   => array
+			(
+				':hide',
+				BCD::pathToField('layout', 'metapalette'),
+			),
 			'gridClasses' => array
 			(
 				':hide',
-				BCD::pathToField('metasubselectpalettes', 'rows'),
-				BCD::pathToField('metasubselectpalettes', 'cols'),
+				BCD::pathToField('layout', 'metasubselectpalettes', 'rows'),
+				BCD::pathToField('layout', 'metasubselectpalettes', 'cols'),
 			),
 		),
 
@@ -83,27 +97,42 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		(
 			'templates' => array
 			(
-				BCD::pathToField('dynamicLoad', 'system/modules/bootstrap/templates/theme')
+				BCD::pathToField('templates', 'dynamicLoad', 'system/modules/bootstrap/templates/theme')
 			),
-			'modifiers' => array('bar'),
+			'modifiers' => array
+			(
+				BCD::pathToField('templates', 'bar'),
+			),
 		),
 
 		'form' => array
 		(
-			'table'          => array('tableFormat', 'defaultTableless'),
+			'table'          => array
+			(
+				BCD::pathToField('form', 'tableFormat'),
+				BCD::pathToField('form', 'defaultTableless'),
+			),
 			'widgets'        => array(':hide', 'widgets'),
 			'styleSelect'    => array
 			(
 				':hide',
-				BCD::pathToField('styleSelect', 'enabled'),
-				BCD::pathToField('styleSelect', 'class'),
-				BCD::pathToField('styleSelect', 'defaultStyle'),
+				BCD::pathToField('form', 'styleSelect', 'enabled'),
+				BCD::pathToField('form', 'styleSelect', 'class'),
+				BCD::pathToField('form', 'styleSelect', 'defaultStyle'),
 			),
-			'dataAttributes' => array('dataAttributes'),
+			'dataAttributes' => array
+			(
+				BCD::pathToField('form', 'dataAttributes')
+			),
 		),
 
 		'miscellaneous' => array
 		(
+			'icons' => array
+			(
+				BCD::pathToField('miscellaneous', 'icons', 'active'),
+				BCD::pathToField('miscellaneous', 'icons', 'sets')
+			),
 
 		)
 	),
@@ -116,7 +145,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			'reference' => &$GLOBALS['TL_LANG']['tl_bootstrap'],
 		),
 
-		'metapalette' => array
+		BCD::pathToField('layout', 'metapalette') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['metapalette'],
@@ -173,7 +202,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		),
 
 
-		BCD::pathToField('metasubselectpalettes', 'rows') => array
+		BCD::pathToField('layout', 'metasubselectpalettes', 'rows') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['metasubselectpalettes_rows'],
@@ -230,7 +259,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('metasubselectpalettes', 'cols') => array
+		BCD::pathToField('layout', 'metasubselectpalettes', 'cols') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['metasubselectpalettes_cols'],
@@ -288,7 +317,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		),
 
 
-		BCD::pathToField('dynamicLoad', 'system/modules/bootstrap/templates/theme') => array
+		BCD::pathToField('templates', 'dynamicLoad', 'system/modules/bootstrap/templates/theme') => array
 		(
 			'inputType' => 'listWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['dynamicLoad'],
@@ -300,7 +329,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		'widgets' => array
+		BCD::pathToField('form', 'widgets') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['widgets'],
@@ -378,7 +407,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		'defaultTableless' => array
+		BCD::pathToField('form', 'defaultTableless') => array
 		(
 			'inputType' => 'checkbox',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['defaultTableless'],
@@ -388,7 +417,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		'tableFormat' => array
+		BCD::pathToField('form', 'tableFormat') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['tableFormat'],
@@ -426,7 +455,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('styleSelect', 'enabled') => array
+		BCD::pathToField('form', 'styleSelect', 'enabled') => array
 		(
 			'inputType' => 'checkbox',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_enabled'],
@@ -437,7 +466,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('styleSelect', 'class') => array
+		BCD::pathToField('form', 'styleSelect', 'class') => array
 		(
 			'inputType' => 'text',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_enabled'],
@@ -448,7 +477,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('styleSelect', 'defaultStyle') => array
+		BCD::pathToField('form', 'styleSelect', 'defaultStyle') => array
 		(
 			'inputType' => 'text',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_enabled'],
@@ -459,7 +488,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		'dataAttributes' => array
+		BCD::pathToField('form', 'dataAttributes') => array
 		(
 			'inputType' => 'listWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['dataAttributes'],
@@ -467,6 +496,76 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			(
 				'multiple' => true,
 				'size'  => 1,
+			),
+		),
+
+		BCD::pathToField('miscellaneous', 'icons', 'active') => array
+		(
+			'inputType' => 'select',
+			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['icons'],
+			'options'   => array_keys($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets']),
+			'eval'   => array
+			(
+			),
+		),
+
+		BCD::pathToField('miscellaneous', 'icons', 'sets') => array
+		(
+			'inputType' => 'multiColumnWizard',
+			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['icons'],
+			'save_callback' => array
+			(
+				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'saveAssociativeFromMcw'),
+			),
+
+			'load_callback' => array
+			(
+				array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'loadAssociativeForMcw'),
+			),
+			'eval'   => array
+			(
+				'tl_class'     => 'bootstrapMultiColumnWizard alignOperations',
+				'multiColumns' => true,
+				'columnFields' => array
+				(
+					'name' => array
+					(
+						'inputType' => 'text',
+						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['icons_name'],
+						'eval'   => array
+						(
+							'valign' => 'top',
+							'columnPos' => '1',
+							'style' => 'width: 150px',
+						),
+					),
+
+					'path' => array
+					(
+						'inputType' => 'text',
+						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['icons_path'],
+						'eval'   => array
+						(
+							'columnPos' => '2',
+							'style' => 'width: 350px',
+						),
+					),
+
+					'template' => array
+					(
+						'inputType' => 'text',
+						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['icons_template'],
+						'eval'   => array
+						(
+							'columnPos' => '2',
+							'style' => 'width: 350px',
+							'allowHtml' => true,
+							'preserveTags' => true,
+						),
+					),
+
+
+				),
 			),
 		),
 

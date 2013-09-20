@@ -51,6 +51,8 @@ $GLOBALS['BE_FFL']['singleSelect']              = 'Netzmacht\Bootstrap\Widget\Si
 /**
  * hooks
  */
+
+$GLOBALS['TL_HOOKS']['initializeSystem'][]      = array('Netzmacht\Bootstrap\Bootstrap', 'initializeConfig');
 $GLOBALS['TL_HOOKS']['getPageLayout'][]         = array('Netzmacht\Bootstrap\Bootstrap', 'initializeLayout');
 $GLOBALS['TL_HOOKS']['loadFormField'][]         = array('Netzmacht\Bootstrap\Bootstrap', 'initializeFormWidget');
 

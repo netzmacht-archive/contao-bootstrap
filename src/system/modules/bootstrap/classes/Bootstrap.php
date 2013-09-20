@@ -81,6 +81,15 @@ class Bootstrap
 
 
 	/**
+	 * initialize user config, load it here so it affect other extensions as well
+	 */
+	public function initializeConfig()
+	{
+		require_once TL_ROOT . '/system/config/bootstrap.php';
+	}
+
+
+	/**
 	 * check if bootstrap is used
 	 *
 	 * @return bool

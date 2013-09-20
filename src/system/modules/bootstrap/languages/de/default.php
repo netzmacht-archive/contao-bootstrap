@@ -53,6 +53,9 @@ $GLOBALS['TL_LANG']['FFL']['button'][1] = 'Schaltfläche mit Text, Icon oder Bil
 /**
  *
  */
+$GLOBALS['TL_LANG']['MSC']['bootstrap'][0] = 'Bootstrap Config';
+$GLOBALS['TL_LANG']['MSC']['bootstrap'][1] = 'Einstellungen der Bootstrap-Erweiterung ändern.';
+
 $GLOBALS['TL_LANG']['MSC']['bootstrapToggleNavigation'] = 'Navigation anzeigen/verstecken';
 
 $GLOBALS['TL_LANG']['MSC']['bootstrap_carousel'] = 'Bootstrap Carousel: %s';
