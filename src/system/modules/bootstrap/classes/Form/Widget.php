@@ -166,7 +166,7 @@ class Widget
 	public function generate()
 	{
 		$isModal = isset($GLOBALS['bootstrapModalForm']) &&
-			$GLOBALS['BOOTSTRAP']['modal']['adjustForm'] &&
+			$GLOBALS['BOOTSTRAP']['miscellaneous']['modal']['adjustForm'] &&
 			$this->getConfiguration('modalFooter');
 
 		// modal form support

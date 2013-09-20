@@ -13,7 +13,7 @@
  **/
 
 
-$GLOBALS['BOOTSTRAP']['icons'] = array
+$GLOBALS['BOOTSTRAP']['miscellaneous']['icons'] = array
 (
 	// registered icons sets
 	'sets' => array
@@ -32,7 +32,7 @@ $GLOBALS['BOOTSTRAP']['icons'] = array
 	'template' => array(),
 );
 
-$GLOBALS['BOOTSTRAP']['dropdown'] = array
+$GLOBALS['BOOTSTRAP']['miscellaneous']['dropdown'] = array
 (
 	// element which is used as download toggler
 	'toggle' => '<b class="caret"></b>',
@@ -44,7 +44,7 @@ $GLOBALS['BOOTSTRAP']['dropdown'] = array
 	),
 );
 
-$GLOBALS['BOOTSTRAP']['modal'] = array
+$GLOBALS['BOOTSTRAP']['miscellaneous']['modal'] = array
 (
 		'dismiss' => '&times;',
 

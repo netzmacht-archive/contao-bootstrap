@@ -87,8 +87,8 @@ class Bootstrap
 	{
 		$set = $name === null ? $GLOBALS['TL_CONFIG']['bootstrapIconSet'] : $name;
 
-		$GLOBALS['BOOTSTRAP']['icons']['set'] = include(TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['icons']['sets'][$set]['path']);
-		$GLOBALS['BOOTSTRAP']['icons']['template'] = $GLOBALS['BOOTSTRAP']['icons']['sets'][$set]['template'];
+		$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'] = include(TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$set]['path']);
+		$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['template'] = $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$set]['template'];
 	}
 
 

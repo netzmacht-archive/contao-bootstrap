@@ -39,7 +39,7 @@ class Icons
 	public static function generateIcon($icon, $class=null)
 	{
 		return sprintf(
-			$GLOBALS['BOOTSTRAP']['icons']['template'],
+			$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['template'],
 			$icon . ($class == null ? '' : ' ' . $class)
 		);
 	}
@@ -56,7 +56,7 @@ class Icons
 	{
 		// get all icons
 		if($group === null) {
-			return $GLOBALS['BOOTSTRAP']['icons']['set'];
+			return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'];
 		}
 
 		// get all icons as flat array
@@ -64,7 +64,7 @@ class Icons
 			if(self::$flatIcons === null) {
 				$icons = array();
 
-				foreach ($GLOBALS['BOOTSTRAP']['icons']['set'] as $groupIcons) {
+				foreach ($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'] as $groupIcons) {
 					$icons = array_merge($icons, $groupIcons);
 				}
 
@@ -75,8 +75,8 @@ class Icons
 		}
 
 		//
-		if(isset($GLOBALS['BOOTSTRAP']['icons']['set'][$group])) {
-			return $GLOBALS['BOOTSTRAP']['icons']['set'][$group];
+		if(isset($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'][$group])) {
+			return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['set'][$group];
 		}
 
 		return array();
@@ -90,7 +90,7 @@ class Icons
 	 */
 	public static function getIconTemplate()
 	{
-		return $GLOBALS['BOOTSTRAP']['icons']['template'];
+		return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['template'];
 	}
 
 

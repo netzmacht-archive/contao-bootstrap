@@ -66,7 +66,7 @@ class Modal extends BootstrapAbstract
 
 		if($this->Template->hideContent)
 		{
-			$url = sprintf($GLOBALS['BOOTSTRAP']['modal']['remoteUrl'], $GLOBALS['objPage']->id, $this->id);
+			$url = sprintf($GLOBALS['BOOTSTRAP']['miscellaneous']['modal']['remoteUrl'], $GLOBALS['objPage']->id, $this->id);
 			$this->Template->dataRemote = ' data-remote="' . $url . '"';
 			return;
 		}
@@ -94,7 +94,7 @@ class Modal extends BootstrapAbstract
 				$GLOBALS['bootstrapModalForm'] = '';
 				$this->Template->content = $this->getForm($this->form);
 
-				if($GLOBALS['BOOTSTRAP']['modal']['adjustForm'])
+				if($GLOBALS['BOOTSTRAP']['miscellaneous']['modal']['adjustForm'])
 				{
 					$this->Template->footer = $GLOBALS['bootstrapModalForm'];
 					unset($GLOBALS['bootstrapModalForm']);
@@ -144,14 +144,14 @@ class Modal extends BootstrapAbstract
 			$this->Template->footerButtons = $buttons;
 		}
 
-		$this->Template->headerClose = $GLOBALS['BOOTSTRAP']['modal']['dismiss'];
+		$this->Template->headerClose = $GLOBALS['BOOTSTRAP']['miscellaneous']['modal']['dismiss'];
 	}
 
 	public function generate()
 	{
 		if(!$this->modalAjax || !$this->isAjax)
 		{
-			$GLOBALS['TL_JQUERY']['bootstrap-modal-' . $this->id] = parent::generate();
+			$GLOBALS['TL_BODY']['bootstrap-modal-' . $this->id] = parent::generate();
 			return '';
 		}
 
