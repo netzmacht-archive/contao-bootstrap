@@ -69,11 +69,21 @@ class Bootstrap extends General
 	public function saveAssociativeFromMcw($values, DC_General $dc)
 	{
 		$arrNew = array();
+		$arrKeys = array_keys($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['columnFields']);
 
-		foreach((array) $values as $value )
+		$arrConfig = $dc->getDCA();
+
+		foreach((array) $values as $row => $value )
 		{
-			$key = array_shift($value);
-			$arrNew[$key] = $value;
+
+			if($arrConfig['fields'][$dc->field]['eval']['multiColumns'])
+			{
+				$key = array_shift($value);
+				$arrNew[$key] = $value;
+			}
+			else {
+				$arrNew[$value[$arrKeys[0]]] = $value[$arrKeys[1]];
+			}
 		}
 
 		return $arrNew;

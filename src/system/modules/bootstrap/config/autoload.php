@@ -55,7 +55,6 @@ ClassLoader::addClasses(array
 	'Netzmacht\Bootstrap\DataContainer\General'            => 'system/modules/bootstrap/classes/DataContainer/General.php',
 	'Netzmacht\Bootstrap\DataContainer\Module'             => 'system/modules/bootstrap/classes/DataContainer/Module.php',
 	'Netzmacht\Bootstrap\DataContainer\Wrapper'            => 'system/modules/bootstrap/classes/DataContainer/Wrapper.php',
-	'Netzmacht\Bootstrap\DcGeneral\Data\BootstrapConfigDriver'   => 'system/modules/bootstrap/classes/DcGeneral/Data/BootstrapConfigDriver.php',
 	'Netzmacht\Bootstrap\InsertTags'                       => 'system/modules/bootstrap/classes/InsertTags.php',
 	'Netzmacht\Bootstrap\Module\Navbar'                    => 'system/modules/bootstrap/classes/Module/Navbar.php',
 	'Netzmacht\Bootstrap\Module\Modal'                     => 'system/modules/bootstrap/classes/Module/Modal.php',

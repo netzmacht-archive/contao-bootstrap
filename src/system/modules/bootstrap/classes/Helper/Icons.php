@@ -38,10 +38,10 @@ class Icons
 	 */
 	public static function generateIcon($icon, $class=null)
 	{
-		$key = $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['active'];
+		$key = $GLOBALS['BOOTSTRAP']['icons']['active'];
 
 		return sprintf(
-			$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['template'],
+			$GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['template'],
 			$icon . ($class == null ? '' : ' ' . $class)
 		);
 	}
@@ -56,19 +56,19 @@ class Icons
 	 */
 	public static function getIcons($group=null)
 	{
-		$key = $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['active'];
+		$key = $GLOBALS['BOOTSTRAP']['icons']['active'];
 
 		// load icons if not done so far
-		if(!isset($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons']))
+		if(!isset($GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['icons']))
 		{
-			$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons'] =
-				include TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['path'];
+			$GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['icons'] =
+				include TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['path'];
 		}
 
 		// get all icons
 		if($group === null)
 		{
-			return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons'];
+			return $GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['icons'];
 		}
 
 		// get all icons as flat array
@@ -77,7 +77,7 @@ class Icons
 			if(self::$flatIcons === null) {
 				$icons = array();
 
-				foreach ($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons'] as $groupIcons)
+				foreach ($GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['icons'] as $groupIcons)
 				{
 					$icons = array_merge($icons, $groupIcons);
 				}
@@ -88,7 +88,7 @@ class Icons
 			return self::$flatIcons;
 		}
 
-		return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets'][$key]['icons'];
+		return $GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['icons'];
 	}
 
 
@@ -99,9 +99,9 @@ class Icons
 	 */
 	public static function getIconTemplate()
 	{
-		$key = $GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['active'];
+		$key = $GLOBALS['BOOTSTRAP']['icons']['active'];
 
-		return $GLOBALS['BOOTSTRAP']['miscellaneous']['icons'][$key]['template'];
+		return $GLOBALS['BOOTSTRAP']['icons'][$key]['template'];
 	}
 
 

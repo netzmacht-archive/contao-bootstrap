@@ -85,7 +85,7 @@ class Bootstrap
 	 */
 	public function initializeConfig()
 	{
-		require_once TL_ROOT . '/system/config/bootstrap.php';
+		include TL_ROOT . '/system/config/bootstrap.php';
 	}
 
 

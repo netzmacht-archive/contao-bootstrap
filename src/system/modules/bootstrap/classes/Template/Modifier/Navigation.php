@@ -90,7 +90,7 @@ class Navigation
 					{
 						if($level == 1 || $template->disableUl)
 						{
-							$item['link'] .= ' ' . $GLOBALS['BOOTSTRAP']['miscellaneous']['dropdown']['toggle'];
+							$item['link'] .= ' ' . $GLOBALS['BOOTSTRAP']['dropdown']['toggle'];
 						}
 					}
 					else {
@@ -98,7 +98,7 @@ class Navigation
 						$item['subitems']   = sprintf(
 							'<a href="#" class="dropdown-toggle" data-toggle="%s">%s</a>%s',
 							$template->level == 'level_1' ? 'dropdown' : 'collapse',
-							$GLOBALS['BOOTSTRAP']['miscellaneous']['dropdown']['toggle'],
+							$GLOBALS['BOOTSTRAP']['dropdown']['toggle'],
 							$item['subitems']
 						);
 					}

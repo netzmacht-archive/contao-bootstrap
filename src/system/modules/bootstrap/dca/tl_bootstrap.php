@@ -1,9 +1,6 @@
 <?php
 
-use Netzmacht\Bootstrap\DcGeneral\Data\BootstrapConfigDriver;
-
-class BCD extends BootstrapConfigDriver{}
-
+use Netzmacht\DcGeneral\Data\ConfigFileDriver;
 
 $this->loadLanguageFile('tl_form_field');
 
@@ -22,7 +19,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		(
 			'default' => array
 			(
-				'class'        => 'Netzmacht\Bootstrap\DcGeneral\Data\BootstrapConfigDriver',
+				'class'        => 'Netzmacht\DcGeneral\Data\ConfigFileDriver',
 				'source'       => 'tl_bootstrap',
 				'path'         => 'system/config/bootstrap.php',
 				'root'         => 'BOOTSTRAP',
@@ -83,13 +80,13 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			'palettes'   => array
 			(
 				':hide',
-				BCD::pathToField('layout', 'metapalette'),
+				ConfigFileDriver::pathToField('layout', 'metapalette'),
 			),
 			'gridClasses' => array
 			(
 				':hide',
-				BCD::pathToField('layout', 'metasubselectpalettes', 'rows'),
-				BCD::pathToField('layout', 'metasubselectpalettes', 'cols'),
+				ConfigFileDriver::pathToField('layout', 'metasubselectpalettes', 'rows'),
+				ConfigFileDriver::pathToField('layout', 'metasubselectpalettes', 'cols'),
 			),
 		),
 
@@ -97,11 +94,11 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		(
 			'templates' => array
 			(
-				BCD::pathToField('templates', 'dynamicLoad', 'system/modules/bootstrap/templates/theme')
+				ConfigFileDriver::pathToField('templates', 'dynamicLoad', 'system/modules/bootstrap/templates/theme')
 			),
 			'modifiers' => array
 			(
-				BCD::pathToField('templates', 'bar'),
+				ConfigFileDriver::pathToField('templates', 'bar'),
 			),
 		),
 
@@ -109,20 +106,20 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		(
 			'table'          => array
 			(
-				BCD::pathToField('form', 'tableFormat'),
-				BCD::pathToField('form', 'defaultTableless'),
+				ConfigFileDriver::pathToField('form', 'tableFormat'),
+				ConfigFileDriver::pathToField('form', 'defaultTableless'),
 			),
 			'widgets'        => array(':hide', 'widgets'),
 			'styleSelect'    => array
 			(
 				':hide',
-				BCD::pathToField('form', 'styleSelect', 'enabled'),
-				BCD::pathToField('form', 'styleSelect', 'class'),
-				BCD::pathToField('form', 'styleSelect', 'defaultStyle'),
+				ConfigFileDriver::pathToField('form', 'styleSelect', 'enabled'),
+				ConfigFileDriver::pathToField('form', 'styleSelect', 'class'),
+				ConfigFileDriver::pathToField('form', 'styleSelect', 'defaultStyle'),
 			),
 			'dataAttributes' => array
 			(
-				BCD::pathToField('form', 'dataAttributes')
+				ConfigFileDriver::pathToField('form', 'dataAttributes')
 			),
 		),
 
@@ -130,8 +127,8 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		(
 			'icons' => array
 			(
-				BCD::pathToField('miscellaneous', 'icons', 'active'),
-				BCD::pathToField('miscellaneous', 'icons', 'sets')
+				ConfigFileDriver::pathToField('miscellaneous', 'icons', 'active'),
+				ConfigFileDriver::pathToField('miscellaneous', 'icons', 'sets')
 			),
 
 		)
@@ -145,7 +142,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			'reference' => &$GLOBALS['TL_LANG']['tl_bootstrap'],
 		),
 
-		BCD::pathToField('layout', 'metapalette') => array
+		ConfigFileDriver::pathToField('layout', 'metapalette') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['metapalette'],
@@ -202,7 +199,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		),
 
 
-		BCD::pathToField('layout', 'metasubselectpalettes', 'rows') => array
+		ConfigFileDriver::pathToField('layout', 'metasubselectpalettes', 'rows') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['metasubselectpalettes_rows'],
@@ -259,7 +256,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('layout', 'metasubselectpalettes', 'cols') => array
+		ConfigFileDriver::pathToField('layout', 'metasubselectpalettes', 'cols') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['metasubselectpalettes_cols'],
@@ -317,7 +314,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		),
 
 
-		BCD::pathToField('templates', 'dynamicLoad', 'system/modules/bootstrap/templates/theme') => array
+		ConfigFileDriver::pathToField('templates', 'dynamicLoad', 'system/modules/bootstrap/templates/theme') => array
 		(
 			'inputType' => 'listWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['dynamicLoad'],
@@ -329,7 +326,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('form', 'widgets') => array
+		ConfigFileDriver::pathToField('form', 'widgets') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['widgets'],
@@ -407,7 +404,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('form', 'defaultTableless') => array
+		ConfigFileDriver::pathToField('form', 'defaultTableless') => array
 		(
 			'inputType' => 'checkbox',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['defaultTableless'],
@@ -417,7 +414,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('form', 'tableFormat') => array
+		ConfigFileDriver::pathToField('form', 'tableFormat') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['tableFormat'],
@@ -455,7 +452,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('form', 'styleSelect', 'enabled') => array
+		ConfigFileDriver::pathToField('form', 'styleSelect', 'enabled') => array
 		(
 			'inputType' => 'checkbox',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_enabled'],
@@ -466,7 +463,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('form', 'styleSelect', 'class') => array
+		ConfigFileDriver::pathToField('form', 'styleSelect', 'class') => array
 		(
 			'inputType' => 'text',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_enabled'],
@@ -477,7 +474,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('form', 'styleSelect', 'defaultStyle') => array
+		ConfigFileDriver::pathToField('form', 'styleSelect', 'defaultStyle') => array
 		(
 			'inputType' => 'text',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_enabled'],
@@ -488,7 +485,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('form', 'dataAttributes') => array
+		ConfigFileDriver::pathToField('form', 'dataAttributes') => array
 		(
 			'inputType' => 'listWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['dataAttributes'],
@@ -499,17 +496,17 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		BCD::pathToField('miscellaneous', 'icons', 'active') => array
+		ConfigFileDriver::pathToField('miscellaneous', 'icons', 'active') => array
 		(
 			'inputType' => 'select',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['icons'],
-			'options'   => array_keys($GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets']),
+			'options'   => array_keys($GLOBALS['BOOTSTRAP']['icons']['sets']),
 			'eval'   => array
 			(
 			),
 		),
 
-		BCD::pathToField('miscellaneous', 'icons', 'sets') => array
+		ConfigFileDriver::pathToField('miscellaneous', 'icons', 'sets') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['icons'],

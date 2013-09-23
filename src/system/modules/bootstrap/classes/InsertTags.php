@@ -97,7 +97,7 @@ class InsertTags extends \Controller
 			switch($parts[0])
 			{
 				case 'remote':
-					$buffer = sprintf($GLOBALS['BOOTSTRAP']['miscellaneous']['modal']['remoteUrl'], $GLOBALS['objPage']->id, $parts[1]);
+					$buffer = sprintf($GLOBALS['BOOTSTRAP']['modal']['remoteUrl'], $GLOBALS['objPage']->id, $parts[1]);
 					break;
 
 				case 'url':
@@ -136,7 +136,7 @@ class InsertTags extends \Controller
 				case 'link':
 				case 'remote':
 					$parts[0] = $GLOBALS['objPage']->id;
-					$buffer = vsprintf($GLOBALS['BOOTSTRAP']['miscellaneous']['modal']['remoteDynamicUrl'], $parts);
+					$buffer = vsprintf($GLOBALS['BOOTSTRAP']['modal']['remoteDynamicUrl'], $parts);
 
 					if($parts[0] != 'link')
 					{

@@ -88,7 +88,7 @@ $GLOBALS['BOOTSTRAP']['templates'] = array
 			'callback'  => array('Netzmacht\Bootstrap\Template\Modifier\Navigation', 'setNavigationLevel'),
 			'templates' => array
 			(
-				'nav_bootstrap_dropdown',
+				'nav_bootstrap_dropdown*',
 			),
 
 		),
