@@ -98,7 +98,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 			'modifiers' => array
 			(
-				ConfigFileDriver::pathToField('templates', 'bar'),
+				':hide',
 			),
 		),
 
@@ -127,10 +127,25 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 		(
 			'icons' => array
 			(
-				ConfigFileDriver::pathToField('miscellaneous', 'icons', 'active'),
-				ConfigFileDriver::pathToField('miscellaneous', 'icons', 'sets')
+				ConfigFileDriver::pathToField('icons', 'active'),
+				ConfigFileDriver::pathToField('icons', 'sets')
 			),
 
+			'modal' => array
+			(
+				':hide',
+				ConfigFileDriver::pathToField('modal', 'dismiss'),
+				ConfigFileDriver::pathToField('modal', 'adjustForm'),
+				ConfigFileDriver::pathToField('modal', 'remoteUrl'),
+				ConfigFileDriver::pathToField('modal', 'remoteDynamicUrl'),
+			),
+
+			'dropdown' => array
+			(
+				':hide',
+				ConfigFileDriver::pathToField('dropdown', 'toggle'),
+				ConfigFileDriver::pathToField('dropdown', 'formless'),
+			),
 		)
 	),
 
@@ -496,7 +511,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		ConfigFileDriver::pathToField('miscellaneous', 'icons', 'active') => array
+		ConfigFileDriver::pathToField('icons', 'active') => array
 		(
 			'inputType' => 'select',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['icons'],
@@ -506,7 +521,7 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-		ConfigFileDriver::pathToField('miscellaneous', 'icons', 'sets') => array
+		ConfigFileDriver::pathToField('icons', 'sets') => array
 		(
 			'inputType' => 'multiColumnWizard',
 			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['icons'],
@@ -566,6 +581,116 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 			),
 		),
 
-	),
+		ConfigFileDriver::pathToField('dropdown', 'toggle') => array
+		(
+			'inputType' => 'text',
+			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['dropdownToggle'],
+			'eval'   => array
+			(
+				'allowHtml' => true,
+				'preserveTags' => true,
+				'tl_class' => 'long',
+			),
+		),
 
+		ConfigFileDriver::pathToField('dropdown', 'formless') => array
+		(
+			'inputType' => 'multiColumnWizard',
+			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['dropdownFormless'],
+			'eval'   => array
+			(
+				'tl_class' => 'bootstrapMultiColumnWizard hideSubLabels',
+				'flatArray' => true,
+				'templatePrefix' => 'mod_',
+				'buttons' => array('up' => false, 'down' => false),
+				'columnFields' => array
+				(
+					'modules' => array
+					(
+						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['dropdownToggle'],
+						'inputType' => 'select',
+						'options_callback' => array('Netzmacht\Bootstrap\DataContainer\Bootstrap', 'getTemplates'),
+						'eval' => array('style' => 'width: 350px'),
+					),
+				),
+			),
+		),
+
+		ConfigFileDriver::pathToField('modal', 'dismiss') => array
+		(
+			'inputType' => 'text',
+			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['modalDismiss'],
+			'eval'   => array
+			(
+				'decodeEntities' => true,
+				'tl_class' => 'w50',
+			),
+		),
+
+		ConfigFileDriver::pathToField('modal', 'adjustForm') => array
+		(
+			'inputType' => 'checkbox',
+			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['adjustForm'],
+			'eval'   => array
+			(
+				'tl_class' => 'w50 m12',
+			),
+		),
+
+		ConfigFileDriver::pathToField('modal', 'remoteUrl') => array
+		(
+			'inputType' => 'text',
+			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['remoteUrl'],
+			'eval'   => array
+			(
+				'tl_class' => 'w50 clr',
+			),
+		),
+
+		ConfigFileDriver::pathToField('modal', 'remoteDynamicUrl') => array
+		(
+			'inputType' => 'text',
+			'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['remoteDynamicUrl'],
+			'eval'   => array
+			(
+				'tl_class' => 'w50',
+			),
+		),
+	),
 );
+
+foreach($GLOBALS['BOOTSTRAP']['templates']['modifiers'] as $name => $modifier)
+{
+	$GLOBALS['TL_DCA']['tl_bootstrap']['fields'][ConfigFileDriver::pathToField('templates', 'modifiers', $name, 'disabled')] = array
+	(
+		'inputType' => 'checkbox',
+		'label'     => array
+		(
+			sprintf($GLOBALS['TL_LANG']['tl_bootstrap']['modifiersDisabled'][0], $name),
+			sprintf($GLOBALS['TL_LANG']['tl_bootstrap']['modifiersDisabled'][1], $name),
+		),
+		'eval'   => array
+		(
+			'tl_class' => '',
+		),
+	);
+
+	$GLOBALS['TL_DCA']['tl_bootstrap']['fields'][ConfigFileDriver::pathToField('templates', 'modifiers', $name, 'templates')] = array
+	(
+		'inputType' => 'listWizard',
+		'label'     => array
+		(
+			sprintf($GLOBALS['TL_LANG']['tl_bootstrap']['modifiersTemplates'][0], $name),
+			sprintf($GLOBALS['TL_LANG']['tl_bootstrap']['modifiersTemplates'][2], $name),
+		),
+		'eval'   => array
+		(
+			'tl_class' => 'clr',
+			'multiple' => true,
+			'size' => 1,
+		),
+	);
+
+	$GLOBALS['TL_DCA']['tl_bootstrap']['metapalettes']['templates']['modifiers'][] = ConfigFileDriver::pathToField('templates', 'modifiers', $name, 'disabled');
+	$GLOBALS['TL_DCA']['tl_bootstrap']['metapalettes']['templates']['modifiers'][] = ConfigFileDriver::pathToField('templates', 'modifiers', $name, 'templates');
+}

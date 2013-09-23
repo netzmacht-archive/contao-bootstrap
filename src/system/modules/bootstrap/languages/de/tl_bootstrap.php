@@ -3,15 +3,19 @@
 /**
  * legends
  */
-$GLOBALS['TL_LANG']['tl_bootstrap']['viewport_legend']  = 'Viewport';
-$GLOBALS['TL_LANG']['tl_bootstrap']['palettes_legend']  = 'Palettenkonfiguration';
-$GLOBALS['TL_LANG']['tl_bootstrap']['templates_legend'] = 'Templates';
-$GLOBALS['TL_LANG']['tl_bootstrap']['modifier_legend']  = 'Template-Modifier';
-$GLOBALS['TL_LANG']['tl_bootstrap']['table_legend']     = 'Zweispaltiges Formular';
-$GLOBALS['TL_LANG']['tl_bootstrap']['widgets_legend']   = 'Widget-Einstellungen';
+$GLOBALS['TL_LANG']['tl_bootstrap']['viewport_legend']      = 'Viewport';
+$GLOBALS['TL_LANG']['tl_bootstrap']['palettes_legend']      = 'Palettenkonfiguration';
+$GLOBALS['TL_LANG']['tl_bootstrap']['templates_legend']     = 'Templates';
+$GLOBALS['TL_LANG']['tl_bootstrap']['modifier_legend']      = 'Template-Modifier';
+$GLOBALS['TL_LANG']['tl_bootstrap']['table_legend']         = 'Zweispaltiges Formular';
+$GLOBALS['TL_LANG']['tl_bootstrap']['widgets_legend']       = 'Widget-Einstellungen';
 $GLOBALS['TL_LANG']['tl_bootstrap']['styleSelect_legend']   = 'Style-Select';
 $GLOBALS['TL_LANG']['tl_bootstrap']['dataAttributes_legend']   = 'Data-Attribute';
 $GLOBALS['TL_LANG']['tl_bootstrap']['gridClasses_legend']   = 'Paletten der Layout-Builders';
+$GLOBALS['TL_LANG']['tl_bootstrap']['modal_legend']         = 'Modales Fenster';
+$GLOBALS['TL_LANG']['tl_bootstrap']['dropdown_legend']      = 'Dropdown';
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_legend']         = 'Icons';
+$GLOBALS['TL_LANG']['tl_bootstrap']['modifiers_legend']         = 'Modifikatoren';
 
 /**
  * fields
@@ -116,3 +120,27 @@ $GLOBALS['TL_LANG']['tl_bootstrap']['icons_path'][1] = 'Geben Sie den Pfad zur I
 
 $GLOBALS['TL_LANG']['tl_bootstrap']['icons_template'][0] = 'Ausgabe-Template';
 $GLOBALS['TL_LANG']['tl_bootstrap']['icons_template'][1] = 'Format des Ausgabe-Templates.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['dropdownToggle'][0] = 'Droppdown Toggle';
+$GLOBALS['TL_LANG']['tl_bootstrap']['dropdownToggle'][1] = 'Geben Sie an, wie das Toggle-Zeichen bei der Dropdown dargestellt werden soll.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['dropdownFormless'][0] = 'Formularlose Darstellung';
+$GLOBALS['TL_LANG']['tl_bootstrap']['dropdownFormless'][1] = 'Einige Module bringen eine Darstellung als Formular mit. Die modifizierten Templates erlauben eine Verwendung im Bootstrap Stil.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['modalDismiss'][0] = 'Symbol Fenster schließen';
+$GLOBALS['TL_LANG']['tl_bootstrap']['modalDismiss'][1] = 'Schließen Symbol im Kopfbereich des modalen Fensters';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['adjustForm'][0] = 'Formulare einpassen';
+$GLOBALS['TL_LANG']['tl_bootstrap']['adjustForm'][1] = 'Dafür vorgesehene Formularelemente werden im Footer des modalen Fensters dargestellt.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['remoteUrl'][0] = 'Remote-Url';
+$GLOBALS['TL_LANG']['tl_bootstrap']['remoteUrl'][1] = 'Die Url wird für den Inserttag verwendet um den Link zu generieren.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['remoteDynamicUrl'][0] = 'DynamischeRemote-Url';
+$GLOBALS['TL_LANG']['tl_bootstrap']['remoteDynamicUrl'][1] = 'Die Url wird für den Inserttag verwendet, um den Link zu modalen Fenstern mit wechselbaren Inhalten zu generieren.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['modifiersTemplates'][0] = 'Templates von "%s"';
+$GLOBALS['TL_LANG']['tl_bootstrap']['modifiersTemplates'][1] = '"%s" wird auf die angegebenen Templates angewandt. Es kann am Ende als Platzhalter ein "*" angegeben werden.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['modifiersDisabled'][0] = '"%s" deaktivieren';
+$GLOBALS['TL_LANG']['tl_bootstrap']['modifiersDisabled'][1] = '"%s" nicht anwenden.';
