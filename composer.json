@@ -22,7 +22,7 @@
     "require":{
         "php":">=5.3",
         "contao/core":">=3.1",
-        "menatwork/contao-multicolumnwizard":">=3.2.*",
+        "menatwork/contao-multicolumnwizard":"3.2.*",
         "metamodels/dc_general":">=0.9.0",
         "bit3/contao-theme-plus":">=4.0",
         "bit3/contao-meta-palettes":">=1.4.2",
