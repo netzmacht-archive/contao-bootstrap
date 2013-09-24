@@ -14,26 +14,6 @@
 
 $GLOBALS['BOOSTRAP']['installer'] = array
 (
-	'hooky' => array
-	(
-		'file'      => 'https://github.com/xat/contao-hooky/archive/master.zip',
-		'root'      => 'contao-hooky-master/src/',
-		'target'    => '',
-		'condition' => function() {
-			return !class_exists('Hooky');
-		},
-	),
-
-	'configFileDriver' => array
-	(
-		'file'      => 'https://github.com/netzmacht/Dc_General-ConfigFileDriver/archive/master.zip',
-		'root'      => 'Dc_General-ConfigFileDriver-master/src/',
-		'target'    => '',
-		'condition' => function() {
-			return !class_exists('Netzmacht\ConfigFileDriver\ConfigFileDriver');
-		},
-	),
-
 	'bootstrap' => array
 	(
 		'file'        => 'https://github.com/twbs/bootstrap/archive/v3.0.0.zip',
@@ -72,5 +52,5 @@ $GLOBALS['BOOSTRAP']['installer'] = array
 			'jquery.touchSwipe.min.js',
 			'README.md'
 		),
-	)
+	),
 );

@@ -66,7 +66,14 @@ class Ajax extends \PageRegular
 		$objPage->templateGroup = $objLayout->getRelated('pid')->templates;
 
 		// trigger getPageLayout hook so
-		\Hooky::trigger('getPageLayout', $objPage, $objLayout, $this);
+		if(isset($GLOBALS['TL_HOOKS']['getPageLayout']) && is_arry($GLOBALS['TL_HOOKS']['getPageLayout']))
+		{
+			foreach($GLOBALS['TL_HOOKS']['getPageLayout'] as $hook)
+			{
+				$this->import($hook[0]);
+				$this->{$hook[0]}->hook[1]($objPage, $objLayout, $this);
+			}
+		}
 
 		$model = \ModuleModel::findOneBy('type="bootstrap_modal" AND tl_module.id', $id);
 
