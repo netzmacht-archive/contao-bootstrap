@@ -24,6 +24,16 @@ $GLOBALS['BOOSTRAP']['installer'] = array
 		},
 	),
 
+	'configFileDriver' => array
+	(
+		'file'      => 'https://github.com/netzmacht/Dc_General-ConfigFileDriver/archive/master.zip',
+		'root'      => 'Dc_General-ConfigFileDriver-master/src/',
+		'target'    => '',
+		'condition' => function() {
+			return !class_exists('Netzmacht\ConfigFileDriver\ConfigFileDriver');
+		},
+	),
+
 	'bootstrap' => array
 	(
 		'file'        => 'https://github.com/twbs/bootstrap/archive/v3.0.0.zip',

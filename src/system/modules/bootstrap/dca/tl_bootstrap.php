@@ -1,6 +1,6 @@
 <?php
 
-use Netzmacht\DcGeneral\Data\ConfigFileDriver;
+use Netzmacht\ConfigFileDriver\ConfigFileDriver;
 
 $this->loadLanguageFile('tl_form_field');
 
@@ -49,6 +49,13 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_content']['edit'],
 				'href'                => 'act=edit',
 				'icon'                => 'edit.gif'
+			),
+
+			'delete' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_content']['delete'],
+				'href'                => 'act=delete',
+				'icon'                => 'delete.gif'
 			),
 		),
 
