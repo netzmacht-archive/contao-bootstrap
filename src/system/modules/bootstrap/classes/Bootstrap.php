@@ -46,6 +46,9 @@ class Bootstrap
 			return;
 		}
 
+		// reset default framework
+		static::$pageLayout->framework = null;
+
 		$templates = $GLOBALS['BOOTSTRAP']['templates']['dynamicLoad'];
 
 		// only load these templates if layout uses it because default templates are changed
@@ -101,7 +104,7 @@ class Bootstrap
 			return false;
 		}
 
-		return (bool) static::$pageLayout->layoutType == 'bootstrap';
+		return (bool) (static::$pageLayout->layoutType == 'bootstrap');
 	}
 
 
