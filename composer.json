@@ -78,13 +78,13 @@
         "bit3/contao-meta-palettes":">=1.4.2",
         "contao-legacy/subcolumns":">=2.1",
         "contao-legacy/simple_ajax":">=1.0.0",
-        "customselectmenu-unofficial":"*",
+        "xat/contao-customselectmenu":"*",
         "contao-legacy/subcolumns_bootstrap_customize":">=0.1.0",
         "contao-legacy/iconWizard":">=1.0.0",
-        "configFileDriver-unofficial":"*",
+        "netzmacht/Dc_General-ConfigFileDriver":"*",
         "twbs/bootstrap":">=v3.0.0",
-        "bootstrap-select-unofficial":"*",
-        "jquery-touchSwipe-unofficial":"*"
+        "silviomoreto/bootstrap-select":"*",
+        "smattbryson/TouchSwipe-Jquery-Plugin":"*"
     },
     "autoload":{
         "classmap":["src/system/modules/bootstrap/classes/"]
