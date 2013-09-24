@@ -38,7 +38,7 @@ class Modifier
 
 		foreach($GLOBALS['BOOTSTRAP']['templates']['modifiers'] as $config)
 		{
-			if(!$this->isTemplateAffected($template->getName(), $config['templates']))
+			if($config['disabled'] || !$this->isTemplateAffected($template->getName(), $config['templates']))
 			{
 				continue;
 			}
