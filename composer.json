@@ -19,6 +19,20 @@
         "wiki":"http://contao-bootstrap.netzmacht.de",
         "source":"https://github.com/netzmacht/contao-bootstrap"
     },
+    "repositories": {
+        "coustomselectmenu-unofficial": {
+            "type": "package",
+            "package": {
+                "name": "xat/contao-customselectmenu",
+                "version": "dev-master",
+                "source": {
+                    "url": "git://github.com/xat/contao-customselectmenu.git",
+                    "type": "git",
+                    "reference": "origin/masert"
+                }
+            }
+        }
+    },
     "require":{
         "php":">=5.3",
         "contao/core":">=3.1",
@@ -28,7 +42,7 @@
         "bit3/contao-meta-palettes":">=1.4.2",
         "contao-legacy/subcolumns":">=2.1",
         "contao-legacy/simple_ajax":">=1.0.0",
-        "xat/contao-customselectmenu":"dev-master",
+        "coustomselectmenu-unofficial":"dev-master",
         "contao-legacy/subcolumns_bootstrap_customize":">=0.1.0",
         "contao-legacy/iconWizard":">=1.0.0",
         "netzmacht/Dc_General-ConfigFileDriver":"dev-master",
