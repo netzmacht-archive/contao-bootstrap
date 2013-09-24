@@ -1,0 +1,23 @@
+{
+  "name": "contao-bootstrap",
+  "version": "0.1.0",
+  "description": "Contao-Bootstrap",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/netzmacht/contao-bootstrap.git"
+  },
+  "keywords": [
+    "Contao",
+    "Bootstrap",
+    "Extension"
+  ],
+  "author": "netzmacht creative David Molineus",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/netzmacht/contao-bootstrap/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1"
+  }
+}
