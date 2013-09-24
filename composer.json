@@ -28,6 +28,11 @@
                 "dist": {
                     "url": "https://github.com/xat/contao-customselectmenu/archive/master.zip",
                     "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/xat/contao-customselectmenu.git",
+                    "type": "git",
+                    "reference": "origin/master"
                 }
             }
         },
@@ -39,6 +44,11 @@
                 "dist": {
                     "url": "https://github.com/silviomoreto/bootstrap-select/archive/1.3.1.zip",
                     "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/silviomoreto/bootstrap-select.git",
+                    "type": "git",
+                    "reference": "origin/master"
                 }
             }
         },
@@ -50,6 +60,11 @@
                 "dist": {
                     "url": "https://github.com/mattbryson/TouchSwipe-Jquery-Plugin/archive/1.6.4.zip",
                     "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/mattbryson/TouchSwipe-Jquery-Plugin.git",
+                    "type": "git",
+                    "reference": "origin/master"
                 }
             }
         },
@@ -61,6 +76,11 @@
                 "dist": {
                     "url": "https://github.com/netzmacht/Dc_General-ConfigFileDriver/archive/master.zip",
                     "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/netzmacht/Dc_General-ConfigFileDriver.git",
+                    "type": "git",
+                    "reference": "origin/master"
                 }
             }
         }
