@@ -20,7 +20,7 @@
         "source":"https://github.com/netzmacht/contao-bootstrap"
     },
     "repositories": {
-        "coustomselectmenu-unofficial": {
+        "customselectmenu-unofficial": {
             "type": "package",
             "package": {
                 "name": "xat/contao-customselectmenu",
@@ -78,13 +78,13 @@
         "bit3/contao-meta-palettes":">=1.4.2",
         "contao-legacy/subcolumns":">=2.1",
         "contao-legacy/simple_ajax":">=1.0.0",
-        "coustomselectmenu-unofficial":"dev-master",
+        "customselectmenu-unofficial":"*",
         "contao-legacy/subcolumns_bootstrap_customize":">=0.1.0",
         "contao-legacy/iconWizard":">=1.0.0",
-        "configFileDriver-unofficial":"dev-master",
+        "configFileDriver-unofficial":"*",
         "twbs/bootstrap":">=v3.0.0",
-        "bootstrap-select-unofficial":"1.3.1",
-        "jquery-touchSwipe-unofficial":"1.6.4"
+        "bootstrap-select-unofficial":"*",
+        "jquery-touchSwipe-unofficial":"*"
     },
     "autoload":{
         "classmap":["src/system/modules/bootstrap/classes/"]
