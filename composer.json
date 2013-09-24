@@ -15,60 +15,28 @@
     "support":{
         "email":"mail@netzmacht.de",
         "issues":"https://github.com/netzmacht/contao-bootstrap/issues",
-        "forum": "https://community.contao.org/de/showthread.php?44382-Bootstrap-3-f%FCr-Contao&p=286796",
+        "forum":"https://community.contao.org/de/showthread.php?44382-Bootstrap-3-f%FCr-Contao&p=286796",
         "wiki":"http://contao-bootstrap.netzmacht.de",
         "source":"https://github.com/netzmacht/contao-bootstrap"
     },
-    "repositories": {
-        "customselectmenu-unofficial": {
-            "type": "package",
-            "package": {
-                "name": "xat/contao-customselectmenu",
-                "version": "dev-master",
-                "source": {
-                    "url": "git://github.com/xat/contao-customselectmenu.git",
-                    "type": "git",
-                    "reference": "origin/master"
-                }
-            }
+    "repositories":[
+        {
+            "type":"vcs",
+            "url": "https://github.com/xat/contao-customselectmenu"
         },
-        "configFileDriver-unofficial": {
-            "type": "package",
-            "package": {
-                "name": "netzmacht/Dc_General-ConfigFileDriver",
-                "version": "dev-master",
-                "source": {
-                    "url": "git://github.com/netzmacht/Dc_General-ConfigFileDriver.git",
-                    "type": "git",
-                    "reference": "origin/master"
-                }
-            }
+        {
+            "type":"vcs",
+            "url":"https://github.com/silviomoreto/bootstrap-select"
         },
-        "bootstrap-select-unofficial": {
-            "type": "package",
-            "package": {
-                "name": "silviomoreto/bootstrap-select",
-                "version": "1.3.1",
-                "source": {
-                    "url": "git://github.com/silviomoreto/bootstrap-select.git",
-                    "type": "git",
-                    "reference": "origin/tags/1.3.1"
-                }
-            }
+        {
+            "type":"vcs",
+            "url":"https://github.com/mattbryson/TouchSwipe-Jquery-Plugin"
         },
-        "jquery-touchSwipe-unofficial": {
-            "type": "package",
-            "package": {
-                "name": "smattbryson/TouchSwipe-Jquery-Plugin",
-                "version": "1.6.4",
-                "source": {
-                    "url": "git://github.com/mattbryson/TouchSwipe-Jquery-Plugin.git",
-                    "type": "git",
-                    "reference": "origin/tags/1.6.4"
-                }
-            }
+        {
+            "type":"vcs",
+            "url":"https://github.com/netzmacht/Dc_General-ConfigFileDriver"
         }
-    },
+    ],
     "require":{
         "php":">=5.3",
         "contao/core":">=3.1",
@@ -83,8 +51,8 @@
         "contao-legacy/iconWizard":">=1.0.0",
         "netzmacht/Dc_General-ConfigFileDriver":"dev-master",
         "twbs/bootstrap":">=v3.0.0",
-        "silviomoreto/bootstrap-select":"1.3.1",
-        "smattbryson/TouchSwipe-Jquery-Plugin":"1.6.4"
+        "silviomoreto/bootstrap-select":"dev-master",
+        "smattbryson/TouchSwipe-Jquery-Plugin":"dev-master"
     },
     "autoload":{
         "classmap":["src/system/modules/bootstrap/classes/"]
