@@ -29,8 +29,6 @@
         "contao-legacy/subcolumns":">=2.1",
         "contao-legacy/simple_ajax":">=1.0.0",
         "xat/contao-customselectmenu":"dev-master",
-        //"netzmacht/bootstrap-columnsetEditor":">=0.1.0",
-        //"netzmacht/iconwizard":">=1.0.0",
         "contao-legacy/subcolumns_bootstrap_customize":">=0.1.0",
         "contao-legacy/iconWizard":">=1.0.0",
         "netzmacht/Dc_General-ConfigFileDriver":"dev-master",
