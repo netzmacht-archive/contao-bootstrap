@@ -1,7 +1,7 @@
 {
     "name":"netzmacht/contao-bootstrap",
     "description":"Provides modules, content elements and templates for integrating Bootstrap into Contao",
-    "keywords":["bootstrap", "fontawesome", "icon font"],
+    "keywords":["bootstrap", "grid", "layout", "theme", "contao"],
     "type":"contao-module",
     "license":"LGPL-3.0+",
     "authors":[
@@ -63,22 +63,6 @@
                 },
                 "source": {
                     "url": "https://github.com/mattbryson/TouchSwipe-Jquery-Plugin.git",
-                    "type": "git",
-                    "reference": "origin/master"
-                }
-            }
-        },
-        {
-            "type":"package",
-            "package": {
-                "name": "netzmacht/Dc_General-ConfigFileDriver",
-                "version": "dev-master",
-                "dist": {
-                    "url": "https://github.com/netzmacht/Dc_General-ConfigFileDriver/archive/master.zip",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "https://github.com/netzmacht/Dc_General-ConfigFileDriver.git",
                     "type": "git",
                     "reference": "origin/master"
                 }
