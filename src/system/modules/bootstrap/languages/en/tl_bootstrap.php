@@ -107,7 +107,7 @@ $GLOBALS['TL_LANG']['tl_bootstrap']['form'] = 'Form';
 $GLOBALS['TL_LANG']['tl_bootstrap']['miscellaneous'] = 'Miscellaneous settings';
 
 $GLOBALS['TL_LANG']['tl_bootstrap']['activeIconSet'][0] = 'Chose icon set';
-$GLOBALS['TL_LANG']['tl_bootstrap']['activeIconSet'][1] = 'Please chose the icon set you would like to use.';
+$GLOBALS['TL_LANG']['tl_bootstrap']['activeIconSet'][1] = 'Please choose the icon set you would like to use.';
 
 $GLOBALS['TL_LANG']['tl_bootstrap']['icons'][0] = 'Iconsets';
 $GLOBALS['TL_LANG']['tl_bootstrap']['icons'][1] = 'Configuration of the available icon sets';
