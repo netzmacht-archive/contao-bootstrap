@@ -11,8 +11,8 @@ $GLOBALS['TL_LANG']['tl_content']['config_legend'] = 'Configuration';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_columnset'][0] = 'Columnset';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_columnset'][1] = 'Assign an article to every column. Dieser muss zur gleichen Seite gehören und der Spalte Bootstrap zugeordnet sein.';
 
-$GLOBALS['TL_LANG']['tl_content']['bootstrap_columnset_article'][0] = 'Artikel';
-$GLOBALS['TL_LANG']['tl_content']['bootstrap_columnset_article'][1] = 'Wählen Sie einen Artikel aus. It has to belong to the same site and assigned to the column bootstrap.';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_columnset_article'][0] = 'Article';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_columnset_article'][1] = 'Please choose an article. It has to belong to the same site and assigned to the column bootstrap.';
 
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_articleMarkup'][0] = 'Use article markup';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_articleMarkup'][1] = 'Article is included by the article markup.';
