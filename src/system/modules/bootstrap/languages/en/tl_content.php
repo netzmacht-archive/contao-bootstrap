@@ -51,8 +51,8 @@ $GLOBALS['TL_LANG']['tl_content']['bootstrap_interval'][1] = 'Display duration i
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs'][0] = 'Tabs';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs'][1] = 'Define each tab label. Dropdown menus can be set too.';
 
-$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_title'][0] = 'Bezeichung';
-$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_title'][1] = 'Die Bezeichnung wird für das Tab-Menü verwendet.';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_title'][0] = 'Title';
+$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_title'][1] = 'The title will be used fot the tab menu.';
 
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_type'][0] = 'Dropdown';
 $GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_type'][1] = 'Entry can be created as a dropdown menu. The following elements have to be defined as a child.';
