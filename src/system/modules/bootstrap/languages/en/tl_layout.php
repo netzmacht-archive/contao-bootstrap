@@ -29,7 +29,7 @@ $GLOBALS['TL_LANG']['tl_layout']['bootstrap_rightClass'][0] = 'Right column CSS 
 $GLOBALS['TL_LANG']['tl_layout']['bootstrap_rightClass'][1] = 'Set CSS grid classes of the right column. ';
 
 $GLOBALS['TL_LANG']['tl_layout']['layoutType'][0] = 'Layout type';
-$GLOBALS['TL_LANG']['tl_layout']['layoutType'][1] = 'Please select the type ot layout';
+$GLOBALS['TL_LANG']['tl_layout']['layoutType'][1] = 'Please select the type of layout';
 
 $GLOBALS['TL_LANG']['tl_layout']['bootstrap_importStylesheets'][0] = 'Import Bootstrap stylesheets';
 $GLOBALS['TL_LANG']['tl_layout']['bootstrap_importStylesheets'][1] = 'Import Contao-Bootstrap provided stylesheets.';
