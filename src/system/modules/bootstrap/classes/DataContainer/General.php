@@ -13,6 +13,8 @@
 
 namespace Netzmacht\Bootstrap\DataContainer;
 
+use Netzmacht\DcaTools\DcaTools;
+
 /**
  * Class GeneralDataContainer provides useful callbacks for different tables
  *
@@ -43,36 +45,24 @@ class General extends \Backend
 
 
 	/**
-	 * creates an meta palette of an palettes
+	 * Creates an meta palette of a palettes
 	 *
+	 * @param string $table
 	 * @param string $name
+	 * @param string $type
+	 *
 	 * @return array
 	 */
 	protected function getMetaPaletteOfPalette($table, $name='default', $type='palettes')
 	{
-		$palette     = $GLOBALS['TL_DCA'][$table][$type][$name];
-		$metaPalette = array();
-		$legends     = explode(';', $palette);
+		$objDca = DcaTools::getDataContainer($table);
 
-		foreach($legends as $legend)
+		if($type == 'subpalette')
 		{
-			$fields = explode(',', $legend);
-
-			preg_match('/\{(.*)_legend(:hide)?\}/', $fields[0], $matches);
-
-			if(isset($matches[2]))
-			{
-				$fields[0] = $matches[2];
-			}
-			else
-			{
-				array_shift($fields);
-			}
-
-			$metaPalette[$matches[1]] = $fields;
+			return $objDca->getSubPalette($name)->toArray();
 		}
 
-		return $metaPalette;
+		return $objDca->getPalette($name)->toArray();
 	}
 
 
