@@ -33,7 +33,7 @@
         "netzmacht/contao-configfiledriver":"dev-master",
         "twbs/bootstrap":">=v3.0.0",
         "silviomoreto/bootstrap-select":"1.3.*",
-        "smattbryson/touchswipe-jquery-plugin":"1.6.*",
+        "mattbryson/touchswipe-jquery-plugin":"1.6.*",
         "netzmacht/contao-dcatools":"dev-master"
     },
     "autoload":{
