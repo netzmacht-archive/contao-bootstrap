@@ -23,32 +23,12 @@
         {
             "type":"package",
             "package": {
-                "name": "xat/contao-customselectmenu",
-                "version": "dev-master",
-                "dist": {
-                    "url": "https://github.com/xat/contao-customselectmenu/archive/master.zip",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "https://github.com/xat/contao-customselectmenu.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        },
-        {
-            "type":"package",
-            "package": {
                 "name": "silviomoreto/bootstrap-select",
-                "version": "dev-master",
-                "dist": {
-                    "url": "https://github.com/silviomoreto/bootstrap-select/archive/1.3.1.zip",
-                    "type": "zip"
-                },
+                "version": "1.3.1",
                 "source": {
                     "url": "https://github.com/silviomoreto/bootstrap-select.git",
                     "type": "git",
-                    "reference": "master"
+                    "reference": "1.3.1"
                 }
             }
         },
@@ -56,15 +36,11 @@
             "type":"package",
             "package": {
                 "name": "mattbryson/TouchSwipe-Jquery-Plugin",
-                "version": "dev-master",
-                "dist": {
-                    "url": "https://github.com/mattbryson/TouchSwipe-Jquery-Plugin/archive/1.6.4.zip",
-                    "type": "zip"
-                },
+                "version": "1.6.4",
                 "source": {
                     "url": "https://github.com/mattbryson/TouchSwipe-Jquery-Plugin.git",
                     "type": "git",
-                    "reference": "master"
+                    "reference": "1.6.4"
                 }
             }
         }
