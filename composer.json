@@ -83,8 +83,8 @@
         "contao-legacy/iconWizard":">=1.0.0",
         "netzmacht/contao-configfiledriver":"dev-master",
         "twbs/bootstrap":">=v3.0.0",
-        "silviomoreto/bootstrap-select":"*",
-        "smattbryson/TouchSwipe-Jquery-Plugin":"*",
+        "silviomoreto/bootstrap-select":"dev-master",
+        "smattbryson/TouchSwipe-Jquery-Plugin":"dev-master",
         "netzmacht/contao-dcatools":"dev-master"
     },
     "autoload":{
