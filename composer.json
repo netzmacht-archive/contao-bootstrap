@@ -81,7 +81,7 @@
         "xat/contao-customselectmenu":"*",
         "contao-legacy/subcolumns_bootstrap_customize":">=0.1.0",
         "contao-legacy/iconWizard":">=1.0.0",
-        "netzmacht/Dc_General-ConfigFileDriver":"dev-master",
+        "netzmacht/contao-configfiledriver":"dev-master",
         "twbs/bootstrap":">=v3.0.0",
         "silviomoreto/bootstrap-select":"*",
         "smattbryson/TouchSwipe-Jquery-Plugin":"*",
