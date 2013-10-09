@@ -78,7 +78,7 @@
         "bit3/contao-meta-palettes":">=1.4.2",
         "contao-legacy/subcolumns":">=2.1",
         "contao-legacy/simple_ajax":">=1.0.0",
-        "xat/contao-customselectmenu":"*",
+        "xat/contao-customselectmenu":"dev-master",
         "contao-legacy/subcolumns_bootstrap_customize":">=0.1.0",
         "contao-legacy/iconWizard":">=1.0.0",
         "netzmacht/contao-configfiledriver":"dev-master",
