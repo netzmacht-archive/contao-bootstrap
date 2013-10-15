@@ -13,7 +13,7 @@
 
 namespace Netzmacht\Bootstrap\DataContainer;
 
-use Netzmacht\DcaTools\DcaTools;
+use DcaTools\Definition;
 
 /**
  * Class GeneralDataContainer provides useful callbacks for different tables
@@ -32,8 +32,16 @@ class General extends \Backend
 	{
 		$arrModules = array();
 
-		$objModules = $this->Database
-			->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id ORDER BY t.name, m.name");
+		$strQuery = 'SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id';
+
+		if(\Input::get('table') == 'tl_module' && \Input::get('act') == 'edit')
+		{
+			$strQuery .= ' WHERE m.id != ?';
+		}
+
+		$strQuery .= ' ORDER BY t.name, m.name';
+
+		$objModules = $this->Database->prepare($strQuery)->execute(\Input::get('id'));
 
 		while ($objModules->next())
 		{
@@ -55,14 +63,12 @@ class General extends \Backend
 	 */
 	protected function getMetaPaletteOfPalette($table, $name='default', $type='palettes')
 	{
-		$objDca = DcaTools::getDataContainer($table);
-
 		if($type == 'subpalette')
 		{
-			return $objDca->getSubPalette($name)->toArray();
+			return Definition::getSubPalette($table, $name)->asArray();
 		}
 
-		return $objDca->getPalette($name)->toArray();
+		return Definition::getPalette($table, $name)->asArray();
 	}
 
 
