@@ -21,17 +21,12 @@ $GLOBALS['BOOTSTRAP']['icons'] = array
 		'glyphicons'    => array
 		(
 			'path'      => 'system/modules/bootstrap/config/bootstrap/glyphicons.php',
+			'stylesheet' => 'system/modules/bootstrap/assets/css/glyphicons.css',
 			'template'  => '<span class="glyphicon glyphicon-%s"></span>',
 		),
 	),
 
 	'active' => 'glyphicons',
-
-	// the array where all icons are defined
-	'set' => array(),
-
-	// which tag shall be used for icons
-	'template' => array(),
 );
 
 $GLOBALS['BOOTSTRAP']['dropdown'] = array

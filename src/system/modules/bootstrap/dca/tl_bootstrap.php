@@ -583,6 +583,19 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 						),
 					),
 
+					'stylesheet' => array
+					(
+						'inputType' => 'text',
+						'label'     => &$GLOBALS['TL_LANG']['tl_bootstrap']['icons_stylesheet'],
+						'eval'   => array
+						(
+							'columnPos' => '2',
+							'style' => 'width: 350px',
+							'allowHtml' => false,
+							'preserveTags' => false,
+						),
+					),
+
 
 				),
 			),

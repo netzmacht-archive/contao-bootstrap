@@ -89,6 +89,15 @@ class Bootstrap
 	public function initializeConfig()
 	{
 		include TL_ROOT . '/system/config/bootstrap.php';
+
+		$key = $GLOBALS['BOOTSTRAP']['icons']['active'];
+		$GLOBALS['BOOTSTRAP']['icons']['set'] =  $GLOBALS['BOOTSTRAP']['icons']['sets'][$key];
+		$GLOBALS['BOOTSTRAP']['icons']['set']['icons'] = include TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['icons']['set']['path'];
+
+		if(TL_MODE == 'BE')
+		{
+			$GLOBALS['TL_CSS'][] = $GLOBALS['BOOTSTRAP']['icons']['set']['stylesheet'];
+		}
 	}
 
 
