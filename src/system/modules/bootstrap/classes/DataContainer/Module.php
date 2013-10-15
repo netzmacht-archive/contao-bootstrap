@@ -78,5 +78,4 @@ class Module extends General
 		return $arrArticle;
 	}
 
-
 }
