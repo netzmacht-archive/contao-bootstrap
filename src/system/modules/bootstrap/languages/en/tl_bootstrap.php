@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * operations
+ */
+$GLOBALS['TL_LANG']['tl_bootstrap']['edit'][0] = 'Edit';
+$GLOBALS['TL_LANG']['tl_bootstrap']['edit'][1] = 'Edit configuration ID "%s"';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['delete'][0] = 'Reset';
+$GLOBALS['TL_LANG']['tl_bootstrap']['delete'][1] = 'Reset configuration ID "%s"';
+
+/**
  * legends
  */
 $GLOBALS['TL_LANG']['tl_bootstrap']['viewport_legend']      = 'Viewport';
@@ -118,8 +127,11 @@ $GLOBALS['TL_LANG']['tl_bootstrap']['icons_name'][1] = 'The Name of the icon set
 $GLOBALS['TL_LANG']['tl_bootstrap']['icons_path'][0] = 'Path to the icon file';
 $GLOBALS['TL_LANG']['tl_bootstrap']['icons_path'][1] = 'Please set the path to the icon configuration file.';
 
-$GLOBALS['TL_LANG']['tl_bootstrap']['icons_template'][0] = 'Ausgabe-Template';
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_template'][0] = 'Output-Template';
 $GLOBALS['TL_LANG']['tl_bootstrap']['icons_template'][1] = 'Type of the output templates.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_stylesheet'][0] = 'Backend CSS file';
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_stylesheet'][1] = 'Icon font backend CSS file';
 
 $GLOBALS['TL_LANG']['tl_bootstrap']['dropdownToggle'][0] = 'Dropdown toggle';
 $GLOBALS['TL_LANG']['tl_bootstrap']['dropdownToggle'][1] = 'Please set how the toggle symbol has to be displayed by a dropdown.';

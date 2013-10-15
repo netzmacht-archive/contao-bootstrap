@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * operations
+ */
+$GLOBALS['TL_LANG']['tl_bootstrap']['edit'][0] = 'Bearbeiten';
+$GLOBALS['TL_LANG']['tl_bootstrap']['edit'][1] = 'Konfigurationen ID "%s" bearbeiten';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['delete'][0] = 'Zurücksetzen';
+$GLOBALS['TL_LANG']['tl_bootstrap']['delete'][1] = 'Konfigurationen ID "%s" zurücksetzen';
+
+/**
  * legends
  */
 $GLOBALS['TL_LANG']['tl_bootstrap']['viewport_legend']      = 'Viewport';
@@ -120,6 +129,9 @@ $GLOBALS['TL_LANG']['tl_bootstrap']['icons_path'][1] = 'Geben Sie den Pfad zur I
 
 $GLOBALS['TL_LANG']['tl_bootstrap']['icons_template'][0] = 'Ausgabe-Template';
 $GLOBALS['TL_LANG']['tl_bootstrap']['icons_template'][1] = 'Format des Ausgabe-Templates.';
+
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_stylesheet'][0] = 'Backend CSS-Datei';
+$GLOBALS['TL_LANG']['tl_bootstrap']['icons_stylesheet'][1] = 'Icon Font Backend CSS-Datei';
 
 $GLOBALS['TL_LANG']['tl_bootstrap']['dropdownToggle'][0] = 'Droppdown Toggle';
 $GLOBALS['TL_LANG']['tl_bootstrap']['dropdownToggle'][1] = 'Geben Sie an, wie das Toggle-Zeichen bei der Dropdown dargestellt werden soll.';
