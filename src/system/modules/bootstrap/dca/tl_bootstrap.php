@@ -117,7 +117,10 @@ $GLOBALS['TL_DCA']['tl_bootstrap'] = array
 				ConfigFileDriver::path('form', 'tableFormat'),
 				ConfigFileDriver::path('form', 'defaultTableless'),
 			),
-			'widgets'        => array(':hide', 'widgets'),
+			'widgets'        => array(
+				':hide',
+				ConfigFileDriver::path('form', 'widgets'),
+			),
 			'styleSelect'    => array
 			(
 				':hide',
