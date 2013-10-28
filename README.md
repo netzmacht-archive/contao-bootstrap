@@ -23,6 +23,6 @@ This extension required at least **Contao 3.1** and is designed for Bootstrap 3.
 Install
 -----
 1. Install required extensions
-2. Install contao-bootstrap
+2. Install contao-bootstrap (usign the alpha release!)
 3. Run Repository Manager -> update database
 4. Follow first [steps guideline (German only)](http://contao-bootstrap.netzmacht.de/grundlagen/erste-schritte/)
