@@ -11,6 +11,7 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
+require_once("autoload.php");
 
 /**
  * Initialize the system
