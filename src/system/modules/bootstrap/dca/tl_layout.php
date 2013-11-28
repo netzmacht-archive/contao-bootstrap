@@ -186,8 +186,7 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_javaScripts'] = array
 			(
 				'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['bootstrap_conditional'],
 				'exclude'                 => true,
-				//'inputType'               => 'customselect',
-				'inputType'               => 'text',
+				'inputType'               => 'customselect',
 				'options'                 => array('lt IE 9'),
 				'eval'                    => array('style' => 'width: 140px', 'includeBlankOption' => true),
 			),

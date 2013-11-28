@@ -128,9 +128,9 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_icon'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_icon'],
 	'exclude'                 => true,
 	'inputType'               => 'icon',
-	'options'                 => &$GLOBALS['BOOTSTRAP']['icons']['set']['icons'],
+	'options'                 => \Netzmacht\Bootstrap\Helper\Icons::getIcons(),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-	'eval'                    => array('tl_class' => 'w50', 'iconTemplate' => &$GLOBALS['BOOTSTRAP']['icons']['set']['template']),
+	'eval'                    => array('tl_class' => 'w50', 'iconTemplate' => \Netzmacht\Bootstrap\Helper\Icons::getIconTemplate()),
 	'sql'                     => "varchar(32) NOT NULL default ''",
 );
 
@@ -305,8 +305,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 					(
 						'name' => array
 						(
-							//'inputType' => 'customselect',
-							'inputType' => 'text',
+							'inputType' => 'customselect',
 							'options' => array('class', 'title', 'data-'),
 							'exclude' => true,
 							'eval' => array
@@ -344,8 +343,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_dataAttributes'] = array
 			(
 				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_dataAttributes_name'],
 				'exclude'                 => true,
-				//'inputType'               => 'customselect',
-				'inputType'               => 'select',
+				'inputType'               => 'customselect',
 				'options'                 => $GLOBALS['BOOTSTRAP']['form']['dataAttributes'],
 				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_buttons_types'],
 				'eval'                    => array('style' => 'width: 145px;', 'includeBlankOption' => true),

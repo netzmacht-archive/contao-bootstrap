@@ -56,8 +56,8 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['bootstrap_icon'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['bootstrap_icon'],
 	'exclude'                 => true,
 	'inputType'               => 'icon',
-	'options'                 => &$GLOBALS['BOOTSTRAP']['icons']['set']['icons'],
-	'eval'                    => array('tl_class' => 'w50', 'iconTemplate' => &$GLOBALS['BOOTSTRAP']['icons']['set']['template']),
+	'options'                 => \Netzmacht\Bootstrap\Helper\Icons::getIcons(),
+	'eval'                    => array('tl_class' => 'w50', 'iconTemplate' => \Netzmacht\Bootstrap\Helper\Icons::getIconTemplate()),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
@@ -124,9 +124,9 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['bootstrap_addSubmitIcon'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['bootstrap_icon'],
 	'exclude'                 => true,
 	'inputType'               => 'icon',
-	'options'                 => &$GLOBALS['BOOTSTRAP']['icons']['set']['icons'],
+	'options'                 => \Netzmacht\Bootstrap\Helper\Icons::getIcons(),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => &$GLOBALS['BOOTSTRAP']['icons']['set']['template']),
+	'eval'                    => array('tl_class' => 'w50', 'includeBlankOption' => true, 'iconTemplate' => \Netzmacht\Bootstrap\Helper\Icons::getIconTemplate()),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
