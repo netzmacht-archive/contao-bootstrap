@@ -49,13 +49,6 @@ $GLOBALS['TL_LANG']['CTE']['bootstrap_accordionGroupEnd'][1] = 'End of an accord
 $GLOBALS['TL_LANG']['FFL']['button'][0] = 'Button';
 $GLOBALS['TL_LANG']['FFL']['button'][1] = 'Button with text, icon or an image.';
 
-
-/**
- *
- */
-$GLOBALS['TL_LANG']['MSC']['bootstrap'][0] = 'Bootstrap Config';
-$GLOBALS['TL_LANG']['MSC']['bootstrap'][1] = 'Change settings of the Bootstrap-Extension.';
-
 $GLOBALS['TL_LANG']['MSC']['bootstrapToggleNavigation'] = 'Show/hide navigation';
 
 $GLOBALS['TL_LANG']['MSC']['bootstrap_carousel'] = 'Bootstrap Carousel: %s';
