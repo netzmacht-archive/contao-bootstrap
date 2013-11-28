@@ -36,7 +36,7 @@
         "netzmacht/font-awesome" : "Use Font Awesome icons with Contao-Bootstrap"
     },
     "autoload": {
-        "psr-0": { "Netzmacht\\Boostrap\\": "src/" }
+        "psr-0": { "Netzmacht\\Bootstrap\\": "src/" }
     },
     "extra":{
         "contao": {
