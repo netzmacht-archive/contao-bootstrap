@@ -21,20 +21,16 @@
     },
     "require":{
         "php":">=5.3",
-        "contao/core":">=3.1",
+        "contao/core":"~3.1",
         "menatwork/contao-multicolumnwizard":"~3.2",
-        "metamodels/dc_general":">=0.9.0",
-        "bit3/contao-theme-plus":">=4.0",
+        "bit3/contao-theme-plus":"~4.0",
         "bit3/contao-meta-palettes":">=1.4.2",
         "contao-legacy/subcolumns":">=2.1",
         "contao-legacy/simple_ajax":">=1.0.0",
-        "contao-legacy/subcolumns_bootstrap_customize":">=0.1.0",
+        "contao-legacy/customselect": "~1.0.0",
+        "netzmacht/contao-bootstrap-columnseteditor":"1.0.*",
         "contao-legacy/iconWizard":">=1.0.0",
-        "netzmacht/contao-configfiledriver":"dev-master",
-        "twbs/bootstrap":">=v3.0.0",
-        "silviomoreto/bootstrap-select":"1.3.*",
-        "mattbryson/touchswipe-jquery-plugin":"1.6.*",
-        "netzmacht/contao-dcatools":"dev-master"
+        "twbs/bootstrap":"~v3.0.0"
     },
     "autoload":{
         "classmap":["src/system/modules/bootstrap/classes/"]
