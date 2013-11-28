@@ -32,21 +32,19 @@
         "contao-legacy/iconWizard":">=1.0.0",
         "twbs/bootstrap":"~v3.0.0"
     },
-    "autoload":{
-        "classmap":["src/system/modules/bootstrap/classes/"]
-    },
     "suggest": {
-        "netzmacht/font-awesome" : "Use Font Awesome icons in Contao-Bootstrap"
+        "netzmacht/font-awesome" : "Use Font Awesome icons with Contao-Bootstrap"
+    },
+    "autoload": {
+        "psr-0": { "Netzmacht\\Boostrap\\": "src/" }
     },
     "extra":{
         "contao": {
             "symlinks":{
-                "src/system/modules/bootstrap": "system/modules/bootstrap",
-                "src/system/config/bootstrap.php": "system/config/bootstrap.php",
-                "../dc_general-configfiledriver/src/modules/configFileDriver": "system/modules/configFileDriver",
-                "../../twbs/bootstrap": "assets/bootstrap/bootstrap",
-                "../../silviomoreto/bootstrap-select": "assets/bootstrap/bootstrap-select",
-                "../../mattbryson/touchswipe-jquery-plugin": "assets/bootstrap/jquery-touchSwipe"
+                "module": "system/modules/bootstrap",
+                "assets/bootstrap-select": "assets/bootstrap/bootstrap-select",
+                "assets/jquery-touchSwipe": "assets/bootstrap/jquery-touchSwipe",
+                "../../twbs/bootstrap": "assets/bootstrap/bootstrap"
             }
         }
     }
