@@ -29,7 +29,7 @@
         "contao-legacy/simple_ajax":">=1.0.0",
         "contao-legacy/customselect": "~1.0.0",
         "netzmacht/contao-bootstrap-columnseteditor":"1.0.*",
-        "contao-legacy/iconWizard":">=1.0.0",
+        "netzmacht/contao-iconWizard":"1.0.*",
         "twbs/bootstrap":"~3.0.0"
     },
     "suggest": {
