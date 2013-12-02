@@ -45,10 +45,6 @@
                 "assets/jquery-touchSwipe": "assets/bootstrap/jquery-touchSwipe",
                 "./../../twbs/bootstrap": "assets/bootstrap/bootstrap"
             }
-        },
-
-        "branch-alias": {
-            "dev-develop": "1.1.x-dev"
         }
     }
 }
