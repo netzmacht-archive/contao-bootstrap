@@ -39,15 +39,16 @@
     },
     "extra":{
         "contao": {
-            "symlinks":{
+            "sources":{
                 "module": "system/modules/bootstrap",
                 "assets/bootstrap-select": "assets/bootstrap/bootstrap-select",
                 "assets/jquery-touchSwipe": "assets/bootstrap/jquery-touchSwipe",
-                "../../twbs/bootstrap": "assets/bootstrap/bootstrap"
+                "./../../twbs/bootstrap": "assets/bootstrap/bootstrap"
             }
         },
+
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-develop": "1.1.x-dev"
         }
     }
 }
