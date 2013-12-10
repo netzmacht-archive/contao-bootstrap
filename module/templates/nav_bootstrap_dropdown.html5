@@ -1,7 +1,7 @@
 
 <?php if(!$this->disableUl): ?>
 <ul class="<?php echo $this->level . $this->navType; ?> <?php if(!$this->hideNavClass && !$item['hideNavClass']): ?> __navClass__<?php endif; ?>">
-<?php endif; ?>
+	<?php endif; ?>
 
 	<?php foreach ($this->items as $i => $item): ?>
 		<?php if($item['isHeader']): ?>
@@ -10,11 +10,11 @@
 			<?php echo $item['subitems']; ?>
 		<?php else: ?>
 			<li class="<?php echo $item['class'] . $item['itemClass']; ?>">
-				<a href="<?php echo $item['href']; ?>" title="<?php echo $item['pageTitle'] ? $item['pageTitle'] : $item['title']; ?>"<?php if ($item['class']): ?> class="<?php echo $item['class']; ?> "<?php endif; ?><?php if ($item['accesskey'] != ''): ?> accesskey="<?php echo $item['accesskey']; ?>"<?php endif; ?><?php if ($item['tabindex']): ?> tabindex="<?php echo $item['tabindex']; ?>"<?php endif; ?><?php if ($item['nofollow']): ?> rel="nofollow"<?php endif; ?><?php echo $item['target']; ?><?php echo $item['toggle']; ?>><?php echo $item['link']; ?></a>
+				<a href="<?php echo $item['href']; ?>" title="<?php echo $item['pageTitle'] ? $item['pageTitle'] : $item['title']; ?>"<?php if ($item['accesskey'] != ''): ?> accesskey="<?php echo $item['accesskey']; ?>"<?php endif; ?><?php if ($item['tabindex']): ?> tabindex="<?php echo $item['tabindex']; ?>"<?php endif; ?><?php if ($item['nofollow']): ?> rel="nofollow"<?php endif; ?><?php echo $item['target']; ?><?php echo $item['toggle']; ?>><?php echo $item['link']; ?></a>
 				<?php echo $item['subitems']; ?>
 			</li>
 		<?php endif; ?>
 	<?php endforeach; ?>
-<?php if(!$this->disableUl): ?>
+	<?php if(!$this->disableUl): ?>
 </ul>
 <?php endif; ?>

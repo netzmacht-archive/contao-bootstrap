@@ -103,21 +103,16 @@ class Navigation
 						);
 					}
 
-					if($template->level == 'level_1')
-					{
-						$item['toggle'] = 'class="dropdown-toggle"';
+					$item['toggle'] = 'class="dropdown-toggle"';
 
-						if($item['type'] == 'm17Folder')
+
+					if($item['type'] == 'm17Folder')
+					{
+						if($template->level == 'level_1')
 						{
 							$item['toggle'] .= ' data-toggle="dropdown"';
 						}
-					}
-					else
-					{
-						$item['toggle'] = 'class="dropdown-toggle"';
-
-						if($item['type'] == 'm17Folder')
-						{
+						else {
 							$item['isHeader'] = !$template->disableUl;
 							$item['toggle'] .= ' data-toggle="collapse"';
 						}
