@@ -16,5 +16,5 @@
  * Initialize the system
  */
 
-$controller = new Bootstrap\Installer();
+$controller = new Netzmacht\Bootstrap\Installer();
 $controller->runOnce();

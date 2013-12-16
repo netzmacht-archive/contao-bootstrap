@@ -43,8 +43,10 @@
                 "module": "system/modules/bootstrap",
                 "assets/bootstrap-select": "assets/bootstrap/bootstrap-select",
                 "assets/jquery-touchSwipe": "assets/bootstrap/jquery-touchSwipe",
-                "./../../twbs/bootstrap": "assets/bootstrap/bootstrap"
-            }
+            },
+            "runonce":[
+                "runonce/runonce.php"
+            ]
         }
     }
 }

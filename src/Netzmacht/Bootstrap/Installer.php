@@ -42,6 +42,7 @@ class Installer extends \Backend
 		if($this->User->isAdmin)
 		{
 			$this->setupSections();
+			$this->createSymlink();
 		}
 	}
 
@@ -65,22 +66,36 @@ class Installer extends \Backend
 
 
 	/**
-	 * check if file is in one of the defined paths
-	 * @param $fileName
-	 * @param $paths
-	 *
-	 * @return bool
+	 * Create symlink
 	 */
-	protected function fileMatchPaths($fileName, $paths)
+	protected function createSymlink()
 	{
-		foreach($paths as $path)
-		{
-			if(strpos($fileName, $path) === 0)
-			{
-				return true;
-			}
+		$target  = TL_ROOT . '/composer/vendor/twbs/bootstrap';
+		$link    = TL_ROOT . '/assets/bootstrap/bootstrap';
+		$dir     = TL_ROOT . '/assets/bootstrap';
+
+		$success = false;
+
+		// dir or link already exists
+		if(is_dir($link) || is_link($link)) {
+			return;
 		}
 
-		return false;
+		// create parent dir
+		if(!is_dir($dir)) {
+			mkdir($dir);
+		}
+
+		if(is_dir($target)) {
+			$success = symlink($target, $link);
+		}
+
+		if(!$success) {
+			\Controller::log("Error during creating symlink '$target'", 'Netzmacht\Bootstrap\Installer createSymlink', TL_ERROR);
+		}
+		else {
+			\Controller::log("Created symlink '$target'", 'Netzmacht\Bootstrap\Installer createSymlink', TL_INFO);
+		}
 	}
+
 }
