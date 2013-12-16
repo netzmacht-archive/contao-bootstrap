@@ -20,7 +20,7 @@
         "source":"https://github.com/netzmacht/contao-bootstrap"
     },
     "require":{
-        "php":">=5.3",
+        "php":">=5.3.4",
         "contao/core":"~3.1",
         "menatwork/contao-multicolumnwizard":"~3.2",
         "bit3/contao-theme-plus":"~4.0",
@@ -42,7 +42,7 @@
             "sources":{
                 "module": "system/modules/bootstrap",
                 "assets/bootstrap-select": "assets/bootstrap/bootstrap-select",
-                "assets/jquery-touchSwipe": "assets/bootstrap/jquery-touchSwipe",
+                "assets/jquery-touchSwipe": "assets/bootstrap/jquery-touchSwipe"
             },
             "runonce":[
                 "runonce/runonce.php"
