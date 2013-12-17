@@ -89,7 +89,7 @@ class Bootstrap
 	public function initializeConfig()
 	{
 		if($GLOBALS['TL_CONFIG']['bootstrapIconSet']) {
-			$GLOBALS['BOOTSTRAP']['active'] = $GLOBALS['TL_CONFIG']['bootstrapIconSet'];
+			$GLOBALS['BOOTSTRAP']['icons']['active'] = $GLOBALS['TL_CONFIG']['bootstrapIconSet'];
 		}
 	}
 

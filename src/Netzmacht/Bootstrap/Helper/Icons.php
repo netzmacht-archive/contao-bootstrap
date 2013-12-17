@@ -100,8 +100,7 @@ class Icons
 	public static function getIconTemplate()
 	{
 		$key = $GLOBALS['BOOTSTRAP']['icons']['active'];
-
-		return $GLOBALS['BOOTSTRAP']['icons'][$key]['template'];
+		return $GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['template'];
 	}
 
 
