@@ -13,7 +13,7 @@
 
 namespace Netzmacht\Bootstrap\DataContainer;
 
-use Netzmacht\Bootstrap\Model;
+use Netzmacht\Bootstrap\Model\ContentWrapper;
 
 
 /**
@@ -48,7 +48,7 @@ class Wrapper extends \Backend
 	/**
 	 * current model
 	 *
-	 * @var Model\ContentWrapper
+	 * @var ContentWrapper\Model
 	 */
 	protected $objModel;
 
@@ -64,11 +64,11 @@ class Wrapper extends \Backend
 	public function save($value, $dc)
 	{
 		// shortcuts
-		$start  = Model\ContentWrapper::TYPE_START;
-		$stop   = Model\ContentWrapper::TYPE_STOP;
-		$sep    = Model\ContentWrapper::TYPE_SEPARATOR;
+		$start  = ContentWrapper\Model::TYPE_START;
+		$stop   = ContentWrapper\Model::TYPE_STOP;
+		$sep    = ContentWrapper\Model::TYPE_SEPARATOR;
 
-		$this->objModel = new Model\ContentWrapper($dc->activeRecord);
+		$this->objModel = new ContentWrapper\Model(new \ContentModel($dc->activeRecord));
 
 		$this->objModel->type = $value;
 		$sorting = $this->objModel->sorting;
@@ -82,39 +82,37 @@ class Wrapper extends \Backend
 			return $value;
 		}
 
-
 		// check for existing parent element and try to create it if not existing
-		if($type != $start)
-		{
-			if($this->objModel->bootstrap_parentId == '')
-			{
-				$parent = $this->objModel->findPreviousElement($start);
-				$end = $this->objModel->findPreviousElement($stop);
+		if($type != $start) {
+			if($this->objModel->bootstrap_parentId == '') {
+				$parent = ContentWrapper\Repository::findPreviousElement($this->objModel, $start);
 
-				if($parent !== null && ($end === null || $parent->sorting > $end->sorting))
-				{
+				if($parent) {
 					// set relation to parent element
 					$this->objModel->bootstrap_parentId = $parent->id;
 
-					// try to find parent to put separator between start and end
-					// @todo: check sorting value of parent element
-					if($this->objModel->getType() == $sep)
-					{
-						$end = $this->objModel->findRelatedElements($stop);
+					$end = ContentWrapper\Repository::findRelatedElement($this->objModel, $stop);
 
-						if($end !== null)
-						{
-							$this->objModel->sorting = $end->sorting - 1;
-						}
+					if($end === null) {
+						$this->objModel->sorting = $parent->sorting + 2;
+					}
+					elseif($parent !== null && $parent->sorting > $end->sorting) {
+						$this->objModel->sorting = $end->sorting - 2;
 					}
 
-					$this->objModel->save();
+					// set relation to parent element
+					if($this->objModel->getType() != $start) {
+						$this->objModel->bootstrap_parentId = $parent->id;
+					}
+
+					$this->objModel->getModel()->save();
 				}
 
 				// create parent if possible
 				elseif($this->isTrigger($type, $start))
 				{
-					$parent = $this->createElement($sorting, $start);
+					$sorting = $sorting-2;
+					$this->createElement($sorting, $start);
 				}
 
 				// no parent element exists, throw error
@@ -122,7 +120,7 @@ class Wrapper extends \Backend
 				{
 					throw new \Exception(sprintf(
 						$GLOBALS['TL_LANG']['ERR']['wrapperStartNotExists'],
-						$GLOBALS['TL_LANG']['CTE'][$value][0] ? $GLOBALS['TL_LANG']['CTE'][$value][0] : $value
+						$GLOBALS['TL_LANG']['CTE'][$value][0] ?: $value
 					));
 				}
 			}
@@ -131,8 +129,7 @@ class Wrapper extends \Backend
 		// create separators if possible
 		if($type != $sep && ($this->isTrigger($type, $sep) || $this->isTrigger($type, $sep, static::TRIGGER_DELETE)))
 		{
-			$config = $GLOBALS['BOOTSTRAP']['wrappers'][$this->objModel->getGroup()][$sep];
-
+			$config   = $GLOBALS['BOOTSTRAP']['wrappers'][$this->objModel->getGroup()][$sep];
 			$callback = $config['countExisting'];
 			$this->import($callback[0]);
 			$existing = $this->$callback[0]->$callback[1]($this->objModel);
@@ -146,9 +143,18 @@ class Wrapper extends \Backend
 				if($this->isTrigger($type, $sep))
 				{
 					$count = $required - $existing;
+
 					for($i = 0; $i < $count; $i++)
 					{
 						$this->createElement($sorting, $sep);
+					}
+
+					$end = ContentWrapper\Repository::findRelatedElement($this->objModel, $stop);
+
+					if($end && $end->sorting <= $sorting) {
+						$sorting = $sorting + 2;
+						$end->sorting = $sorting;
+						$end->getModel()->save();
 					}
 				}
 			}
@@ -158,7 +164,7 @@ class Wrapper extends \Backend
 				{
 					$count = $existing - $required;
 
-					$parentId = $this->objModel->getType() == Model\ContentWrapper::TYPE_START
+					$parentId = $this->objModel->getType() == ContentWrapper\Model::TYPE_START
 						? $this->objModel->id
 						: $this->objModel->bootstrap_parentId;
 
@@ -173,10 +179,9 @@ class Wrapper extends \Backend
 		// cereate end element
 		if($type == $start && $this->isTrigger($type, $stop))
 		{
-			$end = $this->objModel->findRelatedElements(Model\ContentWrapper::TYPE_STOP);
+			$end = ContentWrapper\Repository::countRelatedElements($this->objModel, $stop);
 
-			if($end === null)
-			{
+			if(!$end) {
 				$end = $this->createElement($sorting, $stop);
 			}
 		}
@@ -191,7 +196,7 @@ class Wrapper extends \Backend
 	 */
 	public function delete($dc)
 	{
-		$this->objModel = new Model\ContentWrapper($dc->activeRecord);
+		$this->objModel = new ContentWrapper\Model(new \ContentModel($dc->activeRecord));
 
 		// getType will throw an exception if type is not found. use it to detect non content wrapper elements
 		try {
@@ -202,18 +207,18 @@ class Wrapper extends \Backend
 			return;
 		}
 
-		if($this->objModel->getType() == Model\ContentWrapper::TYPE_START)
+		if($this->objModel->getType() == ContentWrapper\Model::TYPE_START)
 		{
 			$deleteTypes = array();
 
-			if($this->isTrigger($this->objModel->getType(), Model\ContentWrapper::TYPE_SEPARATOR, static::TRIGGER_DELETE))
+			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_SEPARATOR, static::TRIGGER_DELETE))
 			{
-				$deleteTypes[] = $this->objModel->getTypeName(Model\ContentWrapper::TYPE_SEPARATOR);
+				$deleteTypes[] = $this->objModel->getTypeName(ContentWrapper\Model::TYPE_SEPARATOR);
 			}
 
-			if($this->isTrigger($this->objModel->getType(), Model\ContentWrapper::TYPE_STOP, static::TRIGGER_DELETE))
+			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_STOP, static::TRIGGER_DELETE))
 			{
-				$deleteTypes[] = $this->objModel->getTypeName(Model\ContentWrapper::TYPE_STOP);
+				$deleteTypes[] = $this->objModel->getTypeName(ContentWrapper\Model::TYPE_STOP);
 			}
 
 			if(!empty($deleteTypes))
@@ -226,20 +231,20 @@ class Wrapper extends \Backend
 					->execute($this->objModel->id);
 			}
 		}
-		elseif($this->objModel->getType() == Model\ContentWrapper::TYPE_STOP) {
-			if($this->isTrigger($this->objModel->getType(), Model\ContentWrapper::TYPE_SEPARATOR, static::TRIGGER_DELETE))
+		elseif($this->objModel->getType() == ContentWrapper\Model::TYPE_STOP) {
+			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_SEPARATOR, static::TRIGGER_DELETE))
 			{
 				$this->Database
 					->prepare('DELETE FROM tl_content WHERE bootstrap_parentId=? AND type=?')
 					->execute(
 						$this->objModel->bootstrap_parentId,
-						$this->objModel->getTypeName(Model\ContentWrapper::TYPE_SEPARATOR)
+						$this->objModel->getTypeName(ContentWrapper\Model::TYPE_SEPARATOR)
 					);
 			}
 
-			if($this->isTrigger($this->objModel->getType(), Model\ContentWrapper::TYPE_START, static::TRIGGER_DELETE))
+			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_START, static::TRIGGER_DELETE))
 			{
-				$model = new Model\ContentWrapper();
+				$model = new \ContentModel();
 				$model->id = $this->objModel->bootstrap_parentId;
 				$model->delete();
 			}
@@ -254,28 +259,28 @@ class Wrapper extends \Backend
 	/**
 	 * Create a new wrapper element
 	 *
-	 * @param Model\ContentWrapper $related
 	 * @param int                 $sorting
 	 * @param string              $type
 	 *
-	 * @return Model\ContentWrapper
+	 * @return ContentWrapper\Model
 	 */
-	protected function createElement(&$sorting, $type=Model\ContentWrapper::TYPE_SEPARATOR)
+	protected function createElement(&$sorting, $type=ContentWrapper\Model::TYPE_SEPARATOR)
 	{
-		$model = new Model\ContentWrapper();
-		$model->tstamp = time();
-		$model->pid = $this->objModel->pid;
-		$model->ptable = $this->objModel->ptable;
-		$model->type = $this->objModel->getTypeName($type);
+		$model = new \ContentModel();
 
-		if($type == Model\ContentWrapper::TYPE_START)
-		{
-			$model->sorting = --$sorting;
+		if($type == ContentWrapper\Model::TYPE_START) {
+			$sorting = $sorting - 2;
 		}
 		else {
+			$sorting = $sorting + 2;
 			$model->bootstrap_parentId = $this->objModel->id;
-			$model->sorting = ++$sorting;
 		}
+
+		$model->tstamp  = time();
+		$model->pid     = $this->objModel->pid;
+		$model->ptable  = $this->objModel->ptable;
+		$model->type    = $this->objModel->getTypeName($type);
+		$model->sorting = $sorting;
 
 		$model->save();
 
@@ -302,7 +307,7 @@ class Wrapper extends \Backend
 			$key = $action == static::TRIGGER_DELETE ? 'autoDelete' : 'autoCreate';
 
 			// check if count callback is defined
-			if($target == Model\ContentWrapper::TYPE_SEPARATOR)
+			if($target == ContentWrapper\Model::TYPE_SEPARATOR)
 			{
 				if(!isset($config[$target]['countExisting']) || !isset($config[$target]['countRequired']))
 				{

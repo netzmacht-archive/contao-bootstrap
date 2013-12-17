@@ -33,9 +33,19 @@ class Tab extends Wrapper
 	 */
 	protected $arrBootstrapAttributes = array('fade', 'tabs');
 
+	/**
+	 * @var
+	 */
 	protected $arrTabdefinition;
 
+	/**
+	 * @var mixed
+	 */
 	protected $arrTabs;
+
+	/**
+	 * @var
+	 */
 	protected $arrTab;
 
 
@@ -48,45 +58,45 @@ class Tab extends Wrapper
 		parent::__construct($objElement);
 
 		// load tab definitions
-		if($this->objModel->getType() == ContentWrapper::TYPE_START)
-		{
+		if($this->objWrapper->getType() == ContentWrapper\Model::TYPE_START) {
 			$tabs = deserialize($this->tabs, true);
 			$tab = null;
 
-			foreach ($tabs as $i => $t)
-			{
+			foreach ($tabs as $i => $t) {
 				$tabs[$i]['id'] = standardize($t['title']);
 
-				if($t['type'] != 'dropdown' && $tab === null)
-				{
+				if($t['type'] != 'dropdown' && $tab === null) {
 					$tab = $tabs[$i];
 				}
 			}
 
 			$this->arrTabs = $tabs;
-			$this->arrTab = $tab;
-			$this->fade = $this->bootstrap_fade;
+			$this->arrTab  = $tab;
+			$this->fade    = $this->bootstrap_fade;
 		}
-		elseif($this->objModel->getType() == ContentWrapper::TYPE_SEPARATOR)
-		{
+		elseif($this->objWrapper->getType() == ContentWrapper\Model::TYPE_SEPARATOR) {
 			$elements = $this->Database
 				->prepare('SELECT id FROM tl_content WHERE bootstrap_parentId=? ORDER by sorting')
 				->execute($this->bootstrap_parentId);
 
+			/** @var \Database\Result $elements */
 			$elements = array_merge(array($this->bootstrap_parentId), $elements->fetchEach('id'));
 
 			$index = 0;
-			$parent = ContentWrapper::findByPK($this->bootstrap_parentId);
+			$parent = \ContentModel::findByPK($this->bootstrap_parentId);
+
+			if($parent) {
+				$parent = new ContentWrapper\Model($parent);
+				$this->fade = $parent->bootstrap_fade;
+			}
+
 			$tabs = deserialize($parent->bootstrap_tabs, true);
 
-			foreach ($tabs as $i => $t)
-			{
+			foreach ($tabs as $i => $t) {
 				$tabs[$i]['id'] = standardize($t['title']);
 
-				if($t['type'] != 'dropdown')
-				{
-					if($elements[$index] == $this->id)
-					{
+				if($t['type'] != 'dropdown') {
+					if($elements[$index] == $this->id) {
 						$this->arrTab = $tabs[$i];
 					}
 					$index++;
@@ -94,7 +104,6 @@ class Tab extends Wrapper
 			}
 
 			$this->arrTabs = $tabs;
-			$this->fade = $parent->bootstrap_fade;
 		}
 
 	}
@@ -117,5 +126,7 @@ class Tab extends Wrapper
 		if($this->arrTab['title'] != '') {
 			return '<strong class="title">' . $this->arrTab['title'] . '</strong>';
 		}
+
+		return '';
 	}
 }

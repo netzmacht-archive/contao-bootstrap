@@ -40,8 +40,7 @@ class ColumnSet extends BootstrapAbstract
 	 */
 	public function generate()
 	{
-		$output = parent::generate();
-
+		$output    = parent::generate();
 		$columnSet = \ColumnsetModel::findByPK($this->columnset_id);
 
 		if(TL_MODE == 'BE') {
@@ -69,8 +68,7 @@ class ColumnSet extends BootstrapAbstract
 		$container = \Netzmacht\ColumnSet\ColumnSet::prepareContainer($this->columnset_id);
 		$i=0;
 
-		foreach($data as $article)
-		{
+		foreach($data as $article) {
 			$articles[] = array(
 				'article' => $this->getArticle($article['article'], false, !((bool) $this->articleMarkup)),
 				'class'   => $container[$i++][0],

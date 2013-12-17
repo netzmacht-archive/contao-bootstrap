@@ -13,7 +13,7 @@
 
 namespace Netzmacht\Bootstrap\DataContainer;
 
-use Netzmacht\Bootstrap\Model;
+use Netzmacht\Bootstrap\Model\ContentWrapper;
 
 /**
  * Class Content
@@ -76,41 +76,48 @@ class Content extends General
 	/**
 	 * count existing tab separators elements
 	 *
-	 * @param Model\ContentWrapper $model
+	 * @param ContentWrapper\Model $model
 	 *
 	 * @return int
 	 */
-	public function countExistingTabSeparators(Model\ContentWrapper $model)
+	public function countExistingTabSeparators(ContentWrapper\Model $model)
 	{
-		$id = $model->getType() == Model\ContentWrapper::TYPE_START ? $model->id : $model->bootstrap_parentId;
+		$id = $model->getType() == ContentWrapper\Model::TYPE_START ? $model->id : $model->bootstrap_parentId;
 
-		return Model\ContentWrapper::countBy(
+		$number = \ContentModel::countBy(
 			'type=? AND bootstrap_parentId',
-			array($model->getTypeName(Model\ContentWrapper::TYPE_SEPARATOR), $id)
+			array($model->getTypeName(ContentWrapper\Model::TYPE_SEPARATOR), $id)
 		);
+
+		return $number;
 	}
 
 	/**
 	 * count required tab separator elements
 	 *
-	 * @param Model\ContentWrapper $model
+	 * @param ContentWrapper\Model $model
 	 *
 	 * @return int
 	 */
-	public function countRequiredTabSeparators(Model\ContentWrapper $model)
+	public function countRequiredTabSeparators(ContentWrapper\Model $model)
 	{
-		if($model->getType() != Model\ContentWrapper::TYPE_START)
-		{
-			$model = Model\ContentWrapper::findByPk($model->bootstrap_parentId);
+		if($model->getType() != ContentWrapper\Model::TYPE_START) {
+			$model = \ContentModel::findByPk($model->bootstrap_parentId);
 		}
 
-		$tabs = deserialize($model->bootstrap_tabs, true);
+		$tabs = array();
+
+		if($model->bootstrap_tabs) {
+			$tabs = deserialize($model->bootstrap_tabs, true);
+		}
+		elseif(\Input::post('bootstrap_tabs')) {
+			$tabs = \Input::post('bootstrap_tabs');
+		}
+
 		$count = 0;
 
-		foreach($tabs as $tab)
-		{
-			if($tab['type'] != 'dropdown')
-			{
+		foreach($tabs as $tab) {
+			if($tab['type'] != 'dropdown') {
 				$count++;
 			}
 		}

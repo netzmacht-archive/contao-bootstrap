@@ -13,8 +13,7 @@
 
 namespace Netzmacht\Bootstrap\ContentElement;
 
-use Netzmacht\Bootstrap\Model;
-use Netzmacht\Bootstrap\Collection;
+use Netzmacht\Bootstrap\Model\ContentWrapper;
 
 
 /**
@@ -32,9 +31,10 @@ abstract class Wrapper extends BootstrapAbstract
 	protected static $arrStartElement;
 
 	/**
-	 * @var Model\ContentWrapper
+	 * @var ContentWrapper\Model
 	 */
-	protected $objModel;
+	protected $objWrapper;
+
 
 	/**
 	 * @var string
@@ -49,18 +49,11 @@ abstract class Wrapper extends BootstrapAbstract
 	 */
 	public function __construct($objElement)
 	{
-		if($objElement instanceof \Model\Collection && !$objElement instanceof Collection\ContentWrapper)
-		{
+		if($objElement instanceof \Model\Collection) {
 			$objElement = $objElement->current();
 		}
 
-		if(!$objElement instanceof Model\ContentWrapper)
-		{
-			$row = $objElement->row();
-
-			$objElement = new Model\ContentWrapper();
-			$objElement->setRow($row);
-		}
+		$this->objWrapper = new ContentWrapper\Model($objElement);
 
 		parent::__construct($objElement);
 	}
@@ -74,7 +67,7 @@ abstract class Wrapper extends BootstrapAbstract
 		// backend mode
 		if(TL_MODE == 'BE')
 		{
-			if($this->objModel->getType() == Model\ContentWrapper::TYPE_STOP)
+			if($this->objWrapper->getType() == ContentWrapper\Model::TYPE_STOP)
 			{
 				return '';
 			}
@@ -82,7 +75,7 @@ abstract class Wrapper extends BootstrapAbstract
 			return $this->generateTitle();
 		}
 
-		$this->wrapperType = $this->objModel->getType();
+		$this->wrapperType = $this->objWrapper->getType();
 
 		return parent::generate();
 	}
