@@ -13,7 +13,6 @@
 
 namespace Netzmacht\Bootstrap\DataContainer;
 
-use Netzmacht\Bootstrap\DataContainer\General;
 use Netzmacht\Bootstrap\Model\Locator;
 
 /**

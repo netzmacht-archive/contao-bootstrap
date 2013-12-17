@@ -19,17 +19,24 @@ class Locator
 	 */
 	public static function resolve($result, $table)
 	{
+		$class = \Model::getClassFromTable($table);
 		$model = null;
 		$id    = is_object($result) ? $result->id : $result;
 
 		// first check the registry
 		if(version_compare(VERSION, '3.2', '>=')) {
 			$model = \Model\Registry::getInstance()->fetch($table, $id);
+
+			if(!$model) {
+				$model = $class::findByPk($id);
+
+				if($model) {
+					$model->setRow($result->row());
+				}
+			}
 		}
 
 		if(!$model) {
-			$class = \Model::getClassFromTable($table);
-
 			if(is_object($result)) {
 				$model = new $class($result);
 			}
