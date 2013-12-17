@@ -14,6 +14,7 @@
 namespace Netzmacht\Bootstrap\DataContainer;
 
 use Netzmacht\Bootstrap\Model\ContentWrapper;
+use Netzmacht\Bootstrap\Model\Locator;
 
 
 /**
@@ -68,7 +69,8 @@ class Wrapper extends \Backend
 		$stop   = ContentWrapper\Model::TYPE_STOP;
 		$sep    = ContentWrapper\Model::TYPE_SEPARATOR;
 
-		$this->objModel = new ContentWrapper\Model(new \ContentModel($dc->activeRecord));
+		$model = Locator::resolve($dc->activeRecord, $dc->table);
+		$this->objModel = new ContentWrapper\Model($model);
 
 		$this->objModel->type = $value;
 		$sorting = $this->objModel->sorting;
@@ -196,7 +198,8 @@ class Wrapper extends \Backend
 	 */
 	public function delete($dc)
 	{
-		$this->objModel = new ContentWrapper\Model(new \ContentModel($dc->activeRecord));
+		$model = Locator::resolve($dc->activeRecord, $dc->table);
+		$this->objModel = new ContentWrapper\Model($model);
 
 		// getType will throw an exception if type is not found. use it to detect non content wrapper elements
 		try {
@@ -242,10 +245,8 @@ class Wrapper extends \Backend
 					);
 			}
 
-			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_START, static::TRIGGER_DELETE))
-			{
-				$model = new \ContentModel();
-				$model->id = $this->objModel->bootstrap_parentId;
+			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_START, static::TRIGGER_DELETE)) {
+				$model = Locator::resolve($this->objModel->bootstrap_parentId, $this->objModel->getModel()->getTable());
 				$model->delete();
 			}
 		}

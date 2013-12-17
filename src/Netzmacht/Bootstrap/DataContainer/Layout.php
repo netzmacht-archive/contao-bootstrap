@@ -14,6 +14,7 @@
 namespace Netzmacht\Bootstrap\DataContainer;
 
 use Netzmacht\Bootstrap\DataContainer\General;
+use Netzmacht\Bootstrap\Model\Locator;
 
 /**
  * Class Layout
@@ -226,6 +227,7 @@ class Layout extends General
 				$source = 'system/modules';
 			}
 
+			/** @var \Model $model */
 			$model = new $modelClass();
 			$model->tstamp        = time();
 			$model->pid           = $layout->pid;
@@ -242,8 +244,7 @@ class Layout extends General
 
 		$new = array_merge(deserialize($layout->$field, true), $new);
 
-		$model = new \LayoutModel();
-		$model->id = $layout->id;
+		$model = Locator::resolve($layout->id, 'tl_layout');
 		$model->$field  = $new;
 		$model->$toggle = '';
 		$model->save();
