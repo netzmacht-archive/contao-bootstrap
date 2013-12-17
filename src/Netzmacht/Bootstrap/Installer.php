@@ -37,7 +37,7 @@ class Installer extends \Backend
 	/**
 	 * method for runonce.php
 	 */
-	public function runOnce()
+	public function run()
 	{
 		if($this->User->isAdmin)
 		{
