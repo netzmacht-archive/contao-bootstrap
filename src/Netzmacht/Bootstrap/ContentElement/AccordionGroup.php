@@ -9,7 +9,7 @@
 
 namespace Netzmacht\Bootstrap\ContentElement;
 
-use Netzmacht\Bootstrap\Model;
+use Netzmacht\Bootstrap\Model\ContentWrapper;
 
 /**
  * Class ContentAccordionGroup
@@ -29,7 +29,7 @@ class AccordionGroup extends Wrapper
 	 */
 	protected function compile()
 	{
-		if($this->objModel->getType() == Model\ContentWrapper::TYPE_START)
+		if($this->objWrapper->getType() == ContentWrapper\Model::TYPE_START)
 		{
 			$GLOBALS['accordionGroup'] = 'accordion-group-' . $this->id;
 			$GLOBALS['accordionGroupFirst'] = true;
