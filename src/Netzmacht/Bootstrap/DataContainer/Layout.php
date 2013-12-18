@@ -13,7 +13,7 @@
 
 namespace Netzmacht\Bootstrap\DataContainer;
 
-use Netzmacht\Bootstrap\Model\Locator;
+use Netzmacht\Bootstrap\Model\Factory;
 
 /**
  * Class Layout
@@ -243,7 +243,7 @@ class Layout extends General
 
 		$new = array_merge(deserialize($layout->$field, true), $new);
 
-		$model = Locator::resolve($layout->id, 'tl_layout');
+		$model = Factory::create($layout->id, 'tl_layout');
 		$model->$field  = $new;
 		$model->$toggle = '';
 		$model->save();

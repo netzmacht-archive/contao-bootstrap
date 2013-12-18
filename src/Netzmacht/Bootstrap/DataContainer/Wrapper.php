@@ -14,7 +14,7 @@
 namespace Netzmacht\Bootstrap\DataContainer;
 
 use Netzmacht\Bootstrap\Model\ContentWrapper;
-use Netzmacht\Bootstrap\Model\Locator;
+use Netzmacht\Bootstrap\Model\Factory;
 
 
 /**
@@ -69,7 +69,7 @@ class Wrapper extends \Backend
 		$stop   = ContentWrapper\Model::TYPE_STOP;
 		$sep    = ContentWrapper\Model::TYPE_SEPARATOR;
 
-		$model = Locator::resolve($dc->activeRecord, $dc->table);
+		$model = Factory::create($dc->activeRecord, $dc->table);
 		$this->objModel = new ContentWrapper\Model($model);
 
 		$this->objModel->type = $value;
@@ -198,7 +198,7 @@ class Wrapper extends \Backend
 	 */
 	public function delete($dc)
 	{
-		$model = Locator::resolve($dc->activeRecord, $dc->table);
+		$model = Factory::create($dc->activeRecord, $dc->table);
 		$this->objModel = new ContentWrapper\Model($model);
 
 		// getType will throw an exception if type is not found. use it to detect non content wrapper elements
@@ -246,7 +246,7 @@ class Wrapper extends \Backend
 			}
 
 			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_START, static::TRIGGER_DELETE)) {
-				$model = Locator::resolve($this->objModel->bootstrap_parentId, $this->objModel->getModel()->getTable());
+				$model = Factory::create($this->objModel->bootstrap_parentId, $this->objModel->getModel()->getTable());
 				$model->delete();
 			}
 		}
