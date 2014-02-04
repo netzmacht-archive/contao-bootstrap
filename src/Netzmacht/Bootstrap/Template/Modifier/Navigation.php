@@ -86,7 +86,7 @@ class Navigation
 
 				if($item['subitems'])
 				{
-					if($item['type'] == 'm17Folder')
+					if($item['type'] == 'm17Folder' || $item['href'] == '#')
 					{
 						if($level == 1 || $template->disableUl)
 						{
@@ -106,7 +106,7 @@ class Navigation
 					$item['toggle'] = 'class="dropdown-toggle"';
 
 
-					if($item['type'] == 'm17Folder')
+					if($item['type'] == 'm17Folder' || $item['href'] == '#')
 					{
 						if($template->level == 'level_1')
 						{
