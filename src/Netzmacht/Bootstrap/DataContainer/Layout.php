@@ -190,17 +190,12 @@ class Layout extends General
 	 *
 	 * @param array|string  $value
 	 * @param string        $modelClass
-	 * @param \Model|Result $layout
+	 * @param \Model|\Result $layout
 	 * @param string        $field      fieldname
 	 * @param string        $toggle     name of toggle field
 	 */
 	protected function installFiles($value, $modelClass, $layout, $field, $toggle)
 	{
-		if(!isset($layout->$field))
-		{
-			return;
-		}
-
 		$value = deserialize($value, true);
 
 		$result = $modelClass::findAll(array('limit' => '1', 'order' => 'sorting DESC'));
@@ -209,17 +204,14 @@ class Layout extends General
 
 		foreach($value as $file)
 		{
-			if($file['file'] == '')
-			{
+			if($file['file'] == '') {
 				continue;
 			}
 
-			if(substr($file['file'], 0, 6) == 'assets')
-			{
+			if(substr($file['file'], 0, 6) == 'assets') {
 				$source = 'assets';
 			}
-			elseif(substr($file['file'], 0, 5) == 'files')
-			{
+			elseif(substr($file['file'], 0, 5) == 'files') {
 				$source = 'files';
 			}
 			else {
@@ -241,12 +233,16 @@ class Layout extends General
 			$new[] = $model->id;
 		}
 
-		$new = array_merge(deserialize($layout->$field, true), $new);
+		$new  = array_merge(deserialize($layout->$field, true), $new);
+		$data = array(
+			$field => $new,
+			$toggle => ''
+		);
 
-		$model = Factory::create($layout->id, 'tl_layout');
-		$model->$field  = $new;
-		$model->$toggle = '';
-		$model->save();
+		\Database::getInstance()
+			->prepare('UPDATE tl_layout %s WHERE id=?')
+			->set($data)
+			->execute($layout->id);
 	}
 
 }
