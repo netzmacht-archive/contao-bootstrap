@@ -14,7 +14,7 @@ namespace Netzmacht\Bootstrap;
  * Class Installer
  * @package Netzmacht\Bootstrap
  */
-class Installer extends \Backend
+class Installer
 {
 
 	/**
@@ -22,15 +22,8 @@ class Installer extends \Backend
 	 */
 	public function __construct()
 	{
-		$this->import('BackendUser', 'User');
-		$this->import('Database');
-
-		parent::__construct();
-
-		$this->User->authenticate();
-
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('modules');
+		\Controller::loadLanguageFile('default');
+		\Controller::loadLanguageFile('modules');
 	}
 
 
