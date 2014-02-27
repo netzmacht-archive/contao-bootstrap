@@ -69,10 +69,11 @@ class Wrapper extends \Backend
 		$stop   = ContentWrapper\Model::TYPE_STOP;
 		$sep    = ContentWrapper\Model::TYPE_SEPARATOR;
 
-		$model = Factory::create($dc->activeRecord, $dc->table);
-		$this->objModel = new ContentWrapper\Model($model);
+		$model = new \ContentModel();
+		$model->setRow($dc->activeRecord->row());
+		$model->type = $value;
 
-		$this->objModel->type = $value;
+		$this->objModel = new ContentWrapper\Model($model);
 		$sorting = $this->objModel->sorting;
 
 		// getType will throw an exception if type is not found. use it to detect non content wrapper elements
@@ -111,8 +112,7 @@ class Wrapper extends \Backend
 				}
 
 				// create parent if possible
-				elseif($this->isTrigger($type, $start))
-				{
+				elseif($this->isTrigger($type, $start)) {
 					$sorting = $sorting-2;
 					$this->createElement($sorting, $start);
 				}
@@ -198,7 +198,7 @@ class Wrapper extends \Backend
 	 */
 	public function delete($dc)
 	{
-		$model = Factory::create($dc->activeRecord, $dc->table);
+		$model = \ContentModel::findByPk($dc->id);
 		$this->objModel = new ContentWrapper\Model($model);
 
 		// getType will throw an exception if type is not found. use it to detect non content wrapper elements
@@ -214,18 +214,15 @@ class Wrapper extends \Backend
 		{
 			$deleteTypes = array();
 
-			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_SEPARATOR, static::TRIGGER_DELETE))
-			{
+			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_SEPARATOR, static::TRIGGER_DELETE)) {
 				$deleteTypes[] = $this->objModel->getTypeName(ContentWrapper\Model::TYPE_SEPARATOR);
 			}
 
-			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_STOP, static::TRIGGER_DELETE))
-			{
+			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_STOP, static::TRIGGER_DELETE)) {
 				$deleteTypes[] = $this->objModel->getTypeName(ContentWrapper\Model::TYPE_STOP);
 			}
 
-			if(!empty($deleteTypes))
-			{
+			if(!empty($deleteTypes)) {
 				$this->Database
 					->prepare(sprintf(
 						'DELETE FROM tl_content WHERE bootstrap_parentId=? AND type IN(\'%s\')',
@@ -235,8 +232,7 @@ class Wrapper extends \Backend
 			}
 		}
 		elseif($this->objModel->getType() == ContentWrapper\Model::TYPE_STOP) {
-			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_SEPARATOR, static::TRIGGER_DELETE))
-			{
+			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_SEPARATOR, static::TRIGGER_DELETE)) {
 				$this->Database
 					->prepare('DELETE FROM tl_content WHERE bootstrap_parentId=? AND type=?')
 					->execute(
@@ -246,13 +242,15 @@ class Wrapper extends \Backend
 			}
 
 			if($this->isTrigger($this->objModel->getType(), ContentWrapper\Model::TYPE_START, static::TRIGGER_DELETE)) {
-				$model = Factory::create($this->objModel->bootstrap_parentId, $this->objModel->getModel()->getTable());
-				$model->delete();
+				$query = sprintf('DELETE FROM %s WHERE id=?', $this->objModel->getModel()->getTable());
+
+				\Database::getInstance()
+					->prepare($query)
+					->execute($this->objModel->bootstrap_parentId);
 			}
 		}
-		else
-		{
-			// @todo: handle seperator delete actions
+		else {
+			// todo: handle seperator delete actions
 		}
 	}
 
