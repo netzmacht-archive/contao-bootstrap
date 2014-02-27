@@ -10,6 +10,7 @@ use Model\Collection;
  */
 class Repository
 {
+	
 	/**
 	 * count related elements optionally limited by type
 	 *
@@ -21,29 +22,29 @@ class Repository
 	{
 		if($model->getType() == $model::TYPE_START) {
 			if($type === null) {
-				$strColumn = 'bootstrap_parentId';
-				$mixedValue = $model->id;
+				$column = 'bootstrap_parentId';
+				$values = $model->id;
 			}
 			else {
-				$strColumn = 'bootstrap_parentId=? AND type';
-				$mixedValue = array($model->id, $model->getTypeName($type));
+				$column = array('bootstrap_parentId=?', 'type=?');
+				$values = array($model->id, $model->getTypeName($type));
 			}
 		}
 		elseif($type === null) {
-			$strColumn = 'id !=? AND (bootstrap_parentId=? OR id=?) AND 1';
-			$mixedValue = array($model->id, $model->bootstrap_parentId, $model->bootstrap_parentId, 1);
+			$column = array('id !=?', '(bootstrap_parentId=? OR id=?)');
+			$values = array($model->id, $model->bootstrap_parentId, $model->bootstrap_parentId);
 		}
 		elseif($type == $model::TYPE_START) {
-			$strColumn = 'id';
-			$mixedValue = $model->bootstrap_parentId;
+			$column = 'id';
+			$values = $model->bootstrap_parentId;
 		}
 		else {
-			$strColumn = 'id !=? AND bootstrap_parentId=? AND type';
-			$mixedValue = array($model->id, $model->bootstrap_parentId, $model->getTypeName($type));
+			$column = array('id !=?', 'bootstrap_parentId=?', 'type=?');
+			$values = array($model->id, $model->bootstrap_parentId, $model->getTypeName($type));
 
 		}
 
-		return $model->getModel()->countBy($strColumn, $mixedValue);
+		return \ContentModel::countBy($column, $values);
 	}
 
 
@@ -61,20 +62,22 @@ class Repository
 			return null;
 		}
 
-		$database = \Database::getInstance();
+		$options = array(
+			'order' => 'sorting'
+		);
 
 		if($type === null) {
-			$result = $database
-				->prepare('SELECT * FROM tl_content WHERE bootstrap_parentId=? ORDER BY sorting')
-				->execute($model->id);
+			$column   = 'bootstrap_parentId';
+			$values[] = $model->id;
 		}
 		else {
-			$result = $database
-				->prepare('SELECT * FROM tl_content WHERE bootstrap_parentId=? AND type=? ORDER BY sorting')
-				->execute($model->id, $model->getTypeName($type));
+			$column   = array('bootstrap_parentId=? ', 'type=?');
+			$values[] = $model->id;
+			$values[] = $model->getTypeName($type);
+
 		}
 
-		return new Collection($result, 'tl_content');
+		return \ContentModel::findBy($column, $values, $options);
 	}
 
 
@@ -92,27 +95,22 @@ class Repository
 			return null;
 		}
 
-		$database = \Database::getInstance();
-		$parentId = $model->getType() == $model::TYPE_START ? $model->id : $model->bootstrap_parentId;
+		$options = array(
+			'order' => 'sorting'
+		);
 
 		if($type === null) {
-			$result = $database
-				->prepare('SELECT * FROM tl_content WHERE bootstrap_parentId=? ORDER BY sorting')
-				->limit(1)
-				->execute($parentId);
+			$column   = 'bootstrap_parentId';
+			$values[] = $model->id;
 		}
 		else {
-			$result = $database
-				->prepare('SELECT * FROM tl_content WHERE bootstrap_parentId=? AND type=? ORDER BY sorting')
-				->limit(1)
-				->execute($parentId, $model->getTypeName($type));
+			$column   = array('bootstrap_parentId=? ', 'type=?');
+			$values[] = $model->id;
+			$values[] = $model->getTypeName($type);
+
 		}
 
-		if(!$result->numRows) {
-			return null;
-		}
-
-		return new Model(new \ContentModel($result, 'tl_content'));
+		return \ContentModel::findOneBy($column, $values, $options);
 	}
 
 
@@ -130,16 +128,9 @@ class Repository
 			$type = $model->getType();
 		}
 
-		$databse = \Database::getInstance();
-		$result  = $databse
-			->prepare('SELECT * FROM tl_content WHERE pid=? AND ptable=? AND type=? AND sorting<?')
-			->limit(1)
-			->execute($model->pid, $model->ptable, $model->getTypeName($type), $model->sorting);
+		$column = array('pid=?', 'ptable=?', 'type=?', 'sorting<?');
+		$values = array($model->pid, $model->ptable, $model->getTypeName($type), $model->sorting);
 
-		if($result) {
-			return new Model(new \ContentModel($result));
-		}
-
-		return null;
+		return \ContentModel::findOneBy($column, $values);
 	}
 }
