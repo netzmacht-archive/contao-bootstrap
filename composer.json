@@ -32,7 +32,7 @@
         "twbs/bootstrap":"~3.0.0"
     },
     "suggest": {
-        "netzmacht/font-awesome" : "Use Font Awesome icons with Contao-Bootstrap"
+        "netzmacht/contao-font-awesome" : "Use Font Awesome icons with Contao-Bootstrap"
     },
     "autoload": {
         "psr-0": { "Netzmacht\\Bootstrap\\": "src/" }
