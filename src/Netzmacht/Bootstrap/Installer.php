@@ -39,11 +39,12 @@ class Installer extends \Backend
 	 */
 	public function run()
 	{
-		if($this->User->isAdmin)
-		{
-			$this->setupSections();
-			$this->createSymlink();
-		}
+		\Controller::log('Bootstrap installer called', '\Netzmacht\Bootstrap::run', TL_INFO);
+
+		$this->setupSections();
+		$this->createSymlink();
+
+		\Controller::log('Bootstrap installer finished', '\Netzmacht\Bootstrap::run', TL_INFO);
 	}
 
 
