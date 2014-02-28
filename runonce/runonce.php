@@ -11,7 +11,5 @@
  * @copyright 2013 netzmacht creative David Molineus
  */
 
-\Controller::log('Bootstrap runonce loaded', 'contao-bootstrap/runonce.php', 'TL_INFO');
-
 $controller = new Netzmacht\Bootstrap\Installer();
 $controller->run();

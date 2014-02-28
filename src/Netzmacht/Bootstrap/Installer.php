@@ -36,8 +36,6 @@ class Installer
 
 		$this->setupSections();
 		$this->createSymlink();
-
-		\Controller::log('Bootstrap installer finished', '\Netzmacht\Bootstrap::run', TL_INFO);
 	}
 
 

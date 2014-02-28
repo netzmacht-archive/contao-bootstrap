@@ -45,7 +45,7 @@
                 "assets/jquery-touchSwipe": "assets/bootstrap/jquery-touchSwipe"
             },
             "runonce":[
-                "runonce/runonce.php"
+                "composer/vendor/netzmacht/contao-bootstrap/runonce/runonce.php"
             ]
         }
     }
