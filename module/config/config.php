@@ -55,11 +55,18 @@ $GLOBALS['BE_FFL']['singleSelect']              = 'Netzmacht\Bootstrap\Widget\Si
 
 $GLOBALS['TL_HOOKS']['initializeSystem'][]      = array('Netzmacht\Bootstrap\Bootstrap', 'initializeConfig');
 $GLOBALS['TL_HOOKS']['getPageLayout'][]         = array('Netzmacht\Bootstrap\Bootstrap', 'initializeLayout');
-$GLOBALS['TL_HOOKS']['loadFormField'][]         = array('Netzmacht\Bootstrap\Bootstrap', 'initializeFormWidget');
+//$GLOBALS['TL_HOOKS']['loadFormField'][]         = array('Netzmacht\Bootstrap\Bootstrap', 'initializeFormWidget');
 
 $GLOBALS['TL_HOOKS']['parseTemplate'][]         = array('Netzmacht\Bootstrap\Template\Modifier', 'execute');
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][]     = array('Netzmacht\Bootstrap\InsertTags', 'replaceTags');
 $GLOBALS['TL_HOOKS']['simpleAjax'][]            = array('Netzmacht\Bootstrap\Ajax', 'loadModalContent');
+
+
+/**
+ * Events
+ */
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Netzmacht\Bootstrap\Form\Subscriber';
+
 
 
 /**

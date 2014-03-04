@@ -63,27 +63,6 @@ class Bootstrap
 
 
 	/**
-	 * add bootstrap form widget as delegator by using the loadFormField hook
-	 *
-	 * @param \Widget $widget
-	 * @param         $formId
-	 * @param         $data
-	 * @param         $form
-	 *
-	 * @return BootstrapWidget|\Widget
-	 */
-	public function initializeFormWidget(\Widget $widget, $formId, $data, $form)
-	{
-		if(static::isEnabled())
-		{
-			return new Form\Widget($widget);
-		}
-
-		return $widget;
-	}
-
-
-	/**
 	 * initialize user config, load it here so it affect other extensions as well
 	 */
 	public function initializeConfig()
