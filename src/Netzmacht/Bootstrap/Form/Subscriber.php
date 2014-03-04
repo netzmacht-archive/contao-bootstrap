@@ -1,0 +1,158 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: david
+ * Date: 03.03.14
+ * Time: 18:55
+ */
+
+namespace Netzmacht\Bootstrap\Form;
+
+
+use Netzmacht\Bootstrap\Bootstrap;
+use Netzmacht\Bootstrap\Helper\Icons;
+use Netzmacht\FormHelper\Event\Events;
+use Netzmacht\FormHelper\Event\GenerateEvent;
+use Netzmacht\FormHelper\Event\SelectLayoutEvent;
+use Netzmacht\FormHelper\Html\Element;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class Subscriber implements EventSubscriberInterface
+{
+
+	/**
+	 * Returns an array of event names this subscriber wants to listen to.
+	 *
+	 * The array keys are event names and the value can be:
+	 *
+	 *  * The method name to call (priority defaults to 0)
+	 *  * An array composed of the method name to call and the priority
+	 *  * An array of arrays composed of the method names to call and respective
+	 *    priorities, or 0 if unset
+	 *
+	 * For instance:
+	 *
+	 *  * array('eventName' => 'methodName')
+	 *  * array('eventName' => array('methodName', $priority))
+	 *  * array('eventName' => array(array('methodName1', $priority), array('methodName2'))
+	 *
+	 * @return array The event names to listen to
+	 *
+	 * @api
+	 */
+	public static function getSubscribedEvents()
+	{
+		return array(
+			Events::SELECT_LAYOUT => 'selectLayout',
+			Events::GENERATE => 'generate',
+		);
+	}
+
+
+	/**
+	 * @param SelectLayoutEvent $event
+	 */
+	public function selectLayout(SelectLayoutEvent $event)
+	{
+		if(Bootstrap::isEnabled()) {
+			$event->setLayout('bootstrap');
+		}
+	}
+
+
+	/**
+	 * @param GenerateEvent $event
+	 */
+	public function generate(GenerateEvent $event)
+	{
+		$form      = $event->getForm();
+		$container = $event->getContainer();
+		$element   = $event->getContainer()->getElement();
+		$widget    = $event->getWidget();
+		$label     = $event->getLabel();
+
+		// add label class
+		$label->addClass('control-label');
+
+		// apply form control class to the element
+		if(!$this->getConfig($widget->type, 'noFormControl')) {
+			$element->addClass('form-control');
+		}
+
+		// add column layout
+		if(!$widget->tableless) {
+			$container->setRenderContainer(true);
+			$container->addClass($GLOBALS['BOOTSTRAP']['form']['tableFormat']['control']);
+
+			if(!$widget->label || $this->getConfig($widget->type, 'noLabel')) {
+				$container->addClass($GLOBALS['BOOTSTRAP']['form']['tableFormat']['offset']);
+			}
+			else {
+				$label->addClass($GLOBALS['BOOTSTRAP']['form']['tableFormat']['label']);
+			}
+		}
+
+		// enable styled select
+		if($GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && $this->getConfig($widget->type, 'styleSelect')) {
+			$element->addClass($GLOBALS['BOOTSTRAP']['form']['styleSelect']['class']);
+			$element->setAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']['style']);
+		}
+
+		// generate input group
+		if($this->getConfig($widget->type, 'allowInputGroup') &&
+			($widget->bootstrap_addIcon || $widget->bootstrap_addUnit || $container->has('submit'))
+		) {
+			$inputGroup = new InputGroup();
+			$inputGroup->setElement($element);
+			$container->setWrapper($inputGroup);
+
+			// add icon
+			if($widget->bootstrap_addIcon) {
+				$icon = Icons::generateIcon($widget->bootstrap_icon);
+
+				if($widget->bootstrap_iconPosition == 'right') {
+					$inputGroup->setRight($icon);
+				}
+				else {
+					$inputGroup->setLeft($icon);
+				}
+			}
+
+			// add unit
+			if($widget->bootstrap_addUnit) {
+				if($widget->$this->bootstrap_unit == 'right') {
+					$inputGroup->setRight($widget->bootstrap_unit);
+				}
+				else {
+					$inputGroup->setLeft($widget->bootstrap_unit);
+				}
+			}
+
+			// add submit button into input group
+			if($container->has('submit')) {
+				$submit = $container->remove('submit');
+				$inputGroup->setRight($submit, $inputGroup::BUTTON);
+			}
+		}
+	}
+
+
+	/**
+	 * @param $type
+	 * @param $name
+	 * @return mixed
+	 */
+	protected function getConfig($type, $name)
+	{
+		if(!isset($GLOBALS['BOOTSTRAP']['form']['widgets'][$type])) {
+			return false;
+		}
+
+		if(isset($GLOBALS['BOOTSTRAP']['form']['widgets'][$type][$name])) {
+			return $GLOBALS['BOOTSTRAP']['form']['widgets'][$type][$name];
+		}
+
+		return false;
+	}
+
+}
