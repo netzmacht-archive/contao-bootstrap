@@ -100,7 +100,11 @@ class Subscriber implements EventSubscriberInterface
 
 		// generate input group
 		if($this->getConfig($widget->type, 'allowInputGroup') &&
-			($widget->bootstrap_addIcon || $widget->bootstrap_addUnit || $container->has('submit'))
+			($widget->bootstrap_addIcon ||
+				$widget->bootstrap_addUnit ||
+				$container->has('submit') ||
+				$widget->type == 'captcha'
+			)
 		) {
 			$inputGroup = new InputGroup();
 			$inputGroup->setElement($element);
@@ -134,6 +138,12 @@ class Subscriber implements EventSubscriberInterface
 				$submit->addClass('btn');
 
 				$inputGroup->setRight($submit, $inputGroup::BUTTON);
+			}
+
+			// add captcha as form input group
+			if($widget instanceof \FormCaptcha) {
+				$captcha = $widget->generateQuestion();
+				$inputGroup->setRight($captcha);
 			}
 		}
 	}
