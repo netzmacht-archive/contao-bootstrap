@@ -17,7 +17,7 @@ class InputGroup implements GenerateInterface, ElementContainerInterface
 
 	const ADDON = 'input-group-addon';
 
-	const BUTTON = 'input-group-button';
+	const BUTTON = 'input-group-btn';
 
 
 	/**
@@ -89,9 +89,9 @@ class InputGroup implements GenerateInterface, ElementContainerInterface
 
 
 	/**
-	 * @param Element $element
+	 * @param $element
 	 */
-	public function setElement(Element $element)
+	public function setElement($element)
 	{
 		$this->element = $element;
 	}

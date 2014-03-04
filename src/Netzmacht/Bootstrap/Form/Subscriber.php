@@ -131,6 +131,8 @@ class Subscriber implements EventSubscriberInterface
 			// add submit button into input group
 			if($container->has('submit')) {
 				$submit = $container->remove('submit');
+				$submit->addClass('btn');
+
 				$inputGroup->setRight($submit, $inputGroup::BUTTON);
 			}
 		}

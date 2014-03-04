@@ -34,6 +34,14 @@ $GLOBALS['BOOTSTRAP']['form'] = array
 			'generateTemplate' => 'form_checkbox_generate',
 		),
 
+		'explanation' => array(
+			'noFormControl'    => true,
+		),
+
+		'headline' => array(
+			'noFormControl'    => true,
+		),
+
 		'radio' => array
 		(
 			'noFormControl'    => true,
