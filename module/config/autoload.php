@@ -37,4 +37,5 @@ TemplateLoader::addFiles(array
 	'fe_bootstrap'           => 'system/modules/bootstrap/templates',
 	'mod_navbar'             => 'system/modules/bootstrap/templates',
 	'ce_bootstrap_tab'       => 'system/modules/bootstrap/templates',
+	'formhelper_layout_bootstrap' => 'system/modules/bootstrap/templates',
 ));
