@@ -142,7 +142,7 @@ class Subscriber implements EventSubscriberInterface
 
 			// add captcha as form input group
 			if($widget instanceof \FormCaptcha) {
-				$captcha = $widget->generateQuestion();
+				$captcha = $container->remove('question');
 				$inputGroup->setRight($captcha);
 			}
 		}
