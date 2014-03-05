@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: david
- * Date: 03.03.14
- * Time: 18:55
- */
 
 namespace Netzmacht\Bootstrap\Form;
 
@@ -16,6 +10,7 @@ use Netzmacht\FormHelper\Event\GenerateEvent;
 use Netzmacht\FormHelper\Event\SelectLayoutEvent;
 use Netzmacht\FormHelper\Html\Element;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
 
 class Subscriber implements EventSubscriberInterface
 {
@@ -70,13 +65,12 @@ class Subscriber implements EventSubscriberInterface
 		$widget    = $event->getWidget();
 		$label     = $event->getLabel();
 		$errors    = $event->getErrors();
-		$isObject  = $element instanceof Element;
 
 		// add label class
 		$label->addClass('control-label');
 
 		// apply form control class to the element
-		if($isObject && !$this->getConfig($widget->type, 'noFormControl')) {
+		if(!$this->getConfig($widget->type, 'noFormControl')) {
 			$element->addClass('form-control');
 		}
 
@@ -94,7 +88,7 @@ class Subscriber implements EventSubscriberInterface
 		}
 
 		// enable styled select
-		if($isObject && $GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && $this->getConfig($widget->type, 'styleSelect')) {
+		if($GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && $this->getConfig($widget->type, 'styleSelect')) {
 			$element->addClass($GLOBALS['BOOTSTRAP']['form']['styleSelect']['class']);
 			$element->setAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']['style']);
 		}
