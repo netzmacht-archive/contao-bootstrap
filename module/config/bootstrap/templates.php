@@ -25,6 +25,7 @@ $GLOBALS['BOOTSTRAP']['templates'] = array
 			'ce_accordion',
 			'ce_accordion_start',
 			'form',
+			'formhelper_element_checkboxes',
 			'mod_breadcrumb',
 			'mod_comment_form',
 			'mod_search_advanced',
