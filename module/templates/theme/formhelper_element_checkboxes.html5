@@ -18,8 +18,7 @@ foreach($this->options as $option):
 		$legend = $group->createElement('legend')
 			->addChild($option['label']);
 		$group
-			->addChild($legend)
-			->addClass('checkbox');
+			->addChild($legend);
 
 	else:
 		$child = Element::createElement('input', array('type' => 'checkbox'))
@@ -32,11 +31,13 @@ foreach($this->options as $option):
 		$label->addChild($option['label']);
 		$label->setAttribute('for', $child->getId());
 
+		$buffer = sprintf('<div class="checkbox">%s</div>', $label);
+
 		if($group) {
-			$group->addChild($label);
+			$group->addChild($buffer);
 		}
 		else {
-			echo $label;
+			echo $buffer;
 		}
 
 	endif;
