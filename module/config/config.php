@@ -66,7 +66,7 @@ $GLOBALS['TL_HOOKS']['simpleAjax'][]            = array('Netzmacht\Bootstrap\Aja
  * Events
  */
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Netzmacht\Bootstrap\Form\Subscriber';
-
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Netzmacht\Bootstrap\Module\Modal\Subscriber';
 
 
 /**
