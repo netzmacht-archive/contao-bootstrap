@@ -137,7 +137,7 @@ class Modal extends BootstrapAbstract
 		if($this->addModalFooter)
 		{
 			$buttons  = new Helper\Buttons();
-			$buttons->loadFromFieldset($this->buttons);
+			$buttons->loadFromFieldset(deserialize($this->buttons, true));
 			$buttons->buttonStyle = $this->buttonStyle ? $this->buttonStyle : 'btn-default';
 			$buttons->addContainer = false;
 
