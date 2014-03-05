@@ -9,7 +9,7 @@ $group = null;
 $index = 0;
 
 foreach($this->options as $option):
-	if(isset($option['group']) && $option['group']) :
+	if(isset($option['group']) && $option['group']):
 		if($group) {
 			echo $group;
 		}
@@ -17,7 +17,10 @@ foreach($this->options as $option):
 		$group = Element::createElement('fieldset');
 		$legend = $group->createElement('legend')
 			->addChild($option['label']);
-		$group->addChild($legend);
+		$group
+			->addChild($legend)
+			->addClass('checkbox');
+
 	else:
 		$child = Element::createElement('input', array('type' => 'checkbox'))
 			->setAttribute('name', $this->attributes->get('name') . '[]')
