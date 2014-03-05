@@ -70,12 +70,13 @@ class Subscriber implements EventSubscriberInterface
 		$widget    = $event->getWidget();
 		$label     = $event->getLabel();
 		$errors    = $event->getErrors();
+		$isObject  = $element instanceof Element;
 
 		// add label class
 		$label->addClass('control-label');
 
 		// apply form control class to the element
-		if(!$this->getConfig($widget->type, 'noFormControl')) {
+		if($isObject && !$this->getConfig($widget->type, 'noFormControl')) {
 			$element->addClass('form-control');
 		}
 
@@ -93,7 +94,7 @@ class Subscriber implements EventSubscriberInterface
 		}
 
 		// enable styled select
-		if($GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && $this->getConfig($widget->type, 'styleSelect')) {
+		if($isObject && $GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && $this->getConfig($widget->type, 'styleSelect')) {
 			$element->addClass($GLOBALS['BOOTSTRAP']['form']['styleSelect']['class']);
 			$element->setAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']['style']);
 		}
