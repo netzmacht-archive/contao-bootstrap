@@ -53,15 +53,16 @@ class Subscriber implements EventSubscriberInterface
 		$element = $event->getContainer()->getElement();
 
 		if($this->isModal($widget)) {
-			// hide original form submit button
-			$element->addClass('invisible');
-
 			// create copy for footer
 			$copy = clone $element;
 			$copy->setAttribute('onclick', sprintf('$(\'#ctrl_%s\').click();', $widget->id));
 			$copy->setId('md_' . $element->getId());
+			$copy->addClass('btn');
 
 			$GLOBALS['bootstrapModalForm'] .= $copy->generate();
+
+			// hide original form submit button
+			$element->addClass('invisible');
 		}
 	}
 

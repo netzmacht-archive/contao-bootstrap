@@ -301,19 +301,16 @@ class Buttons extends \Frontend
 		$item = array_merge(array(
 				'type'      => '',
 				'button'    => 'link',
-				'attributes'=> '',
+				'attributes'=> array(),
 				'url'       => '',
 				'label'     => ''
 			), $item
 		);
 
 		// set attribute as param
-		$pattern = '/class\s*=\s*\"([^\"]*)\s*"/i';
-
-		if(!isset($item['class']) && preg_match($pattern, $item['attributes'], $matches))
+		if(!isset($item['class']) && $item['attributes']['class'])
 		{
-			$item['class'] = $matches[1];
-			$item['attributes'] = preg_replace($pattern, '', $item['attributes']);
+			$item['class'] = $item['attributes']['class'];
 		}
 
 		if($first)
