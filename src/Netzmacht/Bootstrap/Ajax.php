@@ -66,7 +66,7 @@ class Ajax extends \PageRegular
 		$objPage->templateGroup = $objLayout->getRelated('pid')->templates;
 
 		// trigger getPageLayout hook so
-		if(isset($GLOBALS['TL_HOOKS']['getPageLayout']) && is_arry($GLOBALS['TL_HOOKS']['getPageLayout']))
+		if(isset($GLOBALS['TL_HOOKS']['getPageLayout']) && is_array($GLOBALS['TL_HOOKS']['getPageLayout']))
 		{
 			foreach($GLOBALS['TL_HOOKS']['getPageLayout'] as $hook)
 			{
