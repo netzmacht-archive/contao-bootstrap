@@ -60,9 +60,7 @@ class Subscriber implements EventSubscriberInterface
 			$copy->addClass('btn');
 
 			$GLOBALS['bootstrapModalForm'] .= $copy->generate();
-
-			// hide original form submit button
-			$element->addClass('invisible');
+			$event->setVisible(false);
 		}
 	}
 
@@ -79,6 +77,5 @@ class Subscriber implements EventSubscriberInterface
 
 		return $isModal;
 	}
-
 
 } 
