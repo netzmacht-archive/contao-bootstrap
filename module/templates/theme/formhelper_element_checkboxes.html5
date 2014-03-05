@@ -1,0 +1,49 @@
+<<?php echo $this->tag; ?> <?php echo $this->attributes; ?>>
+<?php
+
+use Netzmacht\FormHelper\Html\Element;
+use Netzmacht\FormHelper\Html\Element\Checkboxes;
+
+/** @var Checkboxes $element */
+$group = null;
+$index = 0;
+
+foreach($this->options as $option):
+	if(isset($option['group']) && $option['group']) :
+		if($group) {
+			echo $group;
+		}
+
+		$group = Element::createElement('fieldset');
+		$legend = $group->createElement('legend')
+			->addChild($option['label']);
+		$group->addChild($legend);
+	else:
+		$child = Element::createElement('input', array('type' => 'checkbox'))
+			->setAttribute('name', $this->attributes->get('name') . '[]')
+			->setAttribute('id', $this->attributes->get('id') . '_' . $index)
+			->setAttribute('value', $option['value']);
+
+		$label = Element::createElement('label');
+		$label->addChild($child);
+		$label->addChild($option['label']);
+		$label->setAttribute('for', $child->getId());
+
+		if($group) {
+			$group->addChild($label);
+		}
+		else {
+			echo $label;
+		}
+
+	endif;
+
+	$index++;
+endforeach;
+
+if($group) {
+	echo $group;
+}
+
+?>
+</<?php echo $this->tag; ?>>
