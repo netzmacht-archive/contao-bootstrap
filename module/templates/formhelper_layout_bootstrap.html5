@@ -1,4 +1,4 @@
-<?php $container->addChild($errors); ?>
+<?php $container->add('errors', $errors); ?>
 <?php if (!$this->tableless): ?>
 	<div class="form-group<?php if($this->hasErrors()): ?> has-error<?php endif; ?>">
 		<?php echo $label; ?>
