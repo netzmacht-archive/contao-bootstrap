@@ -1,16 +1,14 @@
-<?php /** @var Netzmacht\FormHelper\GeneratedWidget $widget */ ?>
+<?php $container->addChild($errors); ?>
 <?php if (!$this->tableless): ?>
 	<div class="form-group<?php if($this->hasErrors()): ?> has-error<?php endif; ?>">
 		<?php echo $label; ?>
 		<div class="<?php echo $this->columnClass; ?>">
 			<?php echo $container; ?>
-			<?php echo $errors; ?>
 		</div>
 	</div>
 <?php else: ?>
 	<div class="form-group<?php if($this->hasErrors()): ?> has-error<?php endif; ?>">
 		<?php echo $label; ?>
 		<?php echo $container; ?>
-		<?php echo $errors; ?>
 	</div>
 <?php endif; ?>
