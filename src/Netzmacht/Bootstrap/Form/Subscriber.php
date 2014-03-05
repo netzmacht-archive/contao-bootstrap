@@ -65,11 +65,11 @@ class Subscriber implements EventSubscriberInterface
 	 */
 	public function generate(GenerateEvent $event)
 	{
-		$form      = $event->getForm();
 		$container = $event->getContainer();
 		$element   = $event->getContainer()->getElement();
 		$widget    = $event->getWidget();
 		$label     = $event->getLabel();
+		$errors    = $event->getErrors();
 
 		// add label class
 		$label->addClass('control-label');
@@ -146,6 +146,10 @@ class Subscriber implements EventSubscriberInterface
 				$inputGroup->setRight($captcha);
 			}
 		}
+
+		// inject errors into container
+		$container->add('errors', $errors);
+		$errors->addClass('help-block');
 	}
 
 
