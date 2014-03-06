@@ -1,7 +1,7 @@
-
+<?php use Netzmacht\Bootstrap\Helper\Gravatar; ?>
 <div class="media<?php echo $this->class; ?>" id="<?php echo $this->id; ?>">
 	<?php if($this->website): ?><a href="<?php echo $this->website; ?>" rel="nofollow" target="_blank" class="pull-left"><?php else: ?><div class="pull-left"><?php endif; ?>
-		<img src="<?php echo Bootstrap\Gravatar::generateUrl($this->email); ?>" class="media-object">
+		<img src="<?php echo Gravatar::generateUrl($this->email); ?>" class="media-object">
 			<?php if($this->website): ?></a><?php else: ?></div><?php endif; ?>
 
 	<div class="media-body">
@@ -14,7 +14,7 @@
 			<div class="media reply">
 
 				<div class="pull-left">
-					<img src="<?php echo Bootstrap\Gravatar::generateUrl($this->author->email); ?>" class="media-object">
+					<img src="<?php echo Gravatar::generateUrl($this->author->email); ?>" class="media-object">
 				</div>
 
 				<div class="media-body">
