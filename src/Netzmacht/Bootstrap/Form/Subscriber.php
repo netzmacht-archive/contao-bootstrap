@@ -172,7 +172,7 @@ class Subscriber implements EventSubscriberInterface
 
 		$inputGroup = new InputGroup();
 		$inputGroup->setElement($input);
-		$inputGroup->setRight($submit);
+		$inputGroup->setRight($submit, $inputGroup::BUTTON);
 		$container->add('upload', $inputGroup);
 	}
 
