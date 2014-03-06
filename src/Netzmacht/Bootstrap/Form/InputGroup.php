@@ -4,6 +4,7 @@ namespace Netzmacht\Bootstrap\Form;
 
 use Netzmacht\FormHelper\ElementContainerInterface;
 use Netzmacht\FormHelper\GenerateInterface;
+use Netzmacht\FormHelper\Html\Attributes;
 use Netzmacht\FormHelper\Html\AttributesTrait;
 use Netzmacht\FormHelper\Html\Element;
 
@@ -34,6 +35,15 @@ class InputGroup implements GenerateInterface, ElementContainerInterface
 	 * @var Element
 	 */
 	protected $element;
+
+
+	/**
+	 * @param array $attributes
+	 */
+	function __construct(array $attributes)
+	{
+		$this->attributes = new Attributes($attributes);
+	}
 
 
 	/**
