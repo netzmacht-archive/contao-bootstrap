@@ -29,7 +29,7 @@
         "contao-legacy/customselect": "~1.0.0",
         "netzmacht/contao-bootstrap-columnseteditor":"1.0.*",
         "netzmacht/contao-iconWizard":"1.0.*",
-        "netzmacht/contao-form-helper":"0.1.*",
+        "netzmacht/contao-form-helper":"dev-master",
         "twbs/bootstrap":"~3.0.0"
     },
     "suggest": {
