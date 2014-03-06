@@ -98,7 +98,7 @@ class Subscriber implements EventSubscriberInterface
 		if($this->getConfig($widget->type, 'allowInputGroup') &&
 			($widget->bootstrap_addIcon ||
 				$widget->bootstrap_addUnit ||
-				$container->has('submit') ||
+				$container->hasChild('submit') ||
 				$widget->type == 'captcha'
 			)
 		) {
@@ -129,8 +129,8 @@ class Subscriber implements EventSubscriberInterface
 			}
 
 			// add submit button into input group
-			if($container->has('submit')) {
-				$submit = $container->remove('submit');
+			if($container->hasChild('submit')) {
+				$submit = $container->removeChild('submit');
 				$submit->addClass('btn');
 
 				$inputGroup->setRight($submit, $inputGroup::BUTTON);
@@ -138,13 +138,13 @@ class Subscriber implements EventSubscriberInterface
 
 			// add captcha as form input group
 			if($widget instanceof \FormCaptcha) {
-				$captcha = $container->remove('question');
+				$captcha = $container->removeChild('question');
 				$inputGroup->setRight($captcha);
 			}
 		}
 
 		// inject errors into container
-		$container->add('errors', $errors);
+		$container->addChild('errors', $errors);
 		$errors->addClass('help-block');
 
 		if($event->getWidget()->type == 'upload') {
@@ -179,7 +179,7 @@ class Subscriber implements EventSubscriberInterface
 			->setElement($input)
 			->setRight($submit, $inputGroup::BUTTON);
 
-		$container->add('upload', $inputGroup);
+		$container->addChild('upload', $inputGroup);
 	}
 
 
