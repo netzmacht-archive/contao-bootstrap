@@ -39,7 +39,7 @@ class Subscriber implements EventSubscriberInterface
 	{
 		return array(
 			Events::SELECT_LAYOUT => 'selectLayout',
-			Events::GENERATE => 'generate',
+			Events::GENERATE => array('generate', 'generateUpload'),
 		);
 	}
 
@@ -145,6 +145,34 @@ class Subscriber implements EventSubscriberInterface
 		// inject errors into container
 		$container->add('errors', $errors);
 		$errors->addClass('help-block');
+	}
+
+
+	/**
+	 * @param GenerateEvent $event
+	 */
+	public function generateUpload(GenerateEvent $event)
+	{
+		if($event->getWidget()->type != 'upload') {
+			return;
+		}
+
+		$container = $event->getContainer();
+		$element   = $container->getElement();
+		$element->addClass('invisible');
+
+		$input = Element::createElement('input', array('type' => 'text'))
+			->setAttribute('name', $element->getAttribute('name') . '_value');
+
+		$click = sprintf('$(%s).click();', $element->getId());
+		$submit = Element::createElement('button', array('type' => 'submit', 'value' => 'Datei auswählen'))
+			->setAttribute('onclick', $click)
+			->addClass('btn btn-default');
+
+		$inputGroup = new InputGroup();
+		$inputGroup->setElement($input);
+		$inputGroup->setRight($submit);
+		$container->add('upload', $inputGroup);
 	}
 
 
