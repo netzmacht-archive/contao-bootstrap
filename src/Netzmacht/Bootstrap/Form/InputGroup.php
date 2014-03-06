@@ -43,6 +43,7 @@ class InputGroup implements GenerateInterface, ElementContainerInterface
 	function __construct(array $attributes=array())
 	{
 		$this->attributes = new Attributes($attributes);
+		$this->addClass('input-group');
 	}
 
 
@@ -125,7 +126,8 @@ class InputGroup implements GenerateInterface, ElementContainerInterface
 	public function generate()
 	{
 		return sprintf(
-			'<div class="input-group">%s%s%s</div>',
+			'<div %s>%s%s%s</div>',
+			$this->attributes,
 			$this->generateAddon($this->left),
 			$this->element,
 			$this->generateAddon($this->right)
