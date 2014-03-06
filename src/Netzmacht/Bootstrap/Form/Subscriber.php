@@ -160,8 +160,11 @@ class Subscriber implements EventSubscriberInterface
 	{
 		$element   = $container->getElement();
 		$element->addClass('invisible');
+		$element->setAttribute('onchange', sprintf('document.getElementById(\'%s_value\').value=this.value;', $element->getId()));
 
 		$input = Element::createElement('input', array('type' => 'text'))
+			->setId($element->getId() . '_value')
+			->addClass('form-control')
 			->setAttribute('name', $element->getAttribute('name') . '_value');
 
 		$click = sprintf('$(%s).click();', $element->getId());
