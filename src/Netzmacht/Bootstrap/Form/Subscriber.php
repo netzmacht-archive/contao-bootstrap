@@ -160,14 +160,15 @@ class Subscriber implements EventSubscriberInterface
 	{
 		$element   = $container->getElement();
 		$element->addClass('invisible');
-		$element->setAttribute('onchange', sprintf('document.getElementById(\'%s_value\').value=this.value;', $element->getId()));
+		$element->setAttribute('onchange', sprintf('document.getElementById(\'%s_value\').value=this.value;return false;', $element->getId()));
 
 		$input = Element::createElement('input', array('type' => 'text'))
 			->setId($element->getId() . '_value')
 			->addClass('form-control')
+			->setAttribute('disabled', true)
 			->setAttribute('name', $element->getAttribute('name') . '_value');
 
-		$click = sprintf('$(%s).click();', $element->getId());
+		$click = sprintf('$(%s).click();return false;', $element->getId());
 		$submit = Element::createElement('button', array('type' => 'submit'))
 			->addChild('Datei auswählen')
 			->addClass('btn btn-default');
