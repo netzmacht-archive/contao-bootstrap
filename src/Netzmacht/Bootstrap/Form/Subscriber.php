@@ -120,7 +120,7 @@ class Subscriber implements EventSubscriberInterface
 
 			// add unit
 			if($widget->bootstrap_addUnit) {
-				if($widget->$this->bootstrap_unitPosition == 'right') {
+				if($widget-> bootstrap_unitPosition == 'right') {
 					$inputGroup->setRight($widget->bootstrap_unit);
 				}
 				else {
