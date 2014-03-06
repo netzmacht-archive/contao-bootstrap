@@ -16,26 +16,31 @@
  */
 TemplateLoader::addFiles(array
 (
-	'ce_accordion_group'     => 'system/modules/bootstrap/templates',
-	'form_radio_generate'    => 'system/modules/bootstrap/templates',
-	'mod_bootstrap_modal'    => 'system/modules/bootstrap/templates',
-	'navbar'                 => 'system/modules/bootstrap/templates',
-	'ce_bootstrap_carousel'  => 'system/modules/bootstrap/templates',
-	'gallery_grid'           => 'system/modules/bootstrap/templates',
-	'ce_bootstrap_button'    => 'system/modules/bootstrap/templates',
+	'ce_bootstrap_button'    => 'system/modules/bootstrap/templates/elements',
+	'ce_bootstrap_buttons'   => 'system/modules/bootstrap/templates/elements',
+	'ce_bootstrap_carousel'  => 'system/modules/bootstrap/templates/elements',
+	'ce_bootstrap_columnset' => 'system/modules/bootstrap/templates/elements',
+	'ce_accordion_group'     => 'system/modules/bootstrap/templates/elements',
+	'ce_bootstrap_tab'       => 'system/modules/bootstrap/templates/elements',
+
+	'mod_navbar'             => 'system/modules/bootstrap/templates/modules',
+	'mod_navbar_container'   => 'system/modules/bootstrap/templates/modules',
+	'mod_bootstrap_modal'    => 'system/modules/bootstrap/templates/modules',
+
+	'form_radio_generate'    => 'system/modules/bootstrap/templates/form',
+	'form_checkbox_generate' => 'system/modules/bootstrap/templates/form',
+	'formhelper_layout_bootstrap' => 'system/modules/bootstrap/templates/form',
+
+	'navbar'                 => 'system/modules/bootstrap/templates/navigation',
+	'navbar_brand'           => 'system/modules/bootstrap/templates/navigation',
+	'navbar_toggle'          => 'system/modules/bootstrap/templates/navigation',
+	'nav_bootstrap_dropdown' => 'system/modules/bootstrap/templates/navigation',
+
+	'gallery_grid'           => 'system/modules/bootstrap/templates/gallery',
+	'gallery_carousel'       => 'system/modules/bootstrap/templates/gallery',
+
 	'bootstrap_buttons_item' => 'system/modules/bootstrap/templates',
 	'bootstrap_buttons'      => 'system/modules/bootstrap/templates',
-	'nav_bootstrap_dropdown' => 'system/modules/bootstrap/templates',
-	'navbar_brand'           => 'system/modules/bootstrap/templates',
-	'mod_navbar_container'   => 'system/modules/bootstrap/templates',
-	'ce_bootstrap_buttons'   => 'system/modules/bootstrap/templates',
-	'navbar_toggle'          => 'system/modules/bootstrap/templates',
 	'com_bootstrap'          => 'system/modules/bootstrap/templates',
-	'gallery_carousel'       => 'system/modules/bootstrap/templates',
-	'form_checkbox_generate' => 'system/modules/bootstrap/templates',
-	'ce_bootstrap_columnset' => 'system/modules/bootstrap/templates',
 	'fe_bootstrap'           => 'system/modules/bootstrap/templates',
-	'mod_navbar'             => 'system/modules/bootstrap/templates',
-	'ce_bootstrap_tab'       => 'system/modules/bootstrap/templates',
-	'formhelper_layout_bootstrap' => 'system/modules/bootstrap/templates',
 ));
