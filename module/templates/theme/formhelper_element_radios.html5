@@ -14,19 +14,19 @@ foreach($this->options as $option):
 			echo $group;
 		}
 
-		$group = Element::createElement('fieldset');
-		$legend = $group->createElement('legend')
+		$group = Element::create('fieldset');
+		$legend = $group->create('legend')
 			->addChild($option['label']);
 		$group
 			->addChild($legend);
 
 	else:
-		$child = Element::createElement('input', array('type' => 'radio'))
+		$child = Element::create('input', array('type' => 'radio'))
 			->setAttribute('name', $this->attributes->get('name') . '[]')
 			->setAttribute('id', $this->attributes->get('id') . '_' . $index)
 			->setAttribute('value', $option['value']);
 
-		$label = Element::createElement('label');
+		$label = Element::create('label');
 		$label->addChild($child);
 		$label->addChild($option['label']);
 		$label->setAttribute('for', $child->getId());

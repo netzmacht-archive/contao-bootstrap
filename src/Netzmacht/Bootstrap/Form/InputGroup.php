@@ -2,6 +2,7 @@
 
 namespace Netzmacht\Bootstrap\Form;
 
+use Netzmacht\FormHelper\Component;
 use Netzmacht\FormHelper\ElementContainerInterface;
 use Netzmacht\FormHelper\GenerateInterface;
 use Netzmacht\FormHelper\Html\Attributes;
@@ -12,9 +13,8 @@ use Netzmacht\FormHelper\Html\Element;
  * Class InputGroup
  * @package Netzmacht\Bootstrap\Form
  */
-class InputGroup implements GenerateInterface, ElementContainerInterface
+class InputGroup extends Component implements GenerateInterface, ElementContainerInterface
 {
-	use AttributesTrait;
 
 	const ADDON = 'input-group-addon';
 
@@ -42,7 +42,7 @@ class InputGroup implements GenerateInterface, ElementContainerInterface
 	 */
 	function __construct(array $attributes=array())
 	{
-		$this->attributes = new Attributes($attributes);
+		parent::__construct($attributes);
 		$this->addClass('input-group');
 	}
 
@@ -145,7 +145,7 @@ class InputGroup implements GenerateInterface, ElementContainerInterface
 			return '';
 		}
 
-		return Element::createElement('div')
+		return Element::create('div')
 			->addClass($addon['type'])
 			->addChild($addon['addon'])
 			->generate();

@@ -9,7 +9,7 @@ use Netzmacht\FormHelper\Event\Events;
 use Netzmacht\FormHelper\Event\GenerateEvent;
 use Netzmacht\FormHelper\Event\SelectLayoutEvent;
 use Netzmacht\FormHelper\Html\Element;
-use Netzmacht\FormHelper\Transfer\Container;
+use Netzmacht\FormHelper\Component\Container;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
@@ -158,18 +158,18 @@ class Subscriber implements EventSubscriberInterface
 	 */
 	protected function generateUpload(Container $container)
 	{
-		$element   = $container->getElement();
-		$element->addClass('invisible');
+		$element = $container->getElement();
+		$element->setAttribute('style', 'display:none;');
 		$element->setAttribute('onchange', sprintf('document.getElementById(\'%s_value\').value=this.value;return false;', $element->getId()));
 
-		$input = Element::createElement('input', array('type' => 'text'))
+		$input = Element::create('input', array('type' => 'text'))
 			->setId($element->getId() . '_value')
 			->addClass('form-control')
 			->setAttribute('disabled', true)
 			->setAttribute('name', $element->getAttribute('name') . '_value');
 
 		$click = sprintf('$(%s).click();return false;', $element->getId());
-		$submit = Element::createElement('button', array('type' => 'submit'))
+		$submit = Element::create('button', array('type' => 'submit'))
 			->addChild('Datei auswählen')
 			->addClass('btn btn-primary')
 			->setAttribute('onclick', $click);
