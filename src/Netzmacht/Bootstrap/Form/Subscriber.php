@@ -147,7 +147,7 @@ class Subscriber implements EventSubscriberInterface
 		$container->add('errors', $errors);
 		$errors->addClass('help-block');
 
-		if($event->getWidget()->type = 'upload') {
+		if($event->getWidget()->type == 'upload') {
 			$this->generateUpload($container);
 		}
 	}
@@ -165,8 +165,9 @@ class Subscriber implements EventSubscriberInterface
 			->setAttribute('name', $element->getAttribute('name') . '_value');
 
 		$click = sprintf('$(%s).click();', $element->getId());
-		$submit = Element::createElement('button', array('type' => 'submit', 'value' => 'Datei auswählen'))
+		$submit = Element::createElement('button', array('type' => 'submit'))
 			->setAttribute('onclick', $click)
+			->addChild('Datei auswählen')
 			->addClass('btn btn-default');
 
 		$inputGroup = new InputGroup();
