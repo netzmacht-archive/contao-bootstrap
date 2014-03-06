@@ -100,10 +100,13 @@ class InputGroup implements GenerateInterface, ElementContainerInterface
 
 	/**
 	 * @param $element
+	 * @return $this
 	 */
 	public function setElement($element)
 	{
 		$this->element = $element;
+
+		return $this;
 	}
 
 
