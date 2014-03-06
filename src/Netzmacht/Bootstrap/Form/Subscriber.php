@@ -169,13 +169,15 @@ class Subscriber implements EventSubscriberInterface
 
 		$click = sprintf('$(%s).click();', $element->getId());
 		$submit = Element::createElement('button', array('type' => 'submit'))
-			->setAttribute('onclick', $click)
 			->addChild('Datei auswählen')
 			->addClass('btn btn-default');
 
 		$inputGroup = new InputGroup();
-		$inputGroup->setElement($input);
-		$inputGroup->setRight($submit, $inputGroup::BUTTON);
+		$inputGroup
+			->setElement($input)
+			->setAttribute('onclick', $click)
+			->setRight($submit, $inputGroup::BUTTON);
+
 		$container->add('upload', $inputGroup);
 	}
 
