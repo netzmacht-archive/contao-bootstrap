@@ -50,12 +50,13 @@ class Ajax extends \PageRegular
 		$page = \Input::get('page');
 
 		// load layout because we need to initiate bootstrap
+		/** @var \PageModel $objPage */
 		$objPage = \PageModel::findByPk($page);
 		$objPage->loadDetails();
 
 		if($objPage === null)
 		{
-			$this->log(sptrintf('Page ID %s not found', $page), 'Netzmacht\Bootstrap\Ajax::loadModalContent', TL_ERROR);
+			$this->log(sprintf('Page ID %s not found', $page), 'Netzmacht\Bootstrap\Ajax::loadModalContent', TL_ERROR);
 			exit;
 		}
 
@@ -66,7 +67,7 @@ class Ajax extends \PageRegular
 		$objPage->templateGroup = $objLayout->getRelated('pid')->templates;
 
 		// trigger getPageLayout hook so
-		if(isset($GLOBALS['TL_HOOKS']['getPageLayout']) && is_arry($GLOBALS['TL_HOOKS']['getPageLayout']))
+		if(isset($GLOBALS['TL_HOOKS']['getPageLayout']) && is_array($GLOBALS['TL_HOOKS']['getPageLayout']))
 		{
 			foreach($GLOBALS['TL_HOOKS']['getPageLayout'] as $hook)
 			{
