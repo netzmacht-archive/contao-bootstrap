@@ -9,6 +9,7 @@ use Netzmacht\FormHelper\Event\Events;
 use Netzmacht\FormHelper\Event\GenerateEvent;
 use Netzmacht\FormHelper\Event\SelectLayoutEvent;
 use Netzmacht\FormHelper\Html\Element;
+use Netzmacht\FormHelper\Transfer\Container;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
@@ -39,7 +40,7 @@ class Subscriber implements EventSubscriberInterface
 	{
 		return array(
 			Events::SELECT_LAYOUT => 'selectLayout',
-			Events::GENERATE => array('generate', 'generateUpload'),
+			Events::GENERATE => 'generate',
 		);
 	}
 
@@ -145,19 +146,18 @@ class Subscriber implements EventSubscriberInterface
 		// inject errors into container
 		$container->add('errors', $errors);
 		$errors->addClass('help-block');
+
+		if($event->getWidget()->type = 'upload') {
+			$this->generateUpload($container);
+		}
 	}
 
 
 	/**
-	 * @param GenerateEvent $event
+	 * @param Container $container
 	 */
-	public function generateUpload(GenerateEvent $event)
+	protected function generateUpload(Container $container)
 	{
-		if($event->getWidget()->type != 'upload') {
-			return;
-		}
-
-		$container = $event->getContainer();
 		$element   = $container->getElement();
 		$element->addClass('invisible');
 

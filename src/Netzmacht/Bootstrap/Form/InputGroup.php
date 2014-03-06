@@ -40,7 +40,7 @@ class InputGroup implements GenerateInterface, ElementContainerInterface
 	/**
 	 * @param array $attributes
 	 */
-	function __construct(array $attributes)
+	function __construct(array $attributes=array())
 	{
 		$this->attributes = new Attributes($attributes);
 	}
