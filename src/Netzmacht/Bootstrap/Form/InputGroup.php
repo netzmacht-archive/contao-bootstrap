@@ -3,7 +3,7 @@
 namespace Netzmacht\Bootstrap\Form;
 
 use Netzmacht\FormHelper\Component;
-use Netzmacht\FormHelper\ElementContainerInterface;
+use Netzmacht\FormHelper\ElementAwareInterface;
 use Netzmacht\FormHelper\GenerateInterface;
 use Netzmacht\FormHelper\Html\Attributes;
 use Netzmacht\FormHelper\Html\AttributesTrait;
@@ -13,7 +13,7 @@ use Netzmacht\FormHelper\Html\Element;
  * Class InputGroup
  * @package Netzmacht\Bootstrap\Form
  */
-class InputGroup extends Component implements GenerateInterface, ElementContainerInterface
+class InputGroup extends Component implements GenerateInterface, ElementAwareInterface
 {
 
 	const ADDON = 'input-group-addon';
