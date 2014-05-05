@@ -13,6 +13,7 @@
 
 namespace Netzmacht\Bootstrap\DataContainer;
 
+use Contao\Model\Registry;
 use Netzmacht\Bootstrap\Model\ContentWrapper;
 use Netzmacht\Bootstrap\Model\Factory;
 
@@ -69,8 +70,19 @@ class Wrapper extends \Backend
 		$stop   = ContentWrapper\Model::TYPE_STOP;
 		$sep    = ContentWrapper\Model::TYPE_SEPARATOR;
 
-		$model = new \ContentModel();
-		$model->setRow($dc->activeRecord->row());
+		// handle issues with contao models
+		if(version_compare(VERSION, '3.2', '>=')) {
+			try {
+				$model = new \ContentModel($dc->activeRecord);
+			}
+			catch(\Exception $e) {
+				$model = \ContentModel::findByPk($dc->id);
+			}
+		}
+		else {
+			$model = new \ContentModel($dc->activeRecord);
+		}
+
 		$model->type = $value;
 
 		$this->objModel = new ContentWrapper\Model($model);
