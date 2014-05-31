@@ -30,7 +30,7 @@
         "netzmacht/contao-bootstrap-columnseteditor":"~0.1",
         "netzmacht/contao-iconWizard":"1.0.*",
         "netzmacht/contao-form-helper":">=0.1.0-beta2,<0.2.0",
-        "twbs/bootstrap":"~3.0.0"
+        "twbs/bootstrap":"~3.0"
     },
     "suggest": {
         "netzmacht/contao-font-awesome" : "Use Font Awesome icons with Contao-Bootstrap"
