@@ -17,7 +17,7 @@ $GLOBALS['BOOTSTRAP']['templates'] = array
 (
 	// Define paths for autoloading templates. This is used so that only if bootstrap is activated in the layout
 	// the default templates are overridden
-	// You can add differnt template directories here.
+	// You can add different template directories here.
 	'dynamicLoad' => array
 	(
 		'system/modules/bootstrap/templates/theme' => array
@@ -37,7 +37,7 @@ $GLOBALS['BOOTSTRAP']['templates'] = array
 		),
 	),
 
-	// Configuration of template modifer. They changes templates when being parsed. There are 2 types supported:
+	// Configuration of template modifiers. They changes templates when being parsed. There are 2 types supported:
 	// placeholder or callback. A placeholder try to replace a string of an template variable. A Callback just
 	// runs before template is rendered. It's pretty the same like the parseTemplate hook but, you can specify
 	// which templates are affected and use anonymous functions
