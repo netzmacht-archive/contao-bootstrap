@@ -32,7 +32,7 @@ class Installer
 	 */
 	public function run()
 	{
-		\Controller::log('Bootstrap installer called', '\Netzmacht\Bootstrap::run', TL_INFO);
+		\Controller::log('Bootstrap installer called', '\Netzmacht\Bootstrap::run', 'TL_INFO');
 
 		$this->setupSections();
 		$this->createSymlink();
@@ -44,16 +44,19 @@ class Installer
 	 */
 	protected function setupSections()
 	{
-		if($GLOBALS['TL_CONFIG']['customSections'] == '') {
-			$GLOBALS['TL_CONFIG']['customSections'] = 'bootstrap';
-		}
-		elseif(strpos($GLOBALS['TL_CONFIG']['customSections'], 'bootstrap') === false) {
-			$GLOBALS['TL_CONFIG']['customSections'] .= ',bootstrap';
-		}
+		if(version_compare(VERSION, '3.3', '<')) {
+			if(!isset($GLOBALS['TL_CONFIG']['customSections']) || $GLOBALS['TL_CONFIG']['customSections'] == '') {
+				$GLOBALS['TL_CONFIG']['customSections'] = 'bootstrap';
+			}
+			elseif(strpos($GLOBALS['TL_CONFIG']['customSections'], 'bootstrap') === false) {
+				$GLOBALS['TL_CONFIG']['customSections'] .= ',bootstrap';
+			}
 
-		$config = \Config::getInstance();
-		$config->add('$GLOBALS[\'TL_CONFIG\'][\'customSections\']', $GLOBALS['TL_CONFIG']['customSections']);
-		$config->save();
+			$config = \Config::getInstance();
+			$config->add('$GLOBALS[\'TL_CONFIG\'][\'customSections\']', $GLOBALS['TL_CONFIG']['customSections']);
+			$config->save();
+
+		}
 	}
 
 
