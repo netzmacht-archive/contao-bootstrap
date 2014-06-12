@@ -138,4 +138,39 @@ class Layout
 		}
 	}
 
+
+
+	/**
+	 * @param \Template $template
+	 */
+	public static function replaceClasses($buffer)
+	{
+		if (empty($GLOBALS['BOOTSTRAP']['classes'])) {
+			return $buffer;
+		}
+
+		$classes = array_keys($GLOBALS['BOOTSTRAP']['classes']);
+		$classes = array_map(function($class) { return preg_quote($class, '~'); }, $classes);
+
+		$search = sprintf('~class="([^"]*(%s)[^"]*)"~', implode('|', $classes));
+
+		$buffer = preg_replace_callback(
+			$search,
+			function ($matches) {
+				$classes = explode(' ', $matches[1]);
+				$classes = array_filter($classes);
+
+				foreach ($classes as $index => $class) {
+					if (isset($GLOBALS['BOOTSTRAP']['classes'][$class])) {
+						$classes[$index] = $GLOBALS['BOOTSTRAP']['classes'][$class];
+					}
+				}
+
+				return sprintf('class="%s"', implode(' ', $classes));
+			},
+			$buffer
+		);
+
+		return $buffer;
+	}
 }
