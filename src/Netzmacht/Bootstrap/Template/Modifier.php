@@ -63,6 +63,42 @@ class Modifier
 		}
 	}
 
+	public function parse($buffer, $templateName)
+	{
+		if(!Bootstrap::isEnabled())
+		{
+			return $buffer;
+		}
+
+		foreach($GLOBALS['BOOTSTRAP']['templates']['parsers'] as $config)
+		{
+			if($config['disabled'] || !$this->isTemplateAffected($templateName, $config['templates']))
+			{
+				continue;
+			}
+
+			if($config['type'] == 'replace')
+			{
+				if(is_callable($config['replace']))
+				{
+					$value = call_user_func($config['replace'], $buffer, $templateName);
+				}
+				else
+				{
+					$value = $config['replace'];
+				}
+
+				$buffer = str_replace($config['search'], $value, $buffer);
+			}
+			elseif($config['type'] == 'callback')
+			{
+				$buffer = call_user_func($config['callback'], $buffer, $templateName);
+			}
+		}
+
+		return $buffer;
+	}
+
 	protected function isTemplateAffected($template, $templates)
 	{
 		foreach($templates as $config)

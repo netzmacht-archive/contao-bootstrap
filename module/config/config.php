@@ -1,6 +1,7 @@
 <?php
 
 require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/assets.php';
+require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/classes.php';
 require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/layout.php';
 require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/form.php';
 require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/templates.php';
@@ -57,6 +58,7 @@ $GLOBALS['TL_HOOKS']['initializeSystem'][]      = array('Netzmacht\Bootstrap\Boo
 $GLOBALS['TL_HOOKS']['getPageLayout'][]         = array('Netzmacht\Bootstrap\Bootstrap', 'initializeLayout');
 
 $GLOBALS['TL_HOOKS']['parseTemplate'][]         = array('Netzmacht\Bootstrap\Template\Modifier', 'execute');
+$GLOBALS['TL_HOOKS']['parseFrontendTemplate'][] = array('Netzmacht\Bootstrap\Template\Modifier', 'parse');
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][]     = array('Netzmacht\Bootstrap\InsertTags', 'replaceTags');
 $GLOBALS['TL_HOOKS']['simpleAjax'][]            = array('Netzmacht\Bootstrap\Ajax', 'loadModalContent');
 
@@ -101,4 +103,7 @@ if(TL_MODE == 'BE')
 }
 
 
+/**
+ * settings
+ */
 $GLOBALS['TL_CONFIG']['gravatarSize'] = '60';

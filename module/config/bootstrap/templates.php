@@ -110,4 +110,21 @@ $GLOBALS['BOOTSTRAP']['templates'] = array
 			),
 		),
 	),
+
+	// Configuration of template parsers. They changes already parsed templates. There are 2 types supported:
+	// placeholder or callback. A placeholder try to replace a string of an template variable. A Callback just
+	// runs before template is rendered. It's pretty the same like the parseTemplate hook but, you can specify
+	// which templates are affected and use anonymous functions
+	'parsers' => array
+	(
+		'callback.replaceClasses' => array
+		(
+			'type'      => 'callback',
+			'callback'  => array('Netzmacht\Bootstrap\Template\Modifier\Layout', 'replaceClasses'),
+			'templates' => array
+			(
+				'fe_*',
+			),
+		),
+	),
 );
