@@ -89,6 +89,7 @@ class Layout extends General
 	 * get all uninstalled stylesheets
 	 *
 	 * @callback options_callback
+	 * @param $dc
 	 * @return mixed
 	 */
 	public function getStyleSheets($dc)
@@ -101,6 +102,7 @@ class Layout extends General
 	 * get all uninstalled javascript
 	 *
 	 * @callback options_callback
+	 * @param $dc
 	 * @return mixed
 	 */
 	public function getJavaScripts($dc)
@@ -119,13 +121,11 @@ class Layout extends General
 	 */
 	public function installStylesheets($value, $dc)
 	{
-		$this->installFiles(
-			$value,
-			'\ThemePlus\Model\StylesheetModel',
-			$dc->activeRecord,
-			'theme_plus_stylesheets',
-			'bootstrap_importStylesheets'
-		);
+		$class = class_exists('Bit3\Contao\ThemePlus\Model\StylesheetModel') ?
+			'Bit3\Contao\ThemePlus\Model\StylesheetModel' :
+			'ThemePlus\Model\StylesheetModel';
+
+		$this->installFiles($value, $class, $dc->activeRecord, 'theme_plus_stylesheets', 'bootstrap_importStylesheets');
 	}
 
 
@@ -139,13 +139,11 @@ class Layout extends General
 	 */
 	public function installJavaScripts($value, $dc)
 	{
-		$this->installFiles(
-			$value,
-			'\ThemePlus\Model\JavaScriptModel',
-			$dc->activeRecord,
-			'theme_plus_javascripts',
-			'bootstrap_importJavaScripts'
-		);
+		$class = class_exists('Bit3\Contao\ThemePlus\Model\JavaScriptModel') ?
+			'Bit3\Contao\ThemePlus\Model\JavaScriptModel' :
+			'ThemePlus\Model\JavaScriptModel';
+
+		$this->installFiles($value, $class,	$dc->activeRecord, 'theme_plus_javascripts', 'bootstrap_importJavaScripts');
 	}
 
 
