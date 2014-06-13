@@ -41,7 +41,7 @@ class ColumnSet extends BootstrapAbstract
 	public function generate()
 	{
 		$output    = parent::generate();
-		$columnSet = \ColumnsetModel::findByPK($this->columnset_id);
+		$columnSet = \Netzmacht\ColumnSet\ColumnsetModel::findByPK($this->columnset_id);
 
 		if(TL_MODE == 'BE') {
 			$output = sprintf(
