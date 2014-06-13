@@ -121,11 +121,13 @@ class Layout extends General
 	 */
 	public function installStylesheets($value, $dc)
 	{
-		$class = class_exists('Bit3\Contao\ThemePlus\Model\StylesheetModel') ?
-			'Bit3\Contao\ThemePlus\Model\StylesheetModel' :
-			'ThemePlus\Model\StylesheetModel';
-
-		$this->installFiles($value, $class, $dc->activeRecord, 'theme_plus_stylesheets', 'bootstrap_importStylesheets');
+		$this->installFiles(
+			$value,
+			$GLOBALS['TL_MODELS']['tl_theme_plus_stylesheet'],
+			$dc->activeRecord,
+			'theme_plus_stylesheets',
+			'bootstrap_importStylesheets'
+		);
 	}
 
 
@@ -139,11 +141,13 @@ class Layout extends General
 	 */
 	public function installJavaScripts($value, $dc)
 	{
-		$class = class_exists('Bit3\Contao\ThemePlus\Model\JavaScriptModel') ?
-			'Bit3\Contao\ThemePlus\Model\JavaScriptModel' :
-			'ThemePlus\Model\JavaScriptModel';
-
-		$this->installFiles($value, $class,	$dc->activeRecord, 'theme_plus_javascripts', 'bootstrap_importJavaScripts');
+		$this->installFiles(
+			$value,
+			$GLOBALS['TL_MODELS']['tl_theme_plus_javascript'],
+			$dc->activeRecord,
+			'theme_plus_javascripts',
+			'bootstrap_importJavaScripts'
+		);
 	}
 
 
