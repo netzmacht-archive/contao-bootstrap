@@ -72,7 +72,7 @@ class Ajax extends \PageRegular
 			foreach($GLOBALS['TL_HOOKS']['getPageLayout'] as $hook)
 			{
 				$this->import($hook[0]);
-				$this->{$hook[0]}->hook[1]($objPage, $objLayout, $this);
+				$this->{$hook[0]}->{$hook[1]}($objPage, $objLayout, $this);
 			}
 		}
 
