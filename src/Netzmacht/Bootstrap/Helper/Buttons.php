@@ -297,7 +297,7 @@ class Buttons extends \Frontend
 	 */
 	protected function addItemToTarget(array &$target, array $item, $first=false, $createGroup=false)
 	{
-		if($item['attributes']) {
+		if(is_array($item['attributes'])) {
 			$attributes = '';
 
 			foreach($item['attributes'] as $attribute) {
