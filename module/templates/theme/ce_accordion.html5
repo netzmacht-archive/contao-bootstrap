@@ -1,11 +1,11 @@
 <section class="<?php echo $this->class; ?> ce_accordion ce_text panel"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
-	<div class="panel-heading"<?php if ($this->headlineStyle): ?> style="<?php echo $this->headlineStyle; ?>"<?php endif; ?> <?php if($this->accordion != 'accordion'): ?>data-toggle="collapse"<?php if($GLOBALS['accordionGroup']): ?> data-parent="#<?php echo $GLOBALS['accordionGroup']; ?>"<?php endif; ?> data-target="#accordion-<?php echo $this->id; ?>"<?php endif; ?>>
+	<div class="panel-heading"<?php if ($this->headlineStyle): ?> style="<?php echo $this->headlineStyle; ?>"<?php endif; ?> data-toggle="collapse"<?php if($GLOBALS['accordionGroup']): ?> data-parent="#<?php echo $GLOBALS['accordionGroup']; ?>"<?php endif; ?> data-target="#accordion-<?php echo $this->id; ?>">
 		<div class="panel-title">
 		<?php echo $this->headline; ?>
 		</div>
 	</div>
 
-	<div class="panel-collapse <?php echo $this->accordion; ?>" id="accordion-<?php echo $this->id; ?>"><div class="panel-body">
+	<div class="panel-collapse <?php echo $this->accordion; ?> <?php if(!$GLOBALS['accordionGroup']): ?>in<?php endif; ?>" id="accordion-<?php echo $this->id; ?>"><div class="panel-body">
 
 			<?php if (!$this->addBefore): ?>
 				<?php echo $this->text; ?>
@@ -35,6 +35,7 @@
 				<?php echo $this->text; ?>
 			<?php endif; ?>
 
-		</div></div>
+		</div>
+	</div>
 
 </section>
