@@ -26,7 +26,7 @@
         "menatwork/contao-multicolumnwizard":"~3.2",
         "bit3/contao-theme-plus":"~5.0.0-dev",
         "bit3/contao-meta-palettes":">=1.4.2",
-        "contao-legacy/simple_ajax":">=1.0.0",
+        "leounglaub/contao-simple-ajax":"~1.0",
         "contao-legacy/customselect": "~1.0.0",
         "netzmacht/contao-bootstrap-columnseteditor":">=0.3.3,~0.3",
         "netzmacht/contao-iconWizard":"1.0.*",
