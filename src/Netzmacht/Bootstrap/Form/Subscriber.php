@@ -66,7 +66,7 @@ class Subscriber implements EventSubscriberInterface
 		$widget    = $event->getWidget();
 		$label     = $event->getLabel();
 		$errors    = $event->getErrors();
-		$isDynamic = $container->hasDynamicElement();
+		$isDynamic = $element instanceof Element;
 
 		// add label class
 		$label->addClass('control-label');
