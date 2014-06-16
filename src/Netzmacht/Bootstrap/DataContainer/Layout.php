@@ -94,7 +94,11 @@ class Layout extends General
 	 */
 	public function getStyleSheets($dc)
 	{
-		return $this->getUninstalledFiles('css', '\ThemePlus\Model\StylesheetModel',  \LayoutModel::findByPK(\Input::get('id'))->pid);
+		return $this->getUninstalledFiles(
+			'css',
+			$GLOBALS['TL_MODELS']['tl_theme_plus_stylesheet'],
+			\LayoutModel::findByPK(\Input::get('id'))->pid
+		);
 	}
 
 
@@ -107,7 +111,11 @@ class Layout extends General
 	 */
 	public function getJavaScripts($dc)
 	{
-		return $this->getUninstalledFiles('js', '\ThemePlus\Model\JavaScriptModel', \LayoutModel::findByPK(\Input::get('id'))->pid);
+		return $this->getUninstalledFiles(
+			'js',
+			$GLOBALS['TL_MODELS']['tl_theme_plus_javascript'],
+			\LayoutModel::findByPK(\Input::get('id'))->pid
+		);
 	}
 
 
