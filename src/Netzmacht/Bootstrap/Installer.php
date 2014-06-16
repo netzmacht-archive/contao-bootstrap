@@ -86,10 +86,10 @@ class Installer
 		}
 
 		if(!$success) {
-			\Controller::log("Error during creating symlink '$target'", 'Netzmacht\Bootstrap\Installer createSymlink', TL_ERROR);
+			\Controller::log("Error during creating symlink '$target'", 'Netzmacht\Bootstrap\Installer createSymlink', 'TL_ERROR');
 		}
 		else {
-			\Controller::log("Created symlink '$target'", 'Netzmacht\Bootstrap\Installer createSymlink', TL_INFO);
+			\Controller::log("Created symlink '$target'", 'Netzmacht\Bootstrap\Installer createSymlink', 'TL_INFO');
 		}
 	}
 
