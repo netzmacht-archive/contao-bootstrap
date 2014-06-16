@@ -301,6 +301,11 @@ class Buttons extends \Frontend
 			$attributes = '';
 
 			foreach($item['attributes'] as $attribute) {
+				// do not assign empty attributes
+				if($attribute['name'] == '') {
+					continue;
+				}
+
 				if($attribute['name'] == 'class' && !isset($item['class'])) {
 					$item['class'] = $attribute ['value'];
 					continue;
