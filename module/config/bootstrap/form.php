@@ -65,6 +65,27 @@ $GLOBALS['BOOTSTRAP']['form'] = array
 			'allowInputGroup'  => true,
 		),
 
+		'email' => array
+		(
+			'allowInputGroup'  => true,
+		),
+
+
+		'digit' => array
+		(
+			'allowInputGroup'  => true,
+		),
+
+		'tel' => array
+		(
+			'allowInputGroup'  => true,
+		),
+
+		'url' => array
+		(
+			'allowInputGroup'  => true,
+		),
+
 		'textarea' => array
 		(
 			'allowInputGroup'  => true,
