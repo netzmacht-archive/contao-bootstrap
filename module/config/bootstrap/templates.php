@@ -27,6 +27,7 @@ $GLOBALS['BOOTSTRAP']['templates'] = array
 			'form',
 			'formhelper_element_checkboxes',
 			'formhelper_element_radios',
+			'form_row',
 			'mod_breadcrumb',
 			'mod_comment_form',
 			'mod_search_advanced',
