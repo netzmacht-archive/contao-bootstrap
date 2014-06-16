@@ -362,7 +362,7 @@ class Buttons extends \Frontend
 	{
 		if($this->addContainer === null)
 		{
-			$this->addContainer = ($this->count() > 0);
+			$this->addContainer = ($this->count() > 1);
 		}
 
 		$this->containerClass = 'btn-' . $this->getContainerType();
