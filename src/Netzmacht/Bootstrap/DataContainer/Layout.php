@@ -28,6 +28,11 @@ class Layout extends General
 	 */
 	protected static $instance;
 
+	/**
+	 * @var \Database\Result
+	 */
+	private $layout;
+
 
 	/**
 	 * get single instance
@@ -56,10 +61,7 @@ class Layout extends General
 			return;
 		}
 
-		// we cannot use the model because of contao/core #6179
-		//$layout = \LayoutModel::findByPk(\Input::get('id'));
-
-		$layout = \Database::getInstance()->prepare('SELECT * FROM tl_layout WHERE id=?')->execute(\Input::get('id'));
+		$layout = $this->getCurrentLayout();
 
 		if($layout->layoutType == 'bootstrap')
 		{
@@ -97,7 +99,7 @@ class Layout extends General
 		return $this->getUninstalledFiles(
 			'css',
 			$GLOBALS['TL_MODELS']['tl_theme_plus_stylesheet'],
-			\LayoutModel::findByPK(\Input::get('id'))->pid
+			$this->getCurrentLayout()->pid
 		);
 	}
 
@@ -114,7 +116,7 @@ class Layout extends General
 		return $this->getUninstalledFiles(
 			'js',
 			$GLOBALS['TL_MODELS']['tl_theme_plus_javascript'],
-			\LayoutModel::findByPK(\Input::get('id'))->pid
+			$this->getCurrentLayout()->pid
 		);
 	}
 
@@ -206,11 +208,10 @@ class Layout extends General
 	 */
 	protected function installFiles($value, $modelClass, $layout, $field, $toggle)
 	{
-		$value = deserialize($value, true);
-
-		$result = $modelClass::findAll(array('limit' => '1', 'order' => 'sorting DESC'));
+		$value 	 = deserialize($value, true);
+		$result  = $modelClass::findAll(array('limit' => '1', 'order' => 'sorting DESC'));
 		$sorting = $result === null ? 0 : $result->sorting;
-		$new = array();
+		$new 	 = array();
 
 		foreach($value as $file)
 		{
@@ -253,6 +254,24 @@ class Layout extends General
 			->prepare('UPDATE tl_layout %s WHERE id=?')
 			->set($data)
 			->execute($layout->id);
+	}
+
+
+	/**
+	 * @return \Database\Result
+	 */
+	protected function getCurrentLayout()
+	{
+		// we cannot use the model because of contao/core #6179
+		//$layout = \LayoutModel::findByPk(\Input::get('id'));
+
+		if(!$this->layout) {
+			$this->layout = \Database::getInstance()
+				->prepare('SELECT * FROM tl_layout WHERE id=?')
+				->execute(\Input::get('id'));
+		}
+
+		return $this->layout;
 	}
 
 }
