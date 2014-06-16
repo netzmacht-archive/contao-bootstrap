@@ -140,7 +140,7 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_stylesheets'] = array
 				'exclude'                 => true,
 				'inputType'               => 'select',
 				'reference'               => &$GLOBALS['TL_LANG']['assetic'],
-				'options_callback'        => array('ThemePlus\DataContainer\Stylesheet', 'getAsseticFilterOptions'),
+				'options_callback'        => array('Netzmacht\Bootstrap\DataContainer\Layout', 'getCssAsseticFilterOptions'),
 				'eval'                    => array('style' => 'width: 140px', 'includeBlankOption' => true),
 			),
 
@@ -198,7 +198,7 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_javaScripts'] = array
 				'exclude'                 => true,
 				'inputType'               => 'select',
 				'reference'               => &$GLOBALS['TL_LANG']['assetic'],
-				'options_callback'        => array('ThemePlus\DataContainer\JavaScript', 'getAsseticFilterOptions'),
+				'options_callback'        => array('Netzmacht\Bootstrap\DataContainer\Layout', 'getJsAsseticFilterOptions'),
 				'eval'                    => array('style' => 'width: 140px', 'includeBlankOption' => true),
 			),
 

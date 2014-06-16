@@ -162,6 +162,41 @@ class Layout extends General
 
 
 	/**
+	 * @return array
+	 */
+	public function getCssAsseticFilterOptions()
+	{
+		if(class_exists('Bit3\Contao\ThemePlus\DataContainer\Stylesheet')) {
+			$class = 'Bit3\Contao\ThemePlus\DataContainer\Stylesheet';
+		}
+		else {
+			$class = 'ThemePlus\DataContainer\Stylesheet';
+		}
+
+		$callback = new $class;
+		return $callback->getAsseticFilterOptions();
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getJsAsseticFilterOptions()
+	{
+		if(class_exists('Bit3\Contao\ThemePlus\DataContainer\Javascript')) {
+			$class = 'Bit3\Contao\ThemePlus\DataContainer\Javascript';
+		}
+		else {
+			$class = 'ThemePlus\DataContainer\Javascript';
+		}
+
+		$callback = new $class;
+		return $callback->getAsseticFilterOptions();
+	}
+
+
+
+	/**
 	 * generic get uninstall files helper method
 	 *
 	 * @param string $type css|js
