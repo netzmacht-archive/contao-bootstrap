@@ -110,6 +110,16 @@ $GLOBALS['BOOTSTRAP']['templates'] = array
 				'fe_*',
 			),
 		),
+
+		'callback.replaceImageClasses' => array
+		(
+			'type'      => 'callback',
+			'callback'  => array('Netzmacht\Bootstrap\Template\Modifier\Elements', 'replaceImageClasses'),
+			'templates' => array
+			(
+				'ce_*',
+			),
+		),
 	),
 
 	// Configuration of template parsers. They changes already parsed templates. There are 2 types supported:
