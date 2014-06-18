@@ -61,6 +61,14 @@ class Icons
 		// load icons if not done so far
 		if(!isset($GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['icons']))
 		{
+			if (TL_MODE == 'BE') {
+				if (isset($GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['stylesheet'])) {
+					foreach ((array) $GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['stylesheet'] as $stylesheet) {
+						$GLOBALS['TL_CSS'][] = $stylesheet;
+					}
+				}
+			}
+
 			$GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['icons'] =
 				include TL_ROOT . '/' . $GLOBALS['BOOTSTRAP']['icons']['sets'][$key]['path'];
 		}
