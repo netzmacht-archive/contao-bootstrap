@@ -40,10 +40,6 @@ $GLOBALS['BOOTSTRAP']['assets'] = array
 		// bootstrap core files
 		'bootstrap' => array
 		(
-			// bootstrap helper files
-			'assets/bootstrap/bootstrap/assets/js/html5shiv.js'   => 'html5shiv.js',
-			'assets/bootstrap/bootstrap/assets/js/respond.min.js' => 'respond.min.js',
-
 			// bootstrap all components
 			'assets/bootstrap/bootstrap/dist/js/bootstrap.min.js' => 'bootstrap.min.js',
 
