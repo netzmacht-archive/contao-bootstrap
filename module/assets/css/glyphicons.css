@@ -2,9 +2,9 @@
   font-family: 'Glyphicons Halflings';
   src: url('../../../../../assets/bootstrap/bootstrap/fonts/glyphicons-halflings-regular.eot?v=3.0');
   src: url('../../../../../assets/bootstrap/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
-    url('../../../../../assets/bootstrap/bootstrap/glyphicons-halflings-regular.woff?v=3.0') format('woff'),
-    url('../../../../../assets/bootstrap/bootstrap/glyphicons-halflings-regular.ttf?v=3.0') format('truetype'),
-    url('../../../../../assets/bootstrap/bootstrap/glyphicons-halflings-regular.svg#glyphicons-halflingsregular?v=3.0') format('svg');
+    url('../../../../../assets/bootstrap/bootstrap/fonts/glyphicons-halflings-regular.woff?v=3.0') format('woff'),
+    url('../../../../../assets/bootstrap/bootstrap/fonts/glyphicons-halflings-regular.ttf?v=3.0') format('truetype'),
+    url('../../../../../assets/bootstrap/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular?v=3.0') format('svg');
 
   font-style: normal;
   font-weight: normal;
