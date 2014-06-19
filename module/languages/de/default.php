@@ -59,6 +59,8 @@ $GLOBALS['TL_LANG']['MSC']['bootstrapToggleNavigation'] = 'Navigation anzeigen/v
 $GLOBALS['TL_LANG']['MSC']['bootstrap_carousel'] = 'Bootstrap Carousel: %s';
 $GLOBALS['TL_LANG']['MSC']['bootstrap_tab'] = 'Bootstrap Tab: %s';
 
+$GLOBALS['TL_LANG']['MSC']['bootstrapUploadButton'] = 'Datei auswählen';
+
 /**
  * errors
  */

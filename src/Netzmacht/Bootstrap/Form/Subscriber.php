@@ -148,7 +148,7 @@ class Subscriber implements EventSubscriberInterface
 		$container->addChild('errors', $errors);
 		$errors->addClass('help-block');
 
-		if($isDynamic && $event->getWidget()->type == 'upload') {
+		if($isDynamic && $event->getWidget()->type == 'upload' && $GLOBALS['BOOTSTRAP']['form']['styledUpload']['enabled']) {
 			$this->generateUpload($container);
 		}
 	}
@@ -159,8 +159,9 @@ class Subscriber implements EventSubscriberInterface
 	 */
 	protected function generateUpload(Container $container)
 	{
+		$config  = $GLOBALS['BOOTSTRAP']['form']['styledUpload'];
 		$element = $container->getElement();
-		$element->setAttribute('style', 'display:none;');
+		$element->addClass('sr-only');
 		$element->setAttribute('onchange', sprintf('document.getElementById(\'%s_value\').value=this.value;return false;', $element->getId()));
 
 		$input = Element::create('input', array('type' => 'text'))
@@ -171,14 +172,19 @@ class Subscriber implements EventSubscriberInterface
 
 		$click = sprintf('$(%s).click();return false;', $element->getId());
 		$submit = Element::create('button', array('type' => 'submit'))
-			->addChild('Datei auswählen')
-			->addClass('btn btn-primary')
+			->addChild($config['label'])
+			->addClass($config['class'])
 			->setAttribute('onclick', $click);
 
 		$inputGroup = new InputGroup();
-		$inputGroup
-			->setElement($input)
-			->setRight($submit, $inputGroup::BUTTON);
+		$inputGroup->setElement($input);
+
+		if($config['position'] == 'left') {
+			$inputGroup->setLeft($submit, $inputGroup::BUTTON);
+		}
+		else {
+			$inputGroup->setRight($submit, $inputGroup::BUTTON);
+		}
 
 		$container->addChild('upload', $inputGroup);
 	}

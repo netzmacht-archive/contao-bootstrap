@@ -117,6 +117,15 @@ $GLOBALS['BOOTSTRAP']['form'] = array
 		'defaultStyle'  => 'btn-default',
 	),
 
+	// style the upload button
+	'styledUpload' => array
+	(
+		'enabled'	    => true,
+		'class'			=> 'btn btn-primary',
+		'position'	    => 'right',
+		'label'			=> &$GLOBALS['TL_LANG']['MSC']['bootstrapUploadButton']
+	),
+
 	// provides data attributes for custom select
 	'dataAttributes' => array('target', 'toggle', 'dismiss', 'remote'),
 );
