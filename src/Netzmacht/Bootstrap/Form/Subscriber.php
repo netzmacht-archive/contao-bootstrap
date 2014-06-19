@@ -71,6 +71,10 @@ class Subscriber implements EventSubscriberInterface
 		// add label class
 		$label->addClass('control-label');
 
+		if(!$widget->label || $this->getConfig($widget->type, 'noLabel')) {
+			$label->hide();
+		}
+
 		// apply form control class to the element
 		if($isDynamic && !$this->getConfig($widget->type, 'noFormControl')) {
 			$element->addClass('form-control');
