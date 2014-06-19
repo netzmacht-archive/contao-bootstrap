@@ -52,6 +52,7 @@ $GLOBALS['BOOTSTRAP']['form'] = array
 		'submit' => array
 		(
 			'noFormControl'    => true,
+			'noLabel'          => true,
 			'modalFooter'      => true,
 		),
 
