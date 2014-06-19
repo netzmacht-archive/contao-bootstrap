@@ -162,7 +162,7 @@ class Subscriber implements EventSubscriberInterface
 		$config  = $GLOBALS['BOOTSTRAP']['form']['styledUpload'];
 		$element = $container->getElement();
 		$element->addClass('sr-only');
-		$element->setAttribute('onchange', sprintf('document.getElementById(\'%s_value\').value=this.value;return false;', $element->getId()));
+		$element->setAttribute('onchange', sprintf($config['onchange'], $element->getId()));
 
 		$input = Element::create('input', array('type' => 'text'))
 			->setId($element->getId() . '_value')

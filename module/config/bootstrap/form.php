@@ -123,6 +123,7 @@ $GLOBALS['BOOTSTRAP']['form'] = array
 		'enabled'	    => true,
 		'class'			=> 'btn btn-primary',
 		'position'	    => 'right',
+		'onchange'	    => 'document.getElementById(\'%s_value\').value=this.value;return false;',
 		'label'			=> &$GLOBALS['TL_LANG']['MSC']['bootstrapUploadButton']
 	),
 
