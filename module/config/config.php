@@ -7,6 +7,7 @@ require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/form.php';
 require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/templates.php';
 require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/wrappers.php';
 require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/miscellaneous.php';
+require_once TL_ROOT . '/system/modules/bootstrap/config/bootstrap/stylepicker.php';
 
 
 /**
