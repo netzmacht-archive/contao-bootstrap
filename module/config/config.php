@@ -94,12 +94,8 @@ $GLOBALS['TL_WRAPPERS']['stop'][]       = 'bootstrap_buttonGroupEnd';
 /**
  * stylesheets
  */
-if(TL_MODE == 'BE')
-{
+if(TL_MODE == 'BE') {
 	$GLOBALS['TL_CSS']['bootstrap'] = 'system/modules/bootstrap/assets/css/backend.css|all|static';
-
-	// @see xat/contao-customselectmenu #6
-	$GLOBALS['TL_JAVASCRIPT']['customselectmenu'] = 'system/modules/customselectmenu/html/js/customselectmenu.min.js';
 }
 
 

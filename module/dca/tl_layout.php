@@ -186,7 +186,6 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['bootstrap_javaScripts'] = array
 			(
 				'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['bootstrap_conditional'],
 				'exclude'                 => true,
-				/*'inputType'               => 'customselect', */
 				'inputType'               => 'text',
 				'options'                 => array('lt IE 9'),
 				'eval'                    => array('style' => 'width: 140px', 'includeBlankOption' => true),
@@ -213,9 +212,8 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['viewport'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['viewport'],
 	'exclude'                 => true,
 	'default'                 => $GLOBALS['BOOTSTRAP']['layout']['viewport'],
-	'inputType'               => 'customselect',
-	'options'                 => array('width=device-width, initial-scale=1.0', 'width=device-width, initial-scale=1.0, user-scalable=no'),
+	'inputType'               => 'text',
 	'eval'                    => array('tl_class' => 'w50', 'decodeEntities' => true),
-	'sql'                     => "varchar(128) NOT NULL default ''",
+	'sql'                     => "varchar(255) NOT NULL default ''",
 );
 

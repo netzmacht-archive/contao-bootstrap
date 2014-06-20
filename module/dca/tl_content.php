@@ -306,7 +306,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_buttons'] = array
 						'name' => array
 						(
 							'inputType' => 'text',
-							/*'inputType' => 'customselect',*/
 							'options' => array('class', 'title', 'data-'),
 							'exclude' => true,
 							'eval' => array

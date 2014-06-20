@@ -14,9 +14,6 @@
 
 $GLOBALS['BOOTSTRAP']['layout'] = array
 (
-	// we do not remove the viewport setting, but add a default viewport by replace.addViewport modifier
-	'viewport'  => 'width=device-width, initial-scale=1.0',
-
 	// customize default palette. we remove the stuff we do not want to
 	// Using this way it is possible for other extensions to plug in the default palette
 	// MetaPalettes extending feature can be used
@@ -27,7 +24,6 @@ $GLOBALS['BOOTSTRAP']['layout'] = array
 		'-style'    => array('framework', 'stylesheet', 'external', '+bootstrap_importStylesheets'),
 		'+script'   => array('bootstrap_importJavaScripts after theme_plus_javascripts'),
 		'-static'   => array('static'),
-		'+expert'   => array('viewport after cssClass'),
 	),
 
 	// modification of the default subpalettes by using metasubselectpalettes
@@ -49,3 +45,7 @@ $GLOBALS['BOOTSTRAP']['layout'] = array
 		),
 	),
 );
+
+if(version_compare(VERSION, '3.3', '<')) {
+	$GLOBALS['BOOTSTRAP']['layout']['metapalette']['+expert'][] = 'viewport after cssClass';
+}
