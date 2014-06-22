@@ -82,35 +82,21 @@ class Navigation
 			function($item) use($template, $level)
 			{
 				$item['hideNavClass'] = true;
-				$item['itemClass'] = ($item['class'] == '' ? '' : ' ') . 'dropdown';
 
 				if($item['subitems'])
 				{
-					if($item['type'] == 'm17Folder')
-					{
-						if($level == 1 || $template->disableUl)
-						{
-							$item['link'] .= ' ' . $GLOBALS['BOOTSTRAP']['dropdown']['toggle'];
-						}
-					}
-					else {
-						$item['link'] .= str_replace('href="', 'data-toggle="dropdown" href="', $item['link']);
-						$item['link'] .= ' ' . $GLOBALS['BOOTSTRAP']['dropdown']['toggle'];
-					}
-
 					$item['toggle'] = 'class="dropdown-toggle"';
 
-
-					if($item['type'] == 'm17Folder')
+					// m17 page folder items are handled as folders as well
+					if($item['type'] == 'm17Folder' && $template->level != 'level_1')
 					{
-						if($template->level == 'level_1')
-						{
-							$item['toggle'] .= ' data-toggle="dropdown"';
-						}
-						else {
-							$item['isHeader'] = !$template->disableUl;
-							$item['toggle'] .= ' data-toggle="collapse"';
-						}
+						$item['isHeader'] = !$template->disableUl;
+						$item['toggle'] .= ' data-toggle="collapse"';
+					}
+					else {
+						$item['itemClass'] = ($item['class'] == '' ? '' : ' ') . 'dropdown';
+						$item['link']   .= ' ' . $GLOBALS['BOOTSTRAP']['dropdown']['toggle'];
+						$item['toggle'] .= ' data-toggle="dropdown"';
 					}
 				}
 
