@@ -94,6 +94,7 @@ class Navigation
 						}
 					}
 					else {
+						$item['link'] .= str_replace('href="', 'data-toggle="dropdown" href="', $item['link']);
 						$item['link'] .= ' ' . $GLOBALS['BOOTSTRAP']['dropdown']['toggle'];
 					}
 
