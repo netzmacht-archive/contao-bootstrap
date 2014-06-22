@@ -82,31 +82,31 @@ $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['img-thumbnail'][1]  = '';
 /**
  * Contextual colors
  */
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-muted'][0]   = 'Text - Muted';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-muted'][0]   = 'Text - verhalten';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-muted'][1]   = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-primary'][0] = 'Text - Primary';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-primary'][0] = 'Text - Primär';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-primary'][1] = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-success'][0] = 'Text - Success';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-success'][0] = 'Text - Erfolg';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-success'][1] = '';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-info'][0]    = 'Text - Info';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-info'][1]    = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-warning'][0] = 'Text - Warning';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-warning'][0] = 'Text - Warnhinweis';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-warning'][1] = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-danger'][0]  = 'Text - Danger';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-danger'][0]  = 'Text - Gefahrenhinweis';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-danger'][1]  = '';
 
 /**
  * Contextual backgrounds
  */
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-primary'][0] = 'Hintergrund - Primary';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-primary'][0] = 'Hintergrund - Primär';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-primary'][1] = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-success'][0] = 'Hintergrund - Primary';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-success'][0] = 'Hintergrund - Erfolg';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-success'][1] = '';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-info'][0]    = 'Hintergrund - Info';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-info'][1]    = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-warning'][0] = 'Hintergrund - Warning';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-warning'][0] = 'Hintergrund - Warnhinweis';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-warning'][1] = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-danger'][0]  = 'Hintergrund - Danger';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-danger'][0]  = 'Hintergrund - Gefahrenhinweis';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-danger'][1]  = '';
 
 
@@ -124,27 +124,27 @@ $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['center-block'][1] = '';
 /**
  * Accessibility
  */
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['sr-only'][0]       = 'Accessibility - Screen readers only';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['sr-only'][0]       = 'Barrierefreiheit - Sichtbar nur für Screenreaders';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['sr-only'][1]       = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-xs'][0]    = 'Accessibility - Visible for extra small devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-xs'][0]    = 'Barrierefreiheit - Sichtbar für sehr kleine Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-xs'][1]    = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-sm'][0]    = 'Accessibility - Visible for small devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-sm'][0]    = 'Barrierefreiheit - Sichtbar für kleine Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-sm'][1]    = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-md'][0]    = 'Accessibility - Visible for medium devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-md'][0]    = 'Barrierefreiheit - Sichtbar für mittlere Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-md'][1]    = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-lg'][0]    = 'Accessibility - Visible for large devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-lg'][0]    = 'Barrierefreiheit - Sichtbar für große Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-lg'][1]    = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-xs'][0]     = 'Accessibility - Invisible for extra small devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-xs'][0]     = 'Barrierefreiheit - Unsichtbar für sehr kleine Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-xs'][1]     = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-sm'][0]     = 'Accessibility - Invisible for small devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-sm'][0]     = 'Barrierefreiheit - Unsichtbar für kleine Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-sm'][1]     = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-md'][0]     = 'Accessibility - Invisible for medium devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-md'][0]     = 'Barrierefreiheit - Unsichtbar für mittlere Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-md'][1]     = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-lg'][0]     = 'Accessibility - Invisible for large devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-lg'][0]     = 'Barrierefreiheit - Unsichtbar für große Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-lg'][1]     = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-lg'][0]     = 'Accessibility - Invisible for large devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-lg'][0]     = 'Barrierefreiheit - Unsichtbar für große Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-lg'][1]     = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-print'][0] = 'Accessibility - Invisible for large devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-print'][0] = 'Barrierefreiheit - Unsichtbar für große Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-print'][1] = '';
-$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-print'][0]  = 'Accessibility - Invisible for large devices';
+$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-print'][0]  = 'Barrierefreiheit - Unsichtbar für große Geräte';
 $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-print'][1]  = '';
