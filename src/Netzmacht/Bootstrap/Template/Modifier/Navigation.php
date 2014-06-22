@@ -94,13 +94,7 @@ class Navigation
 						}
 					}
 					else {
-						$item['itemClass'] .= ' navbar-group';
-						$item['subitems']   = sprintf(
-							'<a href="#" class="dropdown-toggle" data-toggle="%s">%s</a>%s',
-							$template->level == 'level_1' ? 'dropdown' : 'collapse',
-							$GLOBALS['BOOTSTRAP']['dropdown']['toggle'],
-							$item['subitems']
-						);
+						$item['link'] .= ' ' . $GLOBALS['BOOTSTRAP']['dropdown']['toggle'];
 					}
 
 					$item['toggle'] = 'class="dropdown-toggle"';
