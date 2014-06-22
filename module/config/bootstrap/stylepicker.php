@@ -7,239 +7,291 @@ $GLOBALS['STYLEPICKER_PRESET']['bootstrap'] = array(
 		 * Grid
 		 */
 		'container'        => array(
-			'title' => 'Grid - Container',
-			'ce'    => 'semantic_html5',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['container'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['container'][1],
+			'ce'          => 'semantic_html5',
 		),
 		'container-fluid'  => array(
-			'title' => 'Grid - Container Responsive',
-			'ce'    => 'semantic_html5',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['container-fluid'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['container-fluid'][1],
+			'ce'          => 'semantic_html5',
 		),
 		'row'              => array(
-			'title' => 'Grid - Zeile',
-			'ce'    => 'semantic_html5',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['row'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['row'][1],
+			'ce'          => 'semantic_html5',
 		),
 		/**
 		 * Text
 		 */
 		'text-left'        => array(
-			'title' => 'Text - Links',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-left'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-left'][1],
+			'ce'          => '*',
 		),
 		'text-center'      => array(
-			'title' => 'Text - Mittig',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-center'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-center'][1],
+			'ce'          => '*',
 		),
 		'text-right'       => array(
-			'title' => 'Text - Rechts',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-right'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-right'][1],
+			'ce'          => '*',
 		),
 		'text-justify'     => array(
-			'title' => 'Text - Blocksatz',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-justify'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-justify'][1],
+			'ce'          => '*',
 		),
 		'lead'             => array(
-			'title' => 'Text - Aufmacher',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['lead'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['lead'][1],
+			'ce'          => '*',
 		),
 		'small'            => array(
-			'title' => 'Text - Fußnotiz',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['small'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['small'][1],
+			'ce'          => '*',
 		),
 		/**
 		 * Headline
 		 */
 		'h1'               => array(
-			'title' => 'Überschrift - Level 1 Stil',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h1'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h1'][1],
+			'ce'          => '*',
 		),
 		'h2'               => array(
-			'title' => 'Überschrift - Level 2 Stil',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h2'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h2'][1],
+			'ce'          => '*',
 		),
 		'h3'               => array(
-			'title' => 'Überschrift - Level 3 Stil',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h3'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h3'][1],
+			'ce'          => '*',
 		),
 		'h4'               => array(
-			'title' => 'Überschrift - Level 4 Stil',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h4'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h4'][1],
+			'ce'          => '*',
 		),
 		'h5'               => array(
-			'title' => 'Überschrift - Level 5 Stil',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h5'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h5'][1],
+			'ce'          => '*',
 		),
 		'h6'               => array(
-			'title' => 'Überschrift - Level 6 Stil',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h6'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['h6'][1],
+			'ce'          => '*',
 		),
 		/**
 		 * Table
 		 */
 		'table-striped'    => array(
-			'title' => 'Tabelle - Linien',
-			'ce'    => 'table',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['table-striped'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['table-striped'][1],
+			'ce'          => 'table',
 		),
 		'table-bordered'   => array(
-			'title' => 'Tabelle - Umrahmt',
-			'ce'    => 'table',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['table-bordered'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['table-bordered'][1],
+			'ce'          => 'table',
 		),
 		'table-hover'      => array(
-			'title' => 'Tabelle - Hervorhebung',
-			'ce'    => 'table',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['table-hover'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['table-hover'][1],
+			'ce'          => 'table',
 		),
 		'table-condensed'  => array(
-			'title' => 'Tabelle - Platzsparent',
-			'ce'    => 'table',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['table-condensed'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['table-condensed'][1],
+			'ce'          => 'table',
 		),
 		'table-responsive' => array(
-			'title' => 'Tabelle - Responsive',
-			'ce'    => 'table',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['table-responsive'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['table-responsive'][1],
+			'ce'          => 'table',
 		),
 		/**
 		 * Buttons
 		 */
 		'btn-lg'           => array(
-			'title' => 'Button - groß',
-			'ce'    => array('bootstrap_button', 'bootstrap_buttons'),
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['btn-lg'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['btn-lg'][1],
+			'ce'          => array('bootstrap_button', 'bootstrap_buttons'),
 		),
 		'btn-sm'           => array(
-			'title' => 'Button - leicht vergrößert',
-			'ce'    => array('bootstrap_button', 'bootstrap_buttons'),
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['btn-sm'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['btn-sm'][1],
+			'ce'          => array('bootstrap_button', 'bootstrap_buttons'),
 		),
 		'btn-xs'           => array(
-			'title' => 'Button - klein',
-			'ce'    => array('bootstrap_button', 'bootstrap_buttons'),
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['btn-xs'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['btn-xs'][1],
+			'ce'          => array('bootstrap_button', 'bootstrap_buttons'),
 		),
 		/**
 		 * Images
 		 */
 		'img-responsive'   => array(
-			'title' => 'Bild - Responsive',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['img-responsive'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['img-responsive'][1],
+			'ce'          => '*',
 		),
 		'img-rounded'      => array(
-			'title' => 'Bild - Abgerundet',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['img-rounded'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['img-rounded'][1],
+			'ce'          => '*',
 		),
 		'img-circle'       => array(
-			'title' => 'Bild - Rund',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['img-circle'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['img-circle'][1],
+			'ce'          => '*',
 		),
 		'img-thumbnail'    => array(
-			'title' => 'Bild - Eingerahmt',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['img-thumbnail'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['img-thumbnail'][1],
+			'ce'          => '*',
 		),
 		/**
 		 * Contextual colors
 		 */
 		'text-muted'       => array(
-			'title' => 'Text - Muted',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-muted'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-muted'][1],
+			'ce'          => '*',
 		),
 		'text-primary'     => array(
-			'title' => 'Text - Primary',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-primary'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-primary'][1],
+			'ce'          => '*',
 		),
 		'text-success'     => array(
-			'title' => 'Text - Success',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-success'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-success'][1],
+			'ce'          => '*',
 		),
 		'text-info'        => array(
-			'title' => 'Text - Info',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-info'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-info'][1],
+			'ce'          => '*',
 		),
 		'text-warning'     => array(
-			'title' => 'Text - Warning',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-warning'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-warning'][1],
+			'ce'          => '*',
 		),
 		'text-danger'      => array(
-			'title' => 'Text - Danger',
-			'ce'    => '*',
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-danger'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['text-danger'][1],
+			'ce'          => '*',
 		),
 		/**
 		 * Contextual backgrounds
 		 */
-		'bg-primary'     => array(
-			'title' => 'Hintergrund - Primary',
-			'ce'    => '*',
+		'bg-primary'       => array(
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-primary'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-primary'][1],
+			'ce'          => '*',
 		),
-		'bg-success'     => array(
-			'title' => 'Hintergrund - Success',
-			'ce'    => '*',
+		'bg-success'       => array(
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-success'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-success'][1],
+			'ce'          => '*',
 		),
-		'bg-info'        => array(
-			'title' => 'Hintergrund - Info',
-			'ce'    => '*',
+		'bg-info'          => array(
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-info'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-info'][1],
+			'ce'          => '*',
 		),
-		'bg-warning'     => array(
-			'title' => 'Hintergrund - Warning',
-			'ce'    => '*',
+		'bg-warning'       => array(
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-warning'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-warning'][1],
+			'ce'          => '*',
 		),
-		'bg-danger'      => array(
-			'title' => 'Hintergrund - Danger',
-			'ce'    => '*',
+		'bg-danger'        => array(
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-danger'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['bg-danger'][1],
+			'ce'          => '*',
 		),
 		/**
 		 * Floating
 		 */
-		'pull-left'     => array(
-			'title' => 'Umfließend - Links ausgerichtet',
-			'ce'    => '*',
+		'pull-left'        => array(
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['pull-left'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['pull-left'][1],
+			'ce'          => '*',
 		),
-		'pull-right'      => array(
-			'title' => 'Umfließend - Rechts ausgerichtet',
-			'ce'    => '*',
+		'pull-right'       => array(
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['pull-right'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['pull-right'][1],
+			'ce'          => '*',
 		),
-		'center-block'      => array(
-			'title' => 'Block - Mittig ausgerichtet',
-			'ce'    => '*',
+		'center-block'     => array(
+			'title'       => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['center-block'][0],
+			'description' => &$GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['center-block'][1],
+			'ce'          => '*',
 		),
 		/**
 		 * Accessibility
 		 */
-		'sr-only'      => array(
-			'title' => 'Accessibility - Screen readers only',
-			'ce'    => '*',
+		'sr-only'          => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['sr-only'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['sr-only'][1],
+			'ce'          => '*',
 		),
-		'visible-xs'      => array(
-			'title' => 'Accessibility - Visible for extra small devices',
-			'ce'    => '*',
+		'visible-xs'       => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-xs'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-xs'][1],
+			'ce'          => '*',
 		),
-		'visible-sm'      => array(
-			'title' => 'Accessibility - Visible for small devices',
-			'ce'    => '*',
+		'visible-sm'       => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-sm'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-sm'][1],
+			'ce'          => '*',
 		),
-		'visible-md'      => array(
-			'title' => 'Accessibility - Visible for medium devices',
-			'ce'    => '*',
+		'visible-md'       => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-md'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-md'][1],
+			'ce'          => '*',
 		),
-		'visible-lg'      => array(
-			'title' => 'Accessibility - Visible for large devices',
-			'ce'    => '*',
+		'visible-lg'       => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-lg'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-lg'][1],
+			'ce'          => '*',
 		),
-		'hidden-xs'      => array(
-			'title' => 'Accessibility - Invisible for extra small devices',
-			'ce'    => '*',
+		'hidden-xs'        => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-xs'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-xs'][1],
+			'ce'          => '*',
 		),
-		'hidden-sm'      => array(
-			'title' => 'Accessibility - Invisible for small devices',
-			'ce'    => '*',
+		'hidden-sm'        => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-sm'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-sm'][1],
+			'ce'          => '*',
 		),
-		'hidden-md'      => array(
-			'title' => 'Accessibility - Invisible for medium devices',
-			'ce'    => '*',
+		'hidden-md'        => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-md'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-md'][1],
+			'ce'          => '*',
 		),
-		'hidden-lg'      => array(
-			'title' => 'Accessibility - Invisible for large devices',
-			'ce'    => '*',
+		'hidden-lg'        => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-lg'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-lg'][1],
+			'ce'          => '*',
 		),
-		'visible-print'      => array(
-			'title' => 'Accessibility - Visible for print',
-			'ce'    => '*',
+		'visible-print'    => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-print'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['visible-print'][1],
+			'ce'          => '*',
 		),
-		'hidden-print'      => array(
-			'title' => 'Accessibility - Invisible for print',
-			'ce'    => '*',
+		'hidden-print'     => array(
+			'title'       => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-print'][0],
+			'description' => $GLOBALS['TL_LANG']['BOOTSTRAP']['stylepicker']['hidden-print'][1],
+			'ce'          => '*',
 		),
 	),
 );
