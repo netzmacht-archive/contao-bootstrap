@@ -27,6 +27,7 @@ foreach($GLOBALS['BOOTSTRAP']['form']['widgets'] as $widget => $config)
 // append inlineStyle option to radio and checkbox
 \MetaPalettes::appendFields('tl_form_field', 'radio', 'fconfig', array('bootstrap_inlineStyle'));
 \MetaPalettes::appendFields('tl_form_field', 'checkbox', 'fconfig', array('bootstrap_inlineStyle'));
+\MetaPalettes::appendFields('tl_form_field', 'upload', 'fconfig', array('placeholder'));
 
 
 /**
