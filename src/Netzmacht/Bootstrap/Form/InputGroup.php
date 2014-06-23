@@ -3,17 +3,16 @@
 namespace Netzmacht\Bootstrap\Form;
 
 use Netzmacht\FormHelper\Component;
-use Netzmacht\FormHelper\ElementAwareInterface;
-use Netzmacht\FormHelper\GenerateInterface;
-use Netzmacht\FormHelper\Html\Attributes;
-use Netzmacht\FormHelper\Html\AttributesTrait;
-use Netzmacht\FormHelper\Html\Element;
+use Netzmacht\FormHelper\HasElement;
+use Netzmacht\Html\Attributes;
+use Netzmacht\Html\CastsToString;
+use Netzmacht\Html\Element;
 
 /**
  * Class InputGroup
  * @package Netzmacht\Bootstrap\Form
  */
-class InputGroup extends Component implements GenerateInterface, ElementAwareInterface
+class InputGroup extends Component implements HasElement
 {
 
 	const ADDON = 'input-group-addon';
@@ -22,12 +21,12 @@ class InputGroup extends Component implements GenerateInterface, ElementAwareInt
 
 
 	/**
-	 * @var GenerateInterface|string
+	 * @var CastsToString|string
 	 */
 	protected $left;
 
 	/**
-	 * @var GenerateInterface|string
+	 * @var CastsToString|string
 	 */
 	protected $right;
 
@@ -61,7 +60,7 @@ class InputGroup extends Component implements GenerateInterface, ElementAwareInt
 
 
 	/**
-	 * @return GenerateInterface|string|null
+	 * @return CastsToString|null
 	 */
 	public function getLeft()
 	{
@@ -87,7 +86,7 @@ class InputGroup extends Component implements GenerateInterface, ElementAwareInt
 
 
 	/**
-	 * @return GenerateInterface|string|null
+	 * @return CastsToString|null
 	 */
 	public function getRight()
 	{
@@ -112,7 +111,7 @@ class InputGroup extends Component implements GenerateInterface, ElementAwareInt
 
 
 	/**
-	 * @return \Netzmacht\FormHelper\Html\Element
+	 * @return \Netzmacht\Html\Element
 	 */
 	public function getElement()
 	{

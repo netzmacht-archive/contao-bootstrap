@@ -8,8 +8,8 @@ use Netzmacht\Bootstrap\Helper\Icons;
 use Netzmacht\FormHelper\Event\Events;
 use Netzmacht\FormHelper\Event\GenerateEvent;
 use Netzmacht\FormHelper\Event\SelectLayoutEvent;
-use Netzmacht\FormHelper\Html\Element;
-use Netzmacht\FormHelper\Component\Container;
+use Netzmacht\Html\Element;
+use Netzmacht\FormHelper\Partial\Container;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
@@ -66,7 +66,6 @@ class Subscriber implements EventSubscriberInterface
 		$widget    = $event->getWidget();
 		$label     = $event->getLabel();
 		$errors    = $event->getErrors();
-		$isDynamic = $element instanceof Element;
 
 		// add label class
 		$label->addClass('control-label');
@@ -75,9 +74,21 @@ class Subscriber implements EventSubscriberInterface
 			$label->hide();
 		}
 
-		// apply form control class to the element
-		if($isDynamic && !$this->getConfig($widget->type, 'noFormControl')) {
-			$element->addClass('form-control');
+		if($element instanceof Element) {
+			// apply form control class to the element
+			if(!$this->getConfig($widget->type, 'noFormControl')) {
+				$element->addClass('form-control');
+			}
+
+			// enable styled select
+			if($GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && $this->getConfig($widget->type, 'styleSelect')) {
+				$element->addClass($GLOBALS['BOOTSTRAP']['form']['styleSelect']['class']);
+				$element->setAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']['style']);
+			}
+
+			if($event->getWidget()->type == 'upload' && $GLOBALS['BOOTSTRAP']['form']['styledUpload']['enabled']) {
+				$this->generateUpload($container);
+			}
 		}
 
 		// add column layout
@@ -91,12 +102,6 @@ class Subscriber implements EventSubscriberInterface
 			else {
 				$label->addClass($GLOBALS['BOOTSTRAP']['form']['tableFormat']['label']);
 			}
-		}
-
-		// enable styled select
-		if($isDynamic && $GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && $this->getConfig($widget->type, 'styleSelect')) {
-			$element->addClass($GLOBALS['BOOTSTRAP']['form']['styleSelect']['class']);
-			$element->setAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']['style']);
 		}
 
 		// generate input group
@@ -135,6 +140,7 @@ class Subscriber implements EventSubscriberInterface
 
 			// add submit button into input group
 			if($container->hasChild('submit')) {
+				/** @var Element $submit */
 				$submit = $container->removeChild('submit');
 				$submit->addClass('btn');
 
@@ -152,9 +158,6 @@ class Subscriber implements EventSubscriberInterface
 		$container->addChild('errors', $errors);
 		$errors->addClass('help-block');
 
-		if($isDynamic && $event->getWidget()->type == 'upload' && $GLOBALS['BOOTSTRAP']['form']['styledUpload']['enabled']) {
-			$this->generateUpload($container);
-		}
 	}
 
 
@@ -165,6 +168,8 @@ class Subscriber implements EventSubscriberInterface
 	{
 		$config  = $GLOBALS['BOOTSTRAP']['form']['styledUpload'];
 		$element = $container->getElement();
+
+		/** @var Element $element */
 		$element->addClass('sr-only');
 		$element->setAttribute('onchange', sprintf($config['onchange'], $element->getId()));
 

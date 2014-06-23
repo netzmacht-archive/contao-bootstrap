@@ -1,8 +1,8 @@
-<<?php echo $this->tag; ?> <?php echo $this->attributes; ?>>
+<<?php echo $this->tag; ?> <?php echo $this->element->generateAttributes(); ?>>
 <?php
 
-use Netzmacht\FormHelper\Html\Element;
-use Netzmacht\FormHelper\Html\Element\Checkboxes;
+use Netzmacht\Html\Element;
+use Netzmacht\FormHelper\Element\Checkboxes;
 
 /** @var Checkboxes $element */
 $group = null;
@@ -22,8 +22,8 @@ foreach($this->options as $option):
 
 	else:
 		$child = Element::create('input', array('type' => 'radio'))
-			->setAttribute('name', $this->attributes->get('name') . '[]')
-			->setAttribute('id', $this->attributes->get('id') . '_' . $index)
+			->setAttribute('name', $this->element->getAttribute('name') . '[]')
+			->setAttribute('id', $this->element->getId() . '_' . $index)
 			->setAttribute('value', $option['value']);
 
 		$label = Element::create('label');
