@@ -81,6 +81,9 @@ class Subscriber implements EventSubscriberInterface
 		$this->setColumnLayout($widget, $container, $label);
 		$this->adjustElement($event, $element, $widget, $container);
 		$this->addInputGroup($widget, $container, $element);
+
+		// inject errors into container
+		$container->addChild('errors', $errors);
 	}
 
 
