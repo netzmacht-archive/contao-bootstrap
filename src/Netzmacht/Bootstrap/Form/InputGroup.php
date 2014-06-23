@@ -126,7 +126,7 @@ class InputGroup extends Component implements HasElement
 	{
 		return sprintf(
 			'<div %s>%s%s%s</div>',
-			$this->attributes,
+			$this->generateAttributes(),
 			$this->generateAddon($this->left),
 			$this->element,
 			$this->generateAddon($this->right)
