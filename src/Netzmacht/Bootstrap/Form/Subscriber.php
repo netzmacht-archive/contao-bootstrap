@@ -10,6 +10,7 @@ use Netzmacht\FormHelper\Event\GenerateEvent;
 use Netzmacht\FormHelper\Event\SelectLayoutEvent;
 use Netzmacht\Html\Element;
 use Netzmacht\FormHelper\Partial\Container;
+use Netzmacht\Html\Element\Node;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
@@ -140,9 +141,32 @@ class Subscriber implements EventSubscriberInterface
 
 			// add submit button into input group
 			if($container->hasChild('submit')) {
-				/** @var Element $submit */
+				/** @var Node $submit */
 				$submit = $container->removeChild('submit');
+
+				// recreate as button
+				if($submit->getTag() != 'button') {
+					$submit = Element::create('button');
+					$submit->setAttribute('type', 'submit');
+					$submit->addChild($widget->slabel);
+				}
+
 				$submit->addClass('btn');
+
+				if($widget->bootstrap_addSubmitClass) {
+					$submit->addClass($widget->bootstrap_addSubmitClass);
+				}
+
+				if($widget->bootstrap_addSubmitIcon) {
+					$icon 	  = Icons::generateIcon($widget->bootstrap_addSubmitIcon);
+					$position = null;
+
+					if($widget->bootstrap_addSubmitIconPosition == 'left') {
+						$position = Node::POSITION_FIRST;
+					}
+
+					$submit->addChild($icon, $position);
+				}
 
 				$inputGroup->setRight($submit, $inputGroup::BUTTON);
 			}
