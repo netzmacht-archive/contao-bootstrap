@@ -286,9 +286,8 @@ class Subscriber implements EventSubscriberInterface
 	 * @param $container
 	 * @param $element
 	 */
-	private function addInputGroup($widget, $container, $element)
+	private function addInputGroup($widget, Container $container, Element $element)
 	{
-// generate input group
 		if($this->getConfig($widget->type, 'allowInputGroup') &&
 			($widget->bootstrap_addIcon ||
 				$widget->bootstrap_addUnit ||
