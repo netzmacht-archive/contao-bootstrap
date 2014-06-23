@@ -179,7 +179,7 @@ class Subscriber implements EventSubscriberInterface
 			->setAttribute('disabled', true)
 			->setAttribute('name', $element->getAttribute('name') . '_value');
 
-		if ($element->hasAttribute('placeholder')) {
+		if($element->hasAttribute('placeholder')) {
 			$input->setAttribute('placeholder', $element->getAttribute('placeholder'));
 		}
 
