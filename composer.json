@@ -29,7 +29,7 @@
         "leounglaub/contao-simple-ajax":"~1.0",
         "netzmacht/contao-bootstrap-columnseteditor":">=0.3.3,~0.3",
         "netzmacht/contao-iconWizard":"~1.0",
-        "netzmacht/contao-form-helper":"~0.1.0",
+        "netzmacht/contao-form-helper":"~0.2.0",
         "twbs/bootstrap":"~3.0"
     },
     "suggest": {
