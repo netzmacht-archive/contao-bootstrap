@@ -9,6 +9,7 @@ use Netzmacht\FormHelper\Element\StaticHtml;
 use Netzmacht\FormHelper\Event\Events;
 use Netzmacht\FormHelper\Event\GenerateEvent;
 use Netzmacht\FormHelper\Event\SelectLayoutEvent;
+use Netzmacht\FormHelper\Partial\Label;
 use Netzmacht\Html\Element;
 use Netzmacht\FormHelper\Partial\Container;
 use Netzmacht\Html\Element\Node;
@@ -71,122 +72,15 @@ class Subscriber implements EventSubscriberInterface
 
 		// add label class
 		$label->addClass('control-label');
+		$errors->addClass('help-block');
 
 		if(!$widget->label || $this->getConfig($widget->type, 'noLabel')) {
 			$label->hide();
 		}
 
-		if($element instanceof Element) {
-			// apply form control class to the element
-			if(!$this->getConfig($widget->type, 'noFormControl')) {
-				$element->addClass('form-control');
-			}
-
-			// enable styled select
-			if($GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && $this->getConfig($widget->type, 'styleSelect')) {
-				$element->addClass($GLOBALS['BOOTSTRAP']['form']['styleSelect']['class']);
-				$element->setAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']['style']);
-			}
-
-			if($event->getWidget()->type == 'upload' && $GLOBALS['BOOTSTRAP']['form']['styledUpload']['enabled']) {
-				$this->generateUpload($container);
-			}
-		}
-
-		// add column layout
-		if(!$widget->tableless) {
-			$container->setRenderContainer(true);
-			$container->addClass($GLOBALS['BOOTSTRAP']['form']['tableFormat']['control']);
-
-			if(!$widget->label || $this->getConfig($widget->type, 'noLabel')) {
-				$container->addClass($GLOBALS['BOOTSTRAP']['form']['tableFormat']['offset']);
-			}
-			else {
-				$label->addClass($GLOBALS['BOOTSTRAP']['form']['tableFormat']['label']);
-			}
-		}
-
-		// generate input group
-		if($this->getConfig($widget->type, 'allowInputGroup') &&
-			($widget->bootstrap_addIcon ||
-				$widget->bootstrap_addUnit ||
-				$container->hasChild('submit') ||
-				$widget->type == 'captcha'
-			)
-		) {
-			$inputGroup = new InputGroup();
-			$inputGroup->setElement($element);
-			$container->setWrapper($inputGroup);
-
-			// add icon
-			if($widget->bootstrap_addIcon) {
-				$icon = Icons::generateIcon($widget->bootstrap_icon);
-
-				if($widget->bootstrap_iconPosition == 'right') {
-					$inputGroup->setRight($icon);
-				}
-				else {
-					$inputGroup->setLeft($icon);
-				}
-			}
-
-			// add unit
-			if($widget->bootstrap_addUnit) {
-				if($widget-> bootstrap_unitPosition == 'right') {
-					$inputGroup->setRight($widget->bootstrap_unit);
-				}
-				else {
-					$inputGroup->setLeft($widget->bootstrap_unit);
-				}
-			}
-
-			// add submit button into input group
-			if($container->hasChild('submit')) {
-				/** @var Node $submit */
-				$submit = $container->removeChild('submit');
-
-				// recreate as button
-				if($submit->getTag() != 'button') {
-					$submit = Element::create('button');
-					$submit->setAttribute('type', 'submit');
-					$submit->addChild($widget->slabel);
-				}
-
-				$submit->addClass('btn');
-
-				if($widget->bootstrap_addSubmitClass) {
-					$submit->addClass($widget->bootstrap_addSubmitClass);
-				}
-
-				if($widget->bootstrap_addSubmitIcon) {
-					$icon 	  = Icons::generateIcon($widget->bootstrap_addSubmitIcon);
-					$position = null;
-
-					if($widget->bootstrap_addSubmitIconPosition == 'left') {
-						$position = Node::POSITION_FIRST;
-						$icon .= ' ';
-					}
-					else {
-						$icon = ' ' . $icon;
-					}
-
-					$submit->addChild(new StaticHtml($icon), $position);
-				}
-
-				$inputGroup->setRight($submit, $inputGroup::BUTTON);
-			}
-
-			// add captcha as form input group
-			if($widget instanceof \FormCaptcha) {
-				$captcha = $container->removeChild('question');
-				$inputGroup->setRight($captcha);
-			}
-		}
-
-		// inject errors into container
-		$container->addChild('errors', $errors);
-		$errors->addClass('help-block');
-
+		$this->setColumnLayout($widget, $container, $label);
+		$this->adjustElement($event, $element, $widget, $container);
+		$this->addInputGroup($widget, $container, $element);
 	}
 
 
@@ -248,6 +142,166 @@ class Subscriber implements EventSubscriberInterface
 		}
 
 		return false;
+	}
+
+	/**
+	 * @param GenerateEvent $event
+	 * @param $element
+	 * @param $widget
+	 * @param $container
+	 */
+	private function adjustElement(GenerateEvent $event, $element, $widget, $container)
+	{
+		if($element instanceof Element) {
+			// apply form control class to the element
+			if(!$this->getConfig($widget->type, 'noFormControl')) {
+				$element->addClass('form-control');
+			}
+
+			// enable styled select
+			if($GLOBALS['BOOTSTRAP']['form']['styleSelect']['enabled'] && $this->getConfig($widget->type, 'styleSelect')) {
+				$element->addClass($GLOBALS['BOOTSTRAP']['form']['styleSelect']['class']);
+				$element->setAttribute('data-style', $GLOBALS['BOOTSTRAP']['form']['styleSelect']['style']);
+			}
+
+			if($event->getWidget()->type == 'upload' && $GLOBALS['BOOTSTRAP']['form']['styledUpload']['enabled']) {
+				$this->generateUpload($container);
+			}
+		}
+	}
+
+	/**
+	 * @param $widget
+	 * @param $container
+	 * @param $label
+	 */
+	private function setColumnLayout($widget, Container $container, Label $label)
+	{
+		if(!$widget->tableless) {
+			$container->setRenderContainer(true);
+			$container->addClass($GLOBALS['BOOTSTRAP']['form']['tableFormat']['control']);
+
+			if(!$widget->label || $this->getConfig($widget->type, 'noLabel')) {
+				$container->addClass($GLOBALS['BOOTSTRAP']['form']['tableFormat']['offset']);
+			} else {
+				$label->addClass($GLOBALS['BOOTSTRAP']['form']['tableFormat']['label']);
+			}
+		}
+	}
+
+	/**
+	 * @param $widget
+	 * @param $inputGroup
+	 * @return string
+	 */
+	private function addIcon($widget, InputGroup $inputGroup)
+	{
+		if($widget->bootstrap_addIcon) {
+			$icon = Icons::generateIcon($widget->bootstrap_icon);
+
+			if($widget->bootstrap_iconPosition == 'right') {
+				$inputGroup->setRight($icon);
+			} else {
+				$inputGroup->setLeft($icon);
+			}
+		}
+	}
+
+	/**
+	 * @param $widget
+	 * @param InputGroup $inputGroup
+	 */
+	private function addUnit($widget, InputGroup $inputGroup)
+	{
+		// add unit
+		if($widget->bootstrap_addUnit) {
+			if($widget->bootstrap_unitPosition == 'right') {
+				$inputGroup->setRight($widget->bootstrap_unit);
+			} else {
+				$inputGroup->setLeft($widget->bootstrap_unit);
+			}
+		}
+	}
+
+	/**
+	 * @param $container
+	 * @param $widget
+	 * @param $inputGroup
+	 */
+	private function adjustSubmitButton(Container $container, $widget, InputGroup $inputGroup)
+	{
+		if($container->hasChild('submit')) {
+			/** @var Node $submit */
+			$submit = $container->removeChild('submit');
+
+			// recreate as button
+			if($submit->getTag() != 'button') {
+				$submit = Element::create('button');
+				$submit->setAttribute('type', 'submit');
+				$submit->addChild($widget->slabel);
+			}
+
+			$submit->addClass('btn');
+
+			if($widget->bootstrap_addSubmitClass) {
+				$submit->addClass($widget->bootstrap_addSubmitClass);
+			}
+
+			if($widget->bootstrap_addSubmitIcon) {
+				$icon     = Icons::generateIcon($widget->bootstrap_addSubmitIcon);
+				$position = null;
+
+				if($widget->bootstrap_addSubmitIconPosition == 'left') {
+					$position = Node::POSITION_FIRST;
+					$icon .= ' ';
+				} else {
+					$icon = ' ' . $icon;
+				}
+
+				$submit->addChild(new StaticHtml($icon), $position);
+			}
+
+			$inputGroup->setRight($submit, $inputGroup::BUTTON);
+		}
+	}
+
+	/**
+	 * @param $widget
+	 * @param $container
+	 * @param $inputGroup
+	 */
+	private function adjustCaptcha($widget, Container $container, InputGroup $inputGroup)
+	{
+		if($widget instanceof \FormCaptcha) {
+			$captcha = $container->removeChild('question');
+			$inputGroup->setRight($captcha);
+		}
+	}
+
+	/**
+	 * @param $widget
+	 * @param $container
+	 * @param $element
+	 */
+	private function addInputGroup($widget, $container, $element)
+	{
+// generate input group
+		if($this->getConfig($widget->type, 'allowInputGroup') &&
+			($widget->bootstrap_addIcon ||
+				$widget->bootstrap_addUnit ||
+				$container->hasChild('submit') ||
+				$widget->type == 'captcha'
+			)
+		) {
+			$inputGroup = new InputGroup();
+			$inputGroup->setElement($element);
+			$container->setWrapper($inputGroup);
+
+			$this->addIcon($widget, $inputGroup);
+			$this->addUnit($widget, $inputGroup);
+			$this->adjustSubmitButton($container, $widget, $inputGroup);
+			$this->adjustCaptcha($widget, $container, $inputGroup);
+		}
 	}
 
 }
