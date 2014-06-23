@@ -1,4 +1,5 @@
 <<?php echo $this->tag; ?> <?php echo $this->element->generateAttributes(); ?>>
+	<legend><?php echo $this->label; ?></legend>
 <?php
 
 use Netzmacht\Html\Element;
