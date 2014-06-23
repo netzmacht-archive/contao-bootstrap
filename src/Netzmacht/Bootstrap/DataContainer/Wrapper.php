@@ -168,7 +168,7 @@ class Wrapper extends \Backend
 					if($end && $end->sorting <= $sorting) {
 						$sorting = $sorting + 2;
 						$end->sorting = $sorting;
-						$end->getModel()->save();
+						$end->save();
 					}
 				}
 			}
