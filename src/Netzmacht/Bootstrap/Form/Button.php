@@ -26,20 +26,8 @@ class Button extends \FormSubmit
 	{
 		if ($this->imageSubmit)
 		{
-			// Check for version 3 format
-			if ($this->singleSRC != '' && !is_numeric($this->singleSRC))
-			{
-				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-			}
-
 			$objModel = \FilesModel::findByPk($this->singleSRC);
 
-			if(version_compare(VERSION, '3.2', '<')) {
-				$image = $objModel->id;
-			}
-			else {
-				$image = $objModel->uuid;
-			}
 
 			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 			{
@@ -49,7 +37,7 @@ class Button extends \FormSubmit
 					specialchars($this->slabel),
 					specialchars($this->slabel),
 					$this->getAttributes(),
-					\Image::getHtml($image, $this->slabel)
+					\Image::getHtml($this->singleSRC, $this->slabel)
 				);
 			}
 
