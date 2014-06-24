@@ -6,10 +6,12 @@ namespace Netzmacht\Bootstrap\Form;
 use Netzmacht\Bootstrap\Bootstrap;
 use Netzmacht\Bootstrap\Helper\Icons;
 use Netzmacht\FormHelper\Element\StaticHtml;
+use Netzmacht\FormHelper\Event\BuildElementEvent;
 use Netzmacht\FormHelper\Event\Events;
 use Netzmacht\FormHelper\Event\GenerateEvent;
 use Netzmacht\FormHelper\Event\SelectLayoutEvent;
 use Netzmacht\FormHelper\Partial\Label;
+use Netzmacht\Html\CastsToString;
 use Netzmacht\Html\Element;
 use Netzmacht\FormHelper\Partial\Container;
 use Netzmacht\Html\Element\Node;
@@ -42,9 +44,26 @@ class Subscriber implements EventSubscriberInterface
 	public static function getSubscribedEvents()
 	{
 		return array(
+			Events::BUILD_ELEMENT => 'buildElement',
 			Events::SELECT_LAYOUT => 'selectLayout',
 			Events::GENERATE => 'generate',
 		);
+	}
+
+
+	/**
+	 * @param BuildElementEvent $event
+	 */
+	public function buildElement(BuildElementEvent $event)
+	{
+		$widget = $event->getWidget();
+
+		if($widget->type == 'bootstrap_button') {
+			$element = Element::create('input', array('type' => $widget->type));
+			$element->setAttribute('name', $widget->name);
+
+			$event->setElement($element);
+		}
 	}
 
 
@@ -286,7 +305,7 @@ class Subscriber implements EventSubscriberInterface
 	 * @param $container
 	 * @param $element
 	 */
-	private function addInputGroup($widget, Container $container, Element $element)
+	private function addInputGroup($widget, Container $container, CastsToString $element)
 	{
 		if($this->getConfig($widget->type, 'allowInputGroup') &&
 			($widget->bootstrap_addIcon ||
