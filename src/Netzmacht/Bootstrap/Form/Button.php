@@ -28,7 +28,6 @@ class Button extends \FormSubmit
 		{
 			$objModel = \FilesModel::findByPk($this->singleSRC);
 
-
 			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 			{
 				return sprintf('<button type="submit" id="ctrl_%s" class="submit %s" title="%s" alt="%s"%s>%s</button>',
@@ -37,7 +36,7 @@ class Button extends \FormSubmit
 					specialchars($this->slabel),
 					specialchars($this->slabel),
 					$this->getAttributes(),
-					\Image::getHtml($this->singleSRC, $this->slabel)
+					\Image::getHtml($objModel->path, $this->slabel)
 				);
 			}
 
