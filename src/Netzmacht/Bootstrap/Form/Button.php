@@ -30,7 +30,7 @@ class Button extends \FormSubmit
 
 			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 			{
-				return sprintf('<button type="submit" id="ctrl_%s" class="submit %s" title="%s" alt="%s"%s>%s</button>',
+				return sprintf('<button type="submit" id="ctrl_%s" class="submit btn %s" title="%s" alt="%s"%s>%s</button>',
 					$this->strId,
 					(($this->strClass != '') ? ' ' . $this->strClass : 'btn-default'),
 					specialchars($this->slabel),
@@ -39,8 +39,6 @@ class Button extends \FormSubmit
 					\Image::getHtml($objModel->path, $this->slabel)
 				);
 			}
-
-
 		}
 
 		$label = specialchars($this->slabel);
