@@ -58,7 +58,7 @@ class Subscriber implements EventSubscriberInterface
 	{
 		$widget = $event->getWidget();
 
-		if($widget->type == 'bootstrap_button') {
+		if($widget->type == 'button') {
 			$element = Element::create('input', array('type' => $widget->type));
 			$element->setAttribute('name', $widget->name);
 
