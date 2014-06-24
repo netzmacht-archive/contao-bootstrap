@@ -60,7 +60,6 @@ class Subscriber implements EventSubscriberInterface
 
 		if($widget->type == 'button') {
 			$element = Element::create('button', array('type' => 'submit'));
-			$element->setAttribute('name', $widget->name);
 
 			if($widget->imageSubmit) {
 				$img = \Image::getHtml(\FilesModel::findByPk($widget->singleSRC)->path, $widget->slabel);
@@ -68,6 +67,9 @@ class Subscriber implements EventSubscriberInterface
 			}
 			else {
 				$element->addChild($widget->slabel);
+				$element
+					->addClass('btn')
+					->addClass($widget->class ?: 'btn-default');
 			}
 
 			$event->setElement($element);
