@@ -44,6 +44,8 @@ $GLOBALS['BOOTSTRAP']['layout'] = array
 			'3cl'    => array('bootstrap_leftClass', 'bootstrap_mainClass', 'bootstrap_rightClass'),
 		),
 	),
+
+	'viewport' => '',
 );
 
 if(version_compare(VERSION, '3.3', '<')) {

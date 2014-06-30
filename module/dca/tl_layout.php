@@ -211,9 +211,9 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['viewport'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['viewport'],
 	'exclude'                 => true,
-	'default'                 => $GLOBALS['BOOTSTRAP']['layout']['viewport'],
+	'default'                 => (string) $GLOBALS['BOOTSTRAP']['layout']['viewport'],
 	'inputType'               => 'text',
-	'eval'                    => array('tl_class' => 'w50', 'decodeEntities' => true),
+	'eval'                    => array('tl_class' => 'w50', 'decodeEntities'=>true, 'maxlength'=>255),
 	'sql'                     => "varchar(255) NOT NULL default ''",
 );
 
