@@ -72,6 +72,17 @@ class Subscriber implements EventSubscriberInterface
 					->addClass($widget->class ?: 'btn-default');
 			}
 
+			if($widget->bootstrap_addIcon) {
+				$icon = Icons::generateIcon($widget->bootstrap_icon);
+
+				if($widget->bootstrap_iconPosition == 'left') {
+					$element->addChild($icon . ' ', Node::POSITION_FIRST);
+				}
+				else {
+					$element->addChild(' ' . $icon);
+				}
+			}
+
 			$event->setElement($element);
 		}
 	}
