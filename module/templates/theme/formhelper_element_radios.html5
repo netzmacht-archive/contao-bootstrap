@@ -27,6 +27,10 @@ foreach($this->options as $option):
 			->setAttribute('id', $this->element->getId() . '_' . $index)
 			->setAttribute('value', $option['value']);
 
+		if(in_array($option['value'], (array) $this->element->getValue())) {
+			$child->setAttribute('checked', true);
+		}
+
 		$label = Element::create('label');
 		$label->addChild($child);
 		$label->addChild($option['label']);
