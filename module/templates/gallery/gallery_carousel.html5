@@ -1,4 +1,4 @@
-<?php if($this->cssID[0] == '') : $cssId = 'carousel_' . time(); else: $cssId = 'carousel_' . $this->cssID[0]; endif; ?>
+<?php $cssId = 'carousel_' . ($this->cssID[0] ?: $this->id); ?>
 <div class="carousel slide img-polaroid" data-interval="8000" id="<?php echo $cssId; ?>">
 	<div class="carousel-inner">
 		<?php foreach ($this->body as $class=>$row): ?>
