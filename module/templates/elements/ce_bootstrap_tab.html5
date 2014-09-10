@@ -27,7 +27,7 @@
 	</ul>
 
 	<div class="tab-content">
-		<div class="tab-pane active" id="tab-<?php echo $this->currentTab['id']; ?>">
+		<div class="tab-pane active<?php if($this->fade): ?> fade in<?php endif;?>" id="tab-<?php echo $this->currentTab['id']; ?>">
 	<?php elseif($this->type == 'bootstrap_tabPart'): ?>
 		</div>
 		<div class="tab-pane<?php if($this->fade): ?> fade<?php endif;?>" id="tab-<?php echo $this->currentTab['id']; ?>">
