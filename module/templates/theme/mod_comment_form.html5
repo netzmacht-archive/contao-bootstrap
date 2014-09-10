@@ -12,12 +12,10 @@
 					<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
 
 					<?php
-						foreach($this->fields as $name => $widget )
-						{
-							$fields[$name] = new Netzmacht\Bootstrap\Form\Widget($widget);
-							$fields[$name]->tableless = $GLOBALS['BOOTSTRAP']['form']['defaultTableless'];
-							echo $fields[$name]->parse();
-						}
+					foreach($this->fields as $widget ) {
+						$widget->tableless = $GLOBALS['BOOTSTRAP']['form']['defaultTableless'];
+						echo $widget->parse();
+					}
 					?>
 
 					<div class="form-group">
