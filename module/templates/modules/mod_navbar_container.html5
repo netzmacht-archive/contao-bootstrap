@@ -1,6 +1,6 @@
 
 <!-- indexer::stop -->
-<nav class="navbar <?php echo $this->class;?>" <?php if($this->cssID): ?><?php echo $this->cssID; ?><?php endif; ?> role="navigation">
+<nav class="navbar <?php echo $this->class;?>" <?php if($this->cssID): ?><?php echo $this->cssID; ?><?php endif; ?> role="navigation"<?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 	<div class="container">
 	<?php include $this->getTemplate('navbar'); ?>
 	</div>
