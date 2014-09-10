@@ -120,6 +120,12 @@ $GLOBALS['BOOTSTRAP']['templates'] = array
 				'ce_*',
 			),
 		),
+
+		'callback.replaceTableClasses' => array(
+			'type'      => 'callback',
+			'callback'  => array('Netzmacht\Bootstrap\Template\Modifier\Elements', 'replaceTableClasses'),
+			'templates' => array('ce_table*'),
+		),
 	),
 
 	// Configuration of template parsers. They changes already parsed templates. There are 2 types supported:

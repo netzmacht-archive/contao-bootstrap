@@ -47,4 +47,34 @@ class Elements
 			$template->imgSize .= sprintf(' class="%s"', implode(' ', $imageClasses));
 		}
 	}
+
+
+	/**
+	 * @param \Template $template
+	 */
+	public static function replaceTableClasses(\Template $template)
+	{
+		$cssClasses   = $template->class;
+		$cssClasses   = trimsplit(' ', $cssClasses);
+		$tableClasses = array('table');
+
+		foreach ($cssClasses as $index => $cssClass) {
+			if (substr($cssClass, 0, 6) == 'table-') {
+				$tableClasses[] = $cssClass;
+				unset($cssClasses[$index]);
+			}
+		}
+
+		if (count($tableClasses)) {
+			$template->class  = implode(' ', $cssClasses);
+
+			// reset sortable, to avoid double class attributes
+			if($template->sortable) {
+				$tableClasses[] = 'sortable';
+				$template->sortable = null;
+			}
+
+			$template->id       = sprintf('%s" class="%s', $template->id, implode(' ', $tableClasses));
+		}
+	}
 }
