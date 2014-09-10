@@ -1,5 +1,5 @@
 <?php if($this->type == 'bootstrap_tabStart'): ?>
-<div class="tab-container <?php echo $this->class; ?>" <?php echo $this->cssID; ?>>
+<div class="tab-container <?php echo $this->class; ?>" <?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 
 	<ul class="nav nav-tabs">
 		<?php foreach($this->tabs as $i => $tab): ?>

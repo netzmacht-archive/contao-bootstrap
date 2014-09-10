@@ -1,5 +1,5 @@
 <?php if($this->type == 'bootstrap_accordionGroupStart'): ?>
-<div class="panel-group" id="<?php echo $this->groupId; ?>">
+<div class="panel-group<?php if($this->class): ?> <?php echo $this->class; endif; ?>" id="<?php echo $this->groupId; ?>"<?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 <?php else: ?>
 </div>
 <?php endif; ?>
