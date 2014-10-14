@@ -3,6 +3,8 @@ contao-bootstrap
 
 Contao-bootstrap integrates Bootstrap 3 into Contao CMS.
 
+New Modular Version for Contao > 3.2 https://github.com/contao-bootstrap (bundle: https://github.com/contao-bootstrap/bundle )
+
 Requirements
 --------------------
 
