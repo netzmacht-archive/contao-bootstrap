@@ -9,8 +9,8 @@
 namespace Netzmacht\Bootstrap\Module\Modal;
 
 
-use Netzmacht\Contao\FormHelper\Component;
-use Netzmacht\Contao\FormHelper\Event\Events;
+use Netzmacht\FormHelper\Component;
+use Netzmacht\FormHelper\Event\Events;
 use Netzmacht\FormHelper\Event\GenerateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
