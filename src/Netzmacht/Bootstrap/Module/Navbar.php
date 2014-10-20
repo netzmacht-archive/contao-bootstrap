@@ -51,6 +51,26 @@ class Navbar extends BootstrapAbstract
 		}
 	}
 
+    /**
+     * @return string
+     */
+    public function generate()
+    {
+        if(TL_MODE == 'BE') {
+            $template = new \BackendTemplate('be_wildcard');
+
+            $template->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['navigation'][0]) . ' ###';
+            $template->title = $this->name;
+            $template->id = $this->id;
+            $template->link = $this->name;
+            $template->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
+
+            return $template->parse();
+        }
+
+        return parent::generate();
+    }
+
 
 	/**
 	 * compile the navbar
@@ -60,11 +80,6 @@ class Navbar extends BootstrapAbstract
 		// generate modules
 		$dataModules = deserialize($this->navbarModules, true);
 		$modules = array();
-
-        // avoid displaying of navbar toggle in the backend, see #69
-        if(TL_MODE == 'BE') {
-            $this->Template->isResponsive = false;
-        }
 
 		foreach ($dataModules as $module)
 		{
