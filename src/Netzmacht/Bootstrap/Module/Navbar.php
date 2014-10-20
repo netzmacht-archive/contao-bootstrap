@@ -59,7 +59,7 @@ class Navbar extends BootstrapAbstract
         if(TL_MODE == 'BE') {
             $template = new \BackendTemplate('be_wildcard');
 
-            $template->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['navigation'][0]) . ' ###';
+            $template->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['bootstrap_navbar'][0]) . ' ###';
             $template->title = $this->name;
             $template->id = $this->id;
             $template->link = $this->name;
