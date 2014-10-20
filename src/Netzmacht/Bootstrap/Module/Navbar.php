@@ -61,6 +61,11 @@ class Navbar extends BootstrapAbstract
 		$dataModules = deserialize($this->navbarModules, true);
 		$modules = array();
 
+        // avoid displaying of navbar toggle in the backend, see #69
+        if(TL_MODE == 'BE') {
+            $this->Template->isResponsive = false;
+        }
+
 		foreach ($dataModules as $module)
 		{
 			if($module['module'] != '')

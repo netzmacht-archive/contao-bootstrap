@@ -3,7 +3,7 @@
 <?php
 
 use Netzmacht\Html\Element;
-use Netzmacht\FormHelper\Element\Checkboxes;
+use Netzmacht\Contao\FormHelper\Element\Checkboxes;
 
 /** @var Checkboxes $element */
 $group = null;

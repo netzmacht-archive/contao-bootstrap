@@ -1,5 +1,5 @@
 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-responsive-<?php echo $this->id; ?>">
-	<span class="invisible"><?php echo $GLOBALS['TL_LANG']['MSC']['bootstrapToggleNavigation']; ?></span>
+	<span class="sr-only"><?php echo $GLOBALS['TL_LANG']['MSC']['bootstrapToggleNavigation']; ?></span>
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>

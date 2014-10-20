@@ -5,15 +5,15 @@ namespace Netzmacht\Bootstrap\Form;
 
 use Netzmacht\Bootstrap\Bootstrap;
 use Netzmacht\Bootstrap\Helper\Icons;
-use Netzmacht\FormHelper\Element\StaticHtml;
-use Netzmacht\FormHelper\Event\BuildElementEvent;
-use Netzmacht\FormHelper\Event\Events;
+use Netzmacht\Contao\FormHelper\Element\StaticHtml;
+use Netzmacht\Contao\FormHelper\Event\BuildElementEvent;
+use Netzmacht\Contao\FormHelper\Event\Events;
 use Netzmacht\FormHelper\Event\GenerateEvent;
 use Netzmacht\FormHelper\Event\SelectLayoutEvent;
-use Netzmacht\FormHelper\Partial\Label;
+use Netzmacht\Contao\FormHelper\Partial\Label;
 use Netzmacht\Html\CastsToString;
 use Netzmacht\Html\Element;
-use Netzmacht\FormHelper\Partial\Container;
+use Netzmacht\Contao\FormHelper\Partial\Container;
 use Netzmacht\Html\Element\Node;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -52,7 +52,7 @@ class Subscriber implements EventSubscriberInterface
 
 
 	/**
-	 * @param BuildElementEvent $event
+	 * @param \Netzmacht\Contao\FormHelper\Event\BuildElementEvent $event
 	 */
 	public function buildElement(BuildElementEvent $event)
 	{

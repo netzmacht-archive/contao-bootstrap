@@ -2,8 +2,8 @@
 
 namespace Netzmacht\Bootstrap\Form;
 
-use Netzmacht\FormHelper\Component;
-use Netzmacht\FormHelper\HasElement;
+use Netzmacht\Contao\FormHelper\Component;
+use Netzmacht\Contao\FormHelper\HasElement;
 use Netzmacht\Html\Attributes;
 use Netzmacht\Html\CastsToString;
 use Netzmacht\Html\Element;
