@@ -9,7 +9,7 @@
 namespace Netzmacht\Bootstrap\Module\Modal;
 
 
-use Netzmacht\FormHelper\Component;
+use Netzmacht\Html\Element;
 use Netzmacht\FormHelper\Event\Events;
 use Netzmacht\FormHelper\Event\GenerateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -58,14 +58,14 @@ class Subscriber implements EventSubscriberInterface
 			$copy = clone $element;
 
 			// make sure that we can modify the element
-			if($element instanceof Component) {
+			if($element instanceof Element) {
 				$copy->setAttribute('onclick', sprintf('$(\'#ctrl_%s\').click();', $widget->id));
 				$copy->setId('md_' . $element->getId());
 				$copy->addClass('btn');
 			}
 
 			$GLOBALS['bootstrapModalForm'] .= $copy->generate();
-			$event->setVisible(false);
+            $element->setAttribute('style', 'display:none;');
 		}
 	}
 
