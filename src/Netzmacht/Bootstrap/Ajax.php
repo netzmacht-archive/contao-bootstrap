@@ -89,20 +89,23 @@ class Ajax extends \PageRegular
 
 
 	/**
-	 * Output data, encode to json and replace insert tags
-	 * @param  mixed
+	 * Output data, encode to json and replace insert tags.
+     *
+	 * @param string $buffer
 	 * @return string
 	 */
-	protected function output($value)
+	protected function output($buffer)
 	{
-		$value = $this->replaceInsertTags($value);
+		$buffer = $this->replaceInsertTags($buffer);
+        $buffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $buffer);
+        $buffer = str_replace('{{request_token}}', \RequestToken::get(), $buffer);
 
-		if (is_array($value) || is_object($value))
+		if (is_array($buffer) || is_object($buffer))
 		{
-			$value = json_encode($value);
+			$buffer = json_encode($buffer);
 		}
 
-		echo $value;
+		echo $buffer;
 		exit;
 	}
 }
