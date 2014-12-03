@@ -104,3 +104,10 @@ if(TL_MODE == 'BE') {
  * settings
  */
 $GLOBALS['TL_CONFIG']['gravatarSize'] = '60';
+
+/**
+ *
+ */
+$GLOBALS['TL_PURGE']['custom']['bootstrap_symlink'] = array(
+    'callback' => array('Netzmacht\Bootstrap\Installer', 'recreateSymlink')
+);

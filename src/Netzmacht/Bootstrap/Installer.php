@@ -38,6 +38,21 @@ class Installer
 		$this->createSymlink();
 	}
 
+    /**
+     * Recreate the symlink
+     *
+     * @return void
+     */
+    public function recreateSymlink()
+    {
+        $link = TL_ROOT . '/assets/bootstrap/bootstrap';
+
+        if (is_link($link)) {
+            unlink($link);
+        }
+
+        $this->createSymlink();
+    }
 
 	/**
 	 * setup required sections
@@ -65,9 +80,9 @@ class Installer
 	 */
 	protected function createSymlink()
 	{
-		$target  = TL_ROOT . '/composer/vendor/twbs/bootstrap';
-		$link    = TL_ROOT . '/assets/bootstrap/bootstrap';
-		$dir     = TL_ROOT . '/assets/bootstrap';
+		$target = TL_ROOT . '/composer/vendor/twbs/bootstrap';
+		$link   = TL_ROOT . '/assets/bootstrap/bootstrap';
+		$dir    = TL_ROOT . '/assets/bootstrap';
 
 		$success = false;
 
