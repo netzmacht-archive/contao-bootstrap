@@ -21,11 +21,11 @@
     },
     "require":{
         "php":">=5.3.4",
-        "contao/core":">=3.1,<3.4-dev",
+        "contao/core":">=3.1,<3.5",
         "contao-community-alliance/composer-plugin":"~2.0",
         "menatwork/contao-multicolumnwizard":"~3.2",
         "bit3/contao-theme-plus":">=4.2,<=5.0.x-dev",
-        "bit3/contao-meta-palettes":">=1.4.2",
+        "contao-community-alliance/meta-palettes":"~1.4",
         "leounglaub/contao-simple-ajax":"~1.0",
         "netzmacht/contao-bootstrap-columnseteditor":">=0.3.3,~0.3",
         "netzmacht/contao-iconWizard":"~1.0",
